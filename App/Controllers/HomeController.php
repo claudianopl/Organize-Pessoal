@@ -10,7 +10,7 @@ use MF\Model\Container;
 class HomeController extends Action {
 	
 	public function index() {
-		$this->render('index', 'layout');
+		$this->render('index');
 	}
 	
 }

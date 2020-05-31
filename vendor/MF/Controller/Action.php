@@ -13,20 +13,27 @@ abstract class Action {
 	}
 
 	// Apresentando o view com layout
-	public function render($view, $layout = '') {
+	public function render($view) {
 		$this->view->page = $view;
-		if(file_exists("../App/Views/".$layout.".phtml")) {
-			require_once "../App/Views/".$layout.".phtml";
-		} else {
-			$this->content();
-		}
+		$this->content();
 	}
 	
+	protected function header($header='') {
+		if(file_exists("../App/Views/".$header.".phtml")) {
+			require_once "../App/Views/".$header.".phtml";
+		}
+	}
+
+	protected function footer($footer='') {
+		if(file_exists("../App/Views/".$footer.".phtml")) {
+			require_once "../App/Views/".$footer.".phtml";
+		}
+	}
+
 	/*
 	* Para rodar as view com as informações futuras do model
 	* Não se preocupar tanto com o render, basta copiar e colar nas class controllers futuras
 	*/
-	
 	protected function content() {
 		if(isset($this->view->dados)) {
 			extract($this->view->dados);
@@ -37,7 +44,7 @@ abstract class Action {
 		$classAtual = str_replace('App\\Controllers\\', '', $classAtual);
 
 		$classAtual = strtolower(str_replace('Controller', '', $classAtual));
-		
+
 		require_once "../App/Views/".$classAtual."/".$this->view->page.".phtml";
 	}
 }
