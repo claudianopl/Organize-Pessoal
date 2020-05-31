@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Roboto, serif,  Arial, Helvetica;
+  font-size: 14px;
+  background: #F9F8F8;
+}
+/*header {
+  background: linear-gradient(270deg, #59DF83 38.36%, #13C5A5 93.83%),
+  rgba(194, 192, 192, 0.18);
+  height: 70px;
+} */
+header {
+background-image: linear-gradient(to right, #59DF83,#13C5A5);
+background-size: 600%;
+background-position: 0 0;
+height: 70px;
+/* Animation */
+animation-duration: 20s;
+animation-iteration-count: infinite;
+animation-name: gradients;
+}
+@keyframes gradients {
+  0%   {background-position: 0 0;}
+  25% {background-position: 50% 0;}
+  50% {background-position: 90% 0;}
+  60% {background-position: 60%;}
+  75% {background-position: 40%;}
+  100%  {background-position: 0 0;}
+}
+
+.header {
+  max-width: 1140px;
+  margin: auto;
+  display: flex;
+  color: #ffffff;
+  align-items: center;
+}
+.menu {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.menu ul, 
+.menu li {
+  list-style: none;
+  margin:0;
+  padding: 0;
+}
+.menu ul {
+  display: flex;
+  height: 70px;
+  align-items: center;
+}
+
+.menu li a {
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 5px 20px;
+  margin-left:20px;
+  display:flex;
+}
+
+.menu li a:hover{
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #59DF83;
+  border-radius: 30px;
+}
+
+.menu .active a {
+  color: #38A75A;
+}
+
+.section-one {
+  height: calc(100vh - 70px);
+  background: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.2)),
+  url(../images/banner.jpg) no-repeat;
+  background-size: 100%;
+  background-color: #ccc;
+}
+
+.container {
+  max-width: 90%;
+  max-width: 1140px;
+  margin:auto;
+}
+
+.area-desc {
+  width: 727px;
+}
+
+.section-title {
+  padding-top: 60px;
+  width: 727px;
+  font-size: 48px;
+  text-align: center;
+  color: #ffffff;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.8);
+  font-weight: 900;
+}
+
+.section-desc {
+  padding-top: 50px;
+  width: 727px;
+  font-size: 19px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: normal;
+}
+
+.button-cadastrar {
+  padding-top: 80px;
+  display: flex;
+  justify-content: center;
+}
+
+.button-cadastrar a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: normal;
+  font-size:19px;
+  padding: 10px 100px;
+  background-color: #59DF83;
+  border-radius: 18px;
+  text-align: center;
+}
+
+.button-cadastrar a:hover {
+  background-color: #ffffff;
+  color: #59DF83;
+  font-weight: bold;
+}
