@@ -11,9 +11,10 @@ body {
 }
 
 .container {
+  display: block;
+  width: 1200px;
   max-width: 90%;
-  max-width: 1140px;
-  margin:auto;
+  margin: 0 auto;
 }
 
 /* header-home.phtml */
@@ -23,9 +24,7 @@ background-size: 600%;
 background-position: 0 0;
 height: 70px;
 /* Animation */
-animation-duration: 5s;
-animation-iteration-count: infinite;
-animation-name: gradients;
+animation: gradients 3s infinite;
 }
 @keyframes gradients {
   0%   {background-position: 0 0;}
@@ -92,18 +91,17 @@ animation-name: gradients;
 
 
 .sectionHomeAreaDesc {
-  max-width: 727px;
+  max-width: 800px;
   display: flex;
-  justify-content: center;
+  justify-content: justify;
   align-items: center;
   flex-direction: column;
 }
 
 .sectionHomeTitle {
   margin-top: 60px;
-  width: 727px;
   font-size: 43px;
-  text-align: center;
+  text-align: justify;
   color: #ffffff;
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.8);
   font-weight: 900;
@@ -180,11 +178,11 @@ animation-name: gradients;
   width: 290px;
   height: 350px;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
   box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.4);
   transition: 1s;
+  border: 1px solid #ccc;
 }
 
 .cards:hover {
@@ -223,9 +221,7 @@ animation-name: gradients;
   url(../images/EllipseFundo.svg) no-repeat right bottom, 
   linear-gradient(262.14deg, #59DF83 38.17%, #13C5A5 97.69%);
   display: flex;
-  
 }
-
 
 .sectionThreeTitle {
   color: #555555;
@@ -274,38 +270,146 @@ animation-name: gradients;
   /* --------- sectionfour --------- */
 .sectionFour {
   display: flex;
-}
-.sectionFourIconHelp {
-  align-items: center;
-  margin-top: 50px;
+  margin-bottom: 35px;
 }
 
-.sectionFourTitle {
+.sectionFourIconHelp {
+  max-width: 100%;
+  margin: 50px auto 0 0;
+  text-align: center;
+}
+
+.sectionFourTitle h2{
   font-size: 32px;
-  color: #555555;
+  color: rgb(85, 85, 85);
   margin-top: 30px;
   text-align: center;
+  font-weight: normal;
 }
 
 .sectionFourDesc {
   margin-top: 20px;
   margin-bottom: 40px;
-  color: #8491A5;
-  font-weight: medium;
+  color: rgb(132, 145, 165);
   text-align: center;
+}
+
+.iconPlus::before {
+  content: url(../images/iconPlus.svg);
+  margin: 0px 10px 0px 20px;
+}
+
+.iconMinus::before {
+  content: url(../images/iconMinus.svg);
 }
 
 .sectionFourHelps {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
 }
 
-.sectionFourHelpsCard {
+.sectionFourHelp {
+  flex-basis: calc(50% - 30px);
+  margin: 15px;
   background-color: #ffffff;
-  width: 505px;
-  align-items: center;
-  margin-left: 20px;
-  margin-right: 20px;
+  cursor: pointer;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0px 4px 4px #59DF83;
+  animation: gradientsHelp 5s infinite;
+  border: 1px solid #ccc;
 }
-  /* --------- /sectionfour --------- */
+
+@keyframes gradientsHelp {
+  0%   {box-shadow: 0px 4px 4px #59DF83;}
+  25% {box-shadow: 0px 4px 4px rgb(89, 223, 131, 0.5);}
+  50% {box-shadow: 0px 4px 4px #59DF83;}
+  60% {box-shadow: 0px 4px 4px rgb(89, 223, 131, 0.5);}
+  75% {box-shadow: 0px 4px 4px #59DF83;}
+  100% {box-shadow: 0px 4px 4px rgb(89, 223, 131, 0.5);}
+}
+
+.sectionFourHelp h4 {
+  font-size: medium;
+  font-weight: medium;
+  color: #555555;
+  display: flex;
+  align-items: center;
+}
+
+.hCollapse p{
+  text-align: justify;
+  padding-top: 15px;
+  color: #555555;
+  border-top: 1px solid #ccc;
+  margin: 0px auto 15px;
+}
 /* index-phtml */
+
+/* footer.phtml */
+footer {
+  background-color: #333333;
+  padding-bottom: 40px;
+}
+
+.footerContent {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin: auto;
+  justify-content: center;
+  border-bottom: 2px solid #59DF83;
+}
+
+.footerItem {
+  font-size: 24px;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 50px 20px 30px;
+  flex-basis: calc(30% - 40px);
+}
+
+.footerItemDesc {
+  font-size: 14px;
+  font-weight: normal;
+  color: #ffffff;
+  padding-top: 20px;
+  text-align: justify;
+  border-top: 1px solid #ccc;
+}
+
+.footerItemDesc a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.footerItemDesc h4{
+  font-size: 17px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.email::before {
+  content: url(../images/email.svg);
+  margin-right: 15px;
+}
+
+.github, .linkedin {
+  margin-top: 15px;
+}
+
+.github::before {
+  content: url(../images/github.svg);
+  margin-right: 15px;
+}
+
+.linkedin::before {
+  content: url(../images/linkedin.svg);
+  margin-right: 15px;
+}
+
+
+/* /footer.phtml */
