@@ -25,40 +25,44 @@
     
   </head>
   <body>
-  <?php $this->header('header-home') ?>
+  <?php $this->header('header-home','Home') ?>
 
     <section class='sectionHomeOne'>
       <div class='container'>
-        <div class="sectionHomeAreaDesc">
+        <article class="sectionHomeAreaDesc">
           <div class="sectionHomeTitle">
-            Maneira simples de gerenciar suas finanças e sua vida pessoal.
+            <h1 id='homeTitleWriter'>
+              Maneira simples de gerenciar suas finanças e sua vida pessoal.
+            </h1>
           </div>
           <div class="sectionHomeDesc">
-            Conte com o Organize Pessoal, com ele você tem o controle de sua vida 
-            financeira e pessoal. Com o Organize Pessoal, você terá controle de 
-            suas contas, suas tarefas e seus compromissos pessoais. Não precisa 
-            mais de diversos aplicativos para gerência sua vida tão agitada. 
-            Organize tudo em um só lugar!
+            <p>
+              Conte com o Organize Pessoal, com ele você tem o controle de sua vida 
+              financeira e pessoal. Com o Organize Pessoal, você terá controle de 
+              suas contas, suas tarefas e seus compromissos pessoais. Não precisa 
+              mais de diversos aplicativos para gerência sua vida tão agitada. 
+              Organize tudo em um só lugar!
+            <p>
           </div>
           <div class="sectionHomeButtonCadastrar">
             <a href="">Cadastra-se</a>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
     <section class="sectionTwo">
       <div class='container'>
-        <div class='sectionTwoTittle'>
+        <div class='sectionTwoTittle' data-anime='right'>
           O que o Organize Pessoal pode lhe proporcionar?
         </div>
-        <div class="sectionTwoDesc">
+        <div class="sectionTwoDesc" data-anime='left'>
           O Organize Pessoal é uma ferramenta grátis de controle de gastos 
           pessoais e gerenciamento de tarefas que permite que você cadastre e 
           gerencie suas contas e tarefas de forma eficiente e prática.
         </div>
         <div class="sectionTwoCards">
-          <article class="cards">
+          <article class="cards" data-anime='left'>
             <img src="assets/images/iconControle.svg">
             <div class='cardsTittle'>
               Controle seus gastos, é rápido e fácil.
@@ -70,7 +74,7 @@
             </div>
           </article>
 
-          <article class="cards">
+          <article class="cards" data-anime='depth'>
             <img src="assets/images/iconDinheiro.svg">
             <div class='cardsTittle'>
               Acompanhe para onde o seu dinheiro vai.
@@ -82,7 +86,7 @@
             </div>
           </article>
 
-          <article class="cards">
+          <article class="cards" data-anime='right'>
             <img src="assets/images/iconAcompanha.svg">
             <div class='cardsTittle'>
               Acompanhe os seus ganhos mensais.
@@ -94,7 +98,7 @@
             </div>
           </article>
 
-          <article class="cards">
+          <article class="cards" data-anime='left'>
             <img src="assets/images/iconAlert.svg">
             <div class='cardsTittle'>
               Alerta, nunca mais sofra com juros.
@@ -107,7 +111,7 @@
             </div>
           </article>
 
-          <article class="cards">
+          <article class="cards" data-anime='depth'>
             <img src="assets/images/iconOrganização.svg">
             <div class='cardsTittle'>
               Organize as suas tarefas cotidianas.
@@ -120,7 +124,7 @@
             </div>
           </article>
 
-          <article class="cards">
+          <article class="cards" data-anime='right'>
             <img src="assets/images/iconTempo.svg">
             <div class='cardsTittle'>
               Tempo é dinheiro, assim  organizamos a sua vida.
@@ -138,12 +142,12 @@
 
     <section class="sectionThree">
       <div class="container">
-        <article class="sectionThreeTitle">
+        <article class="sectionThreeTitle" data-anime='top'>
           Ferramenta 100% gratuita. Cadastre e comece hoje mesmo a controlar 
           sua vida financeira e pessoal.
         </article>
         <div class="sectionThreeDesc">
-          <article class="descLeft">
+          <article class="descLeft" data-anime='left'>
               Receber, pagar e realizar tarefas importantes é uma atividade muito 
               comum no cotidiano. Porém, quem leva uma vida agitada muitas vezes 
               esquecem de diversos compromissos importantes e o pior disso é que 
@@ -156,11 +160,11 @@
               suas atividades e finanças em um só local e se livre de uma vez por 
               todas da perda de tempo gerenciando suas finanças e anotando as 
               atividades importantes.
-            <div class="descLeftButton">
+            <div class="descLeftButton" data-anime='left'>
               <a href="">Cadastre-se</a>
             </div>
           </article>
-          <div class="descright">
+          <div class="descright" data-anime='right'>
             <img src="assets/images/laptopPagina.svg">
           </div>
         </div>
@@ -169,22 +173,22 @@
 
     <section class="sectionFour">
       <div class="container">
-        <div class="sectionFourIconHelp">
+        <div class="sectionFourIconHelp" data-anime='top'>
           <img src="assets/images/iconPerguntasFrequentes.svg">
         </div>
-        <article class="sectionFourTitle">
+        <article class="sectionFourTitle" data-anime='right'>
           <h2>Perguntas frequentes:</h2>
         </article>
-        <article class="sectionFourDesc">
+        <article class="sectionFourDesc" data-anime='left'>
           As principais dúvidas e respostas sobre o Organize Pessoal.
         </article>
         
         <div class="sectionFourHelps">
-          <article class="sectionFourHelp">
+          <article class="sectionFourHelp" data-anime='left'>
             <h4 class="hCollapseIcon iconPlus">
               O Organize Pessoal é gratuito ?
             </h4>
-            <div class="hCollapse" style="display: none;">
+            <div class="hCollapse">
               <p>
                 Sim, o Organize Pessoal é totalmente gratuito e com ele você 
                 pode organizar suas finanças e tarefas pessoais ao mesmo tempo, 
@@ -197,11 +201,11 @@
             </div>
           </article>
 
-          <article class="sectionFourHelp">
+          <article class="sectionFourHelp" data-anime='right'>
             <h4 class="hCollapseIcon iconPlus">
               O que fazer com o Organize Pessoal?
             </h4>
-            <div class="hCollapse" style="display: none;">
+            <div class="hCollapse">
               <p>
                 Com o Organize Pessoal você pode gerenciar de forma fácil e 
                 inteligente as suas finanças adicionando despesas dos cotidianos, 
@@ -220,11 +224,11 @@
             </div>
           </article>
 
-          <article class="sectionFourHelp">
+          <article class="sectionFourHelp" data-anime='left'>
             <h4 class="hCollapseIcon iconPlus">
               Não sou de maior, posso usar o Organize Pessoal?
             </h4>
-            <div class="hCollapse" style="display: none;">
+            <div class="hCollapse">
               <p>
                 Sim, o Organize Pessoal não necessita de seus dados pessoais 
                 como CPF, conta bancaria, cartão de crédito. Na Organize 
@@ -236,11 +240,11 @@
             </div>
           </article>
 
-          <article class="sectionFourHelp">
+          <article class="sectionFourHelp" data-anime='right'>
             <h4 class="hCollapseIcon iconPlus">
               Como usar o Organize Pessoal?
             </h4>
-            <div class="hCollapse" style="display: none;">
+            <div class="hCollapse">
               <p>
                 Para usar o Organize Pessoal é simples, basta se cadastra na 
                 nossa plataforma e começar a cadastrar suas contas e 
@@ -256,11 +260,11 @@
             </div>
           </article>
 
-          <article class="sectionFourHelp">
+          <article class="sectionFourHelp" data-anime='left'>
             <h4 class="hCollapseIcon iconPlus">
               Precisa de documentos pessoais?
             </h4>
-            <div class="hCollapse" style="display: none;">
+            <div class="hCollapse">
               <p>
                 Não, quando o sistema Organize Pessoal foi criado o intuito 
                 principal era servir como uma ferramenta intuitiva, inteligente 
@@ -277,11 +281,11 @@
             </div>
           </article>
 
-          <article class="sectionFourHelp">
+          <article class="sectionFourHelp" data-anime='right'>
             <h4 class="hCollapseIcon iconPlus">
               De onde surgiu o Organize Pessoal?
             </h4>
-            <div class="hCollapse" style="display: none;">
+            <div class="hCollapse">
               <p>
                 O Organize Pessoal surgiu com a ideia de juntar dois serviços 
                 que é a financeira e a listagem de tarefas cotidianas para 
@@ -301,6 +305,8 @@
       </div>
     </section>
     <?php $this->footer('footer'); ?>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="assets/js/scriptHome.js"></script>
   </body>
 </html>
 

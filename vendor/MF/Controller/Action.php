@@ -18,7 +18,7 @@ abstract class Action {
 		$this->content();
 	}
 	
-	protected function header($header='') {
+	protected function header($header='', $info='') {
 		if(file_exists("../App/Views/".$header.".phtml")) {
 			require_once "../App/Views/".$header.".phtml";
 		}
