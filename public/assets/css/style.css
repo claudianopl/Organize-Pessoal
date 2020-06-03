@@ -4,10 +4,15 @@
   box-sizing: border-box;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
   font-size: 14px;
   background: #F9F8F8;
+  position: relative;
 }
 
 .container {
@@ -19,7 +24,7 @@ body {
 
 /* header-home.phtml */
 header {
-background-image: linear-gradient(to right, #59DF83,#13C5A5);
+background: linear-gradient(to right, #59DF83,#13C5A5);
 background-size: 600%;
 background-position: 0 0;
 height: 70px;
@@ -36,16 +41,22 @@ animation: gradients 3s infinite;
 }
 
 .header {
-  max-width: 1140px;
+  max-width: 1200px;
+  max-width: 90%;
   margin: auto;
   display: flex;
   color: #ffffff;
   align-items: center;
 }
+.menuMobile {
+  display: none;
+  cursor: pointer;
+}
 .menu {
   flex: 1;
   display: flex;
   justify-content: flex-end;
+  height: 70px;
 }
 .menu ul, 
 .menu li {
@@ -85,23 +96,23 @@ animation: gradients 3s infinite;
 
 .sectionHomeOne {
   height: calc(100vh - 70px);
-  background: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.2)),
+  background: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.6)),
   url(../images/banner.jpg) no-repeat;
-  background-size: 100%;
+  background-size: 100% 100vh;
   background-color: #ccc;
+  display: flex;
+  align-items: center;
 }
 
 
 .sectionHomeAreaDesc {
   max-width: 800px;
   display: flex;
-  justify-content: justify;
   align-items: center;
   flex-direction: column;
 }
 
 .sectionHomeTitle {
-  margin-top: 60px;
   font-size: 40px;
   text-align: justify;
   color: #ffffff;
@@ -122,7 +133,7 @@ animation: gradients 3s infinite;
 }
 
 .sectionHomeDesc {
-  margin-top: 70px;
+  margin-top: 50px;
   font-size: 20px;
   text-align: justify;
   color: #ffffff;
@@ -179,7 +190,7 @@ animation: gradients 3s infinite;
   color: #8491A5;
   margin-bottom: 35px;
   font-size: 19px;
-  font-weight: medium;
+  font-weight: 500;
   text-align: center;
 }
 
@@ -235,7 +246,6 @@ animation: gradients 3s infinite;
 .sectionThree {
   /*background-image: url('../images/background.svg');
   background-size: 100%;*/
-  height: 100vh;
   background: url(../images/EllipseLeft.svg) no-repeat left bottom, 
   url(../images/EllipseFundo.svg) no-repeat right bottom, 
   linear-gradient(262.14deg, #59DF83 38.17%, #13C5A5 97.69%);
@@ -259,7 +269,7 @@ animation: gradients 3s infinite;
 .descLeft {
   font-size: 19px;
   color: #555555;
-  font-weight: medium;
+  font-weight: 500;
   text-align: justify;
   margin-top: 20px;
 }
@@ -282,8 +292,13 @@ animation: gradients 3s infinite;
   background-color: #59DF83;
 }
 
-.descright {
+.descRight {
   margin-left:10px;
+}
+
+.descRight img {
+  width: 547px;
+  height: 315px;
 }
   /* --------- /sectionThree --------- */
   /* --------- sectionfour --------- */
@@ -296,6 +311,9 @@ animation: gradients 3s infinite;
   max-width: 100%;
   margin: 50px auto 0 0;
   text-align: center;
+}
+.sectionFourIconHelp img {
+  width: 583px;
 }
 
 .sectionFourTitle h2{
@@ -349,7 +367,7 @@ animation: gradients 3s infinite;
 
 .sectionFourHelp h4 {
   font-size: medium;
-  font-weight: medium;
+  font-weight: 600;
   color: #555555;
   display: flex;
   align-items: center;
@@ -433,6 +451,127 @@ footer {
 
 /* /footer.phtml */
 
+
+/*----- RESPONSIVE -----*
+
+/* Dispositivos extra small (telefones em modo retrato, com menos de 576px) */
+@media (max-width: 575px) { 
+	.header {
+    max-width: 100%;
+  }
+
+  .menuMobile {
+    display: block;
+  }
+
+	.menu nav {
+    opacity: 0;
+    position: absolute;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100vw;
+    top: 70px;
+    border-radius: 0 0 30px 30px;
+    transition: 1s;
+    transform: translateY(100%);
+    overflow-x: hidden !important;;
+  }
+  .menu ul {
+    flex-direction: column;
+    height: auto;
+  }
+  .menu li a{
+    margin: 20px 0 20px 0;
+    font-size: 20px;
+    padding: 10px 80px;
+  }
+
+  
+}
+
+/* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .header {
+    max-width: 100%;
+  }
+
+  .menuMobile {
+    display: block;
+  }
+
+	.menu nav {
+    opacity: 0;
+    position: absolute;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100vw;
+    top: 70px;
+    border-radius: 0 0 30px 30px;
+    transition: 1s;
+    transform: translateX(100%);
+  }
+
+  .menu ul {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .menu li a{
+    margin: 20px 0 20px 0;
+    font-size: 20px;
+    padding: 10px 80px;
+  }
+
+}
+
+/* Dispositivos médios (tablets com 768px ou mais) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .header {
+    max-width: 100%;
+  }
+
+  .menuMobile {
+    display: block;
+  }
+
+  .menu nav {
+    opacity: 0;
+    position: absolute;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100vw;
+    top: 70px;
+    border-radius: 0 0 30px 30px;
+    transition: 1s;
+    transform: translateX(100%);
+  }
+
+  .menu ul {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .menu li a{
+    margin: 20px 0 20px 0;
+    font-size: 20px;
+    padding: 10px 80px;
+  }
+
+	
+  
+}
+
+/* Dispositivos large (desktops com 992px ou mais) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  
+}
+
+/* Dispositivos extra large (desktops grandes com 1200px ou mais) */
+@media (min-width: 1200px) {
+
+}
+
+
 /*----- Animação Scroll -----*/
 [data-anime] {
   opacity: 0;
@@ -455,8 +594,13 @@ footer {
   transform: translate3d(100px,0,0);
 }
 
+[data-anime='menu'] {
+  transform: translate3d(100%,0,0);
+}
+
 .animateStart {
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }
 /*----- /Animação Scroll -----*/
+

@@ -1,13 +1,14 @@
 <header>
   <div class="header">
-    <div class='logo'>
+    <div class='logo' data-anime='left'>
       <img src='assets/images/logo.svg'>
     </div>
     <div class='menu'>
-      <nav>
-        <ul class='teste'>
+      <img class='menuMobile' src='assets/images/menuOpen.svg' onclick='toggleMenu()'>
+      <nav id='menu' data-anime='menu'>
+        <ul>
           <li class='<?php if($info == 'Home'){echo'active';} ?>'>
-            <a href="/home">Home</a>
+            <a href="/">Home</a>
           </li>
           <li class='<?php if($info == 'Sobre'){echo'active';} ?>'>
             <a href="/sobre">Sobre</a>

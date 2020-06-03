@@ -14,6 +14,21 @@ const debounce = function(func, wait, immediate) {
   };
 };
 
+/* ------ Menu responsivo ------*/
+
+function toggleMenu() {
+  let menu = document.getElementById('menu')
+
+  if(menu.style.opacity == '1') {
+    //menu.slideToggle(slow)
+    menu.style.transform = 'translateX(100%)'
+    menu.style.opacity = '0';
+  } else {
+    menu.style.transform = 'translateX(0)'
+    menu.style.opacity = '1';
+  }
+}
+
 /* ------ Animação de digitação do titulo principal ------*/
 const title = document.getElementById('homeTitleWriter');
 
@@ -27,22 +42,6 @@ function typeWriter(element) {
   });
 }
 typeWriter(title);
-
-/* ------ animação carregar um elementos em determinado tempo ------ */
-function load(element) {
-  element.addClass('animateStart');
-}
-
-/* ------ Ação jQuery para animar os botões mais perguntas ------ */
-$('.sectionFourHelp').click(function() {
-  const hCollapse = $(this).find('div.hCollapse');
-  const hCollapseIcon = $(this).find('h4.hCollapseIcon');
-
-  hCollapse.slideToggle('slow');
-  hCollapseIcon.toggleClass('iconPlus');
-  hCollapseIcon.toggleClass('iconMinus');
-});
-
 
 /* ------ Ação para animar os scroll ------ */
 const target = document.querySelectorAll('[data-anime]');
@@ -65,6 +64,20 @@ if(target.length) {
   }, 200));
 }
 
+/* ------ animação carregar um elementos em determinado tempo ------ */
+function load(element) {
+  element.addClass('animateStart');
+}
+
+/* ------ Ação jQuery para animar os botões mais perguntas ------ */
+$('.sectionFourHelp').click(function() {
+  const hCollapse = $(this).find('div.hCollapse');
+  const hCollapseIcon = $(this).find('h4.hCollapseIcon');
+
+  hCollapse.slideToggle('slow');
+  hCollapseIcon.toggleClass('iconPlus');
+  hCollapseIcon.toggleClass('iconMinus');
+});
 
 /* ------ Executa quando após o carregamento dos documentos ------ */
 $(document).ready(() => {
