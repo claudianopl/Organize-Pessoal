@@ -1,0 +1,100 @@
+
+/* footer.phtml */
+footer {
+  background-color: #333333;
+  padding-bottom: 40px;
+}
+
+.footerContent {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin: auto;
+  justify-content: center;
+  border-bottom: 2px solid #59DF83;
+}
+
+.footerItem {
+  font-size: 24px;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 50px 20px 30px;
+  flex-basis: calc(30% - 40px);
+}
+
+.footerItemDesc {
+  font-size: 14px;
+  font-weight: normal;
+  color: #ffffff;
+  padding-top: 20px;
+  text-align: justify;
+  border-top: 1px solid #ccc;
+}
+
+.footerItemDesc a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.footerItemDesc h4{
+  font-size: 17px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.email::before {
+  content: url(../images/email.svg);
+  margin-right: 15px;
+}
+
+.github, .linkedin {
+  margin-top: 15px;
+}
+
+.github::before {
+  content: url(../images/github.svg);
+  margin-right: 15px;
+}
+
+.linkedin::before {
+  content: url(../images/linkedin.svg);
+  margin-right: 15px;
+}
+
+
+/* /footer.phtml */
+@media (max-width: 575px) { 
+  .footerContent {
+    flex-direction: column;
+    padding-top: 15px;
+  }
+  .footerItem {
+    margin:0;
+    margin-bottom: 15px;
+  }
+  
+}
+/* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .footerContent {
+    flex-direction: column;
+    padding-top: 15px;
+  }
+  .footerItem {
+    margin:0;
+    margin-bottom: 15px;
+  }
+}
+
+/* Dispositivos médios (tablets com 768px ou mais) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .footerContent {
+    flex-direction: column;
+    padding-top: 15px;
+  }
+  .footerItem {
+    margin:0;
+    margin-bottom: 15px;
+  }
+}

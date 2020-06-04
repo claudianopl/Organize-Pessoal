@@ -70,8 +70,8 @@ function load(element) {
 }
 
 /* ------ Ação jQuery para animar os botões mais perguntas ------ */
-$('.sectionFourHelp').click(function() {
-  const hCollapse = $(this).find('div.hCollapse');
+$('.sectionHomeFourHelp').click(function() {
+  const hCollapse = $(this).find('p.hCollapse');
   const hCollapseIcon = $(this).find('h4.hCollapseIcon');
 
   hCollapse.slideToggle('slow');
@@ -82,8 +82,8 @@ $('.sectionFourHelp').click(function() {
 /* ------ Executa quando após o carregamento dos documentos ------ */
 $(document).ready(() => {
   // Mostrando a descrição principal e o botão inscreva-se após a escrita
-  setTimeout(()=> {load($('.sectionHomeDesc'))}, 6000);
-  setTimeout(()=> {load($('.sectionHomeButtonCadastrar'))}, 6500);
+  setTimeout(()=> {load($('.sectionHomeOneInfoDesc'))}, 6000);
+  setTimeout(()=> {load($('.sectionHomeOneInfoDescButton'))}, 6500);
 
   // Deixando o mais pergunta com display none
   $('.hCollapse').hide();
