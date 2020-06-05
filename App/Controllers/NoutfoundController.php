@@ -1,9 +1,12 @@
 <?php
 namespace App\Controllers;
 
-class NoutfoundController {
+// Recursos
+use MF\Controller\Action;
+
+class NoutfoundController extends Action {
 	public function index() {
-		echo "Página não encontrada";
+		$this->render('notFound404');
 	}
 }
 

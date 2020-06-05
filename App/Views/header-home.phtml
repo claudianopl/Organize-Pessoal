@@ -2,7 +2,7 @@
 <header>
   <div class="header">
     <div class='logo' data-anime='left'>
-      <img src='assets/images/logo.svg'>
+      <a href='/'><img src='/assets/images/logo.svg'></a>
     </div>
     
     <div class='menu'>
@@ -33,7 +33,7 @@
 	  </label>
 	  <nav class="navMenu">
       <ul>
-        <li class='active <?php if($info == 'Home'){echo'active';} ?>'>
+        <li class='<?php if($info == 'Home'){echo'active';} ?>'>
           <a href="/home">Home</a>
         </li>
         <li class='<?php if($info == 'Sobre'){echo'active';} ?>'>

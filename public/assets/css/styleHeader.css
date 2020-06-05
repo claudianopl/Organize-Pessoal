@@ -143,8 +143,8 @@ input:checked ~ label .hamburguer:after {
   opacity: 0;
   transition: 0.25s 0.1s cubic-bezier(0, 1.07, 0, 1.02);
   top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) translate3d(100vw, 0, 0px);
+  left: 50%;
+  transform: translate(-50%, -50%) translate3d(100vw, 0, 0px);
   z-index: 2;
   display: flex;
   flex-direction: column;

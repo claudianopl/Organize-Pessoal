@@ -1,0 +1,94 @@
+.sectionConfirmarOne,
+.sectionCadastroConfirmOne {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 70px);
+}
+.sectionConfirmarOneInfo,
+.sectionCadastroConfirmOneInfo {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  text-align: center;
+}
+.sectionConfirmarOneInfo img,
+.sectionCadastroConfirmOneInfo img{
+  width: 550px;
+}
+.sectionConfirmarOneInfo h3,
+.sectionCadastroConfirmOneInfo h3 {
+  margin: 50px 0 30px;
+  color: #555555;
+  font-weight: 700;
+}
+.sectionConfirmarOneInfo p {
+  font-weight: 500;
+  color: #8491A5;
+  text-align: center;
+}
+.sectionCadastroConfirmOneInfo p {
+  font-weight: 500;
+  color: #8491A5;
+  text-align: justify;
+  margin: 0 100px 0;
+}
+
+/*
+ ------------- Cadastro Confirmado -------------
+*/
+
+@media (max-width: 575px) { 
+  .sectionConfirmarOne {
+    height: auto;
+  }
+  .sectionConfirmarOneInfo,
+  .sectionCadastroConfirmOneInfo img {
+    width: 300px;
+  }
+  .sectionConfirmarOneInfo p {
+    text-align: justify;
+  }
+  .sectionCadastroConfirmOneInfo p {
+    margin: 0;
+  }
+}
+/* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .sectionConfirmarOne,
+  .sectionCadastroConfirmOne {
+    height: auto;
+  }
+  .sectionConfirmarOneInfo,
+  .sectionCadastroConfirmOneInfo img{
+    width: 400px;
+  }
+  .sectionConfirmarOneInfo p{
+    text-align: justify;
+  }
+  .sectionCadastroConfirmOneInfo p {
+    margin: 0;
+  }
+}
+
+/* Dispositivos médios (tablets com 768px ou mais) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .sectionConfirmarOne,
+  .sectionCadastroConfirmOne {
+    height: auto;
+  }
+  .sectionConfirmarOneInfo p {
+    text-align: justify;
+  }
+  .sectionCadastroConfirmOneInfo p {
+    margin: 0;
+  }
+}
+
+/* Dispositivos large (desktops com 992px ou mais) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .sectionConfirmarOne,
+  .sectionCadastroConfirmOne {
+    height: auto;
+  }
+}
+@media (min-width: 1200px) { }

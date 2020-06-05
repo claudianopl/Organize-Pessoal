@@ -1,0 +1,74 @@
+.sectionSobreOne {
+  background: url(../images/EllipseLeft.svg) no-repeat left bottom, 
+  url(../images/EllipseFundo.svg) no-repeat right bottom, 
+  linear-gradient(262.14deg, #59DF83 38.17%, #13C5A5 97.69%);
+  height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+}
+.teste {
+  transition: all 2s;
+  animation: pulse 1.5s linear infinite;
+}
+@keyframes pulse{
+  0%{
+    box-shadow: 0 0 0 0 rgba(89, 223, 131, 1);
+  }
+  100%{
+    box-shadow: 0 0 0 25px rgba(89, 223, 131, 0);
+  }
+}
+.sectionSobreOneInfoTitle {
+  color: #555555;
+  font-weight: 700;
+  margin-bottom: 50px;
+  padding-top: 50px;
+}
+.sectionSobreOneInfoSubTitle{
+  color: #555555;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+.sectionSobreOneInfo h4 {
+  color: #555555;
+  font-weight: 500;
+  margin: 0 60px 0;
+  text-align: justify;
+  padding-bottom: 50px;
+}
+
+@media (max-width: 575px) { 
+  .sectionSobreOne {
+    height: auto;
+  }
+  .sectionSobreOneInfo h4 {
+    margin: 0;
+  } 
+}
+/* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .sectionSobreOne {
+    height: auto;
+  }
+  .sectionSobreOneInfo h4 {
+    margin: 0 10px 0;
+  }
+}
+
+/* Dispositivos médios (tablets com 768px ou mais) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .sectionSobreOne {
+    height: auto;
+  }
+  .sectionSobreOneInfo h4 {
+    margin: 0 20px 0;
+  }
+}
+
+/* Dispositivos large (desktops com 992px ou mais) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .sectionSobreOne {
+    height: auto;
+  }
+}
+@media (min-width: 1200px) { }

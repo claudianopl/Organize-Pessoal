@@ -1,0 +1,85 @@
+.sectionNotFound404One {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 70px);
+}
+.sectionNotFound404OneInfo {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  text-align: center;
+}
+.sectionNotFound404OneInfo img{
+  width: 380px;
+}
+.sectionNotFound404OneInfo h3 {
+  margin: 40px 0 30px;
+  color: #555555;
+  font-weight: 700;
+}
+.sectionNotFound404OneInfo p {
+  font-weight: 500;
+  color: #8491A5;
+  text-align: center;
+}
+.sectionNotFound404OneButton {
+  margin-top: 40px;
+}
+.sectionNotFound404OneButton a {
+  text-decoration: none;
+  color: #ffffff;
+  padding: 10px 100px;
+  background-color: #949494;
+  border-radius: 18px;
+  font-weight: 600;
+  transition: all 2s;
+  animation: pulse 1.5s linear infinite;
+}
+.sectionNotFound404OneButton a:hover {
+  background-color: #34F06F;
+}
+@keyframes pulse{
+  0%{
+    box-shadow: 0 0 0 0 #949494;
+  }
+  100%{
+    box-shadow: 0 0 0 25px rgba(0, 0, 0, 0);
+  }
+}
+
+
+@media (max-width: 575px) { 
+  .sectionConfirmarOne {
+    height: auto;
+  }
+  .sectionNotFound404OneInfo img {
+    width: 300px;
+  }
+  .sectionNotFound404OneButton a {
+    padding: 10px 50px;
+  }
+}
+/* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+ .sectionNotFound404One {
+    height: auto;
+  }
+  .sectionNotFound404OneInfo img{
+    width: 400px;
+  }
+}
+
+/* Dispositivos médios (tablets com 768px ou mais) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .sectionNotFound404One {
+    height: auto;
+  }
+}
+
+/* Dispositivos large (desktops com 992px ou mais) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .sectionNotFound404One{
+    height: auto;
+  }
+}
+@media (min-width: 1200px) { }

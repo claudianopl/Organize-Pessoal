@@ -26,12 +26,30 @@ abstract class Bootstrap {
 
 	protected function run($url) {
 		$notFound = True;
+		$dados = explode('/', $url);
+		array_shift($dados);
+
 		foreach ($this->getRoutes() as $key => $route) {
+			if(count($dados) > 1 && count($dados)<=2) {
+				if('/'.$dados[0] == $route['route'] && $dados[0] == 'cadastro-confirmado') {
+					$class = "App\\Controllers\\".ucfirst($route['controller']);
+
+					$controller = new $class;
+			
+					$action = $route['action'];
+
+					$controller->$action($dados[1]);
+
+					$notFound = False;
+					break;
+				}
+			}
+
 			if($url == $route['route']) {
 				$class = "App\\Controllers\\".ucfirst($route['controller']);
-
-				$controller = new $class;
 				
+				$controller = new $class;
+			
 				$action = $route['action'];
 
 				$controller->$action();

@@ -20,16 +20,22 @@ class Route extends Bootstrap {
 			'action' => 'sobre'
 		);
 
-		$routes['cadastre-se'] = array(
-			'route' => '/cadastrar',
+		$routes['confirmar-cadastro'] = array(
+			'route' => '/confirmar-cadastro',
 			'controller' => 'HomeController',
-			'action' => 'cadastrar'
+			'action' => 'confirmarCadastro'
+		);
+		
+		$routes['cadastro-confirmado'] = array(
+			'route' => "/cadastro-confirmado",
+			'controller' => 'HomeController',
+			'action' => 'cadastroConfimado',
 		);
 
 		$routes['login'] = array(
-			'route' => '/login',
+			'route' => "/login",
 			'controller' => 'HomeController',
-			'action' => 'login'
+			'action' => 'login',
 		);
 
 		$this->setRoutes($routes);

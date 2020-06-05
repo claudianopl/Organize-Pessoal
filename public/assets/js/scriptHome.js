@@ -1,34 +1,3 @@
-/* ------ Debounce do Lodash ------ */
-const debounce = function(func, wait, immediate) {
-  let timeout;
-  return function(...args) {
-    const context = this;
-    const later = function () {
-      timeout = null;
-      if (!immediate) func.apply(context, args);
-    };
-    const callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, args);
-  };
-};
-
-/* ------ Menu responsivo ------*/
-
-function toggleMenu() {
-  let menu = document.getElementById('menu')
-
-  if(menu.style.opacity == '1') {
-    //menu.slideToggle(slow)
-    menu.style.transform = 'translateX(100%)'
-    menu.style.opacity = '0';
-  } else {
-    menu.style.transform = 'translateX(0)'
-    menu.style.opacity = '1';
-  }
-}
-
 /* ------ Animação de digitação do titulo principal ------*/
 const title = document.getElementById('homeTitleWriter');
 
@@ -43,26 +12,7 @@ function typeWriter(element) {
 }
 typeWriter(title);
 
-/* ------ Ação para animar os scroll ------ */
-const target = document.querySelectorAll('[data-anime]');
-const animationClass = 'animateStart';
 
-function animeScroll() {
- const windowTop = window.pageYOffset + (window.innerHeight * 0.8);
- target.forEach((e) => {
-  if(windowTop > e.offsetTop) {
-    e.classList.add(animationClass);
-  }
- })
-}
-
-animeScroll();
-
-if(target.length) {
-  window.addEventListener('scroll', debounce(() => {
-    animeScroll();
-  }, 200));
-}
 
 /* ------ animação carregar um elementos em determinado tempo ------ */
 function load(element) {

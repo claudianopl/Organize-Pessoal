@@ -13,6 +13,23 @@ class HomeController extends Action {
 		$this->render('index');
 	}
 	
+	public function sobre() {
+		$this->render('sobre');
+	}
+
+	public function confirmarCadastro() {
+		$this->render('confirmarCadastro');
+	}
+
+	public function cadastroConfimado($dados) {
+		$this->render('cadastroConfirmado');
+	}
+
+	public function login() {
+		$this->render('login');
+	}
+
+	
 }
 
 ?>
