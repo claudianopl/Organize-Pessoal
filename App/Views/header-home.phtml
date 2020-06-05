@@ -4,9 +4,9 @@
     <div class='logo' data-anime='left'>
       <img src='assets/images/logo.svg'>
     </div>
+    
     <div class='menu'>
-      <img class='menuMobile' src='assets/images/menuOpen.svg' onclick='toggleMenu()'>
-      <nav id='menu' data-anime='menu'>
+      <nav data-anime='menu'>
         <ul>
           <li class='<?php if($info == 'Home'){echo'active';} ?>'>
             <a href="/">Home</a>
@@ -24,4 +24,27 @@
       </nav>
     </div>
   </div>
+
+  <input id="menuHamburguer" type="checkbox">
+	  <label for="menuHamburguer">
+	    <div class="menuMobile">
+	      <span class="hamburguer"></span>
+	    </div>
+	  </label>
+	  <nav class="navMenu">
+      <ul>
+        <li class='active <?php if($info == 'Home'){echo'active';} ?>'>
+          <a href="/home">Home</a>
+        </li>
+        <li class='<?php if($info == 'Sobre'){echo'active';} ?>'>
+          <a href="/sobre">Sobre</a>
+        </li>
+        <li class='<?php if($info == 'Cadastre-se'){echo'active';} ?>'>
+          <a href="/cadastre-se">Cadastre-se</a>
+        </li>
+        <li class='<?php if($info == 'Login'){echo'active';} ?>'>
+          <a href="/login">Login</a>
+        </li>
+      </ul>
+    </nav>
 </header>
