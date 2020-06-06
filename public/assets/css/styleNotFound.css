@@ -29,18 +29,19 @@
   text-decoration: none;
   color: #ffffff;
   padding: 10px 100px;
-  background-color: #949494;
+  background-color: #34F06F;
   border-radius: 18px;
   font-weight: 600;
   transition: all 2s;
   animation: pulse 1.5s linear infinite;
 }
 .sectionNotFound404OneButton a:hover {
-  background-color: #34F06F;
+  background-color: #ffffff;
+  color: #34F06F;
 }
 @keyframes pulse{
   0%{
-    box-shadow: 0 0 0 0 #949494;
+    box-shadow: 0 0 0 0 #34F06F;
   }
   100%{
     box-shadow: 0 0 0 25px rgba(0, 0, 0, 0);
@@ -49,7 +50,7 @@
 
 
 @media (max-width: 575px) { 
-  .sectionConfirmarOne {
+  .sectionNotFound404One {
     height: auto;
   }
   .sectionNotFound404OneInfo img {

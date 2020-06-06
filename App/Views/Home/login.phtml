@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, max-scale=1">
 
   <!-- Estilos CSS -->
-  <link rel="stylesheet" type="text/css" href="/assets/css/styleSobre.css">
+  <link rel="stylesheet" type="text/css" href="/assets/css/styleLogin.css">
   <link rel="stylesheet" type="text/css" href="/assets/css/styleGeral.css">
 
   <!-- Icon -->
@@ -34,7 +34,37 @@
   <?php $this->header('header-home','Login') ?>
 
   <!-- Section -->
-  
+  <section class="sectionLoginOne">
+    <div class="container">
+      <div class="sectionLoginOneArea">
+        <div class="sectionLoginOneInfo">
+          <h2>Fazer login</h2>
+          <h4>Ainda não possui uma conta? <a href="">Cadastre-se!</a></h4>
+          <p></p>
+          <div class="sectionLoginOneForm">
+            <form id='formLogin' action="">
+              <div class="inputBlock">
+                <label for="login-email">
+                  <img src="/assets/images/loginEmail.svg"> Email
+                </label>
+                <input type="email" id="login-email">
+              </div>
+
+              <div class="inputBlock">
+                <label for="login-password">
+                  <img src="/assets/images/loginSenha.svg"> Password 
+                  <a href="">Esqueceu a senha?</a>
+                </label>
+                <input type="password" id="login-password">
+              </div>
+
+              <button type="submit" class="loginBtnSubmit">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <?php $this->footer('footer'); ?>
@@ -42,5 +72,6 @@
   <!-- jQuery e JavaScript -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="/assets/js/scriptGeral.js"></script>
+  <script src="/assets/js/scriptLogin.js"></script>
 </body>
 </html>

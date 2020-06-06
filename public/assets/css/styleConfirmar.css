@@ -15,9 +15,13 @@
 .sectionCadastroConfirmOneInfo img{
   width: 550px;
 }
-.sectionConfirmarOneInfo h3,
-.sectionCadastroConfirmOneInfo h3 {
+.sectionConfirmarOneInfo h3 {
   margin: 50px 0 30px;
+  color: #555555;
+  font-weight: 700;
+}
+.sectionCadastroConfirmOneInfo h3 {
+  margin: 20px 0 20px;
   color: #555555;
   font-weight: 700;
 }
@@ -41,7 +45,8 @@
   .sectionConfirmarOne {
     height: auto;
   }
-  .sectionConfirmarOneInfo,
+  
+  .sectionConfirmarOneInfo img,
   .sectionCadastroConfirmOneInfo img {
     width: 300px;
   }
@@ -58,7 +63,7 @@
   .sectionCadastroConfirmOne {
     height: auto;
   }
-  .sectionConfirmarOneInfo,
+  .sectionConfirmarOneInfo img,
   .sectionCadastroConfirmOneInfo img{
     width: 400px;
   }

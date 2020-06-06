@@ -1,0 +1,200 @@
+.sectionLoginOne {
+  background-color: #E9FAF4;
+}
+.sectionLoginOneArea{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: calc(100vh - 70px);
+  padding: 20px 0;
+}
+.sectionLoginOneInfo h2 {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  color: #555555;
+  text-align: center;
+}
+.sectionLoginOneInfo h4 {
+  color: #555555;
+  margin-bottom: 40px;
+  font-weight: 500;
+  text-align: center;
+}
+.sectionLoginOneInfo h4 a {
+  color: #34F06F;
+  text-decoration: none;
+  font-weight: 700;
+}
+.sectionLoginOneInfo p {
+  margin-bottom: 15px;
+  color: red;
+  font-weight: 600;
+  padding: 10px 100px;
+  border: 2px solid red;
+  border-radius: 18px;
+}
+.sectionLoginOneForm {
+  width: 340px;
+  padding-bottom: 50px;
+}
+.inputBlock{
+  margin-bottom: 35px;
+}
+.inputBlock label {
+  margin-left: 15px;
+  font-size: 14px;
+  color: #555555;
+  font-weight: 600;
+}
+.inputBlock label img {
+  width: 14px;
+}
+.inputBlock label a {
+  margin-left: 88px;
+  text-decoration: none;
+  color: #34F06F;
+  font-size: 15px;
+  font-weight: 700;
+}
+.inputBlock input:focus{
+  border: 1px solid #34F06F;
+  outline: 0;
+}
+.inputBlock input {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+  font-size: 15px;
+  color: #555555;
+  font-weight: 700;
+  border-radius: 18px;
+  border: 1px solid #ccddef;
+}
+.sectionLoginOneForm .loginBtnSubmit{
+  display: block;
+  background-color: #34F06F;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 18px;
+  border: none;
+  padding: 10px 100px;
+  margin: auto;
+  font-size: 16px;
+}
+.sectionLoginOneForm .loginBtnSubmit:focus{
+  border: 1px solid #555555;
+  outline: 0;
+}
+
+/*
+  Animações do formulário de login
+*/
+
+.sectionLoginOneInfo h2,
+.sectionLoginOneInfo h4 {
+  animation: fade 1s;
+  overflow: hidden;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  } to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.inputBlock:nth-child(1) {
+  animation: move 1s;
+  animation-fill-mode: backwards;
+}
+.inputBlock:nth-child(2) {
+  animation: move 1s;
+  animation-delay: 0.25s;
+  animation-fill-mode: backwards;
+}
+.loginBtnSubmit {
+  animation: move 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: backwards;
+}
+@keyframes move {
+  from{
+    opacity: 0;
+    transform: translateX(35%);
+  }to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+/*
+  ---> Animção ao clicar no button sumir com o form <---
+*/
+
+.loginFormHide {
+  animation: down 1s forwards;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+@keyframes down {
+  from {
+    transform: translateY(0);
+  } to {
+    transform: translateY(100vh);
+  }
+}
+
+/*
+  ---> Animção do form vibrar caso algo tiver campo invalido <---
+*/
+.sectionLoginOneInfo form.validateError {
+  animation: invalid 0.3s linear, fade paused;
+  animation-iteration-count: 2;
+}
+
+@keyframes invalid {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  35% {
+    transform: translateX(-15%);
+  }
+  70% {
+    transform: translateX(15%);
+  }
+}
+
+
+@media (max-width: 575px) { 
+  .sectionLoginOneArea {
+    height: auto;
+  }
+  .sectionLoginOneInfo p {
+    padding: 10px 50px;
+    text-align: center;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .sectionLoginOneArea {
+    height: auto;
+  }
+}
+  
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .sectionLoginOneArea {
+    height: auto;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .sectionLoginOneArea {
+    height: auto;
+  }
+}
+@media (min-width: 1200px) { }

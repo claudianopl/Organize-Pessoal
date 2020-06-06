@@ -106,24 +106,24 @@ animation: gradients 3s infinite;
 .hamburguer:after {
   bottom: -10px;
 }
-input {
+#menuHamburguer {
   display: none;
 }
-input:checked ~  .navMenu ul {
+#menuHamburguer:checked ~  .navMenu ul {
   opacity: 1;
   transform:translate(-50%, -50%) translate3d(0, 0, 0);
 }
-input:checked ~ label .menuMobile{
+#menuHamburguer:checked ~ label .menuMobile{
   box-shadow: 0 0 0 130vw #fff;
 }
-input:checked ~ label .hamburguer{
+#menuHamburguer:checked ~ label .hamburguer{
   transform: rotate(45deg);
 }
-input:checked ~ label .hamburguer:before {
+#menuHamburguer:checked ~ label .hamburguer:before {
   transform: rotate(90deg);
   top: 0;
 }
-input:checked ~ label .hamburguer:after {
+#menuHamburguer:checked ~ label .hamburguer:after {
   transform: rotate(90deg);
   bottom: 0;
 }
@@ -180,6 +180,7 @@ input:checked ~ label .hamburguer:after {
   .logo {
     height: 70px;
     display: flex;
+    align-items: center;
   }
   .menu {
     display: none;
@@ -202,6 +203,7 @@ input:checked ~ label .hamburguer:after {
   .logo {
     height: 70px;
     display: flex;
+    align-items: center;
   }
   .menu {
     display: none;
@@ -224,6 +226,7 @@ input:checked ~ label .hamburguer:after {
   .logo {
     height: 70px;
     display: flex;
+    align-items: center;
   }
   .menu {
     display: none;
