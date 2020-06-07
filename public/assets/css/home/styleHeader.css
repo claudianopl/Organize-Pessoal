@@ -24,11 +24,15 @@ animation: gradients 3s infinite;
   color: #ffffff;
   align-items: center;
 }
+.logo {
+  animation: moveLeft 1s;
+}
 .menu {
   flex: 1;
   display: flex;
   justify-content: flex-end;
   height: 70px;
+  animation: moveRight 1s;
 }
 .menu ul, 
 .menu li {

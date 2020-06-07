@@ -1,0 +1,18 @@
+<?php
+namespace App\Controllers;
+// Recursos
+use MF\Controller\Action;
+use MF\Model\Container;
+
+// Models
+
+
+class AppController extends Action {
+	
+	public function index() {
+		$this->render('index');
+	}
+	
+}
+
+?>

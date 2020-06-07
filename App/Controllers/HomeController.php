@@ -21,12 +21,16 @@ class HomeController extends Action {
 		$this->render('confirmarCadastro');
 	}
 
-	public function cadastroConfimado($dados) {
+	public function cadastroConfimado($dados=null) {
 		$this->render('cadastroConfirmado');
 	}
 
 	public function login() {
 		$this->render('login');
+	}
+
+	public function singup() {
+		$this->render('singup');
 	}
 
 	

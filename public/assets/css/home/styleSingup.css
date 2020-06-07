@@ -1,0 +1,117 @@
+.sectionSingupOne {
+  background-color: #E9FAF4;
+}
+.sectionSingupOneAreaForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0px;
+}
+.sectionSingupOneAreaForm,
+.sectionSingupOneForm label{
+  color: #555555;
+}
+.sectionSingupOneAreaForm h2{
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.sectionSingupOneAreaForm h4 {
+  margin-bottom: 50px;
+  font-weight: 500;
+}
+.sectionSingupOneAreaForm h4 a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #34F06F;
+}
+.sectionSingupOneForm {
+  width: 500px;
+}
+.sectionSingupOneForm label {
+  margin-left: 15px;
+  font-size: 14px;
+  color: #555555;
+  font-weight: 600;
+}
+.sectionSingupOneForm img {
+  
+}
+.sectionSingupOneForm input {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+  font-size: 15px;
+  color: #555555;
+  font-weight: 500;
+  border-radius: 18px;
+  border: 1px solid #ccddef;
+  margin-bottom: 35px;
+  text-rendering: right;
+}
+.sectionSingupOneForm input:focus {
+  border: 1px solid #34F06F;
+  outline: 0;
+  font-weight: 700;
+}
+.sectionSingupOneForm button {
+  display: block;
+  background-color: #34F06F;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 18px;
+  border: none;
+  padding: 10px 100px;
+  margin: auto;
+  font-size: 16px;
+}
+.sectionSingupOneForm button:focus{
+  border: 1px solid #555555;
+  outline: 0;
+}
+
+/*
+  -----> Animação <-----
+*/
+
+.sectionSingupOneAreaForm h2,
+.sectionSingupOneAreaForm h4 {
+  animation: fade 1s;
+  overflow: hidden;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  } to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.inputBlock:nth-child(1) {
+  animation: moveRight 1s;
+  animation-fill-mode: backwards;
+}
+.inputBlock:nth-child(2) {
+  animation: moveRight 1s;
+  animation-delay: 0.25s;
+  animation-fill-mode: backwards;
+}
+.inputBlock:nth-child(3) {
+  animation: moveRight 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: backwards;
+}
+.inputBlock:nth-child(4) {
+  animation: moveRight 1s;
+  animation-delay: 0.75s;
+  animation-fill-mode: backwards;
+}
+.sectionSingupOneForm button {
+  animation: moveRight 1s;
+  animation-delay: 1s;
+  animation-fill-mode: backwards;
+}

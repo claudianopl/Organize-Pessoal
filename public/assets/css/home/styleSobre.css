@@ -23,11 +23,13 @@
   font-weight: 700;
   margin-bottom: 50px;
   padding-top: 50px;
+  animation: moveTop 1s;
 }
 .sectionSobreOneInfoSubTitle{
   color: #555555;
   font-weight: 500;
   margin-bottom: 30px;
+  animation: moveLeft 1s;
 }
 .sectionSobreOneInfo h4 {
   color: #555555;
@@ -35,6 +37,7 @@
   margin: 0 60px 0;
   text-align: justify;
   padding-bottom: 50px;
+  animation: moveRight 1s;
 }
 
 @media (max-width: 575px) { 

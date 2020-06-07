@@ -1,0 +1,26 @@
+.teste {
+  background-color: #E9FAF4;
+}
+.headerApp {
+  display: flex;
+  height: 70px;
+  align-items: center;
+}
+.headerAppUser {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.headerAppCalender {
+  margin: auto;
+  color: #34F06F;
+  font-weight: 700;
+}
+.headerAppLogo {
+  flex: 1;
+}
+.headerAppUser h4 {
+  color: #555555;
+  margin-left: 15px;
+}

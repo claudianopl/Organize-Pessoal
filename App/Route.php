@@ -8,6 +8,9 @@ class Route extends Bootstrap {
 
 	protected function initRoutes() {
 
+		/*
+		* Routes do controller principal Home
+		*/
 		$routes['home'] = array(
 			'route' => '/',
 			'controller' => 'HomeController',
@@ -32,12 +35,30 @@ class Route extends Bootstrap {
 			'action' => 'cadastroConfimado',
 		);
 
-		$routes['login'] = array(
-			'route' => "/login",
+		$routes['entrar'] = array(
+			'route' => "/entrar",
 			'controller' => 'HomeController',
 			'action' => 'login',
 		);
 
+		$routes['cadastrar'] = array(
+			'route' => "/cadastre-se",
+			'controller' => 'HomeController',
+			'action' => 'singup',
+		);
+
+		/*
+		* Routes user do controller App
+		*/
+
+		$routes['app'] = array(
+			'route' => "/app",
+			'controller' => 'AppController',
+			'action' => 'index',
+		);
+
+
+		// Execução das routes
 		$this->setRoutes($routes);
 	}
 }

@@ -1,6 +1,7 @@
 .sectionHomeOne {
   height: calc(100vh - 70px);
-  background: url(../images/homeBackgroundLeft.svg) no-repeat left top;
+  background: url(../../images/home/index/homeBackgroundLeft.svg) 
+  no-repeat left top;
   background-size: 100vh;
   background-color: #5A5A75;
   display: flex;
@@ -130,8 +131,8 @@
 */
 
 .sectionHomeThree {
-  background: url(../images/EllipseLeft.svg) no-repeat left bottom, 
-  url(../images/EllipseFundo.svg) no-repeat right bottom, 
+  background: url(../../images/home/index/EllipseLeft.svg) no-repeat left bottom, 
+  url(../../images/home/index/EllipseRight.svg) no-repeat right bottom, 
   linear-gradient(262.14deg, #59DF83 38.17%, #13C5A5 97.69%);
   display: flex;
 }
@@ -232,11 +233,11 @@
   25%, 75% {box-shadow: 0px 4px 4px rgb(89, 223, 131, 0.5);}
 }
 .iconPlus::before {
-  content: url(../images/iconPlus.svg);
+  content: url(../../images/home/index/iconPlus.svg);
   margin: 0px 10px 0px 20px;
 }
 .iconMinus::before {
-  content: url(../images/iconMinus.svg);
+  content: url(../../images/home/index/iconMinus.svg);
   margin: 0px 10px 0px 20px;
 }
 .sectionHomeFourHelp h4 {

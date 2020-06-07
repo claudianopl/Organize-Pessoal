@@ -95,7 +95,9 @@ h4 {
 
   p {font-size: 16px;}
 }
-
+/*
+  Animação com JavaScript Scroll
+*/
 [data-anime] {
   opacity: 0;
   transition: 1s;
@@ -125,3 +127,48 @@ h4 {
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }
+
+/*
+  Animação CSS sem scroll
+*/
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  } to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes moveTop {
+  from{
+    opacity: 0;
+    transform: translateY(-100%);
+  }to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes moveLeft {
+  from{
+    opacity: 0;
+    transform: translateX(-100%);
+  }to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes moveRight {
+  from{
+    opacity: 0;
+    transform: translateX(35%);
+  }to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+

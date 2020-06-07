@@ -44,8 +44,8 @@ footer {
 }
 
 .email::before {
-  content: url(../images/email.svg);
-  margin-right: 15px;
+  content: url(../../images/home/footer/email.svg);
+  margin-right: 10px;
 }
 
 .github, .linkedin {
@@ -53,13 +53,13 @@ footer {
 }
 
 .github::before {
-  content: url(../images/github.svg);
-  margin-right: 15px;
+  content: url(../../images/home/footer/github.svg);
+  margin-right: 10px;
 }
 
 .linkedin::before {
-  content: url(../images/linkedin.svg);
-  margin-right: 15px;
+  content: url(../../images/home/footer/linkedin.svg);
+  margin-right: 10px;
 }
 
 

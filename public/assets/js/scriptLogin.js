@@ -4,11 +4,10 @@ const formMens = document.querySelector(".sectionLoginOneInfo p");
 formMens.style.display = 'none';
 
 btnSubmit.addEventListener('click', (event) => {
+  // Pausa a função de click
   event.preventDefault();
 
   const fields = [...document.querySelectorAll('.inputBlock input')];
-  
-  
 
   // Adiciona a class com o evento invalid
   fields.forEach(field => {
@@ -35,12 +34,13 @@ btnSubmit.addEventListener('click', (event) => {
 
 })
 
+// Elimina a barra de rolagem enquanto o formulário desaparece
 formLogin.addEventListener('animationstart', event => {
   if(event.animationName === 'down') {
     document.querySelector("body").style.overflow = 'hidden';
   }
 })
-
+// Retorna a barra de rolagem quanto o formulário desaparece por completo.
 formLogin.addEventListener('animationend', event => {
   if(event.animationName === "down") {
     formLogin.style.display = "none";
