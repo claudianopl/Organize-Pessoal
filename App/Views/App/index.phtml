@@ -1,3 +1,9 @@
+<?php
+$dataDay = array();
+for($i=1; $i<=31; $i++) {
+  array_push($dataDay, $i);
+}
+?>
 <html>
 <head>
   <meta charset="UFT-8">
@@ -21,6 +27,13 @@
 
   <!-- Estilos CSS -->
   <link rel="stylesheet" type="text/css" href="/assets/css/styleGeral.css">
+  <link rel="stylesheet" type="text/css" href="/assets/css/app/styleHome.css">
+
+  <!-- Script Chart.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" 
+  integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" 
+  crossorigin="anonymous"></script>
+
 
   <!-- Icon -->
   <link rel='icon' type="img/svg" href="/assets/images/iconLogo.svg">
@@ -30,11 +43,227 @@
 </head>
 <body>
   <!-- Header -->
-  <?php $this->header('header-app') ?>
+  <?php $this->header('header-app', 'Home') ?>
+
+  <!-- Section -->
+  <section class="sectionAppHomeOne">
+    <div class="container">
+      <div class="sectionAppHomeOneArea">
+        <?php $this->header('menu-app', 'Home') ?>
+        <div class="sectionAppHomeOneInfo">
+          <div class="sectionAppHomeOneInfoHeader">
+            <div class="sectionAppHomeOneInfoHeaderSale">
+
+              <div class="sectionAppHomeOneInfoHeaderIcon">
+                <img src="/assets/images/app/home/header/saleIcon.svg">
+              </div>
+              <div class="sectionAppHomeOneInfoHeaderSaleInfo">
+                <h4>Saldo Atual</h4>
+                <p>R$ 00,00</p>
+              </div>
+
+            </div>
+            <div class="sectionAppHomeOneInfoHeaderReceive">
+
+              <div class="sectionAppHomeOneInfoHeaderIcon">
+                <img src="/assets/images/app/home/header/receiveIcon.svg">
+              </div>
+              <div class="sectionAppHomeOneInfoHeaderReceiveInfo">
+                <h4>Receitas</h4>
+                <p>R$ 00,00</p>
+              </div>
+
+            </div>
+            <div class="sectionAppHomeOneInfoHeaderExpenses">
+
+              <div class="sectionAppHomeOneInfoHeaderIcon">
+                <img src="/assets/images/app/home/header/expenseIcon.svg">
+              </div>
+              <div class="sectionAppHomeOneInfoHeaderExpensesInfo">
+                <h4>Despesas</h4>
+                <p>R$ 00,00</p>
+              </div>
+
+            </div>
+            <div class="sectionAppHomeOneInfoHeaderWallet">
+
+              <div class="sectionAppHomeOneInfoHeaderWalletOne">
+                <div class="sectionAppHomeOneInfoHeaderIcon">
+                  <img src="/assets/images/app/home/header/walletIcon.svg">
+                </div>
+                <div class="sectionAppHomeOneInfoHeaderWalletInfo">
+                  <h4 class="carteira">Carteiras</h4>
+                </div>
+              </div>
+              <div class="MinhasCarteiras">
+                <ul>
+                  <li class="carteiraSelect">Minha carteira</li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="sectionAppHomeOneInfoSection">
+            <div class="sectionAppHomeOneInfoSectionGraphicGeneral">
+              <canvas id="GraphicGeneral"></canvas>
+              <!-- Grafico usando framework Chart.js -->
+              <script type="text/javascript">
+                let ctx = document.getElementById("GraphicGeneral").getContext("2d")
+                var grafico = new Chart(ctx, {
+                  type:'line',
+                  data: { // data
+                    labels: [<?php echo implode(',', $dataDay); ?>],
+                    datasets: [{ // datasets
+                      label:'Receita',
+                      backgroundColor: "#34F06F",
+                      borderColor:'#34F06F',
+                      data: [/* Colocar os dados PHP */],
+                      borderWidth: 2,
+                      fill:false
+                    }, {
+                      label:'Despesa',
+                      backgroundColor: "#E34E4E",
+                      borderColor: "#E34E4E",
+                      data: [/* Colocar os dados PHP */],
+                      borderWidth: 2,
+                      fill:false
+                    }] // datasets
+                  }, // data
+                  options: {
+                    title: {
+                      display: true,
+                      fontSize: 16,
+                      text: 'Relatório mensal: Receitas x Despesas'
+                    }
+                  }
+                })
+              </script>
+              <!-- Grafico usando framework Chart.js -->
+            </div>
+
+            <div class="sectionAppHomeOneInfoSectionGraphicDetailed">   
+              <canvas id="GraphicDetailed"></canvas>
+              <!-- Grafico usando framework Chart.js -->
+              <script type="text/javascript">
+                  let GraphicDetailed = document.getElementById("GraphicDetailed").getContext("2d")
+                  var grafico = new Chart(GraphicDetailed, {
+                    type:'horizontalBar',
+                    data: { // data
+                      labels: ['Alimentação','Assinaturas e serviços','Casa',
+                      'Compras','Cuidados pessoais','Dívidas e empréstimos',
+                      'Educação','Entretenimento','Família e filhos',
+                      'Impostos e Taxas','Investimentos','Mercado','Pets',
+                      'Saúde','Trabalho','Transporte','Viagem'],
+                      datasets: [{ // datasets
+                        label:'',
+                        backgroundColor: ["#D874A8", '#C683E4',"#8193E1",
+                        "#F67CFF","#C657CE","#FF6C6C","#6470BA","#626491",
+                        "#74E88B","#FF977C","#FF70A1","#FF8A72","#FFBE57",
+                        "#72B4E1","#446FF5",'#44BCE1',"#E16B6B"],
+                        data: [/*São 17 Informação, colocar na mesma ordem
+                        dentro da array*/]
+                      }] // datasets
+                    }, // data
+                    options: {
+                      title: {
+                        display: true,
+                        fontSize: 16,
+                        text: 'Relatório despesas detalhadas'
+                      }
+                    }
+                  })
+              </script>
+              <!-- Grafico usando framework Chart.js -->
+            </div>
+          </div>
+          <div class="sectionAppHomeOneInfoFooter">
+            <div class="sectionAppHomeOneInfoFooterReceive">
+
+              <div class='sectionAppHomeOneInfoFooterReceiveTitle'>
+                <img src='/assets/images/app/home/footer/iconReceive.svg'>
+                <h3>Receitas</h3>
+              </div>
+
+              <!-- Colocar aqui um operador logico que pergunta se a dados
+                para colocar nas receitas a receber, se tiver ele não mostra 
+                essa div e coloca as receitas, se não tiver, ele coloca a div e 
+                não mostra as receitas-->
+              <div class="sectionAppHomeOneInfoFooterNoRecive">
+                <h4>Infelizmente, você não possui contas a receber.</h4>
+              </div>
+
+              <div class="sectionAppHomeOneInfoFooterReceiveNotification">
+                <div class="sectionAppHomeOneInfoFooterNotificationDesc">
+                  <h4>Descrição</h4>
+                  <p>Em x dias</p>
+                </div>
+                <div class="sectionAppHomeOneInfoFooterReceiveNotificationValue">
+                  <h4>R$ 00,00</h4>
+                  <!-- Passar o id para uma função de onclick no javascript -->
+                  <img src="/assets/images/app/home/footer/iconSuccessReceive.svg"> 
+                </div>
+              </div>
+
+            </div>
+
+            <div class="sectionAppHomeOneInfoFooterPay">
+              <div class="sectionAppHomeOneInfoFooterPayTitle">
+                <img src="/assets/images/app/home/footer/iconPay.svg"> 
+                <h3>Despesas</h3>
+              </div>
+              <!-- Colocar aqui um operador logico que pergunta se a dados
+                para colocar nas receitas a receber, se tiver ele não mostra 
+                essa div e coloca as receitas, se não tiver, ele coloca a div e 
+                não mostra as receitas-->
+              <div class="sectionAppHomeOneInfoFooterNoPay">
+                <h4>Parabéns, no momento você não possui contas a pagar.</h4>
+              </div>
+
+              <div class="sectionAppHomeOneInfoFooterPayNotification">
+                <div class="sectionAppHomeOneInfoFooterNotificationDesc">
+                  <h4>Descrição</h4>
+                  <p>Em x dias</p>
+                </div>
+                <div class="sectionAppHomeOneInfoFooterPayNotificationValue">
+                  <h4>R$ 00,00</h4>
+                  <!-- Passar o id para uma função de onclick no javascript -->
+                  <img src="/assets/images/app/home/footer/iconSuccessPay.svg">
+                </div>
+              </div>
+            </div>
+            <div class="sectionAppHomeOneInfoFooterTasks">
+              <div class="sectionAppHomeOneInfoFooterTasksTitle">
+                <img src="/assets/images/app/home/footer/iconTasks.svg"> 
+                <h3>Tarefas</h3>
+              </div>
+              <!-- Colocar aqui um operador logico que pergunta se a dados
+                para colocar nas receitas a receber, se tiver ele não mostra 
+                essa div e coloca as receitas, se não tiver, ele coloca a div e 
+                não mostra as receitas-->
+              <div class="sectionAppHomeOneInfoFooterNoTasks">
+                <h4>Parabéns, no momento você não possui tarefas a concluírem.</h4>
+              </div>
+
+              <div class="sectionAppHomeOneInfoFooterTasksNotification">
+                <div class="sectionAppHomeOneInfoFooterNotificationDesc">
+                  <h4>Descrição da Tarefa</h4>
+                  <p>Em x dias e x horas</p>
+                </div>
+                <!-- Passar o id para uma função de onclick no javascript -->
+                <img src="/assets/images/app/home/footer/iconSuccessTasks.svg">
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- jQuery e JavaScript -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="/assets/js/scriptGeral.js"></script>
-  <script src="/assets/js/scriptLogin.js"></script>
+  <script src="/assets/js/scriptAppHome.js"></script>
 </body>
 </html>

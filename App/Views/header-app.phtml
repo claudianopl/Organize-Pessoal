@@ -1,36 +1,18 @@
 <!-- Estilos CSS -->
 <link rel="stylesheet" type="text/css" href="/assets/css/app/styleHeaderApp.css">
-<header class="teste">
+<header>
   <div class="container">
     <div class="headerApp">
       <div class="headerAppLogo">
         <a href="/app"><img src="/assets/images/app/headerApp/logo.svg"></a>
       </div>
-      <div class="headerAppCalender">
-        <form action="" method="POST">
-          <select name="mes">
-            <option value="">Selecione o mês</option>
-            <option value="01">Jan</option>
-            <option value="02">Fev</option>
-            <option value="03">Mar</option>
-            <option value="04">Abr</option>
-            <option value="05">Mai</option>
-            <option value="06">Jun</option>
-            <option value="07">Jul</option>
-            <option value="08">Ago</option>
-            <option value="09">Set</option>
-            <option value="10">Out</option>
-            <option value="11">Nov</option>
-            <option value="12">Dez</option>
-          </select>
-          <select name='ano'>
-            <option value="">Selecione o ano</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-          </select>
-          <button>Filtrar</button>
-        </form>
-      </div>
+      <?php if($info == 'Home') {?>
+        
+        <div class="headerAppCalender">
+          
+        </div>
+
+      <?php } ?>
       <div class="headerAppUser">
         <img src="/assets/images/app/headerApp/user.svg"> <h4>Seu nome-PHP</h4>
       </div>
