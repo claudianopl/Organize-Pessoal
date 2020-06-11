@@ -1,0 +1,495 @@
+.sectionAppHomeOneArea {
+  margin-top: 50px;
+  display: flex;
+  align-items: flex-start;
+}
+
+/*
+* Section Info
+*/
+.sectionAppHomeOneInfo {
+  margin: 10px 5px 10px 15px;;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+/*
+* Section Info Header
+*/
+.sectionAppHomeOneInfoHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  animation: fade 1s;
+}
+.sectionAppHomeOneInfoHeaderIcon {
+  margin-right: auto;
+}
+.sectionAppHomeOneInfoHeader img {
+  width: 40px;
+}
+/*
+* Blocos Gerais e Iguais
+* Destaque
+*/
+.sectionAppHomeOneInfoHeaderSale,
+.sectionAppHomeOneInfoHeaderReceive,
+.sectionAppHomeOneInfoHeaderExpenses {
+  flex: 1;
+  padding: 5px 15px;
+  margin: 0 15px 0 10px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sectionAppHomeOneInfoHeaderSaleInfo h4,
+.sectionAppHomeOneInfoHeaderReceive h4, 
+.sectionAppHomeOneInfoHeaderExpenses h4,
+.sectionAppHomeOneInfoHeaderWallet h4{
+  font-weight: 500;
+  color: #636D7C;
+}
+.sectionAppHomeOneInfoHeaderSaleInfo p,
+.sectionAppHomeOneInfoHeaderReceive p,
+.sectionAppHomeOneInfoHeaderExpenses p,
+.sectionAppHomeOneInfoHeaderWallet p {
+  font-weight: 700;
+  text-align: end;
+}
+/*
+* Fim de blocos gerais
+*/
+  /* --> Saldo <--- */
+.sectionAppHomeOneInfoHeaderSale {
+  box-shadow: 0px 4px 0px rgba(90, 142, 222, 0.6), 
+  0px 0px 4px rgba(0, 0, 0, 0.25);
+  animation: moveTop 1s;
+  animation-delay: 0.25s;
+  animation-fill-mode: backwards;
+}
+.sectionAppHomeOneInfoHeaderSaleInfo p {
+  color: #5A8EDE;
+}
+
+  /* --> Receitas <--- */
+.sectionAppHomeOneInfoHeaderReceive {
+  box-shadow: 0px 4px 0px rgba(89, 223, 131, 0.6), 
+  0px 0px 4px rgba(0, 0, 0, 0.25);
+  animation: moveTop 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: backwards;
+}
+.sectionAppHomeOneInfoHeaderReceive p {
+  color: #59DF83;
+}
+
+  /* --> Despesas <--- */
+.sectionAppHomeOneInfoHeaderExpenses {
+  box-shadow: 0px 4px 0px rgba(227, 78, 78, 0.6), 
+  0px 0px 4px rgba(0, 0, 0, 0.25);
+  animation: moveTop 1s;
+  animation-delay: 0.75s;
+  animation-fill-mode: backwards;
+}
+.sectionAppHomeOneInfoHeaderExpenses p {
+  color: #E34E4E;
+}
+
+  /* --> Carteira <--- */
+.sectionAppHomeOneInfoHeaderWallet {
+  box-shadow: 0px 4px 0px rgba(132, 145, 165, 0.6), 
+  0px 0px 4px rgba(0, 0, 0, 0.25);
+  flex: 1;
+  padding: 5px 15px;
+  margin: 0 15px 0 10px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  animation: moveTop 1s;
+  animation-delay: 1s;
+  animation-fill-mode: backwards;
+}
+.sectionAppHomeOneInfoHeaderWalletOne {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.sectionAppHomeOneInfoHeaderWalletOne h4 {
+  text-align: end;
+}
+.sectionAppHomeOneInfoHeaderWalletInfo .carteira {
+  margin-right: 15px;
+}
+.sectionAppHomeOneInfoHeaderWalletInfo .carteira::after {
+  content: url(../../images/app/home/header/dropDown.svg);
+  position: absolute;
+}
+.MinhasCarteiras {
+  display: none;
+}
+.MinhasCarteiras ul,
+.MinhasCarteiras lo {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.MinhasCarteiras li {
+  color: #8491A5;
+  font-weight: 700;
+  margin-top: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+
+
+
+/*
+*   SECTION FOOTER
+* --> STYLE GLOBAL <----
+*   CHAMAR ATENÇÃO
+*/
+
+.sectionAppHomeOneInfoSectionReceive,
+.sectionAppHomeOneInfoSectionPay,
+.sectionAppHomeOneInfoSectionTasks {
+  flex: 1;
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  padding: 10px;
+  height: 306px;
+  animation: fade 1s;
+  animation-delay: 1.25s;
+  animation-fill-mode: backwards;
+  overflow: hidden;
+}
+
+.sectionAppHomeOneInfoSectionReceiveTitle,
+.sectionAppHomeOneInfoSectionPayTitle,
+.sectionAppHomeOneInfoSectionTasksTitle {
+ display: flex;
+ justify-content: center;
+ color: #888888;
+ padding-bottom: 5px;
+ border-bottom: 1px solid #ccc;
+}
+.sectionAppHomeOneInfoSectionReceiveTitle img,
+.sectionAppHomeOneInfoSectionPayTitle img,
+.sectionAppHomeOneInfoSectionTasksTitle img {
+  margin-right: 15px;
+}
+
+.sectionAppHomeOneInfoSectionNoRecive,
+.sectionAppHomeOneInfoSectionNoPay,
+.sectionAppHomeOneInfoSectionNoTasks {
+  margin: 15px 0px;
+  padding: 15px;
+  text-align: justify;
+  border-radius: 18px;
+  animation: moveRight 1s;
+  animation-delay: 1.5s;
+  animation-fill-mode: backwards;
+}
+.sectionAppHomeOneInfoSectionNoRecive h4,
+.sectionAppHomeOneInfoSectionNoPay h4,
+.sectionAppHomeOneInfoSectionNoTasks h4 {
+  font-weight: 600;
+}
+
+.sectionAppHomeOneInfoSectionReceiveNotification,
+.sectionAppHomeOneInfoSectionPayNotification,
+.sectionAppHomeOneInfoSectionTasksNotification {
+  margin:15px 0;
+  background-color: #FFFFFF;
+  padding: 10px;
+  border-radius: 18px;
+  animation: moveRight 1s;
+  animation-delay: 1.5s;
+  animation-fill-mode: backwards;
+}
+.sectionAppHomeOneInfoSectionReceiveNotification,
+.sectionAppHomeOneInfoSectionPayNotification,
+.sectionAppHomeOneInfoSectionTasksNotification,
+.sectionAppHomeOneInfoSectionReceiveNotificationValue,
+.sectionAppHomeOneInfoSectionPayNotificationValue,
+.sectionAppHomeOneInfoSectionTasksNotificationValue {
+  display: flex;
+  align-items: center;
+}
+.sectionAppHomeOneInfoSectionNotificationDesc {
+  margin-right: auto;
+}
+.sectionAppHomeOneInfoSectionNotificationDesc h4{
+  color: #636D7C;
+  font-size: 14px;
+}
+.sectionAppHomeOneInfoSectionNotificationDesc p{
+  color: #636D7C;
+  font-size: 12px;
+}
+
+.sectionAppHomeOneInfoSectionReceiveNotificationValue img,
+.sectionAppHomeOneInfoSectionPayNotificationValue img,
+.sectionAppHomeOneInfoSectionTasksNotificationValue img {
+  margin-left: 15px;
+}
+
+/*
+*   SECTION FOOTER
+* --> STYLE GLOBAL <----
+*   CHAMAR ATENÇÃO
+*/
+
+
+/*
+* Section Info Footer
+*/
+.sectionAppHomeOneInfoSection {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-top: 30px;
+}
+  /* ---> Receitas <--- */
+.sectionAppHomeOneInfoSectionReceive {
+  margin-right: 30px;
+}
+.sectionAppHomeOneInfoSectionNoRecive {
+  border: 2px solid #59DF83;
+  color: #59DF83;
+}
+.sectionAppHomeOneInfoSectionReceiveNotification {
+  box-shadow: 0px 4px 0px rgba(89, 223, 131, 0.6), 
+  0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+.sectionAppHomeOneInfoSectionReceiveNotificationValue {
+  color: #59DF83;
+}
+
+  /* ---> Despesas <--- */
+.sectionAppHomeOneInfoSectionPay {
+  margin-right: 30px;
+}.sectionAppHomeOneInfoSectionNoPay {
+  border: 2px solid #E34E4E;
+  color: #E34E4E;
+}
+.sectionAppHomeOneInfoSectionPayNotification {
+  box-shadow: 0px 4px 0px rgba(227, 78, 78, 0.6), 
+  0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+.sectionAppHomeOneInfoSectionPayNotificationValue {
+  color: #E34E4E;
+}
+
+  /* ---> Tarefas <--- */
+.sectionAppHomeOneInfoSectionTasks {
+
+}
+.sectionAppHomeOneInfoSectionNoTasks {
+  border: 2px solid #5A8EDE;
+  color: #5A8EDE;
+}
+.sectionAppHomeOneInfoSectionTasksNotification {
+  box-shadow: 0px 4px 0px #5A8EDE, 
+  0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+.sectionAppHomeOneInfoSectionTasksNotificationValue {
+  color: #5A8EDE;
+}
+
+
+/* GRAFICOS */ 
+.sectionAppHomeOneInfoGraphicMessenger {
+  display: none;
+  padding: 5px;
+  animation: fade 1s;
+  animation-delay: 2.25s;
+  animation-fill-mode: backwards;
+}
+.sectionAppHomeOneInfoGraphicMessenger h3 {
+  color: #E34E4E;
+  text-align: justify;
+  
+}
+.sectionAppHomeOneInfoGraphic {
+  display: flex;
+  width: 100%;
+  margin-top: 30px;
+  padding: 5px;
+  flex-wrap: wrap;
+}
+.sectionAppHomeOneInfoGraphicGeneral,
+.sectionAppHomeOneInfoGraphicDetailed {
+  flex: 1;
+  padding: 15px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  margin-bottom: 30px;
+}
+.sectionAppHomeOneInfoGraphicGeneral {
+  margin-right: 30px;
+  animation: moveLeft 1s;
+  animation-delay: 1.75s;
+  animation-fill-mode: backwards;
+}
+.sectionAppHomeOneInfoGraphicDetailed {
+  animation: moveRight 1s;
+  animation-delay: 1.75s;
+  animation-fill-mode: backwards;
+}
+.GraphicGeneral,
+.GraphicDetailed{
+  max-width: 620;
+  animation: fade 1s;
+  animation-delay: 2.25s;
+  animation-fill-mode: backwards;
+}
+
+
+@media (max-width: 575px) { 
+  .sectionAppHomeOneArea {
+    margin-top: 30px;
+  }
+  .sectionAppHomeOneInfoHeader {
+    flex-direction: column;
+    padding: 20px 10px 0 10px;
+  }
+  .sectionAppHomeOneInfoHeaderSale, 
+  .sectionAppHomeOneInfoHeaderReceive, 
+  .sectionAppHomeOneInfoHeaderExpenses,
+  .sectionAppHomeOneInfoHeaderWallet {
+    margin: 0;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .sectionAppHomeOneInfoSection {
+    flex-direction: column;
+  }
+  .sectionAppHomeOneInfoSectionReceive, 
+  .sectionAppHomeOneInfoSectionPay, 
+  .sectionAppHomeOneInfoSectionTasks {
+    height: auto;
+    margin: 0;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  .sectionAppHomeOneInfoSectionNoRecive,
+  .sectionAppHomeOneInfoSectionNoPay, 
+  .sectionAppHomeOneInfoSectionNoTasks {
+    text-align: center;
+  }
+  .sectionAppHomeOneInfoGraphicMessenger {
+    display: block;
+    margin-bottom: 20px;
+  }
+  .sectionAppHomeOneInfoGraphic {
+    margin-top: 0;
+  }
+  .sectionAppHomeOneInfoGraphicGeneral {
+    margin-right: 0;
+  }
+  .sectionAppHomeOneInfoGraphicDetailed {
+    margin-bottom: 80px;
+  }
+  
+}
+/* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  html, body {
+    overflow-x: inherit;
+  }
+  
+  .sectionAppHomeOneInfo {
+    margin: 0px 10px;
+  }
+  .sectionAppHomeOneInfoHeader {
+    flex-direction: column;
+    padding: 20px 10px 0 10px;
+  }
+  .sectionAppHomeOneInfoHeaderSale, 
+  .sectionAppHomeOneInfoHeaderReceive, 
+  .sectionAppHomeOneInfoHeaderExpenses,
+  .sectionAppHomeOneInfoHeaderWallet {
+    margin: 0;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .sectionAppHomeOneInfoSection {
+    flex-direction: column;
+  }
+  .sectionAppHomeOneInfoSectionReceive, 
+  .sectionAppHomeOneInfoSectionPay, 
+  .sectionAppHomeOneInfoSectionTasks {
+    height: auto;
+    margin: 0;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  .sectionAppHomeOneInfoSectionNoRecive,
+  .sectionAppHomeOneInfoSectionNoPay, 
+  .sectionAppHomeOneInfoSectionNoTasks {
+    text-align: center;
+  }
+  .sectionAppHomeOneInfoGraphicGeneral {
+    margin-right: 0;
+  }
+  .sectionAppHomeOneInfoGraphicDetailed {
+    margin-bottom: 80px;
+  }
+}
+
+/* Dispositivos médios (tablets com 768px ou mais) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .sectionAppHomeOneInfoGraphic {
+    flex-direction: column;
+  }
+  .sectionAppHomeOneInfoGraphicGeneral {
+    margin-right: 0;
+  }
+  .GraphicGeneral, .GraphicDetailed {
+    max-width: 100%;
+  }
+}
+
+/* Dispositivos large (desktops com 992px ou mais) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .sectionAppHomeOneInfoHeaderSaleInfo h4, 
+  .sectionAppHomeOneInfoHeaderReceive h4, 
+  .sectionAppHomeOneInfoHeaderExpenses h4, 
+  .sectionAppHomeOneInfoHeaderWallet h4{
+    font-size: 16px;
+  }
+  .sectionAppHomeOneInfoSectionReceiveNotificationValue img, 
+  .sectionAppHomeOneInfoSectionPayNotificationValue img, 
+  .sectionAppHomeOneInfoSectionTasksNotificationValue img {
+    margin-left: 5px;
+  }
+  .sectionAppHomeOneInfoGraphic {
+    flex-direction: column;
+  }
+  .sectionAppHomeOneInfoGraphicGeneral {
+    margin-right: 0;
+  }
+  .GraphicGeneral, .GraphicDetailed {
+    max-width: 100%;
+  }
+}
+@media (min-width: 1200px) { }

@@ -1,6 +1,8 @@
+.headerAppHeader {
+  height: 70px;
+}
 .headerApp {
   display: flex;
-  height: 70px;
   align-items: center;
 }
 .headerAppUser {
@@ -20,4 +22,17 @@
 .headerAppUser h4 {
   color: #555555;
   margin-left: 15px;
+}
+
+@media (max-width: 575px) { 
+  .headerAppHeader {
+    height: auto;
+  }
+  .headerApp {
+    flex-direction: column;
+  }
+  .headerAppLogo, 
+  .headerAppCalender {
+    margin-bottom: 30px;
+  }
 }

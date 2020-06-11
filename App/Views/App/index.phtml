@@ -23,7 +23,7 @@ for($i=1; $i<=31; $i++) {
   finanças e tarefas simples, muito poderoso e totalmente gratuito. Conte com 
   o Organize Pessoal, com ele você tem o controle de sua vida financeira e 
   pessoal.">
-  <meta name="viewport" content="width=device-width, initial-scale=1, max-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, max-scale=1.0">
 
   <!-- Estilos CSS -->
   <link rel="stylesheet" type="text/css" href="/assets/css/styleGeral.css">
@@ -47,9 +47,10 @@ for($i=1; $i<=31; $i++) {
 
   <!-- Section -->
   <section class="sectionAppHomeOne">
-    <div class="container">
+    <div class="containerApp">
       <div class="sectionAppHomeOneArea">
         <?php $this->header('menu-app', 'Home') ?>
+
         <div class="sectionAppHomeOneInfo">
           <div class="sectionAppHomeOneInfoHeader">
             <div class="sectionAppHomeOneInfoHeaderSale">
@@ -105,83 +106,10 @@ for($i=1; $i<=31; $i++) {
           </div>
 
           <div class="sectionAppHomeOneInfoSection">
-            <div class="sectionAppHomeOneInfoSectionGraphicGeneral">
-              <canvas id="GraphicGeneral"></canvas>
-              <!-- Grafico usando framework Chart.js -->
-              <script type="text/javascript">
-                let ctx = document.getElementById("GraphicGeneral").getContext("2d")
-                var grafico = new Chart(ctx, {
-                  type:'line',
-                  data: { // data
-                    labels: [<?php echo implode(',', $dataDay); ?>],
-                    datasets: [{ // datasets
-                      label:'Receita',
-                      backgroundColor: "#34F06F",
-                      borderColor:'#34F06F',
-                      data: [/* Colocar os dados PHP */],
-                      borderWidth: 2,
-                      fill:false
-                    }, {
-                      label:'Despesa',
-                      backgroundColor: "#E34E4E",
-                      borderColor: "#E34E4E",
-                      data: [/* Colocar os dados PHP */],
-                      borderWidth: 2,
-                      fill:false
-                    }] // datasets
-                  }, // data
-                  options: {
-                    title: {
-                      display: true,
-                      fontSize: 16,
-                      text: 'Relatório mensal: Receitas x Despesas'
-                    }
-                  }
-                })
-              </script>
-              <!-- Grafico usando framework Chart.js -->
-            </div>
+            <div class="sectionAppHomeOneInfoSectionReceive">
 
-            <div class="sectionAppHomeOneInfoSectionGraphicDetailed">   
-              <canvas id="GraphicDetailed"></canvas>
-              <!-- Grafico usando framework Chart.js -->
-              <script type="text/javascript">
-                  let GraphicDetailed = document.getElementById("GraphicDetailed").getContext("2d")
-                  var grafico = new Chart(GraphicDetailed, {
-                    type:'horizontalBar',
-                    data: { // data
-                      labels: ['Alimentação','Assinaturas e serviços','Casa',
-                      'Compras','Cuidados pessoais','Dívidas e empréstimos',
-                      'Educação','Entretenimento','Família e filhos',
-                      'Impostos e Taxas','Investimentos','Mercado','Pets',
-                      'Saúde','Trabalho','Transporte','Viagem'],
-                      datasets: [{ // datasets
-                        label:'',
-                        backgroundColor: ["#D874A8", '#C683E4',"#8193E1",
-                        "#F67CFF","#C657CE","#FF6C6C","#6470BA","#626491",
-                        "#74E88B","#FF977C","#FF70A1","#FF8A72","#FFBE57",
-                        "#72B4E1","#446FF5",'#44BCE1',"#E16B6B"],
-                        data: [/*São 17 Informação, colocar na mesma ordem
-                        dentro da array*/]
-                      }] // datasets
-                    }, // data
-                    options: {
-                      title: {
-                        display: true,
-                        fontSize: 16,
-                        text: 'Relatório despesas detalhadas'
-                      }
-                    }
-                  })
-              </script>
-              <!-- Grafico usando framework Chart.js -->
-            </div>
-          </div>
-          <div class="sectionAppHomeOneInfoFooter">
-            <div class="sectionAppHomeOneInfoFooterReceive">
-
-              <div class='sectionAppHomeOneInfoFooterReceiveTitle'>
-                <img src='/assets/images/app/home/footer/iconReceive.svg'>
+              <div class='sectionAppHomeOneInfoSectionReceiveTitle'>
+                <img src='/assets/images/app/home/section/iconReceive.svg'>
                 <h3>Receitas</h3>
               </div>
 
@@ -189,75 +117,212 @@ for($i=1; $i<=31; $i++) {
                 para colocar nas receitas a receber, se tiver ele não mostra 
                 essa div e coloca as receitas, se não tiver, ele coloca a div e 
                 não mostra as receitas-->
-              <div class="sectionAppHomeOneInfoFooterNoRecive">
+              <div class="sectionAppHomeOneInfoSectionNoRecive">
                 <h4>Infelizmente, você não possui contas a receber.</h4>
               </div>
 
-              <div class="sectionAppHomeOneInfoFooterReceiveNotification">
-                <div class="sectionAppHomeOneInfoFooterNotificationDesc">
+              <!-- 
+              * Detalhes das Receitas
+              -->
+              <div class="sectionAppHomeOneInfoSectionReceiveNotification">
+                <div class="sectionAppHomeOneInfoSectionNotificationDesc">
                   <h4>Descrição</h4>
                   <p>Em x dias</p>
                 </div>
-                <div class="sectionAppHomeOneInfoFooterReceiveNotificationValue">
+                <div class="sectionAppHomeOneInfoSectionReceiveNotificationValue">
                   <h4>R$ 00,00</h4>
                   <!-- Passar o id para uma função de onclick no javascript -->
-                  <img src="/assets/images/app/home/footer/iconSuccessReceive.svg"> 
+                  <img src="/assets/images/app/home/section/iconSuccessReceive.svg"> 
                 </div>
               </div>
 
+              <div class="sectionAppHomeOneInfoSectionReceiveNotification">
+                <div class="sectionAppHomeOneInfoSectionNotificationDesc">
+                  <h4>Descrição</h4>
+                  <p>Em x dias</p>
+                </div>
+                <div class="sectionAppHomeOneInfoSectionReceiveNotificationValue">
+                  <h4>R$ 00,00</h4>
+                  <!-- Passar o id para uma função de onclick no javascript -->
+                  <img src="/assets/images/app/home/section/iconSuccessReceive.svg"> 
+                </div>
+              </div>
+              <!-- 
+              * Detalhes das Receitas
+              -->
+
             </div>
 
-            <div class="sectionAppHomeOneInfoFooterPay">
-              <div class="sectionAppHomeOneInfoFooterPayTitle">
-                <img src="/assets/images/app/home/footer/iconPay.svg"> 
+            <div class="sectionAppHomeOneInfoSectionPay">
+              <div class="sectionAppHomeOneInfoSectionPayTitle">
+                <img src="/assets/images/app/home/section/iconPay.svg"> 
                 <h3>Despesas</h3>
               </div>
               <!-- Colocar aqui um operador logico que pergunta se a dados
                 para colocar nas receitas a receber, se tiver ele não mostra 
                 essa div e coloca as receitas, se não tiver, ele coloca a div e 
                 não mostra as receitas-->
-              <div class="sectionAppHomeOneInfoFooterNoPay">
+              <div class="sectionAppHomeOneInfoSectionNoPay">
                 <h4>Parabéns, no momento você não possui contas a pagar.</h4>
               </div>
 
-              <div class="sectionAppHomeOneInfoFooterPayNotification">
-                <div class="sectionAppHomeOneInfoFooterNotificationDesc">
+              <!-- 
+                * Detalhes das Despesas
+              -->
+              <div class="sectionAppHomeOneInfoSectionPayNotification">
+                <div class="sectionAppHomeOneInfoSectionNotificationDesc">
                   <h4>Descrição</h4>
                   <p>Em x dias</p>
                 </div>
-                <div class="sectionAppHomeOneInfoFooterPayNotificationValue">
+                <div class="sectionAppHomeOneInfoSectionPayNotificationValue">
                   <h4>R$ 00,00</h4>
                   <!-- Passar o id para uma função de onclick no javascript -->
-                  <img src="/assets/images/app/home/footer/iconSuccessPay.svg">
+                  <img src="/assets/images/app/home/section/iconSuccessPay.svg">
                 </div>
               </div>
+
+              <div class="sectionAppHomeOneInfoSectionPayNotification">
+                <div class="sectionAppHomeOneInfoSectionNotificationDesc">
+                  <h4>Descrição</h4>
+                  <p>Em x dias</p>
+                </div>
+                <div class="sectionAppHomeOneInfoSectionPayNotificationValue">
+                  <h4>R$ 00,00</h4>
+                  <!-- Passar o id para uma função de onclick no javascript -->
+                  <img src="/assets/images/app/home/section/iconSuccessPay.svg">
+                </div>
+              </div>
+              <!-- 
+                * Detalhes das Despesas
+              -->
             </div>
-            <div class="sectionAppHomeOneInfoFooterTasks">
-              <div class="sectionAppHomeOneInfoFooterTasksTitle">
-                <img src="/assets/images/app/home/footer/iconTasks.svg"> 
+
+            <div class="sectionAppHomeOneInfoSectionTasks">
+              <div class="sectionAppHomeOneInfoSectionTasksTitle">
+                <img src="/assets/images/app/home/section/iconTasks.svg"> 
                 <h3>Tarefas</h3>
               </div>
               <!-- Colocar aqui um operador logico que pergunta se a dados
                 para colocar nas receitas a receber, se tiver ele não mostra 
                 essa div e coloca as receitas, se não tiver, ele coloca a div e 
                 não mostra as receitas-->
-              <div class="sectionAppHomeOneInfoFooterNoTasks">
+              <div class="sectionAppHomeOneInfoSectionNoTasks">
                 <h4>Parabéns, no momento você não possui tarefas a concluírem.</h4>
               </div>
 
-              <div class="sectionAppHomeOneInfoFooterTasksNotification">
-                <div class="sectionAppHomeOneInfoFooterNotificationDesc">
+              <!-- 
+                * Detalhes das Tarefas 
+              -->
+              <div class="sectionAppHomeOneInfoSectionTasksNotification">
+                <div class="sectionAppHomeOneInfoSectionNotificationDesc">
                   <h4>Descrição da Tarefa</h4>
                   <p>Em x dias e x horas</p>
                 </div>
                 <!-- Passar o id para uma função de onclick no javascript -->
-                <img src="/assets/images/app/home/footer/iconSuccessTasks.svg">
+                <img src="/assets/images/app/home/section/iconSuccessTasks.svg">
               </div>
+
+              <div class="sectionAppHomeOneInfoSectionTasksNotification">
+                <div class="sectionAppHomeOneInfoSectionNotificationDesc">
+                  <h4>Descrição da Tarefa</h4>
+                  <p>Em x dias e x horas</p>
+                </div>
+                <!-- Passar o id para uma função de onclick no javascript -->
+                <img src="/assets/images/app/home/section/iconSuccessTasks.svg">
+              </div>
+              <!-- 
+                * /Detalhes das Tarefas 
+              -->
             </div>
-            
-          </div>
+          </div>    
         </div>
       </div>
+      <section class="sectionAppHomeOneInfoGraphic">
+        <div class='sectionAppHomeOneInfoGraphicMessenger'>
+          <h3>
+          Caso o gráfico esteja de difícil visualização, por favor 
+          rotacionar a tela do seu celular!
+          </h3>
+        </div>
+        <div class="sectionAppHomeOneInfoGraphicGeneral">
+          <div class="GraphicGeneral">
+            <canvas id='GraphicGeneral'></canvas>
+          </div>
+          <script type="text/javascript">
+            let ctx = document.getElementById('GraphicGeneral').getContext("2d");
+            var graphic = new Chart(ctx, {
+              type: 'line',
+              data: {
+                labels: [/*<?php echo implode(',', $dataDay); ?>*/],
+                datasets: [{
+                  label: 'Receita',
+                  backgroundColor: "#34F06F",
+                  borderColor: "#34F06F",
+                  data: [/* Colocar os dados PHP */],
+                  borderWidth: 2,
+                  fill: false
+                }, {
+                  label: 'Despesa',
+                  backgroundColor: "#E34E4E",
+                  borderColor: "#E34E4E",
+                  data: [/* Colocar os dados PHP */],
+                  borderWidth: 2,
+                  fill: false
+                }] // datasets
+              }, // data
+              options: {
+                title: {
+                  display: true,
+                  fontSize: 16,
+                  text: 'Relatório mensal: Receitas x Despesas'
+                }
+              }
+            });
+          </script>
+        </div>
+        <div class="sectionAppHomeOneInfoGraphicDetailed">
+          <div class="GraphicDetailed">
+            <canvas id='GraphicDetailed'></canvas>
+          </div>
+          <script type="text/javascript">
+            let GraphicDetailed = document.getElementById('GraphicDetailed').getContext("2d");
+            var GraphicBar = new Chart(GraphicDetailed, {
+              type: 'horizontalBar',
+              data: {
+                labels: ['Alimentação', 'Assinaturas e serviços','Casa',
+                'Compras','Cuidados pessoais','Dívidas e empréstimos',
+                'Educação','Entretenimento','Família e filhos',
+                'Impostos e Taxas','Investimentos','Mercado','Pets','Saúde',
+                'Trabalho','Transporte','Viagem'],
+                datasets: [{
+                  label: '',
+                  backgroundColor: ["#D874A8","#C683E4","#8193E1","#F67CFF",
+                  "#C657CE","#FF6C6C","#6470BA","#626491","#74E88B",
+                  "#FF977C","#FF70A1","#FF8A72","#FFBE57","#72B4E1",
+                  "#446FF5","#44BCE1","#E16B6B"],
+                  data: [/* Colocar os dados PHP */]
+                }] // datasets
+              }, // data
+              options: {
+                title: {
+                  display: true,
+                  fontSize: 16,
+                  text: 'Relatório despesas detalhadas'
+                },
+                layout: {
+                  padding: {
+                      left: 0,
+                      right: 10,
+                      top: 0,
+                      bottom: 0
+                  }
+                }
+              }
+            })     
+          </script>
+        </div>
+      </section>
+      
     </div>
   </section>
 
