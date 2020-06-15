@@ -17,12 +17,12 @@ class HomeController extends Action {
 		$this->render('sobre');
 	}
 
-	public function confirmarCadastro() {
-		$this->render('confirmarCadastro');
+	public function confirmRegister() {
+		$this->render('confirmRegister');
 	}
 
-	public function cadastroConfimado($dados=null) {
-		$this->render('cadastroConfirmado');
+	public function registerConfirmed($dados=null) {
+		$this->render('registerConfirmed');
 	}
 
 	public function login() {

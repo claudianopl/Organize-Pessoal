@@ -14,27 +14,38 @@
 .sectionConfirmarOneInfo img,
 .sectionCadastroConfirmOneInfo img{
   width: 550px;
+  animation: fade 1s;
 }
 .sectionConfirmarOneInfo h3 {
   margin: 50px 0 30px;
   color: #555555;
   font-weight: 700;
+  animation: moveRight 1s;
+  animation-fill-mode: backwards;
 }
 .sectionCadastroConfirmOneInfo h3 {
   margin: 20px 0 20px;
   color: #555555;
   font-weight: 700;
+  animation: moveRight 1s;
+  animation-fill-mode: backwards;
 }
 .sectionConfirmarOneInfo p {
   font-weight: 500;
   color: #8491A5;
   text-align: center;
+  animation: moveLeft 1s;
+  animation-delay: 0.25s;
+  animation-fill-mode: backwards;
 }
 .sectionCadastroConfirmOneInfo p {
   font-weight: 500;
   color: #8491A5;
   text-align: justify;
   margin: 0 100px 0;
+  animation: moveLeft 1s;
+  animation-delay: 0.25s;
+  animation-fill-mode: backwards;
 }
 
 /*

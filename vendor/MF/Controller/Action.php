@@ -18,15 +18,15 @@ abstract class Action {
 		$this->content();
 	}
 	
-	protected function header($header='', $info='') {
-		if(file_exists("../App/Views/".$header.".phtml")) {
-			require_once "../App/Views/".$header.".phtml";
+	protected function importViews($header='', $info='') {
+		if(file_exists("../App/Views/Global/".$header.".phtml")) {
+			require_once "../App/Views/Global/".$header.".phtml";
 		}
 	}
 
 	protected function footer($footer='') {
-		if(file_exists("../App/Views/".$footer.".phtml")) {
-			require_once "../App/Views/".$footer.".phtml";
+		if(file_exists("../App/Views/Global/".$footer.".phtml")) {
+			require_once "../App/Views/Global/".$footer.".phtml";
 		}
 	}
 

@@ -23,28 +23,28 @@ class Route extends Bootstrap {
 			'action' => 'sobre'
 		);
 
-		$routes['confirmar-cadastro'] = array(
-			'route' => '/confirmar-cadastro',
-			'controller' => 'HomeController',
-			'action' => 'confirmarCadastro'
-		);
-		
-		$routes['cadastro-confirmado'] = array(
-			'route' => "/cadastro-confirmado",
-			'controller' => 'HomeController',
-			'action' => 'cadastroConfimado',
-		);
-
 		$routes['entrar'] = array(
 			'route' => "/entrar",
 			'controller' => 'HomeController',
 			'action' => 'login',
 		);
 
-		$routes['cadastrar'] = array(
+		$routes['register'] = array(
 			'route' => "/cadastre-se",
 			'controller' => 'HomeController',
 			'action' => 'singup',
+		);
+
+		$routes['confirm-register'] = array(
+			'route' => '/confirmar-cadastro',
+			'controller' => 'HomeController',
+			'action' => 'confirmRegister'
+		);
+		
+		$routes['register-confirmed'] = array(
+			'route' => "/cadastro-confirmado",
+			'controller' => 'HomeController',
+			'action' => 'registerConfirmed',
 		);
 
 		/*
@@ -55,6 +55,12 @@ class Route extends Bootstrap {
 			'route' => "/app",
 			'controller' => 'AppController',
 			'action' => 'index',
+		);
+
+		$routes['appReceive'] = array(
+			'route' => "/app/receitas",
+			'controller' => 'AppController',
+			'action' => 'receive',
 		);
 
 

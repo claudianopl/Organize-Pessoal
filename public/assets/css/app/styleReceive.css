@@ -1,0 +1,215 @@
+.sectionAppAreaRight {
+  margin: 10px 5px 10px 15px;;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+.sectionAppOne {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 5px;
+}
+.sectionAppOneWallet {
+  margin-left: auto;
+  width: 250px;
+}
+.mensagemSuccess {
+  text-align: center;
+  padding: 5px 50px;
+  border: 2px solid #59DF83;
+  border-radius: 18px;
+  color: #59DF83;
+  margin: auto;
+  font-weight: 600;
+}
+
+
+.sectionAppTwo {
+  display: flex;
+  width: 100%;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  margin-top: 30px;
+  padding: 20px 10px;
+}
+.sectionAppTwoFilter {
+  display: flex;
+  align-items: flex-start;
+}
+.sectionAppTwoFilterContainer {
+  position: relative;
+  width: 250px;
+  margin-right: 30px;
+}
+.sectionAppTwoFilterContainer:nth-child(3) {
+  margin: 0;
+  width: auto;
+}
+.sectionAppTwoFilterDadosReceive,
+.sectionAppTwoFilterDadosCategory{
+  color: #8491A5;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 0px rgba(89, 223, 131, 0.7), 
+  0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  position: absolute;
+  width: 250px;
+}
+.sectionAppTwoFilterDadosReceive h4,
+.sectionAppTwoFilterDadosCategory h4 {
+  font-weight: 600;
+}
+.sectionAppTwoFilterActiveReceive,
+.sectionAppTwoFilterActiveCategory {
+ display: flex;
+ align-items: center;
+ margin: 5px 10px 5px 10px;
+ cursor: pointer;
+}
+.sectionAppTwoFilterActiveReceive img,
+.sectionAppTwoFilterActiveCategory img{
+  margin-left: auto;
+}
+
+.sectionAppTwoFilter ul,
+.sectionAppTwoFilter li{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sectionAppTwoFilter li {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  padding: 5 10px;
+  cursor: pointer;
+}
+.sectionAppTwoFilter li:hover {
+  background-color: #59DF83;
+  border-radius: 18px;
+  padding: 5 10px;
+  color: #FFFFFF;
+}
+
+.sectionAppTwoFilterNav {
+  margin-top: 10px;
+  
+}
+.sectionAppTwoRecive {
+  margin-left: auto;
+  padding: 10px 30px;
+  background: linear-gradient(270deg, #34F06F 20%, #13C5A5 86%);
+  border-radius: 18px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 1s;
+  cursor: pointer;
+}
+.sectionAppTwoRecive h4 {
+  font-weight: 500;
+  margin-left: 15px;
+}
+.sectionAppTwoRecive:hover { 
+  background: #34F06F;
+}
+
+.sectionAppThreeMessage {
+  margin-top: 30px;
+  width: 100%;
+  padding: 10px 10px;
+  border: 2px solid #59DF83;
+  border-radius: 18px;
+  text-align: center;
+}
+.sectionAppThreeMessage h3 {
+  color: #555555;
+  font-weight: 600;
+}
+
+
+.sectionAppTwoTable {
+  width: 100%;
+  padding: 10px;
+  margin-top: 30px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+}
+.sectionAppTwoTableTitle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  color: #9A9A9A;
+  padding: 15px 0px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.sectionAppTwoTableTitle p {
+  margin: 0px 15px 0 15px;
+}
+
+.sectionAppTwoTableTitle .desc {
+  flex-basis: 40%;
+  text-align: start;
+}
+.sectionAppTwoTableTitle .date,
+.sectionAppTwoTableTitle .category,
+.sectionAppTwoTableTitle .enrollment {
+  flex-basis: 15%;
+  text-align: start;
+}
+.sectionAppTwoTableTitle .price {
+  flex-basis: 20%;
+}
+
+
+.sectionAppTwoTableItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  color: #9A9A9A;
+  padding: 15px 0px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.sectionAppTwoTableItem:nth-child(even) {
+  background-color: #F5FEFB;
+}
+.sectionAppTwoTableItem:nth-child(odd) {
+  background-color: #E9FAF4;
+}
+
+.sectionAppTwoTableItem .desc {
+  flex-basis: 40%;
+  text-align: start;
+}
+.sectionAppTwoTableItem p {
+  margin: 0px 15px 0 15px;
+  font-size: 16px;
+}
+.sectionAppTwoTableItem .date,
+.sectionAppTwoTableItem .category,
+.sectionAppTwoTableItem .enrollment {
+  flex-basis: 15%;
+  text-align: start;
+}
+.sectionAppTwoTableItem .price {
+  flex-basis: 20%;
+  display: flex;
+}
+.sectionAppTwoTableItem .price img {
+  margin: 0 auto 0 auto;
+}
+

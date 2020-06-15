@@ -1,0 +1,71 @@
+.sectionAppWalletArea {
+  box-shadow: 0px 4px 0px rgba(132, 145, 165, 0.6), 
+  0px 0px 4px rgba(0, 0, 0, 0.25);
+  padding: 5px 15px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.sectionAppWallet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.sectionAppWalletIcon {
+  margin-right: auto;
+}
+.sectionAppWallet h4 {
+  text-align: end;
+  font-weight: 500;
+  color: #636D7C;
+  font-size: 16px;
+}
+.sectionAppWalletInfo .carteira {
+  margin-right: 15px;
+}
+.sectionAppWalletInfo .carteira::after {
+  content: url(../../images/app/home/header/dropDown.svg);
+  position: absolute;
+}
+.MinhasCarteiras {
+  display: none;
+}
+.MinhasCarteiras ul,
+.MinhasCarteiras li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.MinhasCarteiras li {
+  color: #8491A5;
+  font-weight: 700;
+  margin-top: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 575px) { 
+  .sectionAppWalletArea {
+    margin: 0;
+    margin-bottom: 20px;
+  }
+  
+}
+/* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .sectionAppWalletArea {
+    margin: 0;
+    margin-bottom: 20px;
+  }
+  
+}
+/* Dispositivos large (desktops com 992px ou mais) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .sectionAppWalletArea h4{
+    font-size: 16px;
+  }
+}

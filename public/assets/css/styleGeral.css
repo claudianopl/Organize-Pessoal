@@ -44,6 +44,12 @@ h4 {
   max-width: 100%;
   margin: 0 auto;
 }
+.sectionAppArea {
+  margin-top: 50px;
+  display: flex;
+  align-items: flex-start;
+}
+
 
 @media (max-width: 575px) { 
   

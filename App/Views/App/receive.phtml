@@ -1,0 +1,159 @@
+<html>
+  <head>
+    <meta charset="UFT-8">
+    <meta http-equiv="content-language" content="pt-br">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Claudiano Lima">
+    <meta name="description" content="O Organize Pessoal é um gerenciador de 
+    finanças e tarefas simples, muito poderoso e totalmente gratuito. Conte com 
+    o Organize Pessoal, com ele você tem o controle de sua vida financeira e 
+    pessoal.">
+    <meta name="keywords" content="finanças, financeiro, controle, 
+    gerenciamento de contas, gerenciamento financeiro, controle financeiro, 
+    gerenciador de tarefas, controle pesoal">
+    <meta name="robots" content="index, follow"> 
+    <meta itemprop="name" content="Organize Pessoal - Organize sua vida de forma fácil">
+    <meta itemprop="description" content="O Organize Pessoal é um gerenciador de 
+    finanças e tarefas simples, muito poderoso e totalmente gratuito. Conte com 
+    o Organize Pessoal, com ele você tem o controle de sua vida financeira e 
+    pessoal.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, max-scale=1">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/app/styleReceive.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/styleGeral.css">
+    
+    <!-- Icon -->
+    <link rel='icon' type="img/svg" href="/assets/images/iconLogo.svg">
+    <title>Organize Pessoal - Seu gerenciador pessoal</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <?php $this->importViews('header-app') ?>
+
+    <section>
+      <div class="containerApp">
+        <div class="sectionAppArea">
+          <?php $this->importViews('menu-app', 'Receive') ?>
+
+          <div class="sectionAppAreaRight">
+            <div class="sectionAppOne">
+              <div id="mensagem"></div>
+              <div class="sectionAppOneWallet">
+                <?php $this->importViews('appWallet', 'Receive') ?>
+              </div>
+            </div>
+  
+            <div class="sectionAppTwo">
+              <div class="sectionAppTwoFilter">
+
+                <div class="sectionAppTwoFilterContainer">
+                  <div class="sectionAppTwoFilterDadosReceive">
+                    <div class="sectionAppTwoFilterActiveReceive">
+                      <h4 class="select">Receitas</h4>
+                      <img src="/assets/images/app/receive/dropDownFilter.svg">
+                    </div>
+                    <div class="sectionAppTwoFilterNavReceive">
+                      <ul>
+                        <li>Receitas Recebidas</li>
+                        <li>Receitas Não Recebidas</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class='sectionAppTwoFilterContainer'>
+                  <div class="sectionAppTwoFilterDadosCategory">
+                    <div class="sectionAppTwoFilterActiveCategory">
+                      <h4 class="select">Categoria</h4>
+                      <img src="/assets/images/app/receive/dropDownFilter.svg">
+                    </div>
+                    <div class="sectionAppTwoFilterNavCategory">
+                      <ul>
+                        <li>Salário</li>
+                        <li>Empréstimos</li>
+                        <li>Outras Receitas</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="sectionAppTwoFilterContainer">
+                  <div class="sectionAppTwoFilterSubmite" onclick="sectionAppFilter()">
+                    <img src="/assets/images/app/receive/buttonFilter.svg">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="sectionAppTwoRecive">
+                <img src="/assets/images/app/receive/iconPlus.svg"> 
+                <h4>Lançar Receitas</h4>
+              </div>
+            </div>
+            <!-- 
+              * APLICAR LÓGICA DO PHP, CASO AS RECEITAS ESTIVEREM VAZIAS 
+              * IMPRIMIR ESSA MENSSAGEM
+            -->
+            <div class="sectionAppThreeMessage">
+              <h3>
+                Você não possui contas a receber. Por favor, comece agora 
+                a lançar as suas receitas.
+              </h3>
+            </div>
+
+            <!--
+              * CASO NÃO ESTIVER VAZIA, IMPRIMIR A TABELA E PREENCHER A TABELA
+            -->
+            <div class="sectionAppTwoTable">
+              <div class="sectionAppTwoTableTitle">
+                <p class="desc">Descrição</p>
+                <p class="date">Vencimento</p>
+                <p class="category">Categoria</p>
+                <p class="enrollment">Parcelas</p>
+                <p class="price">Valor</p>
+              </div>
+              <div class="sectionAppTwoTableItem">
+                <p class="desc">dasdasdasdasdsa</p>
+                <p class="date">15/06/2020</p>
+                <p class="category">bla bla bla</p>
+                <p class="enrollment">dasdas</p>
+                <p class="price">
+                  R$ 00,00
+                  <!--
+                    PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
+                    SE VAI SER POR AJAX OU LINK
+                  -->
+                  <img src="/assets/images/app/appGlobal/remove.svg">
+                  <img src="/assets/images/app/appGlobal/update.svg">
+                  <img src="/assets/images/app/appGlobal/conclude.svg">
+                </p>
+              </div>
+              <div class="sectionAppTwoTableItem">
+                <p class="desc">dasdasdasdasdsa</p>
+                <p class="date">15/06/2020</p>
+                <p class="category">bla bla bla</p>
+                <p class="enrollment">dasdas</p>
+                <p class="price">
+                  R$ 00,00
+                  <!--
+                    PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
+                    SE VAI SER POR AJAX OU LINK
+                  -->
+                  <img src="/assets/images/app/appGlobal/remove.svg">
+                  <img src="/assets/images/app/appGlobal/update.svg">
+                  <img src="/assets/images/app/appGlobal/conclude.svg">
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- jQuery e JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/assets/js/scriptAppReceive.js"></script>
+  </body>
+</html>
