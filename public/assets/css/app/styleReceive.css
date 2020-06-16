@@ -1,23 +1,5 @@
-.sectionAppAreaRight {
-  margin: 10px 5px 10px 15px;;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-}
-.sectionAppOne {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-  padding: 10px 5px;
-}
-.sectionAppOneWallet {
-  margin-left: auto;
-  width: 250px;
-  position: relative;
-}
-.mensagemSuccess {
+/*  ADICIONAR ESSA CLASSE NO ID MENSAGEM QUANDO ELA FOR EXIBIDA */
+.mensagemSuccessReceive {
   text-align: center;
   padding: 5px 50px;
   border: 2px solid #59DF83;
@@ -25,11 +7,13 @@
   color: #59DF83;
   margin: auto;
   font-weight: 600;
+  margin: auto;
 }
 
 
 .sectionAppTwo {
   display: flex;
+  align-items: center;
   width: 100%;
   background: #FFFFFF;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -58,7 +42,7 @@
   0px 0px 4px rgba(0, 0, 0, 0.25);
   border-radius: 18px;
   position: absolute;
-  width: 250px;
+  width: 100%;
 }
 .sectionAppTwoFilterDadosReceive h4,
 .sectionAppTwoFilterDadosCategory h4 {
@@ -85,13 +69,13 @@
 .sectionAppTwoFilter li {
   margin-top: 10px;
   margin-bottom: 5px;
-  padding: 5 10px;
+  padding: 5px 10px;
   cursor: pointer;
 }
 .sectionAppTwoFilter li:hover {
   background-color: #59DF83;
   border-radius: 18px;
-  padding: 5 10px;
+  padding: 5px 10px;
   color: #FFFFFF;
 }
 
@@ -118,6 +102,9 @@
 .sectionAppTwoRecive:hover { 
   background: #34F06F;
 }
+.sectionAppTwoFilterSubmite {
+  cursor: pointer;
+}
 
 .sectionAppThreeMessage {
   margin-top: 30px;
@@ -132,85 +119,71 @@
   font-weight: 600;
 }
 
-
-.sectionAppTwoTable {
-  width: 100%;
-  padding: 10px;
-  margin-top: 30px;
-  background-color: #FFFFFF;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 18px;
-}
-.sectionAppTwoTableTitle {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  background: #FFFFFF;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 18px;
-  color: #9A9A9A;
-  padding: 15px 0px;
-  text-transform: uppercase;
-  font-weight: 600;
-  margin-bottom: 30px;
-}
-.sectionAppTwoTableTitle p {
-  margin: 0px 15px 0 15px;
+.sectionAppTwoFilterSubmiteMobile {
+  display: none;
 }
 
-.sectionAppTwoTableTitle .desc {
-  flex-basis: 40%;
-  text-align: start;
+@media (max-width: 575px) { 
+  .sectionAppTwo {
+    flex-direction: column;
+  }
+  .sectionAppTwoFilter {
+    flex-direction: column;
+  }
+  .sectionAppTwoFilterContainer {
+    margin-bottom: 50px;
+    margin-right: 0;
+  }
+  .sectionAppTwoFilterContainer:nth-child(3) {
+    margin: auto;
+  }
+  .sectionAppTwoFilterSubmite {
+    display: none;
+  }
+  .sectionAppTwoFilterSubmiteMobile {
+    display: block;
+    padding: 10px 80px;
+    border-radius: 18px;
+    color: #ffffff;
+    background: linear-gradient(270deg, #13C5A5 20%, #34F06F 86%);
+    margin-bottom: 15px;
+  }
+  .sectionAppTwoFilterSubmiteMobile:hover { 
+    background: #34F06F;
+  }
+  .sectionAppTwoRecive {
+    margin: auto;
+  }
+  
 }
-.sectionAppTwoTableTitle .date,
-.sectionAppTwoTableTitle .category,
-.sectionAppTwoTableTitle .enrollment {
-  flex-basis: 15%;
-  text-align: start;
-}
-.sectionAppTwoTableTitle .price {
-  flex-basis: 20%;
-}
-
-
-.sectionAppTwoTableItem {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  background: #FFFFFF;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 18px;
-  color: #9A9A9A;
-  padding: 15px 0px;
-  font-weight: 600;
-  margin-bottom: 15px;
-}
-.sectionAppTwoTableItem:nth-child(even) {
-  background-color: #F5FEFB;
-}
-.sectionAppTwoTableItem:nth-child(odd) {
-  background-color: #E9FAF4;
-}
-
-.sectionAppTwoTableItem .desc {
-  flex-basis: 40%;
-  text-align: start;
-}
-.sectionAppTwoTableItem p {
-  margin: 0px 15px 0 15px;
-  font-size: 16px;
-}
-.sectionAppTwoTableItem .date,
-.sectionAppTwoTableItem .category,
-.sectionAppTwoTableItem .enrollment {
-  flex-basis: 15%;
-  text-align: start;
-}
-.sectionAppTwoTableItem .price {
-  flex-basis: 20%;
-  display: flex;
-}
-.sectionAppTwoTableItem .price img {
-  margin: 0 auto 0 auto;
+/* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .sectionAppTwoFilterContainer {
+    width: 145px;
+    margin-right: 10px;
+  }
+  .sectionAppTwoFilter li {
+    font-size: 14px;
+  }
+  .sectionAppTwoRecive {
+    padding: 10px;
+  }
+  
 }
 
+/* Dispositivos médios (tablets com 768px ou mais) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .sectionAppTwoFilterContainer {
+    width: 200px;
+    margin-right: 10px;
+  }
+}
+
+/* Dispositivos large (desktops com 992px ou mais) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .sectionAppTwoFilterContainer {
+    width: 200px;
+    margin-right: 10px;
+  }
+}
+@media (min-width: 1200px) { }
