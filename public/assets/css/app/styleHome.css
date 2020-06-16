@@ -105,6 +105,7 @@
   animation: moveTop 1s;
   animation-delay: 1s;
   animation-fill-mode: backwards;
+  position: relative;
 }
 
 /*

@@ -15,6 +15,7 @@
 .sectionAppOneWallet {
   margin-left: auto;
   width: 250px;
+  position: relative;
 }
 .mensagemSuccess {
   text-align: center;
