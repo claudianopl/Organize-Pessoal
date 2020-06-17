@@ -20,8 +20,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, max-scale=1">
     
     <!-- Estilos CSS -->
-    <link rel="stylesheet" type="text/css" href="/assets/css/app/styleReceive.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/app/styleExpenses.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/app/global/styleGlobal.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/styleGeral.css">
+
     
     <!-- Icon -->
     <link rel='icon' type="img/svg" href="/assets/images/iconLogo.svg">
@@ -34,86 +36,105 @@
     <section>
       <div class="containerApp">
         <div class="sectionAppArea">
-          <?php $this->importViews('menu-app', 'Receive') ?>
+          <?php $this->importViews('menu-app', 'Expense') ?>
 
           <div class="sectionAppAreaRight">
             <div class="sectionAppOne">
               <div id="mensagem"></div>
               <div class="sectionAppOneWallet">
-                <?php $this->importViews('appWallet', 'Receive') ?>
+                <?php $this->importViews('appWallet') ?>
               </div>
             </div>
-  
-            <div class="sectionAppTwo">
-              <div class="sectionAppTwoFilter">
 
-                <div class="sectionAppTwoFilterContainer">
-                  <div class="sectionAppTwoFilterDadosReceive">
-                    <div class="sectionAppTwoFilterActiveReceive">
-                      <h4 class="select">Receitas</h4>
-                      <img src="/assets/images/app/receive/dropDownFilter.svg">
+            <div class='sectionAppExpenseFilter'>
+              <div class="sectionAppExpenseFilterAreaLeft">
+
+                <div class="sectionAppExpenseFilterContainer">
+                  <div class="sectionAppExpenseFilterAll">
+                    <div class="sectionAppExpenseFilterAllActive">
+                      <h4>Todas despesas</h4>
+                      <img src="/assets/images/app/appGlobal/dropDownFilter.svg">
                     </div>
-                    <div class="sectionAppTwoFilterNavReceive">
+                    <div class="sectionAppExpenseFilterAllNav">
                       <ul>
-                        <li>Receitas Recebidas</li>
-                        <li>Receitas Não Recebidas</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class='sectionAppTwoFilterContainer'>
-                  <div class="sectionAppTwoFilterDadosCategory">
-                    <div class="sectionAppTwoFilterActiveCategory">
-                      <h4 class="select">Categoria</h4>
-                      <img src="/assets/images/app/receive/dropDownFilter.svg">
-                    </div>
-                    <div class="sectionAppTwoFilterNavCategory">
-                      <ul>
-                        <li>Salário</li>
-                        <li>Empréstimos</li>
-                        <li>Outras Receitas</li>
+                        <li>Despesas pagar</li>
+                        <li>Despesas não pagas</li>
                       </ul>
                     </div>
                   </div>
                 </div>
 
+                <div class="sectionAppExpenseFilterContainer">
+                  <div class="sectionAppExpenseFilterCategory">
+                    <div class="sectionAppExpenseFilterCategoryActive">
+                      <h4>Todas categorias</h4>
+                      <img src="/assets/images/app/appGlobal/dropDownFilter.svg">
+                    </div>
+                    <div class="sectionAppExpenseFilterCategoryNav">
+                      <ul>
+                        <li>Alimentação</li>
+                        <li>Assinaturas e serviços</li>
+                        <li>Casa</li>
+                        <li>Compras</li>
+                        <li>Cuidados pessoais</li>
+                        <li>Dívidas e empréstimos</li>
+                        <li>Educação</li>
+                        <li>Entretenimento</li>
+                        <li>Família e filhos</li>
+                        <li>Impostos e Taxas</li>
+                        <li>Investimentos</li>
+                        <li>Mercado</li>
+                        <li>Pets</li>
+                        <li>Saúde</li>
+                        <li>Trabalho</li>
+                        <li>Transporte</li>
+                        <li>Viagem</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
 
-                <div class="sectionAppTwoFilterContainer">
-                  <div class="sectionAppTwoFilterSubmite" onclick="sectionAppFilter()">
-                    <img src="/assets/images/app/receive/buttonFilter.svg">
+                <div class="sectionAppExpenseFilterContainer">
+                  <div class="sectionAppExpenseFilterButton" 
+                  onclick="selectFilterExpense()">
+                    <img src="/assets/images/app/expense/buttonFilter.svg">
+                  </div>
+                  <div class="sectionAppExpenseFilterButtonMobile" 
+                  onclick="selectFilterExpense()">
+                    <h4>Filtrar</h4>
                   </div>
                 </div>
               </div>
-              
-              <div class="sectionAppTwoRecive">
-                <img src="/assets/images/app/receive/iconPlus.svg"> 
-                <h4>Lançar Receitas</h4>
+
+              <div class="sectionAppExpenseThrow">
+                <img src="/assets/images/app/appGlobal/iconPlus.svg">
+                <h4>Lançar Despesa</h4>
               </div>
             </div>
-            <!-- 
-              * APLICAR LÓGICA DO PHP, CASO AS RECEITAS ESTIVEREM VAZIAS 
-              * IMPRIMIR ESSA MENSSAGEM
-            -->
-            <div class="sectionAppThreeMessage">
+
+            <div class="sectionAppMessageExpense">
               <h3>
-                Você não possui contas a receber. Por favor, comece agora 
-                a lançar as suas receitas.
+                Você não possui contas a pagar. Por favor, 
+                comece agora a lançar as suas despesas.
               </h3>
             </div>
+            
+  
+            
 
             <!--
               * CASO NÃO ESTIVER VAZIA, IMPRIMIR A TABELA E PREENCHER A TABELA
             -->
+            
             <div class="sectionAppTable">
-              <div class="sectionAppTableTitle">
+              <article class="sectionAppTableTitle">
                 <p class="desc">Descrição</p>
                 <p class="date">Vencimento</p>
                 <p class="category">Categoria</p>
                 <p class="enrollment">Parcelas</p>
                 <p class="price">Valor</p>
-              </div>
-              <div class="sectionAppTableItem">
+              </article>
+              <article class="sectionAppTableItem">
                 <p class="desc">dasdasdasdasdsa</p>
                 <p class="date">15/06/2020</p>
                 <p class="category">bla bla bla</p>
@@ -128,8 +149,9 @@
                   <img src="/assets/images/app/appGlobal/update.svg">
                   <img src="/assets/images/app/appGlobal/conclude.svg">
                 </p>
-              </div>
-              <div class="sectionAppTwoTableItem">
+              
+              </article>
+              <article class="sectionAppTableItem">
                 <p class="desc">dasdasdasdasdsa</p>
                 <p class="date">15/06/2020</p>
                 <p class="category">bla bla bla</p>
@@ -144,7 +166,7 @@
                   <img src="/assets/images/app/appGlobal/update.svg">
                   <img src="/assets/images/app/appGlobal/conclude.svg">
                 </p>
-              </div>
+              </article>
             </div>
 
           </div>
@@ -154,6 +176,6 @@
 
     <!-- jQuery e JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="/assets/js/scriptAppReceive.js"></script>
+    <script src="/assets/js/scriptAppExpense.js"></script>
   </body>
 </html>

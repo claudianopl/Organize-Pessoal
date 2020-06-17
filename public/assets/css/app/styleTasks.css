@@ -1,0 +1,309 @@
+.sectionAppTasksFilter {
+  width: 100%;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  padding: 20px 10px;
+  animation: fade 1s;
+}
+.sectionAppTasksFilterAreaLeft {
+  display: flex;
+  align-items: flex-start;
+}
+.sectionAppTasksFilterContainer {
+  position: relative;
+  width: 250px;
+  margin-right: 30px;
+}
+.sectionAppTasksFilterContainer:nth-child(2){
+  width: auto;
+  margin-right: 0;
+}
+.sectionAppTasksFilterAll {
+  animation: moveTop 1s;
+  animation-delay: 0.25s;
+  animation-fill-mode: backwards;
+  position: absolute;
+  width: 100%;
+  color: #8491A5;
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px 0px rgba(90, 142, 222, 0.7), 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+}
+.sectionAppTasksFilterAllActive {
+  display: flex;
+  align-items: center;
+  margin: 5px 10px 5px 10px;
+  cursor: pointer;
+}
+.sectionAppTasksFilterAllActive img {
+  margin-left: auto;
+}
+.sectionAppTasksFilterAllNav ul,
+.sectionAppTasksFilterAllNav li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sectionAppTasksFilterAllNav li {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.sectionAppTasksFilterAllNav li:hover {
+  background: #5A8EDE;
+  color: #ffffff;
+  border-radius: 18px;
+}
+.sectionAppTasksFilterButton {
+  cursor: pointer;
+  animation: moveTop 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: backwards;
+}
+.sectionAppTasksFilterButtonMobile {
+  display: none;
+}
+.sectionAppTasksThrow {
+  margin-left: auto;
+  padding: 10px 50px;
+  background: linear-gradient(98.58deg, #5A8EDE 8.34%, #636D7C 91.96%);
+  border-radius: 18px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 1s;
+  cursor: pointer;
+  transition: 1s;
+  animation: moveTop 1s;
+  animation-delay: 0.75s;
+  animation-fill-mode: backwards;
+}
+.sectionAppTasksThrow:hover{
+  background: #5A8EDE;
+}
+.sectionAppTasksThrow h4 {
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+
+.sectionAppMessageTasks {
+  margin-top: 30px;
+  width: 100%;
+  padding: 10px 10px;
+  border: 2px solid #5A8EDE;
+  border-radius: 18px;
+  text-align: center;
+  animation: moveRight 1s;
+  animation-delay: 1s;
+  animation-fill-mode: backwards;
+}
+.sectionAppMessageTasks h3 {
+  font-weight: 600;
+  color: #555555;
+}
+
+
+/* Tabela de tarefas */
+.sectionAppTableTasks {
+  width: 100%;
+  padding: 10px;
+  margin-top: 30px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  animation: fade 1s;
+  animation-delay: 1.25s;
+  overflow: hidden;
+  animation-fill-mode: backwards;
+}
+.sectionAppTableTitleTasks {
+  padding: 10px 5px;
+  width: 100%;
+  animation: moveRight 1s;
+  animation-delay: 1.75s;
+  animation-fill-mode: backwards;
+}
+.sectionAppTableItemTasks {
+  margin-bottom: 15px;
+  text-transform: none;
+  animation: moveRight 1s;
+  animation-delay: 2s;
+  animation-fill-mode: backwards;
+}
+.sectionAppTableTitleTasks,
+.sectionAppTableItemTasks {
+  width: calc(100vw - 321px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  color: #9A9A9A;
+  padding: 15px 0px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.sectionAppTableTitleTasks p {
+  margin: 0px 15px 0 15px;
+}
+.sectionAppTableItemTasks p {
+  margin: 0px 15px 0 15px;
+  font-size: 16px;
+}
+.sectionAppTableItemTasks:nth-child(even) {
+  background-color: #F5FEFB;
+}
+.sectionAppTableItemTasks:nth-child(odd) {
+  background-color: #E9FAF4;
+}
+.sectionAppTableTitleTasks .desc,
+.sectionAppTableItemTasks .desc {
+  min-width: 70%;
+  max-width: 70%;
+  text-align: start;
+  word-wrap:break-word
+}
+.sectionAppTableTitleTasks .date,
+.sectionAppTableItemTasks .date {
+  min-width: 22%;
+  max-width: 22%;
+  display: flex;
+  justify-content: center;
+}
+.sectionAppTableItemTasks .date img {
+  margin: 0 0 0 auto;
+}
+
+
+@media (max-width: 575px) {
+  .sectionAppTasksFilter{
+    flex-direction: column;
+  }
+  .sectionAppTasksFilterAreaLeft {
+    flex-direction: column;
+    margin-bottom: 15px;
+    align-items: center;
+  }
+  .sectionAppTasksFilterContainer {
+    margin-bottom: 50px;
+    margin-right: 0;
+  }
+  .sectionAppTasksFilterContainer:nth-child(2) {
+    margin-bottom: 0;
+  }
+  .sectionAppTasksFilterAll {
+    z-index: 1;
+  }
+  .sectionAppTasksFilterButton {
+    display: none;
+  }
+  .sectionAppTasksFilterButtonMobile {
+    display: block;
+    padding: 10px 86px;
+    border-radius: 18px;
+    color: #ffffff;
+    background: linear-gradient(270deg, #636D7C 20%, #5A8EDE 86%);
+    transition: 1s;
+  }
+  .sectionAppTasksThrow {
+    margin: auto;
+  }
+  .sectionAppTableTasks {
+    margin-bottom: 70px;
+  }
+  .sectionAppTableTitleTasks, 
+  .sectionAppTableItemTasks {
+    width: calc(100vw - 30px);
+  }
+  .sectionAppTableTitleTasks p,
+  .sectionAppTableItemTasks p {
+    font-size: 12px;
+    margin: 0px 8px 0 8px;
+  }
+  .sectionAppTableTitleTasks .desc, 
+  .sectionAppTableItemTasks .desc {
+    min-width: 40%;
+    max-width: 40%;
+    margin-right: 20px;
+  }
+  .sectionAppTableTitleTasks .date, 
+  .sectionAppTableItemTasks .date {
+    min-width: 40%;
+    max-width: 40%;
+    flex-direction: column;
+  }
+  .sectionAppTableItemTasks .date img {
+    margin: 10px 20px 0 0;
+  }
+  .sectionAppTableItemTasks .date img:nth-child(3) {
+    margin: 10px 0 0 0;
+  }
+  
+}
+/* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .sectionAppTableTasks {
+    margin-bottom: 70px;
+  }
+  .sectionAppTableTitleTasks, 
+  .sectionAppTableItemTasks {
+    width: calc(100vw - 30px);
+  }
+  .sectionAppTableTitleTasks .desc,
+  .sectionAppTableItemTasks .desc {
+    max-width: 50%;
+    min-width: 50%;
+  }
+  .sectionAppTableTitleTasks .date,
+  .sectionAppTableItemTasks .date {
+    min-width: 40%;
+    max-width: 40%;
+  }
+}
+
+/* Dispositivos médios (tablets com 768px ou mais) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .sectionAppTableTasks {
+    margin-bottom: 70px;
+  }
+  .sectionAppTableTitleTasks, 
+  .sectionAppTableItemTasks {
+    width: calc(100vw - 30px);
+  }
+  .sectionAppTableTitleTasks .desc,
+  .sectionAppTableItemTasks .desc {
+    max-width: 55%;
+    min-width: 55%;
+  }
+  .sectionAppTableTitleTasks .date,
+  .sectionAppTableItemTasks .date {
+    min-width: 35%;
+    max-width: 35%;
+  }
+}
+
+/* Dispositivos large (desktops com 992px ou mais) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .sectionAppTableTitleTasks .desc,
+  .sectionAppTableItemTasks .desc {
+    max-width: 55%;
+    min-width: 55%;
+  }
+  .sectionAppTableTitleTasks .date,
+  .sectionAppTableItemTasks .date {
+    min-width: 35%;
+    max-width: 35%;
+  }
+  
+}
+@media (min-width: 1200px) { }

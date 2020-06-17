@@ -63,6 +63,18 @@ class Route extends Bootstrap {
 			'action' => 'receive',
 		);
 
+		$routes['appExpense'] = array(
+			'route' => "/app/despesas",
+			'controller' => 'AppController',
+			'action' => 'expense',
+		);
+
+		$routes['appTasks'] = array(
+			'route' => "/app/tarefas",
+			'controller' => 'AppController',
+			'action' => 'tasks',
+		);
+
 
 		// Execução das routes
 		$this->setRoutes($routes);

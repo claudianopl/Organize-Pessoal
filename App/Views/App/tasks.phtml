@@ -1,0 +1,147 @@
+<html>
+  <head>
+    <meta charset="UFT-8">
+    <meta http-equiv="content-language" content="pt-br">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Claudiano Lima">
+    <meta name="description" content="O Organize Pessoal é um gerenciador de 
+    finanças e tarefas simples, muito poderoso e totalmente gratuito. Conte com 
+    o Organize Pessoal, com ele você tem o controle de sua vida financeira e 
+    pessoal.">
+    <meta name="keywords" content="finanças, financeiro, controle, 
+    gerenciamento de contas, gerenciamento financeiro, controle financeiro, 
+    gerenciador de tarefas, controle pesoal">
+    <meta name="robots" content="index, follow"> 
+    <meta itemprop="name" content="Organize Pessoal - Organize sua vida de forma fácil">
+    <meta itemprop="description" content="O Organize Pessoal é um gerenciador de 
+    finanças e tarefas simples, muito poderoso e totalmente gratuito. Conte com 
+    o Organize Pessoal, com ele você tem o controle de sua vida financeira e 
+    pessoal.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, max-scale=1">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/app/styleTasks.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/app/global/styleGlobal.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/styleGeral.css">
+
+    
+    <!-- Icon -->
+    <link rel='icon' type="img/svg" href="/assets/images/iconLogo.svg">
+    <title>Organize Pessoal - Despesas</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <?php $this->importViews('header-app') ?>
+
+    <section>
+      <div class="containerApp">
+        <div class="sectionAppArea">
+          <?php $this->importViews('menu-app', 'Tasks') ?>
+
+          <div class="sectionAppAreaRight">
+            <div class="sectionAppOne">
+              <div id="mensagem"></div>
+              <div class="sectionAppOneWallet">
+                <?php $this->importViews('appWallet') ?>
+              </div>
+            </div>
+
+            <div class='sectionAppTasksFilter'>
+              <div class="sectionAppTasksFilterAreaLeft">
+
+                <div class="sectionAppTasksFilterContainer">
+                  <div class="sectionAppTasksFilterAll">
+                    <div class="sectionAppTasksFilterAllActive">
+                      <h4>Todas tarefas</h4>
+                      <img src="/assets/images/app/appGlobal/dropDownFilter.svg">
+                    </div>
+                    <div class="sectionAppTasksFilterAllNav">
+                      <ul>
+                        <li>Tarefas concluídas</li>
+                        <li>Tarefas pendentes</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sectionAppTasksFilterContainer">
+                  <div class="sectionAppTasksFilterButton" 
+                  onclick="selectFilterTasks()">
+                    <img src="/assets/images/app/tasks/buttonFilter.svg">
+                  </div>
+                  <div class="sectionAppTasksFilterButtonMobile" 
+                  onclick="selectFilterTasks()">
+                    <h4>Filtrar</h4>
+                  </div>
+                </div>
+              </div>
+
+              <div class="sectionAppTasksThrow">
+                <img src="/assets/images/app/appGlobal/iconPlus.svg">
+                <h4>Nova Tarefa</h4>
+              </div>
+            </div>
+
+            <div class="sectionAppMessageTasks">
+              <h3>
+                Você não possui contas a pagar. Por favor, 
+                comece agora a lançar as suas despesas.
+              </h3>
+            </div>
+            
+  
+            
+
+            <!--
+              * CASO NÃO ESTIVER VAZIA, IMPRIMIR A TABELA E PREENCHER A TABELA
+            -->
+            <div class="sectionAppTableTasks">
+              <article class="sectionAppTableTitleTasks">
+                <p class="desc">Descrição</p>
+                <p class="date">Data - Hora</p>
+              </article>
+              <article class="sectionAppTableItemTasks">
+                <p class="desc">dasdasdasdsadsadasdasdsad</p>
+                <p class="date">
+                  15/06/2020 - 00:00
+                  <!--
+                    PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
+                    SE VAI SER POR AJAX OU LINK
+                  -->
+                  <span>
+                    <img src="/assets/images/app/appGlobal/remove.svg">
+                    <img src="/assets/images/app/appGlobal/update.svg">
+                    <img src="/assets/images/app/appGlobal/conclude.svg">
+                  </span>
+                  
+                </p>
+              
+              </article>
+              <article class="sectionAppTableItemTasks">
+                <p class="desc">Descrasdasdasdasdasdasdasição</p>
+                <p class="date">
+                  15/06/2020 - 00:00
+                  <!--
+                    PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
+                    SE VAI SER POR AJAX OU LINK
+                  -->
+                  <span>
+                    <img src="/assets/images/app/appGlobal/remove.svg">
+                    <img src="/assets/images/app/appGlobal/update.svg">
+                    <img src="/assets/images/app/appGlobal/conclude.svg">
+                  </span>
+                </p>
+              
+              </article>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- jQuery e JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/assets/js/scriptAppTasks.js"></script>
+  </body>
+</html>

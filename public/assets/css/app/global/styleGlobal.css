@@ -1,3 +1,14 @@
+/*  ADICIONAR ESSA CLASSE NO ID MENSAGEM QUANDO ELA FOR EXIBIDA */
+.mensagemSuccessReceive {
+  text-align: center;
+  padding: 5px 50px;
+  border: 2px solid #59DF83;
+  border-radius: 18px;
+  color: #59DF83;
+  margin: auto;
+  font-weight: 600;
+  margin: auto;
+}
 .containerApp {
   display: block;
   max-width: 100%;
@@ -22,6 +33,7 @@
   width: 100%;
   height: 74px;
   padding: 10px 5px;
+  animation: fade 1s;
 }
 .sectionAppOneWallet {
   margin-left: auto;
@@ -39,16 +51,23 @@
   background-color: #FFFFFF;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 18px;
+  animation: fade 1s;
+  animation-delay: 1.25s;
+  overflow: hidden;
+  animation-fill-mode: backwards;
 }
 
 .sectionAppTableTitle {
   padding: 10px 5px;
   width: 100%;
+  animation: moveRight 1s;
+  animation-delay: 1.75s;
+  animation-fill-mode: backwards;
 }
 
 .sectionAppTableTitle,
 .sectionAppTableItem {
-  width: 100%;
+  width: calc(100vw - 321px);
   display: flex;
   align-items: center;
   background: #FFFFFF;
@@ -62,7 +81,9 @@
 .sectionAppTableItem {
   margin-bottom: 15px;
   text-transform: none;
-  
+  animation: moveRight 1s;
+  animation-delay: 2s;
+  animation-fill-mode: backwards;
 }
 .sectionAppTableTitle p {
   margin: 0px 15px 0 15px;
@@ -148,22 +169,25 @@
 }
 /* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
 @media (min-width: 576px) and (max-width: 767.98px) {
-  .sectionAppTable {
-    margin-bottom: 70px;
-  }
   .sectionAppAreaRight {
     margin: 10px 5px 10px 5px;
   }
+  .sectionAppTable {
+    margin-bottom: 70px;
+  }
+  .sectionAppTableTitle, 
+  .sectionAppTableItem {
+    width: calc(100vw - 30px);
+  }
   .sectionAppTableTitle .desc,
   .sectionAppTableItem .desc {
-    max-width: 40%;
-    min-width: 40%;
+    max-width: 45%;
+    min-width: 45%;
   }
   .sectionAppTableTitle .date,
   .sectionAppTableItem .date {
-    min-width: 25%;
-    max-width: 25%;
-    text-align: center;
+    min-width: 18%;
+    max-width: 18%;
   }
 
   .sectionAppTableTitle .price,
@@ -171,11 +195,10 @@
     min-width: 25%;
     max-width: 25%;
     margin-right: 0;
-    justify-content: center;
   }
   .sectionAppTableTitle p,
   .sectionAppTableItem p {
-    font-size: 12px;
+    font-size: 14px;
     margin: 0px 8px 0 8px;
   }
   .sectionAppTableTitle .category,
@@ -188,6 +211,13 @@
 
 /* Dispositivos médios (tablets com 768px ou mais) */
 @media (min-width: 768px) and (max-width: 991.98px) {
+  .sectionAppTable {
+    margin-bottom: 70px;
+  }
+  .sectionAppTableTitle, 
+  .sectionAppTableItem {
+    width: calc(100vw - 30px);
+  }
   .sectionAppTableTitle .desc,
   .sectionAppTableItem .desc {
     max-width: 30%;
@@ -200,7 +230,7 @@
   }
   .sectionAppTableTitle p,
   .sectionAppTableItem p {
-    font-size: 12px;
+    font-size: 14px;
   }
   .sectionAppAreaRight {
     margin: 10px 5px 10px 5px;
@@ -211,8 +241,8 @@
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .sectionAppTableTitle .desc,
   .sectionAppTableItem .desc {
-    max-width: 30%;
-    min-width: 30%;
+    max-width: 25%;
+    min-width: 25%;
   }
   .sectionAppTableTitle .price,
   .sectionAppTableItem .price {
@@ -221,8 +251,20 @@
   }
   .sectionAppTableTitle p,
   .sectionAppTableItem p {
-    font-size: 12px;
+    font-size: 14px;
   }
-
+  .sectionAppTableTitle .date,
+  .sectionAppTableTitle .category,
+  .sectionAppTableItem .date,
+  .sectionAppTableItem .category{
+    min-width: 12%;
+    max-width: 12%;
+  }
+  .sectionAppTableTitle .enrollment,
+  .sectionAppTableItem .enrollment {
+    min-width: 9%;
+    max-width: 9%;
+}
+  
 }
 @media (min-width: 1200px) { }

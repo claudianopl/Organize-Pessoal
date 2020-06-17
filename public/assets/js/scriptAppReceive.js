@@ -9,9 +9,7 @@ const category = $('.sectionAppTwoFilterActiveCategory');
 const categorySelect = $('.sectionAppTwoFilterActiveCategory h4')
 const categoryNav = $('.sectionAppTwoFilterNavCategory');
 
-/*
-* RECEIVE
-*/
+// ----> Receitas <----
 /*
 * Evento de click
 * Atua na abertura da nav receitas com as opções de filtro
@@ -32,12 +30,7 @@ receiveNav.click((e) => {
   receiveNav.slideToggle('slow');
 })
 
-
-
-/*
-* CATEGORY
-*/
-
+// ----> Category <----
 /*
 * Evento de click
 * Atua na abertura da nav categorias com as opções de filtro
@@ -69,7 +62,9 @@ $(document).ready(() => {
 
 
 /*
-*
+* Função para capturar os valores adicionados pelo usuário, para enviar com o 
+* ajax para a rota do back-end para fazer a manipulação de dados e retornar os 
+* dados filtrados pelo php e fazer o carregamento dos dados ajax.
 */
 function sectionAppFilter() {
   let filterReceive = receiveSelect.html();

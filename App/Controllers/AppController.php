@@ -9,19 +9,20 @@ use MF\Model\Container;
 
 class AppController extends Action {
 	
-	public function index() {
+	public function Index() {
 		$this->render('index');
 	}
 
-	public function receive() {
+	public function Receive() {
 		$this->render('receive');
-		if(isset($_POST) && !(empty($_POST))) {
-			$receive = $_POST['receive'];
-			$category = $_POST['category'];
-			$retorno = ['receita' => $receive, 'categoria' => $category];
-			
-			echo json_encode($retorno, JSON_UNESCAPED_UNICODE);
-		}
+	}
+
+	public function Expense() {
+		$this->render('expense');
+	}
+
+	public function Tasks() {
+		$this->render('tasks');
 	}
 	
 }
