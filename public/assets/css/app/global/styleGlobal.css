@@ -129,7 +129,17 @@
 
 
 @media (max-width: 575px) { 
-  
+  .sectionAppOne {
+    flex-direction: column;
+  }
+  .mensagemSuccessReceive {
+    padding: 5px 25px;
+    margin-bottom: 15px;
+  }
+  .sectionAppOneWallet {
+    margin: auto;
+    margin-bottom: 55px;
+  }
   .sectionAppTable {
     margin-bottom: 70px;
   }
@@ -169,6 +179,9 @@
 }
 /* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
 @media (min-width: 576px) and (max-width: 767.98px) {
+  .mensagemSuccessReceive {
+    padding: 5px 25px;
+  }
   .sectionAppAreaRight {
     margin: 10px 5px 10px 5px;
   }

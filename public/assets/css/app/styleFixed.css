@@ -1,0 +1,246 @@
+.sectionAppFixedThrow {
+  width: 100%;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  padding: 20px 10px;
+  animation: fade 1s;
+}
+.sectionAppFixedReceiveThrow {
+  flex: 1;
+  margin-right: 15px;
+  padding: 10px 30px;
+  background: linear-gradient(270deg, #59DF83 18.13%, #13C5A5 86.25%);
+  box-shadow: 0px 4px 20px rgba(132, 145, 165, 0.6);
+  border-radius: 18px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 1s;
+  cursor: pointer;
+  transition: 1s;
+  animation: moveTop 1s;
+  animation-delay: 0.25s;
+  animation-fill-mode: backwards;
+}
+.sectionAppFixedReceiveThrow:hover{
+  background: #59DF83;
+}
+.sectionAppFixedExpenseThrow {
+  flex: 1;
+  margin-left: 15px;
+  padding: 10px 30px;
+  background: linear-gradient(108.77deg, #E34E4E 8.34%, #636D7C 91.96%);
+  box-shadow: 0px 4px 20px rgba(132, 145, 165, 0.6);
+  border-radius: 18px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 1s;
+  cursor: pointer;
+  transition: 1s;
+  animation: moveTop 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: backwards;
+}
+.sectionAppFixedExpenseThrow:hover{
+  background: #E34E4E;
+}
+.sectionAppFixedReceiveThrow h4,
+.sectionAppFixedExpenseThrow h4 {
+  font-weight: 500;
+  margin-left: 15px;
+}
+.sectionAppMessageFixed {
+  margin-top: 30px;
+  width: 100%;
+  padding: 10px 10px;
+  border: 2px solid #5A8EDE;
+  border-radius: 18px;
+  text-align: center;
+  animation: moveRight 1s;
+  animation-delay: 0.75s;
+  animation-fill-mode: backwards;
+}
+.sectionAppMessageFixed h3 {
+  font-weight: 600;
+  color: #555555;
+}
+
+.sectionAppTableFixed {
+  width: 100%;
+  padding: 10px;
+  margin-top: 30px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  animation: fade 1s;
+  animation-delay: 1s;
+  overflow: hidden;
+  animation-fill-mode: backwards;
+}
+.sectionAppTableFixedTitle {
+  padding: 10px 5px;
+  width: 100%;
+  animation: moveRight 1s;
+  animation-delay: 1.75s;
+  animation-fill-mode: backwards;
+}
+.sectionAppTableFixedItem {
+  margin-bottom: 15px;
+  text-transform: none;
+  animation: moveRight 1s;
+  animation-delay: 2s;
+  animation-fill-mode: backwards;
+}
+.sectionAppTableFixedItem:nth-child(even) {
+  background-color: #F5FEFB;
+}
+.sectionAppTableFixedItem:nth-child(odd) {
+  background-color: #E9FAF4;
+}
+.sectionAppTableFixedTitle,
+.sectionAppTableFixedItem {
+  width: calc(100vw - 321px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  color: #9A9A9A;
+  padding: 15px 0px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.sectionAppTableFixedTitle p,
+.sectionAppTableFixedItem p {
+  margin: 0px 15px 0 15px;
+  font-size: 16px;
+}
+.sectionAppTableFixedTitle .desc,
+.sectionAppTableFixedItem .desc {
+  min-width: 45%;
+  max-width: 45%;
+  text-align: start;
+  word-wrap: break-word;
+}
+.sectionAppTableFixedTitle .category, 
+.sectionAppTableFixedTitle .enrollment, 
+.sectionAppTableFixedItem .category,
+.sectionAppTableFixedItem .enrollment {
+  min-width: 13%;
+  max-width: 13%;
+  text-align: start;
+}
+.sectionAppTableFixedTitle .price,
+.sectionAppTableFixedItem .price {
+  min-width: 15%;
+  max-width: 15%;
+  display: flex;
+  align-items: center;
+}
+.sectionAppTableFixedItem .price img{
+  margin: 0 0 0 auto;
+}
+
+@media (max-width: 575px) {
+  .sectionAppFixedThrow {
+    flex-direction: column;
+  }
+  .sectionAppFixedReceiveThrow {
+    margin: auto;
+    margin-bottom: 15px;
+  }
+  .sectionAppFixedExpenseThrow {
+    margin-top: 15px;
+    margin: auto;
+  }
+  .sectionAppTableFixed {
+    margin-bottom: 70px;
+  }
+  .sectionAppTableFixedTitle, 
+  .sectionAppTableFixedItem {
+    width: calc(100vw - 30px);
+  }
+  .sectionAppTableFixedTitle .category, .sectionAppTableFixedTitle .enrollment, 
+  .sectionAppTableFixedItem .category, .sectionAppTableFixedItem .enrollment {
+    display: none;
+  }
+  .sectionAppTableFixedTitle .price, 
+  .sectionAppTableFixedItem .price {
+    min-width: 45%;
+    max-width: 45%;
+  }
+  .sectionAppTableFixedTitle p, 
+  .sectionAppTableFixedItem p {
+    font-size: 12px;
+    margin: 0px 8px 0 8px;
+  }
+}
+/* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .sectionAppTableFixed {
+    margin-bottom: 70px;
+  }
+  .sectionAppTableFixedTitle, 
+  .sectionAppTableFixedItem {
+    width: calc(100vw - 30px);
+  }
+  .sectionAppTableFixedTitle .desc, 
+  .sectionAppTableFixedItem .desc {
+    min-width: 30%;
+    max-width: 30%;
+  }
+  .sectionAppTableFixedTitle .price, 
+  .sectionAppTableFixedItem .price{
+    min-width: 25%;
+    max-width: 25%;
+  }
+  .sectionAppTableFixedTitle p, 
+  .sectionAppTableFixedItem p {
+    font-size: 14px;
+    margin: 0px 8px 0 8px;
+  }
+}
+
+/* Dispositivos médios (tablets com 768px ou mais) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .sectionAppTableFixed {
+    margin-bottom: 70px;
+  }
+  .sectionAppTableFixedTitle, 
+  .sectionAppTableFixedItem {
+    width: calc(100vw - 30px);
+  }
+  .sectionAppTableFixedTitle .desc, 
+  .sectionAppTableFixedItem .desc {
+    min-width: 36%;
+    max-width: 36%;
+  }
+  .sectionAppTableFixedTitle .price, 
+  .sectionAppTableFixedItem .price{
+    min-width: 20%;
+    max-width: 20%;
+  }
+}
+
+/* Dispositivos large (desktops com 992px ou mais) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .sectionAppTableFixedTitle .desc, 
+  .sectionAppTableFixedItem .desc {
+    min-width: 36%;
+    max-width: 36%;
+  }
+  .sectionAppTableFixedTitle .price, 
+  .sectionAppTableFixedItem .price{
+    min-width: 20%;
+    max-width: 20%;
+  }
+}
+@media (min-width: 1200px) { }

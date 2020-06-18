@@ -1,0 +1,122 @@
+<html>
+  <head>
+    <meta charset="UFT-8">
+    <meta http-equiv="content-language" content="pt-br">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Claudiano Lima">
+    <meta name="description" content="O Organize Pessoal é um gerenciador de 
+    finanças e tarefas simples, muito poderoso e totalmente gratuito. Conte com 
+    o Organize Pessoal, com ele você tem o controle de sua vida financeira e 
+    pessoal.">
+    <meta name="keywords" content="finanças, financeiro, controle, 
+    gerenciamento de contas, gerenciamento financeiro, controle financeiro, 
+    gerenciador de tarefas, controle pesoal">
+    <meta name="robots" content="index, follow"> 
+    <meta itemprop="name" content="Organize Pessoal - Organize sua vida de forma fácil">
+    <meta itemprop="description" content="O Organize Pessoal é um gerenciador de 
+    finanças e tarefas simples, muito poderoso e totalmente gratuito. Conte com 
+    o Organize Pessoal, com ele você tem o controle de sua vida financeira e 
+    pessoal.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, max-scale=1">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/app/styleFixed.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/app/global/styleGlobal.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/styleGeral.css">
+
+    
+    <!-- Icon -->
+    <link rel='icon' type="img/svg" href="/assets/images/iconLogo.svg">
+    <title>Organize Pessoal - Despesas</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <?php $this->importViews('header-app') ?>
+
+    <section>
+      <div class="containerApp">
+        <div class="sectionAppArea">
+          <?php $this->importViews('menu-app', 'Fixed') ?>
+
+          <div class="sectionAppAreaRight">
+            <div class="sectionAppOne">
+              <div id="mensagem"></div>
+              <div class="sectionAppOneWallet">
+                <?php $this->importViews('appWallet') ?>
+              </div>
+            </div>
+
+            <div class='sectionAppFixedThrow'>
+              <div class="sectionAppFixedReceiveThrow">
+                <img src="/assets/images/app/appGlobal/iconPlus.svg">
+                <h4>Lançar Receita Fixa</h4>
+              </div>
+              <div class="sectionAppFixedExpenseThrow">
+                <img src="/assets/images/app/appGlobal/iconPlus.svg">
+                <h4>Lançar Despesa Fixa</h4>
+              </div>
+            </div>
+
+            <div class="sectionAppMessageFixed">
+              <h3>
+                Você não possui contas fixas. Por favor, 
+                comece agora a lançar as suas contas fixas.
+              </h3>
+            </div>
+            
+  
+            
+
+            <!--
+              * CASO NÃO ESTIVER VAZIA, IMPRIMIR A TABELA E PREENCHER A TABELA     
+            -->
+            <div class="sectionAppTableFixed">
+              <article class="sectionAppTableFixedTitle">
+                <p class="desc">Descrição</p>
+                <p class="category">Categoria</p>
+                <p class="enrollment">Parcelas</p>
+                <p class="price">Valor</p>
+              </article>
+              <article class="sectionAppTableFixedItem">
+                <p class="desc">dasdasdasdasdsa</p>
+                <p class="category">bla bla bla</p>
+                <p class="enrollment">dasdas</p>
+                <p class="price">
+                  R$ 00,00
+                  <!--
+                    PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
+                    SE VAI SER POR AJAX OU LINK
+                  -->
+                  <img src="/assets/images/app/appGlobal/remove.svg">
+                  <img src="/assets/images/app/appGlobal/update.svg">
+                  <img src="/assets/images/app/appGlobal/conclude.svg">
+                </p>
+              
+              </article>
+              <article class="sectionAppTableFixedItem">
+                <p class="desc">dasdasdasdasdsa</p>
+                <p class="category">bla bla bla</p>
+                <p class="enrollment">dasdas</p>
+                <p class="price">
+                  R$ 00,00
+                  <!--
+                    PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
+                    SE VAI SER POR AJAX OU LINK
+                  -->
+                  <img src="/assets/images/app/appGlobal/remove.svg">
+                  <img src="/assets/images/app/appGlobal/update.svg">
+                  <img src="/assets/images/app/appGlobal/conclude.svg">
+                </p>
+              </article>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- jQuery e JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/assets/js/scriptAppFixed.js"></script>
+  </body>
+</html>

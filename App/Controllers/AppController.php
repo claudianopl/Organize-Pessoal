@@ -24,6 +24,10 @@ class AppController extends Action {
 	public function Tasks() {
 		$this->render('tasks');
 	}
+
+	public function Fixed() {
+		$this->render('fixed');
+	}
 	
 }
 

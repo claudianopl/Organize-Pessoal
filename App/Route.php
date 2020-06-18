@@ -75,6 +75,12 @@ class Route extends Bootstrap {
 			'action' => 'tasks',
 		);
 
+		$routes['appFixed'] = array(
+			'route' => "/app/fixas",
+			'controller' => 'AppController',
+			'action' => 'fixed',
+		);
+
 
 		// Execução das routes
 		$this->setRoutes($routes);
