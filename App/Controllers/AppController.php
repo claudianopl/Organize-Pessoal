@@ -28,6 +28,10 @@ class AppController extends Action {
 	public function Fixed() {
 		$this->render('fixed');
 	}
+
+	public function Wallet() {
+		$this->render('wallet');
+	}
 	
 }
 

@@ -1,0 +1,237 @@
+.sectionAppWalletAreaGlobal {
+  display: flex;
+  background: linear-gradient(90deg, #59DF83 16.02%, #13C5A5 100%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 18px;
+  width: 100%;
+  padding: 15px 40px;
+  align-items: center;
+  animation: fade 1s;
+}
+.sectionAppNewWallet {
+  flex: 1;
+}
+.sectionAppNewWallet h3{
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-left: 15px;
+  animation: moveTop 1s;
+  animation-delay: 0.25s;
+  animation-fill-mode: backwards;
+}
+.sectionAppNewWallet form {
+  display: flex;
+  align-items: center;
+  animation: moveLeft 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: backwards;
+}
+.sectionAppNewWallet form input {
+  border: 2px solid #ffffff;
+  border-radius: 18px;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  background: transparent;
+  color: #ffffff;
+  width: 350px;
+  text-align: center;
+  margin-right: 15px;
+}
+.sectionAppNewWallet form input:focus{
+  border: 2px solid #f0f0f0;
+  outline: 0;
+}
+::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  color: rgba(255, 255, 255, 0.58);
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+  color: rgba(255, 255, 255, 0.58);
+}
+
+:-ms-input-placeholder {  
+  color: rgba(255, 255, 255, 0.58);
+}
+.sectionAppNewWallet form button {
+  border: none;
+  background: transparent;
+}
+.sectionAppNewWallet form button:focus {
+  border: none;
+  outline: 0;
+}
+
+
+.sectionAppWallets {
+  margin-left: auto;
+  width: 250px;
+  position: relative;
+  height: 54px;
+  border-radius: 18px;
+  animation: moveTop 1s;
+  animation-delay: 0.75s;
+  animation-fill-mode: backwards;
+}
+
+
+.appWalletsCardsArea {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.appWalletCard {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 18px 34px 18px;
+  border-radius: 18px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+  text-transform: uppercase;
+  background:  linear-gradient(8.51deg, #59DF83 13.04%, #13C5A5 83.95%);
+  margin-right: 30px;
+  margin-top: 30px;
+  animation: moveTop 1s;
+  animation-delay: 1s;
+  animation-fill-mode: backwards;
+  overflow: hidden;
+}
+.appWalletCard:nth-child(2n) {
+  background: linear-gradient(94.83deg, #E34E4E 13.82%, #636D7C 104.05%);
+}
+.appWalletCard.appWalletCard:nth-child(3n) {
+  background: linear-gradient(91.08deg, #5A8EDE 8.34%, #636D7C 91.96%);
+}
+.iconWalletRemove {
+  margin-bottom: 7px;
+  margin-left: auto;
+  cursor: pointer;
+  animation: moveTop 1s;
+  animation-delay: 1.25s;
+  animation-fill-mode: backwards;
+}
+.iconWalletCard {
+  margin: auto;
+  margin-bottom: 20px;
+  animation: moveLeft 1s;
+  animation-delay: 1.50s;
+  animation-fill-mode: backwards;
+}
+.titleWallet {
+  padding-bottom: 15px;
+  border-bottom: 2px solid #ffffff;
+  margin-top: 20px;
+  padding: 0px 20px 10px 20px;
+  animation: moveRight 1s;
+  animation-delay: 1.75s;
+  animation-fill-mode: backwards;
+}
+.appWalletCard p{
+  margin-top: 16px;
+  font-weight: 600;
+  text-align: center;
+  animation: moveLeft 1s;
+  animation-delay: 2s;
+  animation-fill-mode: backwards;
+}
+.graphicWalletArea {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.graphicWallet {
+  padding: 15px;
+  border-radius: 18px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  width: 82vw;
+  margin: auto;
+  animation: fade 1s;
+  animation-delay: 2.25s;
+  animation-fill-mode: backwards;
+}
+#GraphicWallet {
+  max-width: 80vw;
+  max-height: 80vw;
+  animation: moveRight 1s;
+  animation-delay: 2.75s;
+  animation-fill-mode: backwards;
+}
+
+.graphicWalletMessenger {
+  display: none;
+}
+
+
+@media (max-width: 575px) {
+  .sectionAppWalletAreaGlobal {
+    flex-direction: column;
+    padding: 15px 5px;
+  }
+  .sectionAppNewWallet form input {
+    width: 230px;
+  }
+  .sectionAppWallets {
+    margin: auto;
+    margin-top: 15px;
+  }
+  .sectionAppNewWallet h3 {
+    margin: 0;
+    text-align: center;
+  }
+  .appWalletCard {
+    margin: 30px auto 30px auto;
+  }
+  .graphicWalletMessenger {
+    display: block;
+    text-align: justify;
+    margin: 0 5px;
+    color: red;
+  }
+}
+/* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .sectionAppWalletAreaGlobal {
+    flex-direction: column;
+  }
+  .sectionAppWallets {
+    margin: auto;
+    margin-top: 15px;
+  }
+  .sectionAppNewWallet h3 {
+    margin: 0;
+    text-align: center;
+  }
+  .graphicWalletArea {
+    margin-bottom: 70px;
+  }
+  
+}
+
+/* Dispositivos médios (tablets com 768px ou mais) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .graphicWalletArea {
+    margin-bottom: 70px;
+  }
+}
+
+/* Dispositivos large (desktops com 992px ou mais) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .sectionAppWalletAreaGlobal {
+    flex-direction: column;
+  }
+  .sectionAppWallets {
+    margin: auto;
+    margin-top: 15px;
+  }
+  .sectionAppNewWallet h3 {
+    margin: 0;
+    text-align: center;
+  }
+}
+@media (min-width: 1200px) { }

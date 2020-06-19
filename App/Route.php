@@ -81,6 +81,12 @@ class Route extends Bootstrap {
 			'action' => 'fixed',
 		);
 
+		$routes['appWallet'] = array(
+			'route' => "/app/carteiras",
+			'controller' => 'AppController',
+			'action' => 'wallet',
+		);
+
 
 		// Execução das routes
 		$this->setRoutes($routes);

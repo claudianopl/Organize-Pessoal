@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UFT-8">
+    <meta http-equiv="content-language" content="pt-br">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Claudiano Lima">
+    <meta name="description" content="O Organize Pessoal é um gerenciador de 
+    finanças e tarefas simples, muito poderoso e totalmente gratuito. Conte com 
+    o Organize Pessoal, com ele você tem o controle de sua vida financeira e 
+    pessoal.">
+    <meta name="keywords" content="finanças, financeiro, controle, 
+    gerenciamento de contas, gerenciamento financeiro, controle financeiro, 
+    gerenciador de tarefas, controle pesoal">
+    <meta name="robots" content="index, follow"> 
+    <meta itemprop="name" content="Organize Pessoal - Organize sua vida de forma fácil">
+    <meta itemprop="description" content="O Organize Pessoal é um gerenciador de 
+    finanças e tarefas simples, muito poderoso e totalmente gratuito. Conte com 
+    o Organize Pessoal, com ele você tem o controle de sua vida financeira e 
+    pessoal.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, max-scale=1">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/app/styleWallet.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/styleGeral.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/app/global/styleGlobal.css">
+
+    <!-- Script Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" 
+    integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" 
+    crossorigin="anonymous"></script>
+    
+    <!-- Icon -->
+    <link rel='icon' type="img/svg" href="/assets/images/iconLogo.svg">
+    <title>Organize Pessoal - Receitas</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <?php $this->importViews('header-app') ?>
+
+    <section>
+      <div class="containerApp">
+        <div class="sectionAppArea">
+          <?php $this->importViews('menu-app', 'Wallet') ?>
+
+          <div class="sectionAppAreaRight">
+            <div class="sectionAppWalletAreaGlobal">
+              <div class="sectionAppNewWallet">
+                <article>
+                  <h3>Adicionar Carteira</h3>
+                </article>
+                <form action="" method="POST">
+                  <input type="text" name="newWallet" 
+                  placeholder="Minha casa / Minha empresa / Meu cartão">
+                  <button type="submit">
+                    <img src="/assets/images/app/wallet/buttonSubmit.svg">
+                  </button>
+                </form>
+              </div>
+              <div class="sectionAppWallets">
+                <?php $this->importViews('appWallet', 'Receive') ?>
+              </div>
+            </div>
+
+            <div class="appWalletsCardsArea">
+              <!-- 
+                Cada Carteira vai ter sua id e ao clicar em remover dispara
+                uma função ao javascript enviando o id da caretira para remover 
+                o appWalletCard que vai ter seu respectivo id adicionado pelo php
+                no javascript acontece o envio dessa informação do id para o php
+                através do ajax, fazendo a remoção da wallet e dando um 
+                reload(talvez).
+                * Função javascript removeWallet(id)
+              -->
+              <div class="appWalletCard">
+                <img class="iconWalletRemove"
+                src="/assets/images/app/wallet/buttonRemove.svg">
+                <img class='iconWalletCard' 
+                src="/assets/images/app/wallet/iconWallet.svg">
+                <article>
+                  <h4 class="titleWallet">Minha Carteira</h4>
+                  <!-- Preencher os dados com o php -->
+                  <!-- Saldo -->
+                  <p class="saleWallet">00,00R$</p>
+                  <!-- Receita-->
+                  <p class="receiveWallet">Receitas: 00,00R$</p>
+                  <!-- Despesas -->
+                  <p class="expenseWallet">Despesas: 00,00R$</p>
+                </article>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="graphicWalletMessenger">
+          <h3>
+            Caso o gráfico esteja de difícil visualização, por favor 
+            rotacionar a tela do seu celular!
+          </h3>
+        </div>
+        <div class="graphicWalletArea">
+          <div class="graphicWallet">
+            <canvas id='GraphicWallet'></canvas>
+          </div>
+          <script type="text/javascript">
+            let ctx = document.getElementById('GraphicWallet').getContext("2d");
+            var graphic = new Chart(ctx, {
+              type: 'line',
+              data: {
+                labels: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set',
+                'Out','Nov','Dez'],
+                datasets: [{
+                  label: 'Receita',
+                  backgroundColor: "#34F06F",
+                  borderColor: "#34F06F",
+                  data: [/* Colocar os dados PHP */],
+                  borderWidth: 2,
+                  fill: false
+                }, {
+                  label: 'Despesa',
+                  backgroundColor: "#E34E4E",
+                  borderColor: "#E34E4E",
+                  data: [/* Colocar os dados PHP */],
+                  borderWidth: 2,
+                  fill: false
+                }] // datasets
+              }, // data
+              options: {
+                title: {
+                  display: true,
+                  fontSize: 16,
+                  text: 'Relatório anual: Receitas x Despesas'
+                }
+              }
+            });
+          </script>
+        </div>
+      </div>
+    </section>
+
+    <!-- jQuery e JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/assets/js/scriptAppWallet.js"></script>
+  </body>
+</html>
