@@ -32,6 +32,10 @@ class AppController extends Action {
 	public function Wallet() {
 		$this->render('wallet');
 	}
+
+	public function Profile() {
+		$this->render('profile');
+	}
 	
 }
 

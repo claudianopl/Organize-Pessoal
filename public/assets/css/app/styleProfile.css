@@ -1,0 +1,214 @@
+.sectionAppProfileArea {
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 18px;
+  padding: 15px 25px;
+  width: 100%;
+  animation: fade 1s;
+  overflow: hidden;
+}
+.appProfileData {
+  background: #FFFFFF;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  padding: 10px 15px;
+  margin-bottom: 30px;
+}
+.appProfileData:nth-child(1),
+.appProfileData:nth-child(3),
+.appProfileData:nth-child(4) {
+  display: flex;
+  flex-wrap: wrap;
+}
+.appProfileData:nth-child(1) {
+  animation: moveRight 1s;
+  animation-fill-mode: backwards;
+}
+.appProfileData:nth-child(2) {
+  animation: moveRight 1s;
+  animation-delay: 0.25s;
+  animation-fill-mode: backwards;
+}
+.appProfileData:nth-child(3) {
+  animation: moveRight 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: backwards;
+} 
+.appProfileData:nth-child(4) {
+  animation: moveRight 1s;
+  animation-delay: 0.75s;
+  animation-fill-mode: backwards;
+}
+.appProfileButton {
+  animation: moveRight 1s;
+  animation-delay: 1s;
+  animation-fill-mode: backwards;
+}
+.appProfileName,
+.appProfileSurname,
+.appProfileBirth,
+.appProfileEmail,
+.appProfilePassword,
+.appProfileConfirmPassword{
+  flex: 1;
+}
+.appProfileName,
+.appProfileBirth,
+.appProfilePassword {
+  margin-right: 30px;
+}
+.appProfileName label,
+.appProfileSurname label,
+.appProfileGenderSelect label,
+.appProfileBirth label,
+.appProfileEmail label,
+.appProfilePassword label,
+.appProfileConfirmPassword label {
+  color: #555555;
+  font-weight: 600;
+  font-size: 16px;
+  margin-left: 15px;
+}
+.appProfileName input,
+.appProfileSurname input,
+.appProfileGenderSelect input,
+.appProfileBirth input,
+.appProfileEmail input,
+.appProfilePassword input,
+.appProfileConfirmPassword input{
+  width: 100%;
+  margin-top: 5px;
+  border: 2px solid #ccddef;
+  border-radius: 18px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #555555;
+  padding: 10px;
+}
+.appProfileBirth input {
+  padding: 8px;
+}
+.appProfileName input:focus,
+.appProfileSurname input:focus,
+.appProfileGenderSelect input:focus,
+.appProfileBirth input:focus,
+.appProfileEmail input:focus,
+.appProfilePassword input:focus,
+.appProfileConfirmPassword input:focus {
+  border: 2px solid #59DF83;
+  outline: 0;
+  font-weight: 700;
+}
+.appProfileGender {
+  position: relative;
+}
+.appProfileGenderSelect input {
+  cursor: pointer;
+}
+.appProfileGenderNav ul,
+.appProfileGenderNav li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.appProfileGenderNav ul {
+  position: absolute;
+  width: 100%;
+  background-color: #FFFFFF;
+}
+.appProfileGenderNav li {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #555555;
+  cursor: pointer;
+  padding: 10px;
+}
+.appProfileGenderNav li:hover{
+  background-color: #59DF83;
+  border-radius: 18px;
+  color: #FFFFFF;
+}
+
+.appProfileButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+.appProfileButtonUpdate button,
+.appProfileButtonUpdatePassword {
+  width: 300px;
+  padding: 10px;
+  border: none;
+  background: linear-gradient(90deg, #59DF83 0%, #13C5A5 99.99%, 
+  rgba(196, 196, 196, 0) 100%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  font-size: 17px;
+  font-weight: 600;
+  margin-right: 30px;
+  cursor: pointer;
+}
+.appProfileButtonUpdate button:hover,
+.appProfileButtonUpdatePassword:hover {
+  background: #34F06F;
+}
+.appProfileButtonUpdate button:focus {
+  border: none;
+  outline: 0;
+}
+.appProfileButtonUpdatePassword {
+  margin-right: 0;
+  text-align: center;
+}
+
+@media (max-width: 575px) {
+  .appProfileData:nth-child(1), 
+  .appProfileData:nth-child(3), 
+  .appProfileData:nth-child(4) {
+    flex-direction: column;
+  } 
+  .appProfileName, 
+  .appProfileBirth, 
+  .appProfilePassword {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+  .appProfileButton{
+    margin-bottom: 60px;
+  }
+  .appProfileButtonUpdate button, 
+  .appProfileButtonUpdatePassword {
+    width: 239px;
+    margin: auto;
+  }
+  .appProfileButtonUpdate button {
+    margin-bottom: 15px;
+  }
+
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .appProfileButton{
+    margin-bottom: 60px;
+  }
+  .appProfileButtonUpdate button, 
+  .appProfileButtonUpdatePassword {
+    width: 239px;
+  }
+}
+  
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .appProfileButton{
+    margin-bottom: 60px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  
+}
+@media (min-width: 1200px) { }

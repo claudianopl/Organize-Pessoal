@@ -87,6 +87,12 @@ class Route extends Bootstrap {
 			'action' => 'wallet',
 		);
 
+		$routes['appProfile'] = array(
+			'route' => "/app/perfil",
+			'controller' => 'AppController',
+			'action' => 'profile',
+		);
+
 
 		// Execução das routes
 		$this->setRoutes($routes);
