@@ -12,17 +12,100 @@
   align-items: center;
   justify-content: flex-end;
 }
-.headerAppCalender {
+.headerAppCalendarArea {
+  position: relative;
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.monthSelectActive {
+  width: 300px;
+  padding: 5px 10px;
   margin: auto;
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.monthSelectActive h4 {
+  margin-right: 50px;
   color: #34F06F;
   font-weight: 700;
+  margin: auto;
 }
+.appCalendar {
+  position: absolute;
+  margin-top: 50px;
+  width: auto;
+  border-radius: 19px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+  z-index: 5;
+}
+.appCalendar header {
+  text-align: center;
+  position: relative;
+  padding: 20px 0px;
+  background-color: #34F06F;
+  color: #555555;
+  border-radius: 20px 20px 0 0;
+}
+.appCalendar header h2 {
+  color: #555;
+}
+.appCalendar a{
+	text-decoration: none;
+}
+.appCalendar table {
+  background-color: #ffffff;
+  border-radius: 0 0 20px 20px;
+}
+.appCalendar tbody td {
+  cursor: pointer;
+  padding: 30px;
+}
+.appCalendar tbody td:hover{
+	background: rgba(52, 240, 112, 0.842);
+  color: #ffffff;
+  border-radius: 20%;
+}
+.tdActive {
+  background: rgba(52, 240, 112, 0.842);
+  color: #ffffff;
+  border-radius: 20%;
+}
+.ButtonPrevious,
+.ButtonNext{
+	position: absolute;
+  line-height: 30px;
+	margin-top: -44px;
+	height: 32px;
+	width: 32px;
+	border: 2px solid #555555;
+	border-radius: 100%;
+	color: #555555;
+	font-size: 16px;
+	font-weight: bold;
+}
+.ButtonPrevious:hover,
+.ButtonNext:hover{
+	background: #ffffff;
+  color: #34F06F;
+  border: 2px solid #34F06F;
+}
+.ButtonPrevious{
+	left: 15px;
+}
+.ButtonNext{
+	right: 15px;
+}
+
+
 .headerAppLogo {
   flex: 1;
 }
 .headerAppUser h4 {
   color: #555555;
-  margin-left: 15px;
 }
 
 @media (max-width: 575px) { 
@@ -36,4 +119,60 @@
   .headerAppCalender {
     margin-bottom: 30px;
   }
+  .headerAppHeader {
+    height: auto;
+  }
+  .headerApp {
+    flex-direction: column;
+  }
+  .headerAppLogo {
+    margin-bottom: 15px;
+  }
+  .headerAppCalendarArea {
+    margin-bottom: 15px;
+  }
+  .ButtonPrevious, .ButtonNext {
+    margin-top: -33px;
+  }
+  .appCalendar {
+    margin-top: 40px;
+  }
+  .appCalendar tbody td {
+    padding: 20px;
+  }
+
 }
+/* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .headerAppHeader {
+    height: auto;
+  }
+  .headerApp {
+    flex-direction: column;
+  }
+  .headerAppLogo {
+    margin-bottom: 15px;
+  }
+  .headerAppCalendarArea {
+    margin-bottom: 15px;
+  }
+  .ButtonPrevious, .ButtonNext {
+    margin-top: -33px;
+  }
+}
+
+/* Dispositivos médios (tablets com 768px ou mais) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .headerAppCalendarArea {
+    flex: 3;
+  }
+  .ButtonPrevious, .ButtonNext {
+    margin-top: -33px;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .ButtonPrevious, .ButtonNext {
+    margin-top: -33px;
+  }
+}
+@media (min-width: 1200px) { }

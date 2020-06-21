@@ -329,6 +329,9 @@
     width: 100%;
     margin-bottom: 20px;
   }
+  .sectionAppHomeOneInfoHeaderWallet {
+    margin-bottom: 70px;
+  }
   .sectionAppHomeOneInfoSection {
     flex-direction: column;
   }
@@ -380,6 +383,9 @@
     margin: 0;
     width: 100%;
     margin-bottom: 20px;
+  }
+  .sectionAppHomeOneInfoHeaderWallet {
+    margin-bottom: 70px;
   }
   .sectionAppHomeOneInfoSection {
     flex-direction: column;
