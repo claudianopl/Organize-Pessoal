@@ -93,6 +93,16 @@ class Route extends Bootstrap {
 			'action' => 'profile',
 		);
 
+		/*
+		* Routes back-end
+		*/
+
+		$routes['newUser'] = array(
+			'route' => "/newUser",
+			'controller' => 'AppController',
+			'action' => 'newUser',
+		);
+
 
 		// Execução das routes
 		$this->setRoutes($routes);

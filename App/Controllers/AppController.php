@@ -36,7 +36,11 @@ class AppController extends Action {
 	public function Profile() {
 		$this->render('profile');
 	}
-	
+	/*
+	public function newUser() {
+		
+	}
+	*/
 }
 
 ?>
