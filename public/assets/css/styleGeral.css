@@ -40,6 +40,21 @@ h4 {
   margin: 0 auto;
 }
 
+.loadingArea {
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: flex;
+    justify-content: center;
+}
+.loadingArea img {
+  width: 150px
+}
 
 
 @media (max-width: 575px) { 
