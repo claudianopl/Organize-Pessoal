@@ -99,7 +99,7 @@ class Route extends Bootstrap {
 
 		$routes['newUser'] = array(
 			'route' => "/newUser",
-			'controller' => 'AppController',
+			'controller' => 'HomeController',
 			'action' => 'newUser',
 		);
 

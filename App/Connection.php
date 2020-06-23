@@ -5,7 +5,7 @@ class Connection {
 	public static function conectar() {
 		try {
 			$host = 'localhost';
-			$dbname = 'mvc';
+			$dbname = 'organize_pessoal';
 			$user = 'root';
 			$pass = 'root';
 

@@ -8,6 +8,21 @@
   align-items: center;
   padding: 40px 0px;
 }
+.formInvalid {
+  animation: invalid 0.3s linear;
+  animation-iteration-count: 2;
+}
+@keyframes invalid {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  35% {
+    transform: translateX(-15%);
+  }
+  70% {
+    transform: translateX(15%);
+  }
+}
 .sectionSingupOneAreaForm,
 .sectionSingupOneForm label{
   color: #555555;

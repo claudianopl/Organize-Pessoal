@@ -39,7 +39,6 @@ h4 {
   max-width: 90%;
   margin: 0 auto;
 }
-
 .loadingArea {
   width: 100vw;
   height: 100vh;
@@ -54,6 +53,14 @@ h4 {
 }
 .loadingArea img {
   width: 150px
+}
+.error {
+  margin-bottom: 15px;
+  color: red;
+  font-weight: 600;
+  padding: 10px 10px;
+  border: 2px solid red;
+  border-radius: 18px;
 }
 
 

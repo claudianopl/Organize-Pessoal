@@ -4,8 +4,6 @@ namespace App\Controllers;
 use MF\Controller\Action;
 use MF\Model\Container;
 
-// Models
-
 
 class AppController extends Action {
 	
@@ -36,11 +34,7 @@ class AppController extends Action {
 	public function Profile() {
 		$this->render('profile');
 	}
-	/*
-	public function newUser() {
-		
-	}
-	*/
+	
 }
 
 ?>
