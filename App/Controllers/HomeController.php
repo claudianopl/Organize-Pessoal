@@ -51,11 +51,13 @@ class HomeController extends Action {
 		
 		// Verificando se podemos salvar no banco de dados
 		if($newUser->validateUser() && count($newUser->getUserEmail()) == 0) {
-			//$newUser->saveUser();
+			$newUser->saveUser();
 			echo ('success');
-			//header('Location:/confirmar-cadastro');
-			$mail = mail('claudianoplima@hotmail.com', 'temaTeste', 'DescriçãoTeste', 
-			'From: organizepessoal@organizepessoal.com');
+			/*
+			*	Configurar a confirmação do e-mail futuramente
+			$mail = mail('claudianoplima@hotmail.com', 'Equipe Organize Pessoal', 'Mesagem',
+			'From: equipeorganizepessoal@organizepessoal.com');
+			*/
 		}
 		else {
 			echo ('Esse email já se encontra cadastrado!');

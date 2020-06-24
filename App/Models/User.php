@@ -42,12 +42,6 @@ class User extends Model{
   public function validateUser() {
     $validate = true;
 
-    if(strlen($this->__get('user_name')) < 3 || 
-    strlen($this->__get('user_surname')) < 3 ||
-    strlen($this->__get('user_password')) < 3) {
-      $validate = false;
-    }
-
     if(!(filter_var($this->__get('user_email'), FILTER_VALIDATE_EMAIL))) {
       $validate = false;
     }

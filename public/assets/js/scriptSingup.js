@@ -35,9 +35,9 @@ $('.sectionSingupOneForm form').on('submit', function(e) {
     $('.sectionSingupOneAreaForm p').html('Por favor, informe um email válido.');
     validate = false;
   }
-  if(password.value == '' || password.value.length < 3) {
+  if(password.value == '' || password.value.length < 8) {
     invalidRegister();
-    $('.sectionSingupOneAreaForm p').html('Por favor, informe uma senha válida.');
+    $('.sectionSingupOneAreaForm p').html('Por favor, informe uma senha válida com no mínimo 8 caracteres.');
     validate = false;
   }
 
@@ -46,7 +46,6 @@ $('.sectionSingupOneForm form').on('submit', function(e) {
       type: 'post',
       url: '/newUser',
       data: form,
-      //dataType: 'json',
       success: d => {
         if(d == 'success') {
           location.href='/confirmar-cadastro';
