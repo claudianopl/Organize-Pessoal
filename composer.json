@@ -4,7 +4,8 @@
 	"minimum-stability": "beta",
 	"license": "MIT",
 	"require": {
-		"php": ">= 7.0"
+		"php": ">= 7.0",
+		"phpmailer/phpmailer": "6.1.6"
 	},
 	"authors": [
 		{
