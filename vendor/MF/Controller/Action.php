@@ -49,10 +49,11 @@ abstract class Action {
 			$mail->Host = $server['host']; // Definir o servidor SMTP para enviar
 			$mail->SMTPAuth   = true; // Ativar autenticação SMTP
 			$mail->Username   = $server['username']; // Nome de usuário SMTP
-			$mail->Password   = $server['passwod']; // Senha de usuário SMTP
+			$mail->Password   = $server['password']; // Senha de usuário SMTP
 			$mail->SMTPSecure = 'PHPMailer::ENCRYPTION_STARTTLS';// Ativar criptografia TLS
 			$mail->Port       = $server['port']; // Porta TCP à qual se conectar
 			$mail->CharSet = "UTF-8";
+			$mail->setLanguage('br');
 
 
 			$mail->setFrom($mailData['from']);
@@ -63,8 +64,8 @@ abstract class Action {
 			
 			// Conteúdo
 			$mail->isHTML(true);  // Definir formato de email para HTML
-			$mail->Subject = $mailData['subject'];  // Assunto da mensagem
-			$mail->Body = $mailData['body']; // Corpo da mensagem
+			$mail->Subject = $mailData['subject'];  // Assunto da menssagem
+			$mail->Body = $mailData['body']; // Corpo da menssagem
 			$mail->send();
 			
 			return true;

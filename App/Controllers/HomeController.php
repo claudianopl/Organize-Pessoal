@@ -30,7 +30,7 @@ class HomeController extends Action {
 		$this->render('singup');
 	}
 
-	public function menssage() {
+	public function menssage($tokenEmail) {
 		$message = "<html><head xmlns='http://www.w3.org/1999/xhtml' xmlns:v='urn:schemas-microsoft-com:vml' xmlns:o='urn:schemas-microsoft-com:office:office'>";
 		$message .= "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>";
 		$message .= "<meta name='viewport' content='width=device-width, initial-scale=1, max-scale=1'>\r\n";
@@ -89,7 +89,7 @@ class HomeController extends Action {
 							</tr>
 							<tr>
 								<td align='center'>
-									<a href='' style='padding: 10px 50px; background: #34F06F; border-radius: 35px; font-size: 24px; text-decoration: none; color: #fff; font-family: Roboto;'>
+									<a href='/cadastro-confirmado/$tokenEmail' style='padding: 10px 50px; background: #34F06F; border-radius: 35px; font-size: 24px; text-decoration: none; color: #fff; font-family: Roboto;'>
 										Confirmar Cadastro
 									</a>
 								</td>
@@ -132,40 +132,40 @@ class HomeController extends Action {
 		
 		// Verificando se podemos salvar no banco de dados
 		if($newUser->validateUser() && count($newUser->getUserEmail()) == 0) {
-			$newUser->saveUser();
+			/*
+			* Configurando o servidor do email $serverMail
+			* host, username, password, port
+			*/
+			$serverMail = [
+				'host' => 'smtp.mailtrap.io',
+				'username' => '37dea9e6299bb1',
+				'password' => '73b8c084a62e50',
+				'port' => '587'
+			];
 
 			/* 
 			* Container do email para ser enviado $mailData
-			* from
-			* to
-			* attachment [path,name]
-			* subject
-			* body
+			* from, to, attachment [path,name], subject, body
 			*/
 			$mailData = [
-
+				'from' => 'equipeorganizepessoal@organizepessoal.com',
+				'to' => $_POST['email'],
+				'subject' => 'Ativar conta no Organize Pessoal',
+				'body' => $this->menssage($tokenEmail)
 			];
 
-			/*
-			* Configurando o servidor do email $serverMail
-			* host
-			* username
-			* passwod
-			* port
-			*/
-			$serverMail = [
-
-			];
-
-			$body = $this->menssage($serverMail, $mailData);
-			echo ('success');
+			$email = $this->sendMail($serverMail, $mailData);
+			// Verificando se o email foi enviado com sucesso
+			if($email) {
+				$newUser->saveUser();
+				echo ('success');
+			}
 		}
 		else {
 			echo ('Esse email já se encontra cadastrado!');
 		}
-		
 	}
-	
+
 }
 
 ?>
