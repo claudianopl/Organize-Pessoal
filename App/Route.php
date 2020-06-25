@@ -97,10 +97,18 @@ class Route extends Bootstrap {
 		* Routes back-end
 		*/
 
+		// Criar novo usuário
 		$routes['newUser'] = array(
 			'route' => "/newUser",
 			'controller' => 'HomeController',
 			'action' => 'newUser',
+		);
+
+		// Autenticação do usuário na hora de efeutar login
+		$routes['authenticateUser'] = array(
+			'route' => "/authenticateUser",
+			'controller' => 'HomeController',
+			'action' => 'authenticateUser',
 		);
 
 

@@ -1,49 +1,79 @@
-const btnSubmit = document.querySelector('.loginBtnSubmit');
-const formLogin = document.querySelector('#formLogin');
-const formMens = document.querySelector(".sectionLoginOneInfo p");
-formMens.style.display = 'none';
+/*
+  * Pegando o paramentro da url para ser usada caso necessário
+  */
+ function url() {
+  // Capturando o parametro completo da url
+  let params = window.location.search.substring(1).split('&');
+  // Criando um objeto para receber os dados
+  let paramObject = {};
+  for(let i=0; i<params.length; i++) {
+    //Extraindo os valares da params
+    let param = params[i].split('=');
+    // Adicionando os dados dentro de paramObject
+    paramObject[param[0]] = param[1];
+  }
 
-btnSubmit.addEventListener('click', (event) => {
-  // Pausa a função de click
-  event.preventDefault();
+  if(Object.keys(paramObject).length > 0 && paramObject.e == 0) {
+    $('.sectionLoginOneInfo p').show();
+    $('.sectionLoginOneInfo p').html('Acesso negado, por favor efetuar o login.');
+  }
+}
 
-  const fields = [...document.querySelectorAll('.inputBlock input')];
+function invalidRegister() {
+  $('.loadingArea').hide();
+  $('.sectionLoginOneInfo p').show();
+  
+  $('.sectionLoginOneForm').addClass('formInvalid');
+  setTimeout(() => {  
+    $('.sectionLoginOneForm').removeClass('formInvalid');
+  }, 1000);
+}
 
-  // Adiciona a class com o evento invalid
-  fields.forEach(field => {
-    if(field.value === ''){
-      formLogin.classList.add("validateError");
-      formMens.style.display = 'block';
-      formMens.innerHTML = 'Email ou senha invalidos.';
-    }
-  })
+$('.sectionLoginOneForm form').on('submit', function(e) {
+  e.preventDefault();
+  $('.loadingArea').show()
+  const form = $(this).serializeArray();
+  const email = form[0];
+  const password = form[1];
+  // Validar email
+  const valid = new RegExp(/^[A-Za-z0-9_\-\.]+@[A-Za-z0-9_\-\.]{2,}\.[A-Za-z0-9]{2,}(\.[A-Za-z0-9])?/);
+  let validate = true;
 
-  /* Remove a class com o evento invalid e se caso não for invalido, 
-  ele desaparece com o formulário */
-  const formError = document.querySelector(".validateError");
-  if(formError) {
-    formError.addEventListener("animationend", event => {
-      if(event.animationName === 'invalid') {
-        formError.classList.remove('validateError');
+  if(email.value == '' || !valid.test(email.value)) {
+    invalidRegister();
+    $('.sectionLoginOneInfo p').html('Ops… Usuário invalido!');
+    validate = false;
+  }
+  if(password.value == '' || password.value.length < 8) {
+    invalidRegister();
+    $('.sectionLoginOneInfo p').html('Ops… Usuário invalido!');
+    validate = false;
+  }
+  if(validate) {
+    $.ajax({
+      type: 'post',
+      url: '/authenticateUser',
+      data: form,
+      dataType: 'json',
+      success: d => {
+        if(d.messege == 'success') {
+          location.href='/app';
+        } else {
+          invalidRegister();
+          $('.sectionLoginOneInfo p').html(d.messege);
+        }
+        
+      },
+      error: erro => {
+       // Futuro log de erro no banco de dados
       }
     })
-  } else {
-    formLogin.classList.add('loginFormHide')
-    formMens.style.display = 'none';
   }
+}) 
 
-})
 
-// Elimina a barra de rolagem enquanto o formulário desaparece
-formLogin.addEventListener('animationstart', event => {
-  if(event.animationName === 'down') {
-    document.querySelector("body").style.overflow = 'hidden';
-  }
-})
-// Retorna a barra de rolagem quanto o formulário desaparece por completo.
-formLogin.addEventListener('animationend', event => {
-  if(event.animationName === "down") {
-    formLogin.style.display = "none";
-    document.querySelector("body").style.overflow = 'none';
-  }
+$(document).ready(() => {
+  $('.sectionLoginOneInfo p').hide()
+
+  url()
 })

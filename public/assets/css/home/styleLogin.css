@@ -126,25 +126,9 @@
 }
 
 /*
-  ---> Animção ao clicar no button sumir com o form <---
-*/
-
-.loginFormHide {
-  animation: down 1s forwards;
-  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-@keyframes down {
-  from {
-    transform: translateY(0);
-  } to {
-    transform: translateY(100vh);
-  }
-}
-
-/*
   ---> Animção do form vibrar caso algo tiver campo invalido <---
 */
-.sectionLoginOneInfo form.validateError {
+.formInvalid {
   animation: invalid 0.3s linear, fade paused;
   animation-iteration-count: 2;
 }

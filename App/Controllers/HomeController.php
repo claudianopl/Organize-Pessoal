@@ -4,6 +4,9 @@ namespace App\Controllers;
 use MF\Controller\Action;
 use MF\Model\Container;
 
+// Iniciando a sessão
+session_start();
+
 class HomeController extends Action {
 	
 	public function index() {
@@ -17,8 +20,13 @@ class HomeController extends Action {
 	public function confirmRegister() {
 		$this->render('confirmRegister');
 	}
-
-	public function registerConfirmed($dados=null) {
+	
+	/**
+	 * Função para confirmar o cadastro de usuário.
+	 * @access public
+	 * @param String $tokenEmail
+	 */
+	public function registerConfirmed($tokenEmail=null) {
 		$this->render('registerConfirmed');
 	}
 
@@ -30,6 +38,13 @@ class HomeController extends Action {
 		$this->render('singup');
 	}
 
+	/**
+	 * Função que recebe o token de confirmação de usário para ser enviado para o
+	 * email com o link de confirmação.
+	 * @access public
+	 * @param String $tokenEmail
+	 * @return string
+	 */
 	public function menssage($tokenEmail) {
 		$message = "<html><head xmlns='http://www.w3.org/1999/xhtml' xmlns:v='urn:schemas-microsoft-com:vml' xmlns:o='urn:schemas-microsoft-com:office:office'>";
 		$message .= "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>";
@@ -111,17 +126,20 @@ class HomeController extends Action {
 		return $message;
 	}
 
+	/**
+	 * Função para cadastrar novos usuários e enviar e-mail de confirmação.
+	 * @access public
+	 */
 	public function newUser() {
+		$info = array();
 		$name = $_POST['name'];
 		$surname = $_POST['surname'];
 		$email = $_POST['email'];
 		$password = $_POST['password'];
-		// Para confirmação de email.
 		$tokenEmail = md5(time().rand(0,9999).rand(0,9999));
 
 		// Criando conexão com o banco de dados e se comunicando com o modal.
 		$newUser = Container::getModel('User');
-
 		// Salvando os dados do novo usuário no modal user para serem verificados.
 		$newUser->__set('user_name', $name);
 		$newUser->__set('user_surname', $surname);
@@ -132,10 +150,11 @@ class HomeController extends Action {
 		
 		// Verificando se podemos salvar no banco de dados
 		if($newUser->validateUser() && count($newUser->getUserEmail()) == 0) {
-			/*
-			* Configurando o servidor do email $serverMail
-			* host, username, password, port
-			*/
+			/**
+			 * Array para configurar o servidor do email
+			 * @name $serverMail
+			 * @param ElementArray host, username, password, port
+			 */
 			$serverMail = [
 				'host' => 'smtp.mailtrap.io',
 				'username' => '37dea9e6299bb1',
@@ -143,10 +162,11 @@ class HomeController extends Action {
 				'port' => '587'
 			];
 
-			/* 
-			* Container do email para ser enviado $mailData
-			* from, to, attachment [path,name], subject, body
-			*/
+			/**
+			 * array do container email para ser enviado
+			 * @name $mailData
+			 * @param ElementArray from, to, attachment [path,name], subject, body
+			 */
 			$mailData = [
 				'from' => 'equipeorganizepessoal@organizepessoal.com',
 				'to' => $_POST['email'],
@@ -154,16 +174,68 @@ class HomeController extends Action {
 				'body' => $this->menssage($tokenEmail)
 			];
 
+			/**
+			 * Váriavel recebe o retorno do envio do email
+			 * @name $email
+			 * @param Array ServerMail, mailData
+			 */
 			$email = $this->sendMail($serverMail, $mailData);
-			// Verificando se o email foi enviado com sucesso
+			
 			if($email) {
 				$newUser->saveUser();
-				echo ('success');
+				$info['messege'] = 'success';
 			}
 		}
 		else {
-			echo ('Esse email já se encontra cadastrado!');
+			$info['messege'] = 'Esse email já se encontra cadastrado!';
 		}
+		echo(json_encode($info));
+	}
+
+	/**
+	 * Função para autenticar a entrada do usuário no sistema
+	 * @access public
+	 */
+	public function authenticateUser() {
+		$info = array();
+		$email = $_POST['email'];
+		$password = md5($_POST['password']);
+
+		// Criando conexão com o banco de dados e se comunicando com o modal.
+		$user = Container::getModel('User');
+
+		$user->__set('user_email', $email);
+		$user->__set('user_password', $password);
+
+		/**
+		 * Verifica se o email do usuário existe no banco de dados, para depois
+		 * veficar a senha do usuário. Se estiver valido, iniciamos a sessão.
+		 * @name $date
+		 */
+		$date = $user->getUserEmail();
+		if(count($date) > 0) {
+			if($date[0]['user_password'] == $password) {
+				if($date[0]['user_confirmed'] == 1) {
+					$_SESSION['authenticate'] = 'YES';
+					$_SESSION['id'] = $date[0]['id'];
+					$_SESSION['name'] = $date[0]['user_name'];
+					$_SESSION['surname'] = $date[0]['user_surname'];
+					$_SESSION['user_email'] = $date[0]['user_name'];
+					$_SESSION['user_gender'] = $date[0]['user_name'];
+					// Informando ao ajax que o login foi efetuado com sucesso
+					$info['messege'] = 'success';
+				}
+				else {
+					// Informando ao ajax que o usuário falta confirmar seu acesso
+					$info['messege'] = 'Você não confirmou o seu cadastro, por favor, verifique seu e-mail.';
+				}
+			}
+		}
+		else {
+			// Informando o usuário não foi encontrado
+			$info['messege'] = 'Ops… Usuário invalido!';
+		}
+	echo(json_encode($info, JSON_UNESCAPED_UNICODE));
 	}
 
 }

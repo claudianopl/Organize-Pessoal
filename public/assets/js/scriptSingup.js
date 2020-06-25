@@ -46,21 +46,21 @@ $('.sectionSingupOneForm form').on('submit', function(e) {
       type: 'post',
       url: '/newUser',
       data: form,
+      dataType: 'json',
       success: d => {
-        if(d == 'success') {
+        if(d.messege == 'success') {
           location.href='/confirmar-cadastro';
         }
         else {
           $('.loadingArea').hide();
           $('.sectionSingupOneAreaForm p').addClass('error');
-          $('.sectionSingupOneAreaForm p').html(d);
+          $('.sectionSingupOneAreaForm p').html(d.messege);
         }
       },
       error: erro => {
-        console.log('erro')
-        console.log(erro)
+       // Futuro log de erro no banco de dados
       }
-    }).done()
+    })
     
   }
 
