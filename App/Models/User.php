@@ -59,6 +59,23 @@ class User extends Model{
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
   }
 
+  public function getUserHashConfirm() {
+    $query = 'select id,user_confirmed from tb_user where user_confirm = :user_confirm';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':user_confirm', $this->__get('user_confirm'));
+    $stmt->execute();
+
+    return $stmt->fetch(\PDO::FETCH_ASSOC);
+  }
+
+  public function userUpdateConfirmed() {
+    $query = 'update tb_user set user_confirmed = 1 where id = :id';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':id', $this->__get('id'));
+    $stmt->execute();
+
+    return true;
+  }
 }
 
 ?>

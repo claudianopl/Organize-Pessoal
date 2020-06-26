@@ -9,7 +9,7 @@ session_start();
 
 class AppController extends Action {
 	public function checkSession() {
-		if($_SESSION['authenticate'] == md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'])) {
+		if($_SESSION['authenticate'] === md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'])) {
 			return true;
 		}
 		return false;

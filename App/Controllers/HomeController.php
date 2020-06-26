@@ -5,7 +5,9 @@ use MF\Controller\Action;
 use MF\Model\Container;
 
 // Iniciando a sessão
-session_start();
+if(!isset($_SESSION)){
+	session_start();
+}
 
 class HomeController extends Action {
 	
@@ -19,6 +21,7 @@ class HomeController extends Action {
 
 	public function confirmRegister() {
 		$this->render('confirmRegister');
+		echo(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']));
 	}
 	
 	/**
@@ -28,6 +31,15 @@ class HomeController extends Action {
 	 */
 	public function registerConfirmed($tokenEmail=null) {
 		$this->render('registerConfirmed');
+
+		$user = Container::getModel('User');
+		$user->__set('user_confirm', $tokenEmail);
+
+		$date = $user->getUserHashConfirm();
+		if(count($date) > 0 && $date['user_confirmed'] == 0) {	
+			$user->__set('id', $date['id']);
+			$user->userUpdateConfirmed();
+		}
 	}
 
 	public function login() {
@@ -209,7 +221,8 @@ class HomeController extends Action {
 		$user->__set('user_password', $password);
 		
 		/**
-		 * Verifica se o email do usuário existe no banco de dados, para depois
+		 * Verifica se o usuário existe.
+		 * Verifica se o email do usuário existe no banco de dados, para depois 
 		 * veficar a senha do usuário. Se estiver valido, iniciamos a sessão.
 		 * @name $date
 		 */
@@ -217,13 +230,13 @@ class HomeController extends Action {
 		if(count($date) > 0) {
 			if($this->checkArgon2id($password, $date[0]['user_password'])) {
 				if($date[0]['user_confirmed'] == 1) {
-					echo 'test1';
 					$_SESSION['authenticate'] = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
 					$_SESSION['id'] = $date[0]['id'];
 					$_SESSION['name'] = $date[0]['user_name'];
 					$_SESSION['surname'] = $date[0]['user_surname'];
-					$_SESSION['user_email'] = $date[0]['user_name'];
-					$_SESSION['user_gender'] = $date[0]['user_name'];
+					$_SESSION['user_email'] = $date[0]['user_email'];
+					$_SESSION['user_gender'] = $date[0]['user_gender'];
+
 					// Informando ao ajax que o login foi efetuado com sucesso
 					$info['messege'] = 'success';
 				}
@@ -239,7 +252,6 @@ class HomeController extends Action {
 		}
 		print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 	}
-
 }
 
 ?>

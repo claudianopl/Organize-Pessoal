@@ -62,7 +62,6 @@ $('.sectionLoginOneForm form').on('submit', function(e) {
           invalidRegister();
           $('.sectionLoginOneInfo p').html(d.messege);
         }
-        
       },
       error: erro => {
         invalidRegister();
