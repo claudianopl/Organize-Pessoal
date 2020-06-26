@@ -208,6 +208,9 @@ class HomeController extends Action {
 
 	/**
 	 * Função para autenticar a entrada do usuário no sistema
+	 * A função valida o email, verifica no banco de dados se esse email está 
+	 * cadastrado, caso tiver cadastrado verificamos a senha, se estiver tudo certo
+	 * efetuamos o login e ligamos a sessão.
 	 * @access public
 	 */
 	public function authenticateUser() {
@@ -215,42 +218,57 @@ class HomeController extends Action {
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 
-		// Criando conexão com o banco de dados e se comunicando com o modal.
-		$user = Container::getModel('User');
-		$user->__set('user_email', $email);
-		$user->__set('user_password', $password);
-		
-		/**
-		 * Verifica se o usuário existe.
-		 * Verifica se o email do usuário existe no banco de dados, para depois 
-		 * veficar a senha do usuário. Se estiver valido, iniciamos a sessão.
-		 * @name $date
-		 */
-		$date = $user->getUserEmail();
-		if(count($date) > 0) {
-			if($this->checkArgon2id($password, $date[0]['user_password'])) {
-				if($date[0]['user_confirmed'] == 1) {
-					$_SESSION['authenticate'] = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
-					$_SESSION['id'] = $date[0]['id'];
-					$_SESSION['name'] = $date[0]['user_name'];
-					$_SESSION['surname'] = $date[0]['user_surname'];
-					$_SESSION['user_email'] = $date[0]['user_email'];
-					$_SESSION['user_gender'] = $date[0]['user_gender'];
+		// Verifica se o email é válido.
+		if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			// Criando conexão com o banco de dados e se comunicando com o modal.
+			$user = Container::getModel('User');
+			$user->__set('user_email', $email);
+			$user->__set('user_password', $password);
+			
+			/**
+			 * Verifica se o usuário existe.
+			 * Verifica se o email do usuário existe no banco de dados, para depois 
+			 * veficar a senha do usuário. Se estiver valido, iniciamos a sessão.
+			 * @name $date
+			 */
+			$date = $user->getUserEmail();
+			if(count($date) > 0) {
+				if($this->checkArgon2id($password, $date[0]['user_password'])) {
+					if($date[0]['user_confirmed'] == 1) {
+						$_SESSION['authenticate'] = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+						$_SESSION['id'] = $date[0]['id'];
+						$_SESSION['name'] = $date[0]['user_name'];
+						$_SESSION['surname'] = $date[0]['user_surname'];
+						$_SESSION['user_email'] = $date[0]['user_email'];
+						$_SESSION['user_gender'] = $date[0]['user_gender'];
 
-					// Informando ao ajax que o login foi efetuado com sucesso
-					$info['messege'] = 'success';
-				}
-				else {
-					// Informando ao ajax que o usuário falta confirmar seu acesso
-					$info['messege'] = 'Você não confirmou o seu cadastro, por favor, verifique seu e-mail.';
+						// Informando ao ajax que o login foi efetuado com sucesso
+						$info['messege'] = 'success';
+					}
+					else {
+						// Informando ao ajax que o usuário falta confirmar seu acesso
+						$info['messege'] = 'Você não confirmou o seu cadastro, por favor, verifique seu e-mail.';
+					}
 				}
 			}
+			else {
+				// Informando o usuário não foi encontrado
+				$info['messege'] = 'Ops… Usuário invalido!';
+			}
 		}
-		else {
-			// Informando o usuário não foi encontrado
-			$info['messege'] = 'Ops… Usuário invalido!';
-		}
+
 		print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
+	}
+
+	/**
+	 * Função para enviar email de troca da senha.
+	 * A função valida o email, verifica no banco de dados se esse email está 
+	 * cadastrado, caso tiver cadastrado geramos um Token e enviamos para o usuário
+	 * por email.
+	 * @access public
+	 */
+	public function changePassword() {
+
 	}
 }
 

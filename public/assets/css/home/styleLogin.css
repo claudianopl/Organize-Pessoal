@@ -52,16 +52,18 @@
 .inputBlock label img {
   width: 14px;
 }
-.inputBlock label a {
+.inputBlock label span {
   margin-left: 88px;
   text-decoration: none;
   color: #34F06F;
   font-size: 15px;
   font-weight: 700;
+  cursor: pointer;
 }
 .inputBlock input:focus{
   border: 1px solid #34F06F;
   outline: 0;
+  font-weight: 600;
 }
 .inputBlock input {
   display: block;
@@ -70,7 +72,7 @@
   padding: 10px;
   font-size: 15px;
   color: #555555;
-  font-weight: 700;
+  font-weight: 500;
   border-radius: 18px;
   border: 1px solid #ccddef;
 }
@@ -145,6 +147,141 @@
   }
 }
 
+/**
+* Criação do modal
+* Modal para usamos no esqueci senha, para fazemos a validação e enviar um email
+com o token de mudança de senha.
+34F06F
+*/
+.bgModalPassword {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 2;
+  opacity: 0;
+  transition: 1s;
+  transform: translate3d(0,0,-100px);
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 1s;
+}
+.bgModalExit {
+  background: rgba(0, 0, 0, 0.4);
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+  position: absolute;
+}
+.bgModalPasswordAnimation {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.ModalPassword {
+  width: 60%;
+  height: auto;
+  background-color: #E9FAF4;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0px 4px 25px rgba(52, 240, 111, 0.25);
+  z-index: 4;
+}
+.ModalPassword span {
+  float: right;
+  font-size: 40px;
+  color: #555;
+  margin: 10px 0px 10px 15px;
+  transition: 0.5s;
+  cursor: pointer;
+  position: absolute;
+}
+.ModalPassword span:hover {
+  color: #34F06F;
+}
+.ModalPassword {
+  color: #555;
+}
+.ModalPassword h2 {
+  margin-top: 60px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 15px;
+}
+.ModalPassword h4 {
+  font-weight: 500;
+  margin-bottom: 30px;
+  text-align: center;
+}
+.success {
+  text-align: center;
+  color: #34F06F;
+  font-weight: 600;
+  padding: 10px 10px;
+  margin: 20px;
+  border-radius: 18px;
+  border: 2px solid #34F06F;
+}
+.error {
+  text-align: center;
+  color: red;
+  font-weight: 600;
+  padding: 10px 10px;
+  margin: 20px;
+  border-radius: 18px;
+  border: 2px solid red;
+}
+.ModalPassword form {
+  width: 60%;
+  margin: auto;
+}
+.ModalPassword input {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 15px;
+  color: #555555;
+  font-weight: 500;
+  border-radius: 18px;
+  border: 1px solid #ccddef;
+  left: auto;
+  margin-bottom: 30px;
+}
+.ModalPassword input:focus {
+  border: 1px solid #34F06F;
+  outline: 0;
+  font-weight: 600;
+}
+.ModalPassword label {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+.ModalPassword button {
+  display: block;
+  background-color: #34F06F;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 18px;
+  border: none;
+  padding: 10px 100px;
+  margin: auto;
+  font-size: 16px;
+  margin-bottom: 20px;
+  transition: 1s;
+}
+.ModalPassword button:hover {
+  padding: 10px 150px;
+  background-color: #ffffff;
+  color: #34F06F;
+}
+.ModalPassword button:focus {
+  border: 1px solid #555555;
+  outline: 0;
+}
+
+
 
 @media (max-width: 575px) { 
   .sectionLoginOneArea {
@@ -154,17 +291,43 @@
     padding: 10px 50px;
     text-align: center;
   }
+  .sectionLoginOneForm {
+    width: 95%;
+
+  }
+  .inputBlock label span {
+    margin-left: 45px;
+    cursor: pointer;
+  }
+  .ModalPassword {
+    width: 95%;
+  }
+  .ModalPassword form {
+    width: 90%;
+  }
+  .ModalPassword button {
+    padding: 10px 50px;
+  }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
   .sectionLoginOneArea {
     height: auto;
   }
+  .ModalPassword form {
+    width: 90%;
+  }
+  .ModalPassword button {
+    padding: 10px 50px;
+  }
 }
   
 @media (min-width: 768px) and (max-width: 991.98px) {
   .sectionLoginOneArea {
     height: auto;
+  }
+  .ModalPassword button {
+    padding: 10px 50px;
   }
 }
 

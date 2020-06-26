@@ -111,6 +111,12 @@ class Route extends Bootstrap {
 			'action' => 'authenticateUser',
 		);
 
+		// Envio de email para trocar senha
+		$routes['changePassword'] = array(
+			'route' => "/changePassword",
+			'controller' => 'HomeController',
+			'action' => 'changePassword',
+		);
 
 		// Execução das routes
 		$this->setRoutes($routes);
