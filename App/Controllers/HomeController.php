@@ -31,7 +31,11 @@ class HomeController extends Action {
 	}
 
 	public function login() {
-		$this->render('login');
+		if(isset($_SESSION) && !empty($_SESSION['authenticate'])) {
+			header('Location: /app');
+		} else {
+			$this->render('login');
+		}
 	}
 
 	public function singup() {
@@ -216,7 +220,7 @@ class HomeController extends Action {
 		if(count($date) > 0) {
 			if($date[0]['user_password'] == $password) {
 				if($date[0]['user_confirmed'] == 1) {
-					$_SESSION['authenticate'] = 'YES';
+					$_SESSION['authenticate'] = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
 					$_SESSION['id'] = $date[0]['id'];
 					$_SESSION['name'] = $date[0]['user_name'];
 					$_SESSION['surname'] = $date[0]['user_surname'];
