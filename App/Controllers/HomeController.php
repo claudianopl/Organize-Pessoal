@@ -139,7 +139,7 @@ class HomeController extends Action {
 		$name = $_POST['name'];
 		$surname = $_POST['surname'];
 		$email = $_POST['email'];
-		$password = $_POST['password'];
+		$password = $this->passwordArgon2id($_POST['password']);
 		$tokenEmail = md5(time().rand(0,9999).rand(0,9999));
 
 		// Criando conexão com o banco de dados e se comunicando com o modal.
@@ -150,8 +150,6 @@ class HomeController extends Action {
 		$newUser->__set('user_email', $email);
 		$newUser->__set('user_password', $password);
 		$newUser->__set('user_confirm', $tokenEmail);
-		
-		
 		// Verificando se podemos salvar no banco de dados
 		if($newUser->validateUser() && count($newUser->getUserEmail()) == 0) {
 			/**
@@ -193,7 +191,7 @@ class HomeController extends Action {
 		else {
 			$info['messege'] = 'Esse email já se encontra cadastrado!';
 		}
-		echo(json_encode($info));
+		print_r(json_encode($info));
 	}
 
 	/**
@@ -203,14 +201,13 @@ class HomeController extends Action {
 	public function authenticateUser() {
 		$info = array();
 		$email = $_POST['email'];
-		$password = md5($_POST['password']);
+		$password = $_POST['password'];
 
 		// Criando conexão com o banco de dados e se comunicando com o modal.
 		$user = Container::getModel('User');
-
 		$user->__set('user_email', $email);
 		$user->__set('user_password', $password);
-
+		
 		/**
 		 * Verifica se o email do usuário existe no banco de dados, para depois
 		 * veficar a senha do usuário. Se estiver valido, iniciamos a sessão.
@@ -218,8 +215,9 @@ class HomeController extends Action {
 		 */
 		$date = $user->getUserEmail();
 		if(count($date) > 0) {
-			if($date[0]['user_password'] == $password) {
+			if($this->checkArgon2id($password, $date[0]['user_password'])) {
 				if($date[0]['user_confirmed'] == 1) {
+					echo 'test1';
 					$_SESSION['authenticate'] = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
 					$_SESSION['id'] = $date[0]['id'];
 					$_SESSION['name'] = $date[0]['user_name'];
@@ -239,7 +237,7 @@ class HomeController extends Action {
 			// Informando o usuário não foi encontrado
 			$info['messege'] = 'Ops… Usuário invalido!';
 		}
-	echo(json_encode($info, JSON_UNESCAPED_UNICODE));
+		print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 	}
 
 }

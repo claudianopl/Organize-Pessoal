@@ -31,7 +31,7 @@ class User extends Model{
     $stmt->bindValue(':name', $this->__get('user_name'));
     $stmt->bindValue(':surname', $this->__get('user_surname'));
     $stmt->bindValue(':email', $this->__get('user_email'));
-    $stmt->bindValue(':password', md5($this->__get('user_password')));
+    $stmt->bindValue(':password', $this->__get('user_password'));
     $stmt->bindValue(':confirm', $this->__get('user_confirm'));
     $stmt->execute();
 

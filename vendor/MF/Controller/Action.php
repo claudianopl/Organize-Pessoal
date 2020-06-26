@@ -74,6 +74,22 @@ abstract class Action {
 		}
 	}
 
+	protected function passwordArgon2id($password) {
+		$options = [
+			'memory' => PASSWORD_ARGON2_DEFAULT_MEMORY_COST,
+    	'threads' => PASSWORD_ARGON2_DEFAULT_THREADS,
+			'time' => PASSWORD_ARGON2_DEFAULT_TIME_COST
+		];
+		return password_hash($password, PASSWORD_ARGON2ID, $options);
+	}
+
+	protected function checkArgon2id($password, $hash) {
+		if(password_verify($password, $hash)) {
+			return true;
+		}
+		return false;
+	}
+
 	/*
 	* Para rodar as view com as informações futuras do model
 	* Não se preocupar tanto com o render, basta copiar e colar nas class controllers futuras

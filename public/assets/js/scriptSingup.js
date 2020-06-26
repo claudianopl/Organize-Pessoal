@@ -58,7 +58,8 @@ $('.sectionSingupOneForm form').on('submit', function(e) {
         }
       },
       error: erro => {
-       // Futuro log de erro no banco de dados
+        invalidRegister();
+        $('.sectionSingupOneAreaForm p').html('Algum erro inesperado aconteceu, tente novamente mais tarde.');
       }
     })
     
