@@ -17,19 +17,25 @@ class Route extends Bootstrap {
 			'action' => 'index'
 		);
 
-		$routes['sobre'] = array(
+		$routes['about'] = array(
 			'route' => '/sobre',
 			'controller' => 'HomeController',
-			'action' => 'sobre'
+			'action' => 'about'
 		);
 
-		$routes['entrar'] = array(
+		$routes['login'] = array(
 			'route' => "/entrar",
 			'controller' => 'HomeController',
 			'action' => 'login',
 		);
 
-		$routes['register'] = array(
+		$routes['resetPassword'] = array(
+			'route' => "/redefinir",
+			'controller' => 'HomeController',
+			'action' => 'resetPassword',
+		);
+
+		$routes['singup'] = array(
 			'route' => "/cadastre-se",
 			'controller' => 'HomeController',
 			'action' => 'singup',
@@ -112,6 +118,13 @@ class Route extends Bootstrap {
 		);
 
 		// Envio de email para trocar senha
+		$routes['changeTokenPassword'] = array(
+			'route' => "/changeTokenPassword",
+			'controller' => 'HomeController',
+			'action' => 'changeTokenPassword',
+		);
+
+		// Trocar de senha
 		$routes['changePassword'] = array(
 			'route' => "/changePassword",
 			'controller' => 'HomeController',

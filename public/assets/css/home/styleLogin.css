@@ -44,14 +44,14 @@
   margin-bottom: 35px;
 }
 .inputBlock label {
+  display: flex;
+  align-items: center;
   margin-left: 15px;
   font-size: 14px;
   color: #555555;
   font-weight: 600;
 }
-.inputBlock label img {
-  width: 14px;
-}
+
 .inputBlock label span {
   margin-left: 88px;
   text-decoration: none;
@@ -86,6 +86,7 @@
   padding: 10px 100px;
   margin: auto;
   font-size: 16px;
+  box-shadow: 0px 5px 4px rgba(52, 240, 111, 0.3);
 }
 .sectionLoginOneForm .loginBtnSubmit:focus{
   border: 1px solid #555555;
@@ -270,6 +271,7 @@ com o token de mudança de senha.
   font-size: 16px;
   margin-bottom: 20px;
   transition: 1s;
+  box-shadow: 0px 5px 4px rgba(52, 240, 111, 0.3);
 }
 .ModalPassword button:hover {
   padding: 10px 150px;

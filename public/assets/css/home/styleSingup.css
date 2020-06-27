@@ -44,6 +44,8 @@
   width: 500px;
 }
 .sectionSingupOneForm label {
+  display: flex;
+  align-items: center;
   margin-left: 15px;
   font-size: 14px;
   color: #555555;
@@ -77,6 +79,7 @@
   padding: 10px 100px;
   margin: auto;
   font-size: 16px;
+  box-shadow: 0px 5px 4px rgba(52, 240, 111, 0.3);
 }
 .sectionSingupOneForm button:focus{
   border: 1px solid #555555;

@@ -55,11 +55,21 @@ h4 {
   width: 150px
 }
 .error {
+  text-align: center;
   margin-bottom: 15px;
   color: red;
   font-weight: 600;
   padding: 10px 10px;
   border: 2px solid red;
+  border-radius: 18px;
+}
+.success {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #34F06F;
+  font-weight: 600;
+  padding: 10px 10px;
+  border: 2px solid #34F06F;
   border-radius: 18px;
 }
 

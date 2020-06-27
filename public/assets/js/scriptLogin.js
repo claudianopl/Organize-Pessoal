@@ -39,6 +39,9 @@ $('.sectionLoginOneForm form').on('submit', function(e) {
   e.preventDefault();
   $('.loadingArea').show()
   const form = $(this).serializeArray();
+  //const token = {'name': 'token'}
+  console.log(token);
+  console.log(form);
   const email = form[0];
   const password = form[1];
   // Validar email
@@ -81,9 +84,8 @@ $('.sectionLoginOneForm form').on('submit', function(e) {
 /**
  * Função para email inválido recuperar senha.
  */
-function emailInvalid() {
+function emailMessege() {
   $('.loadingArea').hide();
-  $('.ModalPassword').addClass('error');
   $('.sectionLoginOneForm').addClass('formInvalid');
   setTimeout(() => {  
     $('.sectionLoginOneForm').removeClass('formInvalid');
@@ -97,29 +99,36 @@ function emailInvalid() {
  */
 $('.ModalPassword form').on('submit', function(e) {
   e.preventDefault();
-  const email = $(this).serializeArray()[0];
+  $('.loadingArea').show()
+  const form = $(this).serializeArray()
+  const email = form[0];
   const valid = new RegExp(/^[A-Za-z0-9_\-\.]+@[A-Za-z0-9_\-\.]{2,}\.[A-Za-z0-9]{2,}(\.[A-Za-z0-9])?/);
   if(email.value == '' || !valid.test(email.value)) {
-    emailInvalid();
-    $('.ModalPassword').html('Email inválido!');
+    emailMessege();
+    $('.ModalPassword p').addClass('error');
+    $('.ModalPassword p').html('E-mail inválido!');
   }
   else {
     $.ajax({
       type: 'post',
-      url: '/changePassword',
-      data: email,
+      url: '/changeTokenPassword',
+      data: form,
       dataType: 'json',
       success: d => {
-        if(d.messege == 'success') {
-          
+        if(d.message == 'success') {
+          emailMessege();
+          $('.ModalPassword p').addClass('success');
+          $('.ModalPassword p').html('Foi enviado um e-mail para você com instruções para mudar a senha.')
         } else {
-          emailInvalid();
-          $('.ModalPassword').html('O email informado não está cadastrado!');
+          emailMessege();
+          $('.ModalPassword p').addClass('error');
+          $('.ModalPassword p').html(d.message);
         }
       },
       error: erro => {
-        emailInvalid();
-        $('.ModalPassword').html('Algum erro inesperado aconteceu, tente novamente mais tarde.');
+        emailMessege();
+        $('.ModalPassword p').addClass('error');
+        $('.ModalPassword p').html('Algum erro inesperado aconteceu, tente novamente mais tarde.');
       }
     })
   }

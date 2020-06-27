@@ -14,6 +14,7 @@ class User extends Model{
   private $user_password;
   private $user_confirm;
   private $user_confirmed;
+  private $user_changepassword;
 
   public function __get($attribute) {
     return $this->$attribute;
@@ -72,6 +73,30 @@ class User extends Model{
     $query = 'update tb_user set user_confirmed = 1 where id = :id';
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':id', $this->__get('id'));
+    $stmt->execute();
+
+    return true;
+  }
+
+  public function changeTokenPassword() {
+    $query = 'update tb_user set user_changepassword = :user_changepassword where user_email = :email';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':user_changepassword', $this->__get('user_changepassword'));
+    $stmt->bindValue(':email', $this->__get('user_email'));
+    $stmt->execute();
+
+    return true;
+  }
+
+  public function changePassword() {
+    $query = "
+    update 
+      tb_user set user_changepassword = 0, user_password = :user_password 
+    where 
+      user_changepassword = :user_changepassword";
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':user_password', $this->__get('user_password'));
+    $stmt->bindValue(':user_changepassword', $this->__get('user_changepassword'));
     $stmt->execute();
 
     return true;
