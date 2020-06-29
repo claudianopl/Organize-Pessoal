@@ -1,11 +1,22 @@
 .sectionHomeOne {
-  height: calc(100vh - 70px);
-  background: url(../../images/home/index/homeBackgroundLeft.svg) 
-  no-repeat left top;
-  background-size: 100vh;
-  background-color: #536DFE;
+  height: calc(100vh);
+  background:linear-gradient(2.23deg, #59DF83 13.04%, #13C5A5 83.95%);
   display: flex;
   align-items: center;
+  position: relative;
+}
+.homeBackgroundRight {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 60%;
+}
+.backgroundBottom {
+  width: 100%;
+  position: absolute;
+  bottom: -1;
+  z-index: 5;
+  object-fit: cover; 
 }
 .sectionHomeOneArea {
   height: auto;
@@ -14,10 +25,12 @@
   align-items: center;
 }
 .sectionHomeOneInfo {
-  max-width: 620px;
+  max-width: 665px;
   margin-bottom: 50px;
   margin-top: 30px;
   margin-left: 20px;
+  margin-right: auto;
+  z-index: 1;
 }
 .sectionHomeOneInfo h2 {
   font-size: 40px;
@@ -53,9 +66,9 @@
   margin-top: 15px;
   text-decoration: none;
   padding: 10px 100px;
-  background-color: #34F06F;
+  background-color: #fafafa;
   border-radius: 18px;
-  color: #fff;
+  color: #34F06F;
   font-weight: 600;
   font-size: 18px;
   transition: all 2s;
@@ -63,15 +76,16 @@
 }
 @keyframes pulse{
   0%{
-    box-shadow: 0 0 0 0 rgba(89, 223, 131, 1);
+    box-shadow: 0 0 0 0 rgba(247, 247, 247, 0.5);
   }
   100%{
     box-shadow: 0 0 0 25px rgba(89, 223, 131, 0);
   }
 }
 .sectionHomeOneInfoDescButton a:hover {
-  background: #ffffff;
-  color: #59DF83;
+  padding: 10px 150px;
+  background: #34F06F;
+  color: #fafafa;
 }
 
 /*
@@ -104,7 +118,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 5px 10px rgba(196, 196, 196, 0.5);
   transition: 1s;
   border-radius: 8px;
 }
@@ -257,17 +271,16 @@
 
 @media (max-width: 575px) { 
   .sectionHomeOne {
-    height: auto;
+    height: 500px;
   }
-  .sectionHomeOneArea {
-    flex-wrap: wrap-reverse;
-    padding-top: 20px;
+  .homeBackgroundRight {
+    display: none;
   }
-  .sectionHomeOneArea img {
-    width: 350px;
+  .sectionHomeOneInfo {
+    margin: 60px auto;
   }
   .sectionHomeOneInfoDesc p {
-    margin: 10px 0 40px 0;
+    margin: 15px 0 40px 0;
   }
   .sectionHomeOneInfo h2 {
     font-size: 30px;
@@ -308,11 +321,16 @@
 /* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
 @media (min-width: 576px) and (max-width: 767.98px) {
   .sectionHomeOne {
-    height: auto;
+    height: 400px;
   }
-  .sectionHomeOneArea {
-    flex-wrap: wrap-reverse;
-    padding-top: 20px;
+  .homeBackgroundRight {
+    display: none;
+  }
+  .sectionHomeOneInfo {
+    margin: 60px auto;
+  }
+  .sectionHomeOneInfoDesc p {
+    font-size: 18px;
   }
   .sectionHomeTwoCards {
     margin: 0px 40px 30px;
@@ -344,15 +362,16 @@
 /* Dispositivos médios (tablets com 768px ou mais) */
 @media (min-width: 768px) and (max-width: 991.98px) {
   .sectionHomeOne {
-    height: auto;
-    background-size: 100%;
+    height: 400px;
   }
-  .sectionHomeOneArea {
-    flex-wrap: wrap-reverse;
-    padding-top: 20px;
+  .homeBackgroundRight {
+    display: none;
+  }
+  .sectionHomeOneInfo {
+    margin: 60px auto;
   }
   .sectionHomeOneInfoDesc p {
-    font-size: 20px;
+    font-size: 18px;
   }
   .sectionHomeOneInfoDescButton a {
     font-size: 25px;
@@ -371,17 +390,20 @@
   .sectionHomeFourHelpIcon img {
     width: 300px;
   }
+  
 }
 
 /* Dispositivos large (desktops com 992px ou mais) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .sectionHomeOne {
-    height: auto;
-    background-size: 100%;
-    background-size: 50% 100%;
+    height: 550px;
   }
-  .sectionHomeOneArea img {
-    width: 400px;
+  .sectionHomeOneInfo {
+    max-width: 580px;
+  }
+  .homeBackgroundRight {
+    width: 70%;
+    
   }
   .sectionHomeThreeAreaInfoDesc {
     padding-top: 10px;
@@ -393,4 +415,12 @@
     width: 450px;
   }
 }
-@media (min-width: 1200px) { }
+@media (min-width: 1200px) {
+  .sectionHomeOneInfo h2 {
+    font-size: 48px;
+  }
+  .sectionHomeOneInfoDesc p {
+    font-size: 18px;
+    
+  }
+ }

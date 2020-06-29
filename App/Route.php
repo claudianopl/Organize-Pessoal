@@ -99,37 +99,56 @@ class Route extends Bootstrap {
 			'action' => 'profile',
 		);
 
-		/*
-		* Routes back-end
-		*/
+		/**
+		 * Rota do back-end.
+		 * Essas rotas são executadas no HomeController.
+		 */
 
-		// Criar novo usuário
+		/**
+		 * Rota para criar novos usuários
+		 */
 		$routes['newUser'] = array(
 			'route' => "/newUser",
 			'controller' => 'HomeController',
 			'action' => 'newUser',
 		);
 
-		// Autenticação do usuário na hora de efeutar login
+		
+		/**
+		 * Rota para efetuar login
+		 */
 		$routes['authenticateUser'] = array(
 			'route' => "/authenticateUser",
 			'controller' => 'HomeController',
 			'action' => 'authenticateUser',
 		);
 
-		// Envio de email para trocar senha
+		/**
+		 * Rota para modificar senha
+		 */
 		$routes['changeTokenPassword'] = array(
 			'route' => "/changeTokenPassword",
 			'controller' => 'HomeController',
 			'action' => 'changeTokenPassword',
 		);
 
-		// Trocar de senha
-		$routes['changePassword'] = array(
-			'route' => "/changePassword",
-			'controller' => 'HomeController',
-			'action' => 'changePassword',
+
+
+		/**
+		 * Rota do back-end.
+		 * Essas rotas são executadas no AppController.
+		 */
+
+		/**
+		 * Rota para efetuar o logoff
+		 */
+		$routes['userLogoff'] = array(
+			'route' => "/logoff",
+			'controller' => 'AppController',
+			'action' => 'logoff',
 		);
+
+
 
 		// Execução das routes
 		$this->setRoutes($routes);

@@ -1,8 +1,12 @@
 <?php
 namespace MF\Controller;
-// Importando o phpmailer
+
+// phpmailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
+// Json Web Token
+use \Firebase\JWT\JWT;
 
 abstract class Action {
 	protected $view;
@@ -90,9 +94,9 @@ abstract class Action {
 		return false;
 	}
 
-	/*
-	* Para rodar as view com as informações futuras do model
-	* Não se preocupar tanto com o render, basta copiar e colar nas class controllers futuras
+	/** 
+	 * Para rodar as view com as informações futuras do model
+	 *  Não se preocupar tanto com o render, basta copiar e colar nas class controllers futuras
 	*/
 	protected function content() {
 		if(isset($this->view->dados)) {
@@ -106,6 +110,30 @@ abstract class Action {
 		$classAtual = strtolower(str_replace('Controller', '', $classAtual));
 
 		require_once "../App/Views/".$classAtual."/".$this->view->page.".phtml";
+	}
+	/**
+	 * Gera um JWT.
+	 * Função gera um jwt para ser colocado no cookie do usuário, para validarmos 
+	 * o login dele e permitir o acesso as páginas de clientes.
+	 * @access protected
+	 * @param array $data são os dados que vamos incluir no jwt.
+	 */
+	protected function econdeJWT($data) {
+		return JWT::encode($data, md5('OrganizePessoalC4658*'));
+	}
+
+	/**
+	 * Decodificar o JWT.
+	 * Função para retornar os dados da hash gerada pelo JWT.
+	 * @access protected
+	 * @param string $hash é a hash gerada pelo JWT.
+	 */
+	protected function decodeJWT($hash) {
+		/**
+		 * Retorna os dados da hash jwt.
+		 * Retorna esses dados em formato de objeto.
+		 */
+		return JWT::decode($hash, md5('OrganizePessoalC4658*'), array('HS256'));
 	}
 }
 

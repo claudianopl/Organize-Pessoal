@@ -39,9 +39,6 @@ $('.sectionLoginOneForm form').on('submit', function(e) {
   e.preventDefault();
   $('.loadingArea').show()
   const form = $(this).serializeArray();
-  //const token = {'name': 'token'}
-  console.log(token);
-  console.log(form);
   const email = form[0];
   const password = form[1];
   // Validar email

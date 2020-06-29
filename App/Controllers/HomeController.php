@@ -4,11 +4,6 @@ namespace App\Controllers;
 use MF\Controller\Action;
 use MF\Model\Container;
 
-// Iniciando a sessão
-if(!isset($_SESSION)){
-	session_start();
-}
-
 class HomeController extends Action {
 	
 	public function index() {
@@ -43,7 +38,7 @@ class HomeController extends Action {
 	}
 
 	public function login() {
-		if(isset($_SESSION) && !empty($_SESSION['authenticate'])) {
+		if(isset($_COOKIE['user'])) {
 			header('Location: /app');
 		} else {
 			$this->render('login');
@@ -151,13 +146,17 @@ class HomeController extends Action {
 			if(count($date) > 0) {
 				if($this->checkArgon2id($password, $date[0]['user_password'])) {
 					if($date[0]['user_confirmed'] == 1) {
-						$_SESSION['authenticate'] = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
-						$_SESSION['id'] = $date[0]['id'];
-						$_SESSION['name'] = $date[0]['user_name'];
-						$_SESSION['surname'] = $date[0]['user_surname'];
-						$_SESSION['user_email'] = $date[0]['user_email'];
-						$_SESSION['user_gender'] = $date[0]['user_gender'];
-
+						$data = [
+							'authenticate' => md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']),
+							'id' => $date[0]['id'],
+							'name' => $date[0]['user_name'],
+							'surname' => $date[0]['user_surname'],
+							'user_email' => $date[0]['user_email'],
+							'user_gender' => $date[0]['user_gender'],
+						];
+						$name = 'user';
+						$jwt = $this->econdeJWT($data);
+						setcookie($name, $jwt, time()+3600);
 						// Informando ao ajax que o login foi efetuado com sucesso
 						$info['messege'] = 'success';
 					}

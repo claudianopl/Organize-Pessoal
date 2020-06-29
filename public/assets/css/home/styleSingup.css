@@ -130,3 +130,13 @@
   animation-delay: 1s;
   animation-fill-mode: backwards;
 }
+
+
+@media (max-width: 575px) { 
+  .sectionSingupOneForm {
+    width: 100%;
+  }
+}
+
+
+@media (min-width: 1200px) { }

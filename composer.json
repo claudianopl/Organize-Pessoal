@@ -2,10 +2,12 @@
 	"name": "claudianopl/organize-pessoal",
 	"description": "Gerenciando suas finanças e tarefas para tornar sua vida mais fácil.",
 	"minimum-stability": "beta",
+	"version": "0.0.0",
 	"license": "MIT",
 	"require": {
 		"php": ">= 7.0",
-		"phpmailer/phpmailer": "6.1.6"
+		"phpmailer/phpmailer": "6.1.6",
+		"firebase/php-jwt": "^5.2"
 	},
 	"authors": [
 		{

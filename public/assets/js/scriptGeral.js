@@ -1,4 +1,4 @@
-/* ------ Debounce do Lodash ------ */
+//debounce do Lodash
 const debounce = function(func, wait, immediate) {
   let timeout;
   return function(...args) {

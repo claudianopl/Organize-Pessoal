@@ -1,20 +1,9 @@
 /* header-home.phtml */
 header {
-background: linear-gradient(to right, #34F06F,#13C5A5);
-background-size: 600%;
-background-position: 0 0;
-height: 70px;
-/* Animation */
-animation: gradients 3s infinite;
+  background: linear-gradient(266.89deg, #13C5A5 0%, #59DF83 99.3%);
+  height: 70px;
 }
-@keyframes gradients {
-  0%   {background-position: 0 0;}
-  25% {background-position: 50% 0;}
-  50% {background-position: 90% 0;}
-  60% {background-position: 60%;}
-  75% {background-position: 40%;}
-  100%  {background-position: 0 0;}
-}
+
 
 .header {
   max-width: 1200px;
@@ -62,7 +51,7 @@ animation: gradients 3s infinite;
 }
 
 .menu .active a {
-  color: #38A75A;
+  color: #5DED8C;
 }
 
 /* ---------------- Menu Mobile ---------------- */
@@ -178,6 +167,9 @@ animation: gradients 3s infinite;
 }
 
 @media (max-width: 575px) { 
+  #menuHamburguer:checked ~ label .menuMobile{
+    box-shadow: 0 0 0 300vh #fff;
+  }
   .header {
     justify-content: center;
   }
