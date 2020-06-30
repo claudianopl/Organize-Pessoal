@@ -7,6 +7,7 @@ use MF\Model\Model;
 
 class User extends Model{
   private $id;
+  private $wallet_name;
   private $user_name;
   private $user_surname;
   private $user_gender;
@@ -24,7 +25,12 @@ class User extends Model{
     $this->$attribute = $value;
   }
 
-  // Salvar usuário no banco de dados
+  /**
+   * Salva novo usuário.
+   * A função salva no banco de dados um novo usuário que foi criado.
+   * @access public
+   * @return boolean
+   */
   public function saveUser() {
     $query = 'insert into tb_user set user_name=:name, user_surname=:surname,
     user_email=:email, user_password=:password, user_confirm=:confirm';
@@ -39,18 +45,43 @@ class User extends Model{
     return true;
   }
 
-  // Validar usuário
-  public function validateUser() {
-    $validate = true;
+  /**
+   * Salvar carteira.
+   * A função salva uma carteira automática para o usuário quando ele faz o seu 
+   * cadastro.
+   * @access public
+   * @return boolean
+   */
+  public function saveWallet() {
+    $query = 'insert into tb_wallets set id_user = :id_user, wallet_name = :wallet';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':id_user', $this->__get('id'));
+    $stmt->bindValue(':wallet', $this->__get('wallet_name'));
+    $stmt->execute();
 
-    if(!(filter_var($this->__get('user_email'), FILTER_VALIDATE_EMAIL))) {
-      $validate = false;
-    }
-
-    return $validate;
+    return true;
   }
 
-  // Verificar se usuário já existe no banco de dados
+  /**
+   * Verifica o e-mail.
+   * A função verifica se o e-mail informado pelo usuário é valido.
+   * @access public
+   * @return boolean
+   */
+  public function validateUser() {
+    if(!(filter_var($this->__get('user_email'), FILTER_VALIDATE_EMAIL))) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * Validar usuário.
+   * A função verifica se já existe um usuário cadastrado com o e-mail informado.
+   * @access public
+   * @return boolean
+   */
   public function getUserEmail() {
     $query = 'select * from tb_user where user_email = :email';
     $stmt = $this->conexao->prepare($query);
@@ -60,6 +91,11 @@ class User extends Model{
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
   }
 
+   /**
+   * Verifica se o usuário confirmou o e-mail.
+   * @access public
+   * @return boolean
+   */
   public function getUserHashConfirm() {
     $query = 'select id,user_confirmed from tb_user where user_confirm = :user_confirm';
     $stmt = $this->conexao->prepare($query);
@@ -69,6 +105,12 @@ class User extends Model{
     return $stmt->fetch(\PDO::FETCH_ASSOC);
   }
 
+  /**
+   * Confirmação do usuário.
+   * Função faz a confirmação do usuário quando ele abrir o e-mail.
+   * @access public
+   * @return boolean
+   */
   public function userUpdateConfirmed() {
     $query = 'update tb_user set user_confirmed = 1 where id = :id';
     $stmt = $this->conexao->prepare($query);
@@ -78,6 +120,13 @@ class User extends Model{
     return true;
   }
 
+  /**
+   * Modifica a hash do banco de dados.
+   * A função modifica a hash do banco de dados para salvar a nova hash de 
+   * solicitação para efetuar a modificação da senha.
+   * @access public
+   * @return boolean
+   */
   public function changeTokenPassword() {
     $query = 'update tb_user set user_changepassword = :user_changepassword where user_email = :email';
     $stmt = $this->conexao->prepare($query);
@@ -88,6 +137,12 @@ class User extends Model{
     return true;
   }
 
+  /**
+   * Modificar senha.
+   * A função faz a modificação da senha solicitada pelo usuário.
+   * @access public
+   * @return boolean
+   */
   public function changePassword() {
     $query = "
     update 

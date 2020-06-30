@@ -104,10 +104,29 @@ class HomeController extends Action {
 			 * @name $email
 			 * @param array ServerMail, mailData
 			 */
-			$email = $this->sendMail($serverMail, $mailData);
+			//$email = $this->sendMail($serverMail, $mailData);
 			
 			if($email) {
 				$newUser->saveUser();
+
+				/**
+				 * Criação da carteira.
+				 * <?php 
+				 * $dateUser = $newUser->getUserEmail();
+				 * $userID = $dateUser[0]['id'];
+				 * $newUser->__set('id', $userID);
+				 * $newUser->__set('wallet_name', 'Carteira Geral');
+				 * $newUser->saveWallet();
+				 * $info['messege'] = 'success';
+				 * ?>
+				 * Esse código cria uma carteira para o usuário.
+				 */
+				$dateUser = $newUser->getUserEmail();				
+				$userID = $dateUser[0]['id'];					
+				$newUser->__set('id', $userID);
+				$newUser->__set('wallet_name', 'Carteira Geral');
+				$newUser->saveWallet();
+
 				$info['messege'] = 'success';
 			}
 		}
