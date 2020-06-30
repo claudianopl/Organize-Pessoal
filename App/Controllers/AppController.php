@@ -23,6 +23,19 @@ class AppController extends Action {
 		return false;
 	}
 
+	/**
+	 * Função para retornar os dados JWT.
+	 * @access public
+	 * @return object
+	 */
+	public function dataJWT() {
+		if(isset($_COOKIE['user'])) {
+			return $this->decodeJWT($_COOKIE['user']);
+		} else {
+			header("Location: /entrar?e=0");
+		}
+	}
+
 	public function Index() {
 		if($this->checkJWT()) {
 			$this->render('index');
@@ -80,6 +93,34 @@ class AppController extends Action {
 	}
 
 	/**
+	 * Retornar os dados ao usuário.
+	 * A função se comunica por requisições ajax, vai ser responsável por levar os
+	 * dados gerais, para a página /app.
+	 * @access public
+	 */
+	public function DateApp() {
+		$dataDate = explode("-", $_POST['date']);
+		$month = $dataDate[0] + 1;
+		$year = $dataDate[1];
+		if($month > 0 && $month < 10) {
+			$month = '0'.$month;
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	public function dateReceive() {
+		$info = array();
+		$userData = $this->dataJWT();
+		$userID = $userData->id;
+		$userName = $userData->name.' '.$userData->surname;
+		$info['name'] = $userName;
+		print_r(json_encode($info));
+	}
+
+
+	/**
 	 * Efetuar o logoff do usuário
 	 * Função que faz a "destruição" do cookie responsável por manter o usuário 
 	 * conectado na página do cliente.
@@ -90,6 +131,8 @@ class AppController extends Action {
 		setcookie('user', null, -1);
 		header('Location: /');
 	}
+
+
 	
 }
 

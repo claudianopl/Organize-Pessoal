@@ -8,18 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
     let url = window.location.pathname.split('/');
     const cauntUrl = url.length - 1;
     if(url[cauntUrl] == 'app') {
-      /*
-      * Colocar a url como a rota para a requisição ajax
-      * url = '/routeAjaxApp
-      */
-      console.log('app');
+      url = '/app/dateApp';
     } 
     else if(url[cauntUrl] == 'receitas') {
-      /*
-      * Colocar a url como a rota para a requisição ajax
-      * url = '/routeAjaxApp
-      */
-      console.log('receitas');
+      url = '/app/dateReceive';
     } 
     else if(url[cauntUrl] == 'despesas') {
       /*
@@ -50,14 +42,22 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('carteiras');
     }
 
-    /*
+    
     $.ajax({
       type: 'post',
-      url: 'script.php',
-      data: {'date':date},
-      dataType: 'json',
+      url: url,
+      data: `date=${date}`,
+      //dataType: 'json',
       success: d => {
-        console.log('success')
+        $('.headerAppUser h4').html(d.name);
+        if(url[cauntUrl] == 'app') {}
+        else if(url[cauntUrl] == 'receitas') {
+         
+        } 
+        else if(url[cauntUrl] == 'despesas') {}
+        else if(url[cauntUrl] == 'tarefas') {}
+        else if(url[cauntUrl] == 'fixas') {}
+        else if(url[cauntUrl] == 'carteiras'){}
         console.log(d)
       },
       error: erro => {
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(erro)
       }
     })
-    */
+    
   }
 
   /*
@@ -88,7 +88,8 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     
     }
-  
+
+    return `${dateMonth}-${dateYear}`;
   }
 
   /*
@@ -97,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let dt = new Date();
   let month = dt.getMonth();
   let year = dt.getFullYear();
-  getDaysCalender(month, year);
+  getAjax(getDaysCalender(month, year));
   
 
   /*

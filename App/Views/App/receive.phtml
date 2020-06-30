@@ -160,7 +160,81 @@
       </div>
     </section>
 
+
+    <div class='newReceiveArea'>
+      <div class="newReceiveFormExit"></div>
+      <div class="newReceiveForm">
+        <div class="newReceiveFormTitle">
+          <img src="/assets/images/app/appGlobal/iconTitleModal.svg">
+          <h3>Adicionar receita:</h3>
+        </div>
+        <form>
+          <div class="newReceiveLine">
+            <label for="newReceiveDesc">
+              <img src="/assets/images/app/appGlobal/iconDescModal.svg"> Descição:
+            </label>
+            <input type="text" id='newReceiveDesc' placeholder="Ex: Investimento na bolsa de valor.">
+          </div>
+          <div class="newReceiveLine">
+            <div class="newReceiveValue">
+              <label for="newReceiveDesc">
+                <img src="/assets/images/app/appGlobal/iconValueModal.svg"> Valor:
+              </label>
+              <input type="number" step="0.01" min="0.01" placeholder="00.00R$">
+            </div>
+
+            <div class="newReceiveDate">
+              <label for="newReceiveDate">
+                <img src="/assets/images/app/appGlobal/iconCalendarModal.svg"> Data:
+              </label>
+              <input type="date" id='newReceiveDate' placeholder="dd/mm/aaaa">
+            </div>
+          </div>
+          <div class="newReceiveLine">
+            <div class="newReceiveWallet">
+              <label for="newReceiveWallet">
+                <img src="/assets/images/app/appGlobal/iconWalletModal.svg"> Carteira
+              </label>
+              <select class="selectWallet">
+                <option value=""></option>
+                <option value="Carteira Geral">Carteira Geral</option>
+              </select>
+            </div>
+
+            <div class="newReceiveCategory">
+              <label for="newReceiveCategory">
+                <img src="/assets/images/app/appGlobal/iconCategoryModal.svg"> Categoria
+              </label>
+              <select>
+                <option value=""></option>
+                <option value="Salário">Salário</option>
+                <option value="Emprestimo">Emprestimo</option>
+                <option value="Outras receitas">Outras receitas</option>
+              </select>
+            </div>
+          </div>
+          <div class="newReceiveLine">
+            <div class="newReceiveRepetition">
+              <label for="newReceiveRepetition">
+                <img src="/assets/images/app/appGlobal/iconRepetitionModal.svg"> Repetição
+              </label>
+              
+              <select>
+                <option value=''></option>
+                <option value='Única'>Única</option>
+                <option value='Mensal'>Mensal</option>
+                <option value='Anual'>Anual</option>
+              </select>
+            </div>
+          </div>
+
+          <button>Lançar Receita</button>
+        </form>
+      </div>
+    </div>
+
     <!-- jQuery e JavaScript -->
+    <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="/assets/js/scriptAppReceive.js"></script>
   </body>

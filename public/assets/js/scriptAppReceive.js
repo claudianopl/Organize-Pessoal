@@ -52,16 +52,6 @@ categoryNav.click((e) => {
 
 
 /*
-* Executar quando carregar a página phtml
-*/
-
-$(document).ready(() => {
-  $('.sectionAppTwoFilterNavReceive').hide();
-  $('.sectionAppTwoFilterNavCategory').hide();
-})
-
-
-/*
 * Função para capturar os valores adicionados pelo usuário, para enviar com o 
 * ajax para a rota do back-end para fazer a manipulação de dados e retornar os 
 * dados filtrados pelo php e fazer o carregamento dos dados ajax.
@@ -99,3 +89,31 @@ function sectionAppFilter() {
     */
   }
 }
+/**
+ * Executando o modal quando solicitado.
+ */
+function executeModal(){
+  $('.newReceiveArea').show();
+  $('.newReceiveArea').addClass('newReceiveAreaAnimation');
+
+  $('.newReceiveFormExit').click(() => {
+    $('.newReceiveArea').removeClass('newReceiveAreaAnimation');
+    setTimeout(() => {  
+      $('.newReceiveArea').hide();
+    }, 1000);
+  })
+}
+
+$('.sectionAppTwoRecive').click(() => {
+  executeModal();
+})
+
+
+/*
+* Executar quando carregar a página phtml
+*/
+$(document).ready(() => {
+  $('.sectionAppTwoFilterNavReceive').hide();
+  $('.sectionAppTwoFilterNavCategory').hide();
+  $('.newReceiveArea').hide();
+})

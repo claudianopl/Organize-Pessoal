@@ -147,6 +147,23 @@ class Route extends Bootstrap {
 			'controller' => 'AppController',
 			'action' => 'logoff',
 		);
+		/**
+		 * Rota para comunicação ajax da página /app
+		 */
+		$routes['dateApp'] = array(
+			'route' => "/app/dateApp",
+			'controller' => 'AppController',
+			'action' => 'dateApp',
+		);
+		/**
+		 * Rota para comunicação ajax da página /app/receitas
+		 */
+		$routes['dateApp'] = array(
+			'route' => "/app/dateReceive",
+			'controller' => 'AppController',
+			'action' => 'dateReceive',
+		);
+		
 
 
 
