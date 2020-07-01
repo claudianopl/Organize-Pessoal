@@ -51,12 +51,37 @@ categoryNav.click((e) => {
 })
 
 
-/*
-* Função para capturar os valores adicionados pelo usuário, para enviar com o 
-* ajax para a rota do back-end para fazer a manipulação de dados e retornar os 
-* dados filtrados pelo php e fazer o carregamento dos dados ajax.
-*/
-function sectionAppFilter() {
+/**
+ * Executando o modal quando solicitado.
+ */
+function executeModal(){
+  $('.newReceiveArea').show();
+  $('.newReceiveArea').addClass('newReceiveAreaAnimation');
+
+  $('.newReceiveFormExit').click(() => {
+    $('.newReceiveArea').removeClass('newReceiveAreaAnimation');
+    setTimeout(() => {  
+      $('.newReceiveArea').hide();
+    }, 1000);
+  })
+}
+
+$('.sectionAppTwoRecive').click(() => {
+  executeModal();
+})
+
+
+
+/**
+ * Função para filtrar as receitas.
+ * A função captura os valores informados pelo usuário e envia para uma rota do 
+ * back-end responsável por filtrar e retornar os valores filtrados que por sua 
+ * vez ele adicionar o html da layout.
+ * @param {String} receive
+ * @param {String} category
+ * @param {String} date
+ */
+function sectionAppFilter(receive, category, date) {
   let filterReceive = receiveSelect.html();
   let filterCategory = categorySelect.html();
 
@@ -89,23 +114,69 @@ function sectionAppFilter() {
     */
   }
 }
-/**
- * Executando o modal quando solicitado.
- */
-function executeModal(){
-  $('.newReceiveArea').show();
-  $('.newReceiveArea').addClass('newReceiveAreaAnimation');
 
-  $('.newReceiveFormExit').click(() => {
-    $('.newReceiveArea').removeClass('newReceiveAreaAnimation');
-    setTimeout(() => {  
-      $('.newReceiveArea').hide();
-    }, 1000);
-  })
+function newReceiveInvalid(info) {
+    $('.loadingArea').hide();
+    $('.newReceiveForm p').addClass('error');
+    $('.newReceiveForm p').html(`${info} inválido, por favor, verifique as informações.`);
 }
 
-$('.sectionAppTwoRecive').click(() => {
-  executeModal();
+$('.newReceiveArea form').on('submit', function (e) {
+  e.preventDefault();
+  let form = $(this).serializeArray();
+  const desc = form[0];
+  const value = form[1];
+  const date = form[2];
+  const wallet = form[3];
+  const category = form[4];
+  const repetition = form[5];
+  let validate = true
+  if(desc.value.length < 3 || value.value == '' || date.value == '' || 
+  wallet.value == '' || category.value == '' || repetition.value == '') {
+    newReceiveInvalid('Informação');
+    validate = false;
+  }
+  
+  if(validate) {
+    $.ajax({
+      type: 'post',
+      url: '/app/insertData?location=receive',
+      data: form,
+      dataType: 'json',
+      success: (d) => {
+        if(d.messege == 'success') {
+          location.href='/app/receitas';
+        } else {
+          $('.loadingArea').hide();
+          $('.newReceiveForm p').addClass('error');
+          $('.newReceiveForm p').html(`Um erro inesperado aconteceu, tente novamente mais tarde!`);
+        }
+      },
+      error: (e) => {
+        console.log(e.responseText)
+        console.log('error')
+      }
+    })
+  }
+  
+})
+
+/**
+ * Abrindo as opções de fixas e parcelas.
+ */
+$('.enrollment').on('change', function(e) {
+  const value = $(this).val()
+  if(value == 'Única' || value == '') {
+    $('.fixed').hide();
+    $('.parcel').hide();
+  }
+  if(value == 'Fixa') {
+    $('.parcel').hide();
+    $('.fixed').slideToggle('slow');
+  } else if(value == 'Parcelada') {
+    $('.fixed').hide();
+    $('.parcel').slideToggle('slow');
+  }
 })
 
 
@@ -116,4 +187,6 @@ $(document).ready(() => {
   $('.sectionAppTwoFilterNavReceive').hide();
   $('.sectionAppTwoFilterNavCategory').hide();
   $('.newReceiveArea').hide();
+  $('.fixed').hide();
+  $('.parcel').hide();
 })

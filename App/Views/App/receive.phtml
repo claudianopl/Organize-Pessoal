@@ -173,26 +173,30 @@
           <img src="/assets/images/app/appGlobal/iconTitleModal.svg">
           <h3>Adicionar receita:</h3>
         </div>
+        <p></p>
         <form>
           <div class="newReceiveLine">
             <label for="newReceiveDesc">
               <img src="/assets/images/app/appGlobal/iconDescModal.svg"> Descição:
             </label>
-            <input type="text" id='newReceiveDesc' placeholder="Ex: Investimento na bolsa de valor.">
+            <input type="text" id='newReceiveDesc'
+            placeholder="Ex: Investimento na bolsa de valor." name="receiveDesc">
           </div>
           <div class="newReceiveLine">
             <div class="newReceiveValue">
               <label for="newReceiveDesc">
                 <img src="/assets/images/app/appGlobal/iconValueModal.svg"> Valor:
               </label>
-              <input type="number" step="0.01" min="0.01" placeholder="00.00R$">
+              <input type="number" step="0.01" min="0.01" 
+              placeholder="00.00R$" name="receiveValue">
             </div>
 
             <div class="newReceiveDate">
               <label for="newReceiveDate">
                 <img src="/assets/images/app/appGlobal/iconCalendarModal.svg"> Data:
               </label>
-              <input type="date" id='newReceiveDate' placeholder="dd/mm/aaaa">
+              <input type="date" id='newReceiveDate' placeholder="dd/mm/aaaa"
+              name="receiveDate">
             </div>
           </div>
           <div class="newReceiveLine">
@@ -200,9 +204,19 @@
               <label for="newReceiveWallet">
                 <img src="/assets/images/app/appGlobal/iconWalletModal.svg"> Carteira
               </label>
-              <select class="selectWallet">
+              <select name="receiveWallet">
                 <option value=""></option>
-                <option value="Carteira Geral">Carteira Geral</option>
+                <?php
+                  foreach($this->view->wallets as $key => $value) { ?>
+                  
+                    <option value="<?php echo $value['id'] ?>">
+                      <?php echo $value['wallet_name']?>
+                    </option>
+                  
+                  <?php
+                  }
+                  ?>
+                
               </select>
             </div>
 
@@ -210,7 +224,7 @@
               <label for="newReceiveCategory">
                 <img src="/assets/images/app/appGlobal/iconCategoryModal.svg"> Categoria
               </label>
-              <select>
+              <select name="receiveCategory">
                 <option value=""></option>
                 <option value="Salário">Salário</option>
                 <option value="Emprestimo">Emprestimo</option>
@@ -223,15 +237,24 @@
               <label for="newReceiveRepetition">
                 <img src="/assets/images/app/appGlobal/iconRepetitionModal.svg"> Repetição
               </label>
-              
-              <select>
-                <option value=''></option>
-                <option value='Única'>Única</option>
-                <option value='Mensal'>Mensal</option>
-                <option value='Anual'>Anual</option>
-              </select>
+              <div class="receiveRepetitionSelects">
+                <select class="enrollment" name="receiveRepetition">
+                  <option value=''></option>
+                  <option value='Única'>Única</option>
+                  <option value='Fixa'>Fixa</option>
+                  <option value='Parcelada'>Parcaleda</option>
+                </select>
+                <select class="fixed" name="receiveRepetitionFixed">
+                  <option value=''></option>
+                  <option value='Mensal'>Mensal</option>
+                  <option value='Anual'>Anual</option>
+                </select>
+                <input class='parcel' type="number" step="0.01" min="0.01" 
+                name='receiveRepetitionParcel'>
+              </div>
             </div>
           </div>
+
 
           <button>Lançar Receita</button>
         </form>

@@ -155,17 +155,15 @@ class Route extends Bootstrap {
 			'controller' => 'AppController',
 			'action' => 'dateApp',
 		);
-		/**
-		 * Rota para comunicação ajax da página /app/receitas
-		 */
-		$routes['dateApp'] = array(
-			'route' => "/app/dateReceive",
-			'controller' => 'AppController',
-			'action' => 'dateReceive',
-		);
 		
-
-
+		/**
+		 * Rota para inserção de receitas, despesas e tarefas.
+		 */
+		$routes['insertData'] = array(
+			'route' => "/app/insertData",
+			'controller' => 'AppController',
+			'action' => 'insertData',
+		);
 
 		// Execução das routes
 		$this->setRoutes($routes);

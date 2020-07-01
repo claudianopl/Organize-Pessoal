@@ -133,7 +133,7 @@ class HomeController extends Action {
 		else {
 			$info['messege'] = 'Esse email já se encontra cadastrado!';
 		}
-		print_r(json_encode($info));
+		print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 	}
 
 	/**
@@ -170,8 +170,8 @@ class HomeController extends Action {
 							'id' => $date[0]['id'],
 							'name' => $date[0]['user_name'],
 							'surname' => $date[0]['user_surname'],
-							'user_email' => $date[0]['user_email'],
-							'user_gender' => $date[0]['user_gender'],
+							'email' => $date[0]['user_email'],
+							'gender' => $date[0]['user_gender'],
 						];
 						$name = 'user';
 						$jwt = $this->econdeJWT($data);
@@ -270,7 +270,7 @@ class HomeController extends Action {
 		} else {
 			$info['message'] = 'Error: Informações inválidas, usuário não existe.';
 		}
-		print_r(json_encode($info));
+		print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 	}
 
 	

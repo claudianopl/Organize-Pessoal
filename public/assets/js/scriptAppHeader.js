@@ -7,38 +7,20 @@ document.addEventListener('DOMContentLoaded', function() {
    * @param {String} date 
    */
   function getAjax(date) {
-    /*
-    let url = window.location.pathname.split('/');
-    const cauntUrl = url.length - 1;
-    if(url[cauntUrl] == 'app') {
-      url = '/app/dateApp';
-    } 
-    o calendário só sera usado na página app,
-    então a url vai ser o back-end da página app
-    
     $.ajax({
       type: 'post',
-      url: url,
+      url: '/app/dateApp',
       data: `date=${date}`,
-      //dataType: 'json',
+      dataType: 'json',
       success: d => {
-        $('.headerAppUser h4').html(d.name);
-        if(url[cauntUrl] == 'app') {}
-        else if(url[cauntUrl] == 'receitas') {
-         
-        } 
-        else if(url[cauntUrl] == 'despesas') {}
-        else if(url[cauntUrl] == 'tarefas') {}
-        else if(url[cauntUrl] == 'fixas') {}
-        else if(url[cauntUrl] == 'carteiras'){}
-        console.log(d)
+        $('.headerAppUser h4').html(d.userName);
+        
       },
       error: erro => {
         console.log('erro')
         console.log(erro)
       }
     })
-    */
   }
 
   /**

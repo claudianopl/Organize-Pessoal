@@ -43,9 +43,20 @@ class AppController extends Action {
 			header("Location: /entrar?e=0");
 		}
 	}
-
+	/**
+	 * Renderizar layout receitas.
+	 * Responável por verifricar se o usuário está conectado e renderizar a 
+	 * página de receitas e adicionar os dados da carteira no modal de inserção.
+	 * @access public
+	 */
 	public function Receive() {
 		if($this->checkJWT()) {
+			$data = $this->dataJWT()->id;
+			$wallet = Container::getModel('wallet');
+			$wallet->__set('id_user', $data);
+			$wallets = $wallet->getUserWallet();
+
+			$this->view->wallets = $wallets;
 			$this->render('receive');
 		} else {
 			header("Location: /entrar?e=0");
@@ -98,27 +109,75 @@ class AppController extends Action {
 	 * dados gerais, para a página /app.
 	 * @access public
 	 */
-	public function DateApp() {
-		$dataDate = explode("-", $_POST['date']);
-		$month = $dataDate[0] + 1;
-		$year = $dataDate[1];
-		if($month > 0 && $month < 10) {
-			$month = '0'.$month;
-		}
-	}
-	
-	/**
-	 * 
-	 */
-	public function dateReceive() {
+	public function dateApp() {
 		$info = array();
-		$userData = $this->dataJWT();
-		$userID = $userData->id;
-		$userName = $userData->name.' '.$userData->surname;
-		$info['name'] = $userName;
-		print_r(json_encode($info));
+		$user = $this->dataJWT();
+
+		$info['userName'] = $user->name.' '.$user->surname;
+		print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 	}
 
+	/**
+	 * Inserir dados no banco.
+	 * A função insere os dados das receitas, despesas, tarefas no banco de dados, 
+	 * fazendo a verificação do $_GET para saber em qual tabela inserir.
+	 * @access public
+	 */
+	public function insertData() {
+		$info = array();
+		if(isset($_GET)) {
+			$get = $_GET['location'];
+		} 
+		if(isset($_POST)) {
+			$post = $_POST;
+			if($get == 'receive') {
+				if($this->insertReceive($post)) {
+					$info['messege'] = 'success';
+				}
+			}
+		}
+
+
+		print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
+	}
+
+
+	/**
+	 * Inserir dados na tb_receive.
+	 * A função insere os dados na tabela de receitas. 
+	 */
+	public function insertReceive($data) {
+		$wallet = $data['receiveWallet'];
+		$desc = $data['receiveDesc'];
+		$value = $data['receiveValue'];
+		$date = $data['receiveDate'];
+		$category = $data['receiveCategory'];
+		$enrollment = $data['receiveRepetition'];
+		if($enrollment == 'Fixa') {
+			$fixed = $data['receiveRepetitionFixed'];
+		}
+		if($enrollment == 'Parcelada') {
+			$parcel = $data['receiveRepetitionParcel'];
+		}
+
+		$dataReceive = Container::getModel('AppData');
+		$dataReceive->__set('id_wallet', $wallet);
+		$dataReceive->__set('status', 0);
+		$dataReceive->__set('description', $desc);
+		$dataReceive->__set('value', $value);
+		$dataReceive->__set('date', $date);
+		$dataReceive->__set('category', $category);
+		$dataReceive->__set('enrollment', $enrollment);
+		if(isset($fixed)) {
+			$dataReceive->__set('statusParcelFixed', $fixed);
+		}
+		if(isset($parcel)) {
+			$dataReceive->__set('parcel', $parcel);
+		}	
+
+		return($dataReceive->saveReceive());
+
+	}
 
 	/**
 	 * Efetuar o logoff do usuário

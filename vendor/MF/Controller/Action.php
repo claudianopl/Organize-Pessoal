@@ -99,10 +99,6 @@ abstract class Action {
 	 *  Não se preocupar tanto com o render, basta copiar e colar nas class controllers futuras
 	*/
 	protected function content() {
-		if(isset($this->view->dados)) {
-			extract($this->view->dados);
-		}
-
 		$classAtual = get_class($this);
 		
 		$classAtual = str_replace('App\\Controllers\\', '', $classAtual);
