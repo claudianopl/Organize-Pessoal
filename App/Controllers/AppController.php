@@ -4,11 +4,14 @@ namespace App\Controllers;
 use MF\Controller\Action;
 use MF\Model\Container;
 
+date_default_timezone_set("America/Sao_Paulo");
+
 class AppController extends Action {
 	
 	public function Index() {
 		if($this->checkJWT()) {
 			$this->view->wallets = $this->userGetWallet();
+			
 			$this->render('index');
 		} else {
 			header("Location: /entrar?e=0");
@@ -24,6 +27,8 @@ class AppController extends Action {
 	public function Receive() {
 		if($this->checkJWT()) {
 			$this->view->wallets = $this->userGetWallet();
+			$this->view->receives = $this->userReceive();
+
 			$this->render('receive');
 		} else {
 			header("Location: /entrar?e=0");
@@ -33,6 +38,7 @@ class AppController extends Action {
 	public function Expense() {
 		if($this->checkJWT()) {
 			$this->view->wallets = $this->userGetWallet();
+			
 			$this->render('expense');
 		} else {
 			header("Location: /entrar?e=0");
@@ -42,6 +48,7 @@ class AppController extends Action {
 	public function Tasks() {
 		if($this->checkJWT()) {
 			$this->view->wallets = $this->userGetWallet();
+			
 			$this->render('tasks');
 		} else {
 			header("Location: /entrar?e=0");
@@ -51,6 +58,7 @@ class AppController extends Action {
 	public function Fixed() {
 		if($this->checkJWT()) {
 			$this->view->wallets = $this->userGetWallet();
+			
 			$this->render('fixed');
 		} else {
 			header("Location: /entrar?e=0");
@@ -60,6 +68,7 @@ class AppController extends Action {
 	public function Wallet() {
 		if($this->checkJWT()) {
 			$this->view->wallets = $this->userGetWallet();
+			
 			$this->render('wallet');
 		} else {
 			header("Location: /entrar?e=0");
@@ -69,6 +78,7 @@ class AppController extends Action {
 	public function Profile() {
 		if($this->checkJWT()) {
 			$this->view->wallets = $this->userGetWallet();
+			
 			$this->render('profile');
 		} else {
 			header("Location: /entrar?e=0");
@@ -175,6 +185,8 @@ class AppController extends Action {
 	/**
 	 * Inserir dados na tb_receive.
 	 * A função insere os dados na tabela de receitas. 
+	 * @access public
+	 * @return boolean
 	 */
 	public function insertReceive($data) {
 		$wallet = $data['receiveWallet'];
@@ -206,7 +218,26 @@ class AppController extends Action {
 		}	
 
 		return($dataReceive->saveReceive());
+	}
 
+	/**
+	 * Retorna todas as receitas da carteira.
+	 * A função retorna todas as receitas daquela carteira que foram criadas e 
+	 * salvadas no banco de dados
+	 * @access public
+	 */
+	public function userReceive() {
+		$wallets = $this->userGetWallet();
+		foreach($wallets as $key => $value) {
+			if(md5($value['id']) == $_COOKIE['userWallet']) {
+				$date = date("Y-m-01");
+				$lastDate = date("Y-m-t");
+				$userReceive = Container::getModel('AppData');
+				$userReceive->__set('id_wallet', $value['id']);
+				$userReceive->__set('lastDate', $lastDate);
+				return $userReceive->filterReceive();
+			}
+		}
 	}
 
 	/**

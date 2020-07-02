@@ -4,12 +4,14 @@
  * fazendo com que essa carteira fique selecionada em toda aplicação.
  */
 function walletSelect(id) {
-  console.log(id, name);
+  $('.loadingArea').show();
   $.ajax({
     type: 'post',
     url: '/app/userSelectWallet',
     data: `wallet=${id}`,
-    dataType: 'json'
+    success: (d) => {
+      location.reload();
+    }
   })
 }
 
@@ -17,10 +19,7 @@ $('.sectionAppWalletArea').hover(() => {
   $('.MinhasCarteiras').slideToggle()
 })
 
-$('.carteiraSelect').click((e) => {
-  let carteira = e.target.innerHTML
-  $(".sectionAppWalletInfo h4").html(carteira)
-})
+
 
 $(document).ready(() => {
   $('.MinhasCarteiras').hide()

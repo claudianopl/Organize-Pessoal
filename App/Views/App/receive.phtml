@@ -126,38 +126,50 @@
                 <p class="enrollment">Parcelas</p>
                 <p class="price">Valor</p>
               </article>
-              <article class="sectionAppTableItem">
-                <p class="desc">fddsfddsfddsfddsfddsfddsfddsfddsfddsfddsfddsfddsfdds</p>
-                <p class="date">15/06/2020</p>
-                <p class="category">bla bla bla</p>
-                <p class="enrollment">dasdas</p>
-                <p class="price">
-                  R$ 00,00
-                  <!--
-                    PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
-                    SE VAI SER POR AJAX OU LINK
-                  -->
-                  <img src="/assets/images/app/appGlobal/remove.svg">
-                  <img src="/assets/images/app/appGlobal/update.svg">
-                  <img src="/assets/images/app/appGlobal/conclude.svg">
-                </p>
-              </article>
-              <article class="sectionAppTableItem">
-                <p class="desc">dasdasdasdasdsa</p>
-                <p class="date">15/06/2020</p>
-                <p class="category">bla bla bla</p>
-                <p class="enrollment">dasdas</p>
-                <p class="price">
-                  R$ 00,00
-                  <!--
-                    PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
-                    SE VAI SER POR AJAX OU LINK
-                  -->
-                  <img src="/assets/images/app/appGlobal/remove.svg">
-                  <img src="/assets/images/app/appGlobal/update.svg">
-                  <img src="/assets/images/app/appGlobal/conclude.svg">
-                </p>
-              </article>
+              <?php foreach($this->view->receives as $key => $value) {?>
+                <article class="sectionAppTableItem">
+                  <p class="desc">
+                    <?php echo $value['description']?>
+                  </p>
+                  <p class="date">
+                    <?php echo date_format(new DateTime($value['date']), 'd/m/Y');?>
+                  </p>
+                  <p class="category">
+                    <?php echo $value['category']; ?>
+                  </p>
+                  <p class="enrollment">
+                    <?php ; 
+                      if($value['enrollment'] == 'Parcelada') {
+                        if(empty($value['_n_parcel_pay'])) {
+                          echo '0/'.$value['n_parcel'];
+                        }
+                        else {
+                          echo $value['_n_parcel_pay'].'/'.$value['n_parcel'];
+                        }
+                      }
+                      else if($value['enrollment'] == 'Fixa') {
+                        echo $value['status_parcel_fixed'];
+                      }
+                      else {
+                        echo $value['enrollment'];
+                      } 
+                    ?>
+                  </p>
+                  <p class="price">
+                    R$<?php echo $value['value']; ?>
+                    <!--
+                      PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
+                      SE VAI SER POR AJAX OU LINK
+                    -->
+                    <img src="/assets/images/app/appGlobal/remove.svg"
+                    onclick="removeReceive('<?php echo $value['id'] ?>')">
+                    <img src="/assets/images/app/appGlobal/update.svg"
+                    onclick="updateReceive('<?php echo $value['id'] ?>')">
+                    <img src="/assets/images/app/appGlobal/conclude.svg"
+                    onclick="concludeReceive('<?php echo $value['id'] ?>')">
+                  </p>
+                </article>
+              <?php } ?>
             </div>
 
           </div>

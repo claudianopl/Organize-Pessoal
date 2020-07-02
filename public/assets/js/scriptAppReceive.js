@@ -123,6 +123,7 @@ function newReceiveInvalid(info) {
 
 $('.newReceiveArea form').on('submit', function (e) {
   e.preventDefault();
+  $('.loadingArea').show();
   let form = $(this).serializeArray();
   const desc = form[0];
   const value = form[1];
@@ -151,10 +152,6 @@ $('.newReceiveArea form').on('submit', function (e) {
           $('.newReceiveForm p').addClass('error');
           $('.newReceiveForm p').html(`Um erro inesperado aconteceu, tente novamente mais tarde!`);
         }
-      },
-      error: (e) => {
-        console.log(e.responseText)
-        console.log('error')
       }
     })
   }
@@ -190,3 +187,35 @@ $(document).ready(() => {
   $('.fixed').hide();
   $('.parcel').hide();
 })
+
+
+
+/**
+ * Função para remover uma receita.
+ * Após remover, vamos apresentar uma mensagem ao usuário informando que foi 
+ * removida com sucesso.
+ * @param {String} id 
+ */
+function removeReceive(id) {
+  console.log(id);
+}
+
+/**
+ * Função para atualizar uma receita.
+ * Vai abrir o modal com os dados daquela receita nesse modal, para o usuário 
+ * atualizar os dados.
+ * @param {String} id 
+ */
+function updateReceive(id) {
+  console.log(id);
+}
+
+/**
+ * Função para concluir uma receita.
+ * Após concluir, vamos apresentar uma mensagem ao usuário informando que foi 
+ * concluido com sucesso.
+ * @param {String} id 
+ */
+function concludeReceive(id) {
+  console.log(id);
+}

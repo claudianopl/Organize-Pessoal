@@ -12,6 +12,7 @@ class AppData extends Model  {
   private $description;
   private $value;
   private $date;
+  private $lastDate;
   private $category;
   private $enrollment;
   private $parcel;
@@ -32,7 +33,7 @@ class AppData extends Model  {
       tb_receives 
     set 
       id_wallet=:id_wallet, status=:status, description=:description,
-      value=:value, date_filter=:date, category=:category, enrollment=:enrollment,
+      value=:value, date=:date, category=:category, enrollment=:enrollment,
       n_parcel=:parcel, status_parcel_fixed = :fixed
     ';
     $stmt = $this->conexao->prepare($query);
@@ -48,6 +49,24 @@ class AppData extends Model  {
     $stmt->execute();
     
     return true;
+  }
+
+  public function filterReceive() {
+    $query = '
+    select 
+      * 
+    from 
+      tb_receives 
+    where 
+      id_wallet = :id_wallet and date <= :lastdate and status = 0 
+    order by date asc
+    ';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
+    $stmt->bindValue(':lastdate', $this->__get('lastDate'));
+    $stmt->execute();
+
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
   }
 }
 ?>
