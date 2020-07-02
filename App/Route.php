@@ -140,20 +140,21 @@ class Route extends Bootstrap {
 		 */
 
 		/**
-		 * Rota para efetuar o logoff
-		 */
-		$routes['userLogoff'] = array(
-			'route' => "/logoff",
-			'controller' => 'AppController',
-			'action' => 'logoff',
-		);
-		/**
 		 * Rota para comunicação ajax da página /app
 		 */
 		$routes['dateApp'] = array(
 			'route' => "/app/dateApp",
 			'controller' => 'AppController',
 			'action' => 'dateApp',
+		);
+
+		/**
+		 * Rota para a seleção e apresentação das carteiras do usuário.
+		 */
+		$routes['userGetWallet'] = array(
+			'route' => "/app/userSelectWallet",
+			'controller' => 'AppController',
+			'action' => 'userSelectWallet',
 		);
 		
 		/**
@@ -163,6 +164,15 @@ class Route extends Bootstrap {
 			'route' => "/app/insertData",
 			'controller' => 'AppController',
 			'action' => 'insertData',
+		);
+
+		/**
+		 * Rota para efetuar o logoff
+		 */
+		$routes['userLogoff'] = array(
+			'route' => "/logoff",
+			'controller' => 'AppController',
+			'action' => 'logoff',
 		);
 
 		// Execução das routes

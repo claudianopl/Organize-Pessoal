@@ -5,12 +5,29 @@
       <img src="/assets/images/app/home/header/walletIcon.svg">
     </div>
     <div class="sectionAppWalletInfo">
-      <h4 class="carteira">Carteiras</h4>
+      <?php foreach($this->view->wallets as $key => $value) { 
+        if(md5($value['id']) == $_COOKIE['userWallet']) {?>
+        
+        <h4 class="carteira">
+          <?php echo $value['wallet_name'] ?>
+        </h4>
+
+        <?php }
+      } ?>
     </div>
   </div>
   <div class="MinhasCarteiras">
     <ul>
-      <li class="carteiraSelect">Minha carteira</li>
+    <?php
+    foreach($this->view->wallets as $key => $value) { ?>    
+      <li class="carteiraSelect" 
+      onclick="walletSelect('<?php echo $value['id']?>')">
+        <?php echo $value['wallet_name'] ?>
+      </li>
+    <?php
+    }
+    ?>
+      
     </ul>
   </div>
 </div>

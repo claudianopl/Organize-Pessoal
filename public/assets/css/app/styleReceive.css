@@ -21,6 +21,7 @@
 .sectionAppTwoFilterDadosReceive {
   animation: moveTop 1s;
   animation-fill-mode: backwards;
+  z-index: 2;
 }
 .sectionAppTwoFilterDadosDate input{
   display: block;
@@ -64,6 +65,7 @@
   animation: moveTop 1s;
   animation-delay: 0.25s;
   animation-fill-mode: backwards;
+  z-index: 1;
 }
 .sectionAppTwoFilterContainer:nth-child(4) {
   margin: 0;

@@ -5,6 +5,76 @@ use MF\Controller\Action;
 use MF\Model\Container;
 
 class AppController extends Action {
+	
+	public function Index() {
+		if($this->checkJWT()) {
+			$this->view->wallets = $this->userGetWallet();
+			$this->render('index');
+		} else {
+			header("Location: /entrar?e=0");
+		}
+	}
+	/**
+	 * Renderizar layout receitas.
+	 * Responável por verifricar se o usuário está conectado e renderizar a 
+	 * página de receitas e adicionar os dados da carteira no modal de inserção e 
+	 * nas seleções de carteiras.
+	 * @access public
+	 */
+	public function Receive() {
+		if($this->checkJWT()) {
+			$this->view->wallets = $this->userGetWallet();
+			$this->render('receive');
+		} else {
+			header("Location: /entrar?e=0");
+		}
+	}
+
+	public function Expense() {
+		if($this->checkJWT()) {
+			$this->view->wallets = $this->userGetWallet();
+			$this->render('expense');
+		} else {
+			header("Location: /entrar?e=0");
+		}
+	}
+
+	public function Tasks() {
+		if($this->checkJWT()) {
+			$this->view->wallets = $this->userGetWallet();
+			$this->render('tasks');
+		} else {
+			header("Location: /entrar?e=0");
+		}
+	}
+
+	public function Fixed() {
+		if($this->checkJWT()) {
+			$this->view->wallets = $this->userGetWallet();
+			$this->render('fixed');
+		} else {
+			header("Location: /entrar?e=0");
+		}
+	}
+
+	public function Wallet() {
+		if($this->checkJWT()) {
+			$this->view->wallets = $this->userGetWallet();
+			$this->render('wallet');
+		} else {
+			header("Location: /entrar?e=0");
+		}
+	}
+
+	public function Profile() {
+		if($this->checkJWT()) {
+			$this->view->wallets = $this->userGetWallet();
+			$this->render('profile');
+		} else {
+			header("Location: /entrar?e=0");
+		}
+	}
+
 	/**
 	 * Função para validar acesso.
 	 * A função checa se o cookie user que está contida a hash jwt, se tiver ele 
@@ -36,70 +106,28 @@ class AppController extends Action {
 		}
 	}
 
-	public function Index() {
-		if($this->checkJWT()) {
-			$this->render('index');
-		} else {
-			header("Location: /entrar?e=0");
-		}
-	}
 	/**
-	 * Renderizar layout receitas.
-	 * Responável por verifricar se o usuário está conectado e renderizar a 
-	 * página de receitas e adicionar os dados da carteira no modal de inserção.
+	 * Seleciona uma carteira automáticamente e retorna todas a carteiras do usuário.
 	 * @access public
+	 * @return array
 	 */
-	public function Receive() {
-		if($this->checkJWT()) {
-			$data = $this->dataJWT()->id;
-			$wallet = Container::getModel('wallet');
-			$wallet->__set('id_user', $data);
-			$wallets = $wallet->getUserWallet();
+	public function userGetWallet() {
+		$id = $this->dataJWT()->id;
 
-			$this->view->wallets = $wallets;
-			$this->render('receive');
-		} else {
-			header("Location: /entrar?e=0");
+		$wallet = Container::getModel('Wallet');
+		$wallet->__set('id_user', $id);
+		$wallets = $wallet->getUserWallet();
+		$walletId = md5($wallets[0]['id']);
+		if(!isset($_COOKIE['userWallet'])) {
+			setcookie('userWallet', $walletId);
 		}
+		return $wallets;
 	}
 
-	public function Expense() {
-		if($this->checkJWT()) {
-			$this->render('expense');
-		} else {
-			header("Location: /entrar?e=0");
-		}
-	}
-
-	public function Tasks() {
-		if($this->checkJWT()) {
-			$this->render('tasks');
-		} else {
-			header("Location: /entrar?e=0");
-		}
-	}
-
-	public function Fixed() {
-		if($this->checkJWT()) {
-			$this->render('fixed');
-		} else {
-			header("Location: /entrar?e=0");
-		}
-	}
-
-	public function Wallet() {
-		if($this->checkJWT()) {
-			$this->render('wallet');
-		} else {
-			header("Location: /entrar?e=0");
-		}
-	}
-
-	public function Profile() {
-		if($this->checkJWT()) {
-		$this->render('profile');
-		} else {
-			header("Location: /entrar?e=0");
+	public function userSelectWallet() {
+		if(isset($_POST)) {
+			$wallet = md5($_POST['wallet']);
+			setcookie('userWallet', $wallet);
 		}
 	}
 
@@ -129,10 +157,12 @@ class AppController extends Action {
 			$get = $_GET['location'];
 		} 
 		if(isset($_POST)) {
-			$post = $_POST;
 			if($get == 'receive') {
-				if($this->insertReceive($post)) {
+				if($this->insertReceive($_POST)) {
 					$info['messege'] = 'success';
+				}
+				else {
+					$info['messege'] = 'Um erro inesperado aconteceu, tente novamente mais tarde.';
 				}
 			}
 		}
@@ -186,8 +216,10 @@ class AppController extends Action {
 	 * @access public
 	 */
 	public function Logoff() {
-		unset($_COOKIE['user']);
-		setcookie('user', null, -1);
+		//unset($_COOKIE['user']);
+		//unset($_COOKIE['userWallet']);
+		setcookie('user', null, -1, '/');
+		setcookie('userWallet', null, -1, '/');
 		header('Location: /');
 	}
 
