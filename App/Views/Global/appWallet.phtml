@@ -6,7 +6,7 @@
     </div>
     <div class="sectionAppWalletInfo">
       <?php foreach($this->view->wallets as $key => $value) { 
-        if(md5($value['id']) == $_COOKIE['userWallet']) {?>
+        if($value['id'] === $_COOKIE['userWallet']) {?>
         
         <h4 class="carteira">
           <?php echo $value['wallet_name'] ?>

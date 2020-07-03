@@ -176,6 +176,15 @@ class HomeController extends Action {
 						$name = 'user';
 						$jwt = $this->econdeJWT($data);
 						setcookie($name, $jwt, time()+3600);
+
+						/**
+						 * 
+						 */
+						$wallet = Container::getModel('Wallet');
+						$wallet->__set('id_user', $date[0]['id']);
+						$wallets = $wallet->getUserWallet();
+						$walletId = $wallets[0]['id'];
+						setcookie('userWallet', $walletId);
 						// Informando ao ajax que o login foi efetuado com sucesso
 						$info['messege'] = 'success';
 					}

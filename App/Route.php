@@ -167,6 +167,15 @@ class Route extends Bootstrap {
 		);
 
 		/**
+		 * Rota para a filtrar as receitas do usuário.
+		 */
+		$routes['filterReceive'] = array(
+			'route' => "/app/filterReceive",
+			'controller' => 'AppController',
+			'action' => 'filterReceive',
+		);
+
+		/**
 		 * Rota para efetuar o logoff
 		 */
 		$routes['userLogoff'] = array(

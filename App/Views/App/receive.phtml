@@ -60,6 +60,7 @@
                     </div>
                     <div class="sectionAppTwoFilterNavReceive">
                       <ul>
+                        <li>Receitas</li>
                         <li>Receitas Recebidas</li>
                         <li>Receitas Não Recebidas</li>
                       </ul>
@@ -75,8 +76,9 @@
                     </div>
                     <div class="sectionAppTwoFilterNavCategory">
                       <ul>
+                        <li>Categoria</li>
                         <li>Salário</li>
-                        <li>Empréstimos</li>
+                        <li>Empréstimo</li>
                         <li>Outras Receitas</li>
                       </ul>
                     </div>
@@ -104,73 +106,83 @@
                 <h4>Lançar Receitas</h4>
               </div>
             </div>
+            
             <!-- 
-              * APLICAR LÓGICA DO PHP, CASO AS RECEITAS ESTIVEREM VAZIAS 
-              * IMPRIMIR ESSA MENSSAGEM
+              * LÓGICA PHP
             -->
-            <div class="sectionAppThreeMessage">
-              <h3>
-                Você não possui contas a receber. Por favor, comece agora 
-                a lançar as suas receitas.
-              </h3>
-            </div>
+            <?php 
+              if(count($this->view->receives) == 0) {
+            ?>
 
-            <!--
-              * CASO NÃO ESTIVER VAZIA, IMPRIMIR A TABELA E PREENCHER A TABELA
-            -->
-            <div class="sectionAppTable">
-              <article class="sectionAppTableTitle">
-                <p class="desc">Descrição</p>
-                <p class="date">Vencimento</p>
-                <p class="category">Categoria</p>
-                <p class="enrollment">Parcelas</p>
-                <p class="price">Valor</p>
-              </article>
-              <?php foreach($this->view->receives as $key => $value) {?>
-                <article class="sectionAppTableItem">
-                  <p class="desc">
-                    <?php echo $value['description']?>
-                  </p>
-                  <p class="date">
-                    <?php echo date_format(new DateTime($value['date']), 'd/m/Y');?>
-                  </p>
-                  <p class="category">
-                    <?php echo $value['category']; ?>
-                  </p>
-                  <p class="enrollment">
-                    <?php ; 
-                      if($value['enrollment'] == 'Parcelada') {
-                        if(empty($value['_n_parcel_pay'])) {
-                          echo '0/'.$value['n_parcel'];
+              <div class="sectionAppThreeMessage">
+                <h3>
+                  Você não possui contas a receber. Por favor, comece agora 
+                  a lançar as suas receitas.
+                </h3>
+              </div>
+              
+            <?php
+              } 
+              else {
+            ?>
+
+              <div class="sectionAppTable">
+                <article class="sectionAppTableTitle">
+                  <p class="desc">Descrição</p>
+                  <p class="date">Vencimento</p>
+                  <p class="category">Categoria</p>
+                  <p class="enrollment">Parcelas</p>
+                  <p class="price">Valor</p>
+                </article>
+                <?php foreach($this->view->receives as $key => $value) {?>
+                  <article class="sectionAppTableItem">
+                    <p class="desc">
+                      <?php echo $value['description']?>
+                    </p>
+                    <p class="date">
+                      <?php echo date_format(new DateTime($value['date']), 'd/m/Y');?>
+                    </p>
+                    <p class="category">
+                      <?php echo $value['category']; ?>
+                    </p>
+                    <p class="enrollment">
+                      <?php ; 
+                        if($value['enrollment'] == 'Parcelada') {
+                          if(empty($value['_n_parcel_pay'])) {
+                            echo '0/'.$value['n_parcel'];
+                          }
+                          else {
+                            echo $value['_n_parcel_pay'].'/'.$value['n_parcel'];
+                          }
+                        }
+                        else if($value['enrollment'] == 'Fixa') {
+                          echo $value['status_parcel_fixed'];
                         }
                         else {
-                          echo $value['_n_parcel_pay'].'/'.$value['n_parcel'];
-                        }
-                      }
-                      else if($value['enrollment'] == 'Fixa') {
-                        echo $value['status_parcel_fixed'];
-                      }
-                      else {
-                        echo $value['enrollment'];
-                      } 
-                    ?>
-                  </p>
-                  <p class="price">
-                    R$<?php echo $value['value']; ?>
-                    <!--
-                      PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
-                      SE VAI SER POR AJAX OU LINK
-                    -->
-                    <img src="/assets/images/app/appGlobal/remove.svg"
-                    onclick="removeReceive('<?php echo $value['id'] ?>')">
-                    <img src="/assets/images/app/appGlobal/update.svg"
-                    onclick="updateReceive('<?php echo $value['id'] ?>')">
-                    <img src="/assets/images/app/appGlobal/conclude.svg"
-                    onclick="concludeReceive('<?php echo $value['id'] ?>')">
-                  </p>
-                </article>
-              <?php } ?>
-            </div>
+                          echo $value['enrollment'];
+                        } 
+                      ?>
+                    </p>
+                    <p class="price">
+                      R$<?php echo $value['value']; ?>
+                      <!--
+                        PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
+                        SE VAI SER POR AJAX OU LINK
+                      -->
+                      <img src="/assets/images/app/appGlobal/remove.svg"
+                      onclick="removeReceive('<?php echo $value['id'] ?>')">
+                      <img src="/assets/images/app/appGlobal/update.svg"
+                      onclick="updateReceive('<?php echo $value['id'] ?>')">
+                      <img src="/assets/images/app/appGlobal/conclude.svg"
+                      onclick="concludeReceive('<?php echo $value['id'] ?>')">
+                    </p>
+                  </article>
+                <?php } ?>
+              </div>
+
+            <?php 
+              }
+            ?>
 
           </div>
         </div>
@@ -237,10 +249,10 @@
                 <img src="/assets/images/app/appGlobal/iconCategoryModal.svg"> Categoria
               </label>
               <select name="receiveCategory">
-                <option value=""></option>
+                <option value="">Categorias</option>
                 <option value="Salário">Salário</option>
-                <option value="Emprestimo">Emprestimo</option>
-                <option value="Outras receitas">Outras receitas</option>
+                <option value="Empréstimo">Empréstimo</option>
+                <option value="Outras Receitas">Outras Receitas</option>
               </select>
             </div>
           </div>
@@ -251,13 +263,13 @@
               </label>
               <div class="receiveRepetitionSelects">
                 <select class="enrollment" name="receiveRepetition">
-                  <option value=''></option>
+                  <option value=''>Repetições</option>
                   <option value='Única'>Única</option>
                   <option value='Fixa'>Fixa</option>
                   <option value='Parcelada'>Parcaleda</option>
                 </select>
                 <select class="fixed" name="receiveRepetitionFixed">
-                  <option value=''></option>
+                  <option value=''>Categorias fixas</option>
                   <option value='Mensal'>Mensal</option>
                   <option value='Anual'>Anual</option>
                 </select>

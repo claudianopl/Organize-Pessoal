@@ -51,7 +51,7 @@ class AppData extends Model  {
     return true;
   }
 
-  public function filterReceive() {
+  public function filterReceiveAll() {
     $query = '
     select 
       * 
@@ -64,6 +64,29 @@ class AppData extends Model  {
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
     $stmt->bindValue(':lastdate', $this->__get('lastDate'));
+    $stmt->execute();
+
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+  }
+
+  public function filterReceive() {
+    $query = "
+    select 
+      id, status, category, description, value, date, enrollment, n_parcel, 
+      _n_parcel_pay, status_parcel_fixed
+    from 
+      tb_receives 
+    where
+      id_wallet = :id_wallet and date between :date and :lastDate and 
+      category like :category and status like :status
+    order by date asc
+    ";
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
+    $stmt->bindValue(':date', $this->__get('date'));
+    $stmt->bindValue(':lastDate', $this->__get('lastDate'));
+    $stmt->bindValue(':category', '%'.$this->__get('category').'%');
+    $stmt->bindValue(':status', '%'.$this->__get('status').'%');
     $stmt->execute();
 
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);

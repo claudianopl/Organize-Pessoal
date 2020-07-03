@@ -11,12 +11,14 @@ class AppController extends Action {
 	public function Index() {
 		if($this->checkJWT()) {
 			$this->view->wallets = $this->userGetWallet();
-			
+
 			$this->render('index');
 		} else {
 			header("Location: /entrar?e=0");
 		}
 	}
+
+
 	/**
 	 * Renderizar layout receitas.
 	 * Responável por verifricar se o usuário está conectado e renderizar a 
@@ -38,7 +40,7 @@ class AppController extends Action {
 	public function Expense() {
 		if($this->checkJWT()) {
 			$this->view->wallets = $this->userGetWallet();
-			
+
 			$this->render('expense');
 		} else {
 			header("Location: /entrar?e=0");
@@ -48,7 +50,7 @@ class AppController extends Action {
 	public function Tasks() {
 		if($this->checkJWT()) {
 			$this->view->wallets = $this->userGetWallet();
-			
+
 			$this->render('tasks');
 		} else {
 			header("Location: /entrar?e=0");
@@ -58,7 +60,7 @@ class AppController extends Action {
 	public function Fixed() {
 		if($this->checkJWT()) {
 			$this->view->wallets = $this->userGetWallet();
-			
+
 			$this->render('fixed');
 		} else {
 			header("Location: /entrar?e=0");
@@ -68,7 +70,7 @@ class AppController extends Action {
 	public function Wallet() {
 		if($this->checkJWT()) {
 			$this->view->wallets = $this->userGetWallet();
-			
+
 			$this->render('wallet');
 		} else {
 			header("Location: /entrar?e=0");
@@ -78,12 +80,13 @@ class AppController extends Action {
 	public function Profile() {
 		if($this->checkJWT()) {
 			$this->view->wallets = $this->userGetWallet();
-			
+
 			$this->render('profile');
 		} else {
 			header("Location: /entrar?e=0");
 		}
 	}
+
 
 	/**
 	 * Função para validar acesso.
@@ -103,6 +106,7 @@ class AppController extends Action {
 		return false;
 	}
 
+
 	/**
 	 * Função para retornar os dados JWT.
 	 * @access public
@@ -116,6 +120,7 @@ class AppController extends Action {
 		}
 	}
 
+
 	/**
 	 * Seleciona uma carteira automáticamente e retorna todas a carteiras do usuário.
 	 * @access public
@@ -127,19 +132,17 @@ class AppController extends Action {
 		$wallet = Container::getModel('Wallet');
 		$wallet->__set('id_user', $id);
 		$wallets = $wallet->getUserWallet();
-		$walletId = md5($wallets[0]['id']);
-		if(!isset($_COOKIE['userWallet'])) {
-			setcookie('userWallet', $walletId);
-		}
 		return $wallets;
 	}
 
 	public function userSelectWallet() {
 		if(isset($_POST)) {
-			$wallet = md5($_POST['wallet']);
+			$wallet = $_POST['wallet'];
+			setcookie('userWallet', null, -1, '/');
 			setcookie('userWallet', $wallet);
 		}
 	}
+
 
 	/**
 	 * Retornar os dados ao usuário.
@@ -154,6 +157,7 @@ class AppController extends Action {
 		$info['userName'] = $user->name.' '.$user->surname;
 		print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 	}
+
 
 	/**
 	 * Inserir dados no banco.
@@ -220,6 +224,7 @@ class AppController extends Action {
 		return($dataReceive->saveReceive());
 	}
 
+
 	/**
 	 * Retorna todas as receitas da carteira.
 	 * A função retorna todas as receitas daquela carteira que foram criadas e 
@@ -227,18 +232,75 @@ class AppController extends Action {
 	 * @access public
 	 */
 	public function userReceive() {
-		$wallets = $this->userGetWallet();
-		foreach($wallets as $key => $value) {
-			if(md5($value['id']) == $_COOKIE['userWallet']) {
-				$date = date("Y-m-01");
-				$lastDate = date("Y-m-t");
+		$date = date("Y-m-01");
+		$lastDate = date("Y-m-t");
+		$userReceive = Container::getModel('AppData');
+		$userReceive->__set('id_wallet', $_COOKIE['userWallet']);
+		$userReceive->__set('lastDate', $lastDate);
+		return $userReceive->filterReceiveAll();
+	}
+
+
+	/**
+	 * Filtra as receitas do usuário.
+	 * A função é solicitada através do Ajax e faz a filtragem no banco de dados, 
+	 * retornando apenas os dados requisitados pelo usuário.
+	 * @access public
+	 */
+	public function filterReceive() {
+		if(isset($_POST)) {
+
+			/**
+			 * Se todos os dados forem vazios, vamos retornar todos os dados que 
+			 * estão pendentes até a atual data.
+			 */
+			if($_POST['date'] == '' && $_POST['status'] == '' && $_POST['category'] == '') {
+				$dataReceive = $this->userReceive();
+				print_r(json_encode($dataReceive, JSON_UNESCAPED_UNICODE));
+			}
+
+			/**
+			 * Caso contrário, vamos retornar os dados que foram filtrados no banco 
+			 * de dados.
+			 */
+			else {
 				$userReceive = Container::getModel('AppData');
-				$userReceive->__set('id_wallet', $value['id']);
-				$userReceive->__set('lastDate', $lastDate);
-				return $userReceive->filterReceive();
+				$date = $_POST['date'];
+				if($date != '') {
+					$date = explode('/', $date);
+					$startDate = $date[1].'-'.$date[0].'-01';
+					$lastDate = date($date[1].'-'.$date[0].'-t');
+					$userReceive->__set('lastDate', $lastDate);
+					$userReceive->__set('date', $startDate);
+				}
+				else {
+					$userReceive->__set('lastDate', '9999-00-00');
+					$userReceive->__set('date', '0000-00-00');
+				}
+
+				$status = $_POST['status'];
+				if($status == '') {
+					$userReceive->__set('status', '');
+				} else {
+					$userReceive->__set('status', $status);
+				}
+
+				$category = $_POST['category'];
+				if($category == '') {
+					$userReceive->__set('category', '');
+				} else {
+					$userReceive->__set('category', $category);
+				}
+				
+				$userReceive->__set('id_wallet',$_COOKIE['userWallet']);
+				
+				$dataReceive = $userReceive->filterReceive();
+
+				print_r(json_encode($dataReceive, JSON_UNESCAPED_UNICODE));
 			}
 		}
 	}
+
 
 	/**
 	 * Efetuar o logoff do usuário
@@ -247,15 +309,12 @@ class AppController extends Action {
 	 * @access public
 	 */
 	public function Logoff() {
-		//unset($_COOKIE['user']);
-		//unset($_COOKIE['userWallet']);
-		setcookie('user', null, -1, '/');
+		unset($_COOKIE['userWallet']);
 		setcookie('userWallet', null, -1, '/');
+		unset($_COOKIE['user']);
+		setcookie('user', null, -1, '/');
 		header('Location: /');
 	}
-
-
-	
 }
 
 ?>
