@@ -43,7 +43,7 @@
 
           <div class="sectionAppAreaRight">
             <div class="sectionAppOne">
-              <div id="mensagem"></div>
+              <div id="messege"></div>
               <div class="sectionAppOneWallet">
                 <?php $this->importViews('appWallet', 'Receive') ?>
               </div>
@@ -135,7 +135,7 @@
                   <p class="price">Valor</p>
                 </article>
                 <?php foreach($this->view->receives as $key => $value) {?>
-                  <article class="sectionAppTableItem">
+                  <article class="sectionAppTableItem" id='<?php echo $value['id'] ?>'>
                     <p class="desc">
                       <?php echo $value['description']?>
                     </p>
@@ -148,12 +148,7 @@
                     <p class="enrollment">
                       <?php ; 
                         if($value['enrollment'] == 'Parcelada') {
-                          if(empty($value['_n_parcel_pay'])) {
-                            echo '0/'.$value['n_parcel'];
-                          }
-                          else {
-                            echo $value['_n_parcel_pay'].'/'.$value['n_parcel'];
-                          }
+                          echo $value['n_parcel_pay'].'/'.$value['n_parcel'];
                         }
                         else if($value['enrollment'] == 'Fixa') {
                           echo $value['status_parcel_fixed'];
@@ -170,11 +165,11 @@
                         SE VAI SER POR AJAX OU LINK
                       -->
                       <img src="/assets/images/app/appGlobal/remove.svg"
-                      onclick="removeReceive('<?php echo $value['id'] ?>')">
+                      onclick="removeReceived('<?php echo $value['id'] ?>')">
                       <img src="/assets/images/app/appGlobal/update.svg"
-                      onclick="updateReceive('<?php echo $value['id'] ?>')">
+                      onclick="updateReceived('<?php echo $value['id'] ?>')">
                       <img src="/assets/images/app/appGlobal/conclude.svg"
-                      onclick="concludeReceive('<?php echo $value['id'] ?>')">
+                      onclick="concludeReceived('<?php echo $value['id'] ?>')">
                     </p>
                   </article>
                 <?php } ?>
@@ -184,10 +179,29 @@
               }
             ?>
 
+            <div class='areaPayStatus'>
+              <div class="payReceived">
+                <h4>
+                  Recebido: <?php 
+                  echo("R$".$this->view->payments['paymentReceived']);
+                  ?>
+                </h4>
+              </div>
+              <div class="payReceivable">
+                <h4>
+                  A receber: <?php 
+                  echo("R$".$this->view->payments['paymentNotReceived']);
+                  ?>
+                </h4>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
     </section>
+    
+    
 
 
     <div class='newReceiveArea'>

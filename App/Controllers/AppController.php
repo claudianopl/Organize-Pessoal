@@ -22,14 +22,15 @@ class AppController extends Action {
 	/**
 	 * Renderizar layout receitas.
 	 * Responável por verifricar se o usuário está conectado e renderizar a 
-	 * página de receitas e adicionar os dados da carteira no modal de inserção e 
-	 * nas seleções de carteiras.
+	 * página de receitas e adicionar os dados: carteiras, receitas, pagamentos 
+	 * das receitas.
 	 * @access public
 	 */
 	public function Receive() {
 		if($this->checkJWT()) {
 			$this->view->wallets = $this->userGetWallet();
 			$this->view->receives = $this->userReceive();
+			$this->view->payments = $this->sumReceived();
 
 			$this->render('receive');
 		} else {
@@ -199,6 +200,7 @@ class AppController extends Action {
 		$date = $data['receiveDate'];
 		$category = $data['receiveCategory'];
 		$enrollment = $data['receiveRepetition'];
+
 		if($enrollment == 'Fixa') {
 			$fixed = $data['receiveRepetitionFixed'];
 		}
@@ -216,12 +218,25 @@ class AppController extends Action {
 		$dataReceive->__set('enrollment', $enrollment);
 		if(isset($fixed)) {
 			$dataReceive->__set('statusParcelFixed', $fixed);
+			return($dataReceive->saveReceive());
 		}
 		if(isset($parcel)) {
 			$dataReceive->__set('parcel', $parcel);
+			$dataReceive->__set('parcelPay', 1);
+			$dataReceive->saveParcelReceived();
+			for($i=2; $i <= $parcel; $i++) {
+				$date = date('Y/m/d', strtotime("+1 month",strtotime($date)));
+				$dataReceive->__set('parcelPay', $i);
+				$dataReceive->__set('date', $date);
+				$dataReceive->saveParcelReceived();
+			}
+			
+			return true;
 		}	
+		else {
+			return($dataReceive->saveReceive());
+		}
 
-		return($dataReceive->saveReceive());
 	}
 
 
@@ -238,6 +253,22 @@ class AppController extends Action {
 		$userReceive->__set('id_wallet', $_COOKIE['userWallet']);
 		$userReceive->__set('lastDate', $lastDate);
 		return $userReceive->filterReceiveAll();
+	}
+
+
+	/**
+	 * A função faz a solicitação da somas das receitas a receber e recebido ao 
+	 * banco de dados.
+	 * @access public
+	 * @return array
+	 */
+	public function sumReceived() {
+		$userReceive = Container::getModel('AppData');
+		$userReceive->__set('id_wallet', $_COOKIE['userWallet']);
+
+		$paymentData = $userReceive->sumReceived();
+
+		return $paymentData;
 	}
 
 
@@ -298,6 +329,51 @@ class AppController extends Action {
 
 				print_r(json_encode($dataReceive, JSON_UNESCAPED_UNICODE));
 			}
+		}
+	}
+
+
+	/**
+	 * Função para solicitamos a remoção da receita no banco de dados.
+	 * @access public
+	 */
+	public function removeReceived() {
+		if(isset($_POST)) {
+			$id = $_POST['id'];
+			$userReceive = Container::getModel('AppData');
+			$userReceive->__set('id', $id);
+
+			if($userReceive->removeReceived()) {
+				$info['messege'] = 'success';
+			}
+			else {
+				$info['messege'] = 'error';
+			}
+
+			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
+
+		}
+	}
+	
+	
+	/**
+	 * Função para solicitar a conclusão da receita ao banco de dados.
+	 * @access public
+	 */
+	public function concludeReceived() {
+		if(isset($_POST)) {
+			$id = $_POST['id'];
+			$userReceive = Container::getModel('AppData');
+			$userReceive->__set('id', $id);
+
+			if($userReceive->concludeReceived()) {
+				$info['messege'] = 'success';
+			}
+			else {
+				$info['messege'] = 'error';
+			}
+
+			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 		}
 	}
 

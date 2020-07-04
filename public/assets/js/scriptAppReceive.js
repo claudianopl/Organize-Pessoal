@@ -126,6 +126,7 @@ function sectionAppFilter() {
     };
     data = dataObj;
   }
+  console.log('test');
   
   /**
    * Enviando dados via ajax para a rota do back-end.
@@ -141,12 +142,12 @@ function sectionAppFilter() {
         $('.sectionAppThreeMessage').hide();
 
         $('.sectionAppTableItem').remove()
-
         let fatherTable = $('.sectionAppTable');
 
         d.forEach(element => {
           let sectionAppTableItem = document.createElement('article');
           sectionAppTableItem.className = 'sectionAppTableItem';
+          sectionAppTableItem.id = element.id;
 
           let desc = document.createElement('p');
           desc.className = 'desc';
@@ -154,7 +155,8 @@ function sectionAppFilter() {
 
           let date = document.createElement('p');
           date.className = 'date';
-          date.innerHTML = element.date;
+          let extractDate = element.date.split('-');
+          date.innerHTML = `${extractDate[2]}/${extractDate[1]}/${extractDate[0]}`;
 
           let category = document.createElement('p');
           category.className = 'category';
@@ -162,13 +164,8 @@ function sectionAppFilter() {
 
           let enrollment = document.createElement('p');
           enrollment.className = 'enrollment';
-          if(element.enrollment == 'Parcelada') {
-            if(element._n_parcel_pay == null) {
-              enrollment.innerHTML = '0/'+element.n_parcel;
-            }
-            else {
-              enrollment.innerHTML = element._n_parcel_pay+'/'+element.n_parcel;
-            }
+          if(element.enrollment == 'Parcelada') { 
+            enrollment.innerHTML = element.n_parcel_pay+'/'+element.n_parcel;
           }
           else if(element.enrollment == 'Fixa') {
             enrollment.innerHTML = element.status_parcel_fixed;
@@ -181,11 +178,11 @@ function sectionAppFilter() {
           price.className = 'price';
           price.innerHTML = `R$${element.value} 
           <img src="/assets/images/app/appGlobal/remove.svg"
-          onclick="removeReceive('${element.id}')">
+          onclick="removeReceived('${element.id}')">
           <img src="/assets/images/app/appGlobal/update.svg"
-          onclick="updateReceive('${element.id}')">
+          onclick="updateReceived('${element.id}')">
           <img src="/assets/images/app/appGlobal/conclude.svg"
-          onclick="concludeReceive('${element.id}')">
+          onclick="concludeReceived('${element.id}')">
           `;
 
           sectionAppTableItem.append(desc);
@@ -248,7 +245,7 @@ $('.newReceiveArea form').on('submit', function (e) {
       dataType: 'json',
       success: (d) => {
         if(d.messege == 'success') {
-          location.href='/app/receitas';
+          location.reload();
         } else {
           $('.loadingArea').hide();
           $('.newReceiveForm p').addClass('error');
@@ -290,6 +287,8 @@ $(document).ready(() => {
   $('.newReceiveArea').hide();
   $('.fixed').hide();
   $('.parcel').hide();
+  $('#messege').hide();
+  $('.parcel').mask('000.000.000.000.000,00', {reverse: true});
 })
 
 
@@ -300,8 +299,23 @@ $(document).ready(() => {
  * removida com sucesso.
  * @param {String} id 
  */
-function removeReceive(id) {
-  console.log(id);
+function removeReceived(id) {
+  $.ajax({
+    type: 'post',
+    url: '/app/removeReceived',
+    data: {'id':id},
+    dataType: 'json',
+    success: d => {
+      if(d.messege == 'success') {
+        location.reload();
+      }
+      else {
+        $('#messege').show('slow');
+        $('#messege').html('Ops... Um error inesperado aconteceu.');
+        $('#messege').addClass('error');
+      }
+    }
+  });
 }
 
 /**
@@ -320,6 +334,21 @@ function updateReceive(id) {
  * concluído com sucesso.
  * @param {String} id 
  */
-function concludeReceive(id) {
-  console.log(id);
+function concludeReceived(id) {
+  $.ajax({
+    type: 'post',
+    url: '/app/concludeReceived',
+    data: {'id':id},
+    dataType: 'json',
+    success: d => {
+      if(d.messege == 'success') {
+        location.reload();
+      }
+      else {
+        $('#messege').show('slow');
+        $('#messege').html('Ops... Um error inesperado aconteceu.');
+        $('#messege').addClass('error');
+      }
+    }
+  });
 }

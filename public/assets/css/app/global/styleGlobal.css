@@ -20,11 +20,12 @@
   align-items: flex-start;
 }
 .sectionAppAreaRight {
-  margin: 10px 5px 10px 15px;
+  padding: 10px 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 1;
+  width: 100%;
 }
 .sectionAppOne {
   display: flex;
@@ -34,6 +35,12 @@
   height: 74px;
   padding: 10px 5px;
   animation: fade 1s;
+  text-align: center;
+}
+#messege {
+  flex: 1;
+  margin: auto;
+  margin-right: 20px;
 }
 .sectionAppOneWallet {
   margin-left: auto;
@@ -78,6 +85,7 @@
   color: #9A9A9A;
   padding: 15px 0px;
   font-weight: 600;
+  margin: auto;
   margin-bottom: 30px;
 }
 .sectionAppTableItem {
@@ -134,6 +142,9 @@
   .sectionAppOne {
     flex-direction: column;
   }
+  #messege {
+    margin: auto;
+  }
   .mensagemSuccessReceive {
     padding: 5px 25px;
     margin-bottom: 15px;
@@ -142,15 +153,10 @@
     margin: auto;
     margin-bottom: 55px;
   }
-  .sectionAppTable {
-    margin-bottom: 70px;
-  }
-  .sectionAppAreaRight {
-    margin: 10px 5px 10px 5px;
-  }
   .sectionAppTableTitle, 
   .sectionAppTableItem {
-    width: calc(100vw - 30px);
+    width: calc(100vw - 45px);
+
   }
   .sectionAppTableTitle .desc,
   .sectionAppTableItem .desc {
@@ -184,15 +190,9 @@
   .mensagemSuccessReceive {
     padding: 5px 25px;
   }
-  .sectionAppAreaRight {
-    margin: 10px 5px 10px 5px;
-  }
-  .sectionAppTable {
-    margin-bottom: 70px;
-  }
   .sectionAppTableTitle, 
   .sectionAppTableItem {
-    width: calc(100vw - 30px);
+    width: calc(100vw - 45px);
   }
   .sectionAppTableTitle .desc,
   .sectionAppTableItem .desc {
@@ -226,12 +226,9 @@
 
 /* Dispositivos médios (tablets com 768px ou mais) */
 @media (min-width: 768px) and (max-width: 991.98px) {
-  .sectionAppTable {
-    margin-bottom: 70px;
-  }
   .sectionAppTableTitle, 
   .sectionAppTableItem {
-    width: calc(100vw - 30px);
+    width: calc(100vw - 45px);
   }
   .sectionAppTableTitle .desc,
   .sectionAppTableItem .desc {
@@ -246,9 +243,6 @@
   .sectionAppTableTitle p,
   .sectionAppTableItem p {
     font-size: 14px;
-  }
-  .sectionAppAreaRight {
-    margin: 10px 5px 10px 5px;
   }
 }
 

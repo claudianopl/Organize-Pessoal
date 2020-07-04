@@ -176,6 +176,24 @@ class Route extends Bootstrap {
 		);
 
 		/**
+		 * Rota para remover as receitas do usuário.
+		 */
+		$routes['removeReceived'] = array(
+			'route' => "/app/removeReceived",
+			'controller' => 'AppController',
+			'action' => 'removeReceived',
+		);
+
+		/**
+		 * Rota para concluir as receitas do usuário.
+		 */
+		$routes['concludeReceived'] = array(
+			'route' => "/app/concludeReceived",
+			'controller' => 'AppController',
+			'action' => 'concludeReceived',
+		);
+
+		/**
 		 * Rota para efetuar o logoff
 		 */
 		$routes['userLogoff'] = array(
