@@ -5,7 +5,8 @@ namespace App\Models;
 // namespace para importar a conexão ao banco de dados
 use MF\Model\Model;
 
-class User extends Model{
+class User extends Model
+{
   private $id;
   private $wallet_name;
   private $user_name;
@@ -17,11 +18,13 @@ class User extends Model{
   private $user_confirmed;
   private $user_changepassword;
 
-  public function __get($attribute) {
+  public function __get($attribute) 
+  {
     return $this->$attribute;
   }
 
-  public function __set($attribute, $value) {
+  public function __set($attribute, $value) 
+  {
     $this->$attribute = $value;
   }
 
@@ -31,7 +34,8 @@ class User extends Model{
    * @access public
    * @return boolean
    */
-  public function saveUser() {
+  public function saveUser() 
+  {
     $query = 'insert into tb_user set user_name=:name, user_surname=:surname,
     user_email=:email, user_password=:password, user_confirm=:confirm';
     $stmt = $this->conexao->prepare($query);
@@ -52,7 +56,8 @@ class User extends Model{
    * @access public
    * @return boolean
    */
-  public function saveWallet() {
+  public function saveWallet() 
+  {
     $query = 'insert into tb_wallets set id_user = :id_user, wallet_name = :wallet';
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':id_user', $this->__get('id'));
@@ -68,8 +73,10 @@ class User extends Model{
    * @access public
    * @return boolean
    */
-  public function validateUser() {
-    if(!(filter_var($this->__get('user_email'), FILTER_VALIDATE_EMAIL))) {
+  public function validateUser() 
+  {
+    if(!(filter_var($this->__get('user_email'), FILTER_VALIDATE_EMAIL))) 
+    {
       return false;
     }
 
@@ -82,7 +89,8 @@ class User extends Model{
    * @access public
    * @return boolean
    */
-  public function getUserEmail() {
+  public function getUserEmail() 
+  {
     $query = 'select * from tb_user where user_email = :email';
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':email', $this->__get('user_email'));
@@ -96,7 +104,8 @@ class User extends Model{
    * @access public
    * @return boolean
    */
-  public function getUserHashConfirm() {
+  public function getUserHashConfirm() 
+  {
     $query = 'select id,user_confirmed from tb_user where user_confirm = :user_confirm';
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':user_confirm', $this->__get('user_confirm'));
@@ -111,7 +120,8 @@ class User extends Model{
    * @access public
    * @return boolean
    */
-  public function userUpdateConfirmed() {
+  public function userUpdateConfirmed() 
+  {
     $query = 'update tb_user set user_confirmed = 1 where id = :id';
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':id', $this->__get('id'));
@@ -127,7 +137,8 @@ class User extends Model{
    * @access public
    * @return boolean
    */
-  public function changeTokenPassword() {
+  public function changeTokenPassword() 
+  {
     $query = 'update tb_user set user_changepassword = :user_changepassword where user_email = :email';
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':user_changepassword', $this->__get('user_changepassword'));
@@ -143,7 +154,8 @@ class User extends Model{
    * @access public
    * @return boolean
    */
-  public function changePassword() {
+  public function changePassword() 
+  {
     $query = "
     update 
       tb_user set user_changepassword = 0, user_password = :user_password 

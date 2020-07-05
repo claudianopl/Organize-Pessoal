@@ -106,6 +106,8 @@
                 <h4>Lançar Receitas</h4>
               </div>
             </div>
+
+            
             
             <!-- 
               * LÓGICA PHP
@@ -123,9 +125,7 @@
               
             <?php
               } 
-              else {
             ?>
-
               <div class="sectionAppTable">
                 <article class="sectionAppTableTitle">
                   <p class="desc">Descrição</p>
@@ -176,14 +176,12 @@
                       <?php } ?>
                     </p>
                   </article>
-                <?php } ?>
+                <?php 
+                  }
+                ?>
               </div>
 
-            <?php 
-              }
-            ?>
-
-            <div class='areaPayStatus'>
+              <div class='areaPayStatus'>
               <div class="payReceived">
                 <h4>
                   Recebido: <?php 
@@ -200,7 +198,13 @@
               </div>
             </div>
 
+            
+
           </div>
+          
+
+          
+
         </div>
       </div>
     </section>

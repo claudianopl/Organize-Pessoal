@@ -4,17 +4,20 @@ namespace App\Controllers;
 use MF\Controller\Action;
 use MF\Model\Container;
 
-class HomeController extends Action {
-	
-	public function index() {
+class HomeController extends Action 
+{
+	public function index() 
+	{
 		$this->render('index');
 	}
 	
-	public function about() {
+	public function about() 
+	{
 		$this->render('about');
 	}
 
-	public function confirmRegister() {
+	public function confirmRegister() 
+	{
 		$this->render('confirmRegister');
 		echo(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']));
 	}
@@ -24,32 +27,39 @@ class HomeController extends Action {
 	 * @access public
 	 * @param String $tokenEmail
 	 */
-	public function registerConfirmed($tokenEmail=null) {
+	public function registerConfirmed($tokenEmail=null) 
+	{
 		$this->render('registerConfirmed');
 
 		$user = Container::getModel('User');
 		$user->__set('user_confirm', $tokenEmail);
 
 		$date = $user->getUserHashConfirm();
-		if(count($date) > 0 && $date['user_confirmed'] == 0) {	
+		if(count($date) > 0 && $date['user_confirmed'] == 0) 
+		{	
 			$user->__set('id', $date['id']);
 			$user->userUpdateConfirmed();
 		}
 	}
 
-	public function login() {
-		if(isset($_COOKIE['user'])) {
+	public function login() 
+	{
+		if(isset($_COOKIE['user'])) 
+		{
 			header('Location: /app');
-		} else {
+		} else 
+		{
 			$this->render('login');
 		}
 	}
 
-	public function resetPassword() {
+	public function resetPassword() 
+	{
 		$this->render('resetPassword');
 	}
 
-	public function singup() {
+	public function singup() 
+	{
 		$this->render('singup');
 	}
 
@@ -57,7 +67,8 @@ class HomeController extends Action {
 	 * Função para cadastrar novos usuários e enviar e-mail de confirmação.
 	 * @access public
 	 */
-	public function newUser() {
+	public function newUser() 
+	{
 		$info = array();
 		$name = $_POST['name'];
 		$surname = $_POST['surname'];
@@ -74,7 +85,8 @@ class HomeController extends Action {
 		$newUser->__set('user_password', $password);
 		$newUser->__set('user_confirm', $tokenEmail);
 		// Verificando se podemos salvar no banco de dados
-		if($newUser->validateUser() && count($newUser->getUserEmail()) == 0) {
+		if($newUser->validateUser() && count($newUser->getUserEmail()) == 0) 
+		{
 			/**
 			 * Array para configurar o servidor do email
 			 * @name $serverMail
@@ -106,7 +118,8 @@ class HomeController extends Action {
 			 */
 			//$email = $this->sendMail($serverMail, $mailData);
 			
-			if($email) {
+			if($email) 
+			{
 				$newUser->saveUser();
 
 				/**
@@ -130,7 +143,8 @@ class HomeController extends Action {
 				$info['messege'] = 'success';
 			}
 		}
-		else {
+		else 
+		{
 			$info['messege'] = 'Esse email já se encontra cadastrado!';
 		}
 		print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
@@ -143,13 +157,15 @@ class HomeController extends Action {
 	 * efetuamos o login e ligamos a sessão.
 	 * @access public
 	 */
-	public function authenticateUser() {
+	public function authenticateUser() 
+	{
 		$info = array();
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 
 		// Verifica se o email é válido.
-		if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		if(filter_var($email, FILTER_VALIDATE_EMAIL)) 
+		{
 			// Criando conexão com o banco de dados e se comunicando com o modal.
 			$user = Container::getModel('User');
 			$user->__set('user_email', $email);
@@ -162,9 +178,12 @@ class HomeController extends Action {
 			 * @name $date
 			 */
 			$date = $user->getUserEmail();
-			if(count($date) > 0) {
-				if($this->checkArgon2id($password, $date[0]['user_password'])) {
-					if($date[0]['user_confirmed'] == 1) {
+			if(count($date) > 0) 
+			{
+				if($this->checkArgon2id($password, $date[0]['user_password'])) 
+				{
+					if($date[0]['user_confirmed'] == 1) 
+					{
 						$data = [
 							'authenticate' => md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']),
 							'id' => $date[0]['id'],
@@ -188,13 +207,15 @@ class HomeController extends Action {
 						// Informando ao ajax que o login foi efetuado com sucesso
 						$info['messege'] = 'success';
 					}
-					else {
+					else 
+					{
 						// Informando ao ajax que o usuário falta confirmar seu acesso
 						$info['messege'] = 'Você não confirmou o seu cadastro, por favor, verifique seu e-mail.';
 					}
 				}
 			}
-			else {
+			else 
+			{
 				// Informando o usuário não foi encontrado
 				$info['messege'] = 'Ops… Usuário invalido!';
 			}
@@ -210,15 +231,18 @@ class HomeController extends Action {
 	 * por email.
 	 * @access public
 	 */
-	public function changeTokenPassword() {
+	public function changeTokenPassword() 
+	{
 		$info = array();
 		$email = $_POST['email'];
-		if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		if(filter_var($email, FILTER_VALIDATE_EMAIL)) 
+		{
 			$user = Container::getModel('User');
 			$user->__set('user_email', $email);
 
 			$date = $user->getUserEmail();
-			if(count($date) > 0) {
+			if(count($date) > 0) 
+			{
 				/**
 				 * Gera o token para o usuário conseguir trocar a sua senha.
 				 * Esse código gera um token e envia esse token para o banco de dados
@@ -231,7 +255,8 @@ class HomeController extends Action {
 				 */
 				$tokenEmail = md5(time().rand(0,9999).rand(0,9999));
 				$user->__set('user_changepassword', $tokenEmail);
-				if($user->changeTokenPassword()){
+				if($user->changeTokenPassword())
+				{
 					$serverMail = [
 						'host' => 'smtp.mailtrap.io',
 						'username' => '37dea9e6299bb1',
@@ -248,35 +273,46 @@ class HomeController extends Action {
 	
 					$info['message'] = 'success';
 				}
-				else{
+				else
+				{
 					$info['message'] = 'Algum erro aconteceu, tente novamente mais tarde!';
 				}
 				
-			} else {
+			} 
+			else 
+			{
 				$info['message'] = 'O e-mail informado não está cadastrado!';
 			}
 		}
-		else {
+		else 
+		{
 			$info['message'] = 'E-mail invalido, por favor informe um e-mail válido.';
 		}
 		print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 	}
 
-	public function changePassword() {
+	public function changePassword() 
+	{
 		$newPassword = $this->passwordArgon2id($_POST['newPassword']);
 		$hash = $_POST['hash'];
 		$info = array();
-		if($hash != '' || strlen($hash) == 32) {
+		if($hash != '' || strlen($hash) == 32) 
+		{
 			$user = Container::getModel('User');
 			$user->__set('user_password', $newPassword);
 			$user->__set('user_changepassword', $hash);
-			if($user->changePassword()) {
+			if($user->changePassword()) 
+			{
 				$info['message'] = 'success';
-			} else {
+			} 
+			else 
+			{
 				$info['message'] = 'Sua senha já foi alterada.';
 			}
 		
-		} else {
+		} 
+		else 
+		{
 			$info['message'] = 'Error: Informações inválidas, usuário não existe.';
 		}
 		print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
@@ -291,7 +327,8 @@ class HomeController extends Action {
 	 * @param string $tokenEmail
 	 * @return string
 	 */
-	public function menssage($tokenEmail) {
+	public function menssage($tokenEmail) 
+	{
 		$message = "<html><head xmlns='http://www.w3.org/1999/xhtml' xmlns:v='urn:schemas-microsoft-com:vml' xmlns:o='urn:schemas-microsoft-com:office:office'>";
 		$message .= "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>";
 		$message .= "<meta name='viewport' content='width=device-width, initial-scale=1, max-scale=1'>\r\n";
@@ -382,7 +419,8 @@ class HomeController extends Action {
 	 * @return string $message retorna o corpo da menssagem para ser enviado no 
 	 * email do usuário.
 	 */
-	public function messegeChangePassword($tokenEmail) {
+	public function messegeChangePassword($tokenEmail) 
+	{
 		$message = "<html><head xmlns='http://www.w3.org/1999/xhtml' xmlns:v='urn:schemas-microsoft-com:vml' xmlns:o='urn:schemas-microsoft-com:office:office'>";
 		$message .= "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>";
 		$message .= "<meta name='viewport' content='width=device-width, initial-scale=1, max-scale=1'>\r\n";

@@ -5,16 +5,19 @@ namespace App\Models;
 // namespace para importar a conexão ao banco de dados
 use MF\Model\Model;
 
-class Wallet extends Model {
+class Wallet extends Model 
+{
   private $id;
   private $id_user;
   private $wallet_name;
 
-  public function __get($attribute) {
+  public function __get($attribute) 
+  {
     return $this->$attribute;
   }
   
-  public function __set($attribute, $value) {
+  public function __set($attribute, $value) 
+  {
     $this->$attribute = $value;
   }
   /**
@@ -22,7 +25,8 @@ class Wallet extends Model {
    * @access public
    * @return array todas as carteiras que o usuário criou.
    */
-  public function getUserWallet() {
+  public function getUserWallet() 
+  {
     $query = 'select * from tb_wallets where id_user = :id_user';
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':id_user', $this->__get('id_user'));

@@ -213,6 +213,7 @@ function sectionAppFilter() {
     error:error=>{
       console.log(error);
     }
+    
   })
 }
 
@@ -236,7 +237,7 @@ function newReceiveInvalid() {
  */
 $('.newReceiveArea form').on('submit', function (e) {
   e.preventDefault();
-  $('.loadingArea').show();
+  //$('.loadingArea').show();
   let form = $(this).serializeArray();
   const desc = form[0];
   const value = form[1];
@@ -264,13 +265,12 @@ $('.newReceiveArea form').on('submit', function (e) {
       data: form,
       dataType: 'json',
       success: (d) => {
-        console.log(d);
         if(d.messege == 'success') {
           location.reload();
         } else {
           $('.loadingArea').hide();
           $('.newReceiveForm p').addClass('error');
-          $('.newReceiveForm p').html(`Um erro inesperado aconteceu, tente novamente mais tarde!`);
+          $('.newReceiveForm p').html(d.messege);
         }
       }
     })

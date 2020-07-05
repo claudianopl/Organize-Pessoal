@@ -5,7 +5,8 @@ namespace App\Models;
 // namespace para importar a conexão ao banco de dados
 use MF\Model\Model;
 
-class AppData extends Model  {
+class AppData extends Model  
+{
   private $id;
   private $id_wallet;
   private $status;
@@ -18,59 +19,35 @@ class AppData extends Model  {
   private $parcel;
   private $parcelPay;
   private $statusParcelFixed;
+  private $id_parcel;
 
-  public function __get($attribute) {
+  public function __get($attribute) 
+  {
     return $this->$attribute;
   }
   
-  public function __set($attribute, $value) {
+  public function __set($attribute, $value) 
+  {
     $this->$attribute = $value;
   }
   
 
+ 
   /**
    * A função salva os dados da nova receita no banco de dados.
    * @access public
    * @return true
    */
-  public function saveReceive() {
+  public function saveReceive() 
+  {
     $query = '
     insert into 
       tb_received 
     set 
       id_wallet=:id_wallet, status=:status, description=:description,
       value=:value, date=:date, category=:category, enrollment=:enrollment,
-      n_parcel=:parcel, status_parcel_fixed = :fixed
-    ';
-    $stmt = $this->conexao->prepare($query);
-    $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
-    $stmt->bindValue(':status', $this->__get('status'));
-    $stmt->bindValue(':description', $this->__get('description'));
-    $stmt->bindValue(':value', $this->__get('value'));
-    $stmt->bindValue(':date', $this->__get('date'));
-    $stmt->bindValue(':category', $this->__get('category'));
-    $stmt->bindValue(':enrollment', $this->__get('enrollment'));
-    $stmt->bindValue(':parcel', $this->__get('parcel'));
-    $stmt->bindValue(':fixed', $this->__get('statusParcelFixed'));
-    $stmt->execute();
-    
-    return true;
-  }
-
-
-  /**
-   * A função salva os dados da nova receita parceladas no banco de dados.
-   * @access public
-   * @return true
-   */
-  public function saveParcelReceived() {
-    $query = '
-    insert into 
-      tb_received 
-    set 
-      id_wallet=:id_wallet, status=:status, description=:description,
-      value=:value, date=:date, category=:category, enrollment=:enrollment,
-      n_parcel=:parcel, n_parcel_pay = :parcelPay, status_parcel_fixed = :fixed
+      n_parcel=:parcel, n_parcel_pay = :parcelPay, status_parcel_fixed = :fixed,
+      id_parcel = :id_parcel
     ';
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
@@ -83,9 +60,14 @@ class AppData extends Model  {
     $stmt->bindValue(':parcel', $this->__get('parcel'));
     $stmt->bindValue(':parcelPay', $this->__get('parcelPay'));
     $stmt->bindValue(':fixed', $this->__get('statusParcelFixed'));
+    $stmt->bindValue(':id_parcel', $this->__get('id_parcel'));
     $stmt->execute();
     
-    return true;
+    $query = 'select LAST_INSERT_ID() as id';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->execute();
+    
+    return $stmt->fetch(\PDO::FETCH_ASSOC);
   }
 
 
@@ -94,7 +76,8 @@ class AppData extends Model  {
    * @access public
    * @return array com todas as receitas a receber.
    */
-  public function filterReceiveAll() {
+  public function filterReceiveAll() 
+  {
     $query = '
     select 
       * 
@@ -114,7 +97,8 @@ class AppData extends Model  {
   /**
    * 
    */
-  public function filterReceivedMonth() {
+  public function filterReceivedMonth() 
+  {
     $query = '
     select 
       * 
@@ -139,7 +123,8 @@ class AppData extends Model  {
    * @access public
    * @return array com todos os dados solicitados pelo usuário.
    */
-  public function filterReceive() {
+  public function filterReceive() 
+  {
     $query = "
     select 
       id, status, category, description, value, date, enrollment, n_parcel, 
@@ -168,7 +153,8 @@ class AppData extends Model  {
    * @access public
    * @return array com dois elementos, conta recebidas e contas a receber.
    */
-  public function sumReceived() {
+  public function sumReceived() 
+  {
     $paymentData = array();
 
     $query = "
@@ -209,7 +195,8 @@ class AppData extends Model  {
    * @access public
    * @return array com dois elementos, conta recebidas e contas a receber.
    */
-  public function sumReceivedAll() {
+  public function sumReceivedAll() 
+  {
     $paymentData = array();
 
     $query = "
@@ -246,7 +233,8 @@ class AppData extends Model  {
    * @access public
    * @return true
    */
-  public function removeReceived() {
+  public function removeReceived() 
+  {
     $query = 'delete from tb_received where id = :id';
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':id', $this->__get('id'));
@@ -260,7 +248,8 @@ class AppData extends Model  {
    * @access public
    * @return true
    */
-  public function concludeReceived() {
+  public function concludeReceived() 
+  {
     $query = 'update tb_received set status = 1 where id = :id';
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':id', $this->__get('id'));
