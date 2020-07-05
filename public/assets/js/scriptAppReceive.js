@@ -126,7 +126,6 @@ function sectionAppFilter() {
     };
     data = dataObj;
   }
-  console.log('test');
   
   /**
    * Enviando dados via ajax para a rota do back-end.
@@ -137,14 +136,14 @@ function sectionAppFilter() {
     data: data,
     dataType: 'json',
     success: (d) => {
-      if(d.length > 0) {
+      if(d.received.length > 0) {
         $('.sectionAppTable').show('slow');
         $('.sectionAppThreeMessage').hide();
 
         $('.sectionAppTableItem').remove()
         let fatherTable = $('.sectionAppTable');
 
-        d.forEach(element => {
+        d.received.forEach(element => {
           let sectionAppTableItem = document.createElement('article');
           sectionAppTableItem.className = 'sectionAppTableItem';
           sectionAppTableItem.id = element.id;
@@ -176,15 +175,23 @@ function sectionAppFilter() {
 
           let price = document.createElement('p');
           price.className = 'price';
-          price.innerHTML = `R$${element.value} 
-          <img src="/assets/images/app/appGlobal/remove.svg"
-          onclick="removeReceived('${element.id}')">
-          <img src="/assets/images/app/appGlobal/update.svg"
-          onclick="updateReceived('${element.id}')">
-          <img src="/assets/images/app/appGlobal/conclude.svg"
-          onclick="concludeReceived('${element.id}')">
-          `;
-
+          if(element.status == 0) {
+            price.innerHTML = `R$${element.value} 
+            <img src="/assets/images/app/appGlobal/remove.svg"
+            onclick="removeReceived('${element.id}')">
+            <img src="/assets/images/app/appGlobal/update.svg"
+            onclick="updateReceived('${element.id}')">
+            <img src="/assets/images/app/appGlobal/conclude.svg"
+            onclick="concludeReceived('${element.id}')">`;
+          }
+          else {
+            price.innerHTML = `R$${element.value} 
+            <img src="/assets/images/app/appGlobal/remove.svg"
+            onclick="removeReceived('${element.id}')">
+            <img src="/assets/images/app/appGlobal/update.svg"
+            onclick="updateReceived('${element.id}')">`;
+          }
+          
           sectionAppTableItem.append(desc);
           sectionAppTableItem.append(date);
           sectionAppTableItem.append(category);
@@ -192,12 +199,19 @@ function sectionAppFilter() {
           sectionAppTableItem.append(price);
 
           fatherTable.append(sectionAppTableItem);
+
+
+          $('.payReceived h4').html(`Recebido: R$${d.sumReceived.paymentReceived}`);
+          $('.payReceivable h4').html(`Recebido: R$${d.sumReceived.paymentNotReceived}`);
         });
       } 
       else {
         $('.sectionAppTable').hide();
         $('.sectionAppThreeMessage').show('slow');
       }
+    },
+    error:error=>{
+      console.log(error);
     }
   })
 }
@@ -209,7 +223,7 @@ function sectionAppFilter() {
 function newReceiveInvalid() {
     $('.loadingArea').hide();
     $('.newReceiveForm p').addClass('error');
-    $('.newReceiveForm p').html(`Informação inválido, por favor, verifique as informações.`);
+    $('.newReceiveForm p').html('Informação inválido, por favor, verifique as informações.');
 }
 
 
@@ -230,20 +244,27 @@ $('.newReceiveArea form').on('submit', function (e) {
   const wallet = form[3];
   const category = form[4];
   const repetition = form[5];
+  const parcel = form[7];
   let validate = true
   if(desc.value.length < 3 || value.value == '' || date.value == '' || 
   wallet.value == '' || category.value == '' || repetition.value == '') {
     newReceiveInvalid();
     validate = false;
   }
-  
+  if(parseInt(parcel.value) > 420) {
+    $('.loadingArea').hide();
+    $('.newReceiveForm p').addClass('error');
+    $('.newReceiveForm p').html('Número de parcelas máximas são de 420, por favor, altere as parcelas.');
+    validate = false;
+  }
   if(validate) {
     $.ajax({
       type: 'post',
-      url: '/app/insertData?location=receive',
+      url: '/app/insertReceive',
       data: form,
       dataType: 'json',
       success: (d) => {
+        console.log(d);
         if(d.messege == 'success') {
           location.reload();
         } else {
@@ -254,7 +275,6 @@ $('.newReceiveArea form').on('submit', function (e) {
       }
     })
   }
-  
 })
 
 /**
@@ -288,7 +308,6 @@ $(document).ready(() => {
   $('.fixed').hide();
   $('.parcel').hide();
   $('#messege').hide();
-  $('.parcel').mask('000.000.000.000.000,00', {reverse: true});
 })
 
 

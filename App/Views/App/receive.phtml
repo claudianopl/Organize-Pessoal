@@ -168,8 +168,12 @@
                       onclick="removeReceived('<?php echo $value['id'] ?>')">
                       <img src="/assets/images/app/appGlobal/update.svg"
                       onclick="updateReceived('<?php echo $value['id'] ?>')">
-                      <img src="/assets/images/app/appGlobal/conclude.svg"
-                      onclick="concludeReceived('<?php echo $value['id'] ?>')">
+                      <?php if($value['status'] == 0) {?>
+
+                        <img src="/assets/images/app/appGlobal/conclude.svg"
+                        onclick="concludeReceived('<?php echo $value['id'] ?>')">
+                        
+                      <?php } ?>
                     </p>
                   </article>
                 <?php } ?>
@@ -287,7 +291,7 @@
                   <option value='Mensal'>Mensal</option>
                   <option value='Anual'>Anual</option>
                 </select>
-                <input class='parcel' type="number" step="0.01" min="0.01" 
+                <input class='parcel' type="number" min="1" max="420"
                 name='receiveRepetitionParcel'>
               </div>
             </div>

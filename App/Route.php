@@ -158,12 +158,12 @@ class Route extends Bootstrap {
 		);
 		
 		/**
-		 * Rota para inserção de receitas, despesas e tarefas.
+		 * Rota para inserção de receitas.
 		 */
-		$routes['insertData'] = array(
-			'route' => "/app/insertData",
+		$routes['insertReceive'] = array(
+			'route' => "/app/insertReceive",
 			'controller' => 'AppController',
-			'action' => 'insertData',
+			'action' => 'insertReceive',
 		);
 
 		/**

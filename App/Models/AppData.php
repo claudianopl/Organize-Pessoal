@@ -101,12 +101,33 @@ class AppData extends Model  {
     from 
       tb_received 
     where 
-      id_wallet = :id_wallet and date <= :lastdate and status = 0 
+      id_wallet = :id_wallet
     order by date asc
     ';
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
-    $stmt->bindValue(':lastdate', $this->__get('lastDate'));
+    $stmt->execute();
+
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+  }
+
+  /**
+   * 
+   */
+  public function filterReceivedMonth() {
+    $query = '
+    select 
+      * 
+    from 
+      tb_received 
+    where 
+      id_wallet = :id_wallet and date between :date and :lastDate
+    order by date asc
+    ';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
+    $stmt->bindValue(':date', $this->__get('date'));
+    $stmt->bindValue(':lastDate', $this->__get('lastDate'));
     $stmt->execute();
 
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -143,11 +164,52 @@ class AppData extends Model  {
 
 
   /**
-   * A função retornas os pagamentos recebidos e não recebidos.
+   * A função retornas os pagamentos recebidos e não recebidos do mês.
    * @access public
    * @return array com dois elementos, conta recebidas e contas a receber.
    */
   public function sumReceived() {
+    $paymentData = array();
+
+    $query = "
+    select 
+      sum(value)
+    from 
+      tb_received 
+    where 
+      id_wallet = :id_wallet and status = 1 and date between :date and :lastDate";
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
+    $stmt->bindValue(':date', $this->__get('date'));
+    $stmt->bindValue(':lastDate', $this->__get('lastDate'));
+    $stmt->execute();
+    
+    $paymentData['paymentReceived'] = number_format($stmt->fetchColumn(),2,',','.');
+
+    $query = "
+    select
+      sum(value)
+    from 
+      tb_received 
+    where 
+      id_wallet = :id_wallet and status = 0 and between :date and :lastDate";
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
+    $stmt->bindValue(':date', $this->__get('date'));
+    $stmt->bindValue(':lastDate', $this->__get('lastDate'));
+    $stmt->execute();
+    $paymentData['paymentNotReceived'] = number_format($stmt->fetchColumn(),2,',','.');
+
+    return $paymentData;
+  }
+
+
+  /**
+   * A função retornas todos os pagamentos recebidos e não recebidos.
+   * @access public
+   * @return array com dois elementos, conta recebidas e contas a receber.
+   */
+  public function sumReceivedAll() {
     $paymentData = array();
 
     $query = "
