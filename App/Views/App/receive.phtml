@@ -114,6 +114,7 @@
             -->
             <?php 
               if(count($this->view->receives) == 0) {
+                $display = 'none';
             ?>
 
               <div class="sectionAppThreeMessage">
@@ -124,64 +125,64 @@
               </div>
               
             <?php
-              } 
+              } else { $display = 'block'; }
             ?>
-              <div class="sectionAppTable">
-                <article class="sectionAppTableTitle">
-                  <p class="desc">Descrição</p>
-                  <p class="date">Vencimento</p>
-                  <p class="category">Categoria</p>
-                  <p class="enrollment">Parcelas</p>
-                  <p class="price">Valor</p>
+            <div class="sectionAppTable" style="display: <?php echo $display; ?>;">
+              <article class="sectionAppTableTitle">
+                <p class="desc">Descrição</p>
+                <p class="date">Vencimento</p>
+                <p class="category">Categoria</p>
+                <p class="enrollment">Parcelas</p>
+                <p class="price">Valor</p>
+              </article>
+              <?php foreach($this->view->receives as $key => $value) {?>
+                <article class="sectionAppTableItem" id='<?php echo $value['id'] ?>'>
+                  <p class="desc">
+                    <?php echo $value['description']?>
+                  </p>
+                  <p class="date">
+                    <?php echo date_format(new DateTime($value['date']), 'd/m/Y');?>
+                  </p>
+                  <p class="category">
+                    <?php echo $value['category']; ?>
+                  </p>
+                  <p class="enrollment">
+                    <?php ; 
+                      if($value['enrollment'] == 'Parcelada') {
+                        echo $value['n_parcel_pay'].'/'.$value['n_parcel'];
+                      }
+                      else if($value['enrollment'] == 'Fixa') {
+                        echo $value['status_parcel_fixed'];
+                      }
+                      else {
+                        echo $value['enrollment'];
+                      } 
+                    ?>
+                  </p>
+                  <p class="price">
+                    R$<?php echo $value['value']; ?>
+                    <!--
+                      PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
+                      SE VAI SER POR AJAX OU LINK
+                    -->
+                    <img src="/assets/images/app/appGlobal/remove.svg"
+                    onclick="removeReceived('<?php echo $value['id'] ?>')">
+                    <img src="/assets/images/app/appGlobal/update.svg"
+                    onclick="updateReceived('<?php echo $value['id'] ?>')">
+                    <?php if($value['status'] == 0) {?>
+
+                      <img src="/assets/images/app/appGlobal/conclude.svg"
+                      onclick="concludeReceived('<?php echo $value['id'] ?>')">
+                      
+                    <?php } ?>
+                  </p>
                 </article>
-                <?php foreach($this->view->receives as $key => $value) {?>
-                  <article class="sectionAppTableItem" id='<?php echo $value['id'] ?>'>
-                    <p class="desc">
-                      <?php echo $value['description']?>
-                    </p>
-                    <p class="date">
-                      <?php echo date_format(new DateTime($value['date']), 'd/m/Y');?>
-                    </p>
-                    <p class="category">
-                      <?php echo $value['category']; ?>
-                    </p>
-                    <p class="enrollment">
-                      <?php ; 
-                        if($value['enrollment'] == 'Parcelada') {
-                          echo $value['n_parcel_pay'].'/'.$value['n_parcel'];
-                        }
-                        else if($value['enrollment'] == 'Fixa') {
-                          echo $value['status_parcel_fixed'];
-                        }
-                        else {
-                          echo $value['enrollment'];
-                        } 
-                      ?>
-                    </p>
-                    <p class="price">
-                      R$<?php echo $value['value']; ?>
-                      <!--
-                        PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
-                        SE VAI SER POR AJAX OU LINK
-                      -->
-                      <img src="/assets/images/app/appGlobal/remove.svg"
-                      onclick="removeReceived('<?php echo $value['id'] ?>')">
-                      <img src="/assets/images/app/appGlobal/update.svg"
-                      onclick="updateReceived('<?php echo $value['id'] ?>')">
-                      <?php if($value['status'] == 0) {?>
+              <?php 
+                }
+              ?>
+            </div>
 
-                        <img src="/assets/images/app/appGlobal/conclude.svg"
-                        onclick="concludeReceived('<?php echo $value['id'] ?>')">
-                        
-                      <?php } ?>
-                    </p>
-                  </article>
-                <?php 
-                  }
-                ?>
-              </div>
-
-              <div class='areaPayStatus'>
+            <div class='areaPayStatus'>
               <div class="payReceived">
                 <h4>
                   Recebido: <?php 
@@ -198,27 +199,21 @@
               </div>
             </div>
 
-            
-
           </div>
-          
-
-          
-
         </div>
       </div>
     </section>
     
     
-
+    <!-- MODAL INSERIR -->
 
     <div class='newReceiveArea'>
       <div class="newReceiveFormExit"></div>
       <div class="newReceiveForm">
-        <div class="newReceiveFormTitle">
+        <article class="newReceiveFormTitle">
           <img src="/assets/images/app/appGlobal/iconTitleModal.svg">
           <h3>Adicionar receita:</h3>
-        </div>
+        </article>
         <p></p>
         <form>
           <div class="newReceiveLine">
@@ -230,7 +225,7 @@
           </div>
           <div class="newReceiveLine">
             <div class="newReceiveValue">
-              <label for="newReceiveDesc">
+              <label for="newReceiveValue">
                 <img src="/assets/images/app/appGlobal/iconValueModal.svg"> Valor:
               </label>
               <input type="number" step="0.01" min="0.01" 
@@ -305,6 +300,82 @@
           <button>Lançar Receita</button>
         </form>
       </div>
+    </div>
+    
+    <!-- MODAL ATUALIZAR -->
+    <div class='updateReceiveArea'>
+      <div class="updateReceiveFormExit"></div>
+      
+      <div class="updateReceiveForm">
+        <article class="updateReceiveFormTitle">
+          <img src="/assets/images/app/appGlobal/iconTitleModal.svg">
+          <h3>Atualizar receita:</h3>
+        </article>
+        <p></p>
+        <form>
+          <article class="updateReceiveLine">
+            <label for="updateReceiveDesc">
+              <img src="/assets/images/app/appGlobal/iconDescModal.svg"> Descição:
+            </label>
+            <input type="text" id='updateReceiveDesc' name="receiveDesc">
+          </article>
+
+          <div class="updateReceiveLine">
+            <article class="updateReceiveValue">
+              <label for="updateReceiveValue">
+                <img src="/assets/images/app/appGlobal/iconValueModal.svg"> Valor:
+              </label>
+              <input type="number" id='updateReceiveValue' step="0.01" min="0.01"
+              name="receiveValue">
+            </article>
+
+            <article class="updateReceiveDate">
+              <label for="updateReceiveDate">
+                <img src="/assets/images/app/appGlobal/iconCalendarModal.svg"> Data:
+              </label>
+              <input type="date" id='updateReceiveDate' name="receiveDate">
+            </article>
+          </div>
+
+          <div class="updateReceiveLine">
+            <article class="updateReceiveWallet">
+              <label for="updateReceiveWallet">
+                <img src="/assets/images/app/appGlobal/iconWalletModal.svg"> Carteira
+              </label>
+              <select id='updateReceiveWallet' name="updateReceiveWallet">
+                <option value=""></option>
+                <?php
+                  foreach($this->view->wallets as $key => $value) { ?>
+                  
+                    <option value="<?php echo $value['id'] ?>">
+                      <?php echo $value['wallet_name']?>
+                    </option>
+                  
+                  <?php
+                  }
+                  ?>
+                
+              </select>
+            </article>
+
+            <article class="updateReceiveCategory">
+              <label for="updateReceiveCategory">
+                <img src="/assets/images/app/appGlobal/iconCategoryModal.svg"> Categoria
+              </label>
+              <select id="updateReceiveCategory" name="updateReceiveCategory">
+                <option value="">Categorias</option>
+                <option value="Salário">Salário</option>
+                <option value="Empréstimo">Empréstimo</option>
+                <option value="Outras Receitas">Outras Receitas</option>
+              </select>
+            </article>
+          </div>
+
+          <button>Atualizar Receita</button>
+
+        </form>
+      </div>
+
     </div>
 
     <!-- jQuery e JavaScript -->

@@ -180,6 +180,7 @@ class AppController extends Action
 	 * A função se comunica por requisições ajax, vai ser responsável por levar os
 	 * dados gerais, para a página /app.
 	 * @access public
+	 * @return array
 	 */
 	public function dateApp() 
 	{
@@ -195,8 +196,7 @@ class AppController extends Action
 	 * Inserir receitas no banco.
 	 * A função insere os dados das receitas.
 	 * @access public
-	 * @access public
-	 * @return boolean
+	 * @return array
 	 */
 	public function insertReceive() 
 	{
@@ -252,11 +252,14 @@ class AppController extends Action
 					if($fixed == 'Anual') 
 					{
 						$idParcel = $dataReceive->saveReceive();
+						$dataReceive->__set('id_parcel', $idParcel['id']);
+						$dataReceive->__set('id', $idParcel['id']);
+						$dataReceive->updateReceived();
+						
 
-						$date = date('Y/m/d', strtotime("+1 year",strtotime($date)));
+						$date = date('Y/m/d', strtotime("+12 month",strtotime($date)));
 						$dataReceive->__set('status', 0);
 						$dataReceive->__set('date', $date);
-						$dataReceive->__set('id_parcel', $idParcel['id']);
 						$dataReceive->saveReceive();
 					}
 
@@ -269,6 +272,8 @@ class AppController extends Action
 					{
 						$idParcel = $dataReceive->saveReceive();
 						$dataReceive->__set('id_parcel', $idParcel['id']);
+						$dataReceive->__set('id', $idParcel['id']);
+						$dataReceive->updateReceived();
 						
 						/**
 						 * Insere a quantidade de parcelas fixas até a data atual, mais 2, 
@@ -305,7 +310,10 @@ class AppController extends Action
 					$dataReceive->__set('parcel', $parcel);
 					$dataReceive->__set('parcelPay', 1);
 
-					$dataReceive->saveReceive();
+					$idParcel = $dataReceive->saveReceive();
+					$dataReceive->__set('id_parcel', $idParcel['id']);
+					$dataReceive->__set('id', $idParcel['id']);
+					$dataReceive->updateReceived();
 	
 					for($i=2; $i <= $parcel; $i++) 
 					{
@@ -352,6 +360,7 @@ class AppController extends Action
 	 * A função retorna todas as receitas daquela carteira que foram criadas e 
 	 * salvadas no banco de dados
 	 * @access public
+	 * @return array
 	 */
 	public function receivedMonth() 
 	{
@@ -395,6 +404,7 @@ class AppController extends Action
 	 * A função é solicitada através do Ajax e faz a filtragem no banco de dados, 
 	 * retornando apenas os dados requisitados pelo usuário.
 	 * @access public
+	 * @return array
 	 */
 	public function filterReceive() 
 	{
@@ -471,6 +481,7 @@ class AppController extends Action
 	/**
 	 * Função para solicitamos a remoção da receita no banco de dados.
 	 * @access public
+	 * @return array
 	 */
 	public function removeReceived() 
 	{
@@ -491,6 +502,65 @@ class AppController extends Action
 
 			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 
+		}
+	}
+
+	/**
+	 * Função para atualizar os dados das receitas do usuário.
+	 * @access public
+	 * @return array
+	 */
+	public function updateReceived()
+	{
+		if(isset($_POST))
+		{
+			$type = $_POST['type'];
+			$id = $_POST['id'];
+
+			if($type == 'filter')
+			{
+				$received = Container::getModel('AppData');
+				$received->__set('id', $id);
+				$dataReceived = $received->filterReceivedId();
+				print_r(json_encode($dataReceived, JSON_UNESCAPED_UNICODE));
+			}
+			else if($type == 'update')
+			{
+				$form = $_POST['form'];
+				$description = $form[0]['value'];
+				$value = $form[1]['value'];
+				$date = $form[2]['value'];
+				$wallet = $form[3]['value'];
+				$category = $form[4]['value'];
+
+				$received = Container::getModel('AppData');
+				$received->__set('id', $id);
+				$received->__set('description', $description);
+				$received->__set('value', $value);
+				$received->__set('date', $date);
+				$received->__set('id_wallet', $wallet);
+				$received->__set('category', $category);
+
+				$dataReceived = $received->filterReceivedId();
+				$enrollment = $dataReceived['enrollment'];
+
+				if($enrollment == 'Fixa' || $enrollment == 'Parcelada') 
+				{
+					$idParcel = $dataReceived['id_parcel'];
+					$received->__set('id_parcel', $idParcel);
+				}
+
+				if($received->updateReceived()) 
+				{
+					$info['messege'] = 'success';
+				}
+				else
+				{
+					$info['messege'] = 'Um erro inesperado aconteceu, tente novamente mais tarde.';
+				}
+
+				print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
+			}
 		}
 	}
 	

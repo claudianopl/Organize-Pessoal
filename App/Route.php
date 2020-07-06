@@ -185,6 +185,15 @@ class Route extends Bootstrap {
 		);
 
 		/**
+		 * Rota para atualizar as receitas do usuário.
+		 */
+		$routes['updateReceived'] = array(
+			'route' => "/app/updateReceived",
+			'controller' => 'AppController',
+			'action' => 'updateReceived',
+		);
+
+		/**
 		 * Rota para concluir as receitas do usuário.
 		 */
 		$routes['concludeReceived'] = array(

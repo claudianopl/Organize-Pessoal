@@ -53,30 +53,6 @@ categoryNav.click((e) => {
 
 
 /**
- * Função de execução do modal quando solicitado.
- */
-function executeModal(){
-  $('.newReceiveArea').show();
-  $('.newReceiveArea').addClass('newReceiveAreaAnimation');
-
-  $('.newReceiveFormExit').click(() => {
-    $('.newReceiveArea').removeClass('newReceiveAreaAnimation');
-    setTimeout(() => {  
-      $('.newReceiveArea').hide();
-    }, 1000);
-  })
-}
-
-/**
- * Evento de click.
- * Atua na execução o modal.
- */
-$('.sectionAppTwoRecive').click(() => {
-  executeModal();
-})
-
-
-/**
  * Função para filtrar as receitas.
  * A função captura os valores informados pelo usuário e envia para uma rota do 
  * back-end responsável por filtrar e retornar os valores filtrados que por sua 
@@ -209,9 +185,6 @@ function sectionAppFilter() {
         $('.sectionAppTable').hide();
         $('.sectionAppThreeMessage').show('slow');
       }
-    },
-    error:error=>{
-      console.log(error);
     }
     
   })
@@ -219,13 +192,27 @@ function sectionAppFilter() {
 
 
 /**
- * A função informa ao usuário que alguma informação está inválida.
+ * Função de execução do modal quando solicitado.
  */
-function newReceiveInvalid() {
-    $('.loadingArea').hide();
-    $('.newReceiveForm p').addClass('error');
-    $('.newReceiveForm p').html('Informação inválido, por favor, verifique as informações.');
+function executeModalNewReceived(){
+  $('.newReceiveArea').show();
+  $('.newReceiveArea').addClass('ReceiveAreaAnimation');
+
+  $('.newReceiveFormExit').click(() => {
+    $('.newReceiveArea').removeClass('ReceiveAreaAnimation');
+    setTimeout(() => {  
+      $('.newReceiveArea').hide();
+    }, 1000);
+  })
 }
+
+/**
+ * Evento de click.
+ * Atua na execução o modal de inserção da receita.
+ */
+$('.sectionAppTwoRecive').click(() => {
+  executeModalNewReceived();
+})
 
 
 /**
@@ -237,7 +224,7 @@ function newReceiveInvalid() {
  */
 $('.newReceiveArea form').on('submit', function (e) {
   e.preventDefault();
-  //$('.loadingArea').show();
+  $('.loadingArea').show();
   let form = $(this).serializeArray();
   const desc = form[0];
   const value = form[1];
@@ -249,7 +236,9 @@ $('.newReceiveArea form').on('submit', function (e) {
   let validate = true
   if(desc.value.length < 3 || value.value == '' || date.value == '' || 
   wallet.value == '' || category.value == '' || repetition.value == '') {
-    newReceiveInvalid();
+    $('.loadingArea').hide();
+    $('.newReceiveForm p').addClass('error');
+    $('.newReceiveForm p').html('Informação inválido, por favor, verifique as informações.');
     validate = false;
   }
   if(parseInt(parcel.value) > 420) {
@@ -279,7 +268,7 @@ $('.newReceiveArea form').on('submit', function (e) {
 
 /**
  * Evento change.
- * O evento abre as opções que estão dentro do select de recepção, que são as 
+ * O evento abre as opções que estão dentro do select de recepetição, que são as 
  * opções de fixas e parceladas.
  */
 $('.enrollment').on('change', function(e) {
@@ -296,20 +285,6 @@ $('.enrollment').on('change', function(e) {
     $('.parcel').slideToggle('slow');
   }
 })
-
-
-/**
- * Evento para executar as funções quando carregar a página phtml.
- */
-$(document).ready(() => {
-  $('.sectionAppTwoFilterNavReceive').hide();
-  $('.sectionAppTwoFilterNavCategory').hide();
-  $('.newReceiveArea').hide();
-  $('.fixed').hide();
-  $('.parcel').hide();
-  $('#messege').hide();
-})
-
 
 
 /**
@@ -338,13 +313,104 @@ function removeReceived(id) {
 }
 
 /**
+ * Função de execução do modal de atualização quando solicitado.
+ */
+function executeModalUpdateReceived(){
+  $('.updateReceiveArea').show();
+  $('.updateReceiveArea').addClass('ReceiveAreaAnimation');
+
+  $('.updateReceiveFormExit').click(() => {
+    $('.updateReceiveArea').removeClass('ReceiveAreaAnimation');
+    setTimeout(() => {  
+      $('.updateReceiveArea').hide();
+    }, 1000);
+  })
+}
+
+/**
  * Função para atualizar uma receita.
  * Vai abrir o modal com os dados daquela receita nesse modal, para o usuário 
  * atualizar os dados.
  * @param {String} id 
  */
-function updateReceive(id) {
-  console.log(id);
+function updateReceived(id) {
+  executeModalUpdateReceived();
+  $('.updateEnrollment').on('change', function(e) {
+    const value = $(this).val();
+    if(value == 'Única' || value == '') {
+      $('.updateFixed').hide();
+      $('.updateParcel').hide();
+    }
+    if(value == 'Fixa') {
+      $('.updateFixed').slideToggle('slow');
+      $('.updateParcel').hide();
+    } else if(value == 'Parcelada') {
+      $('.updateFixed').hide();
+      $('.updateParcel').slideToggle('slow');
+    }
+  })
+
+  /**
+   * Ajax para retornar e preencher os dados da receita a ser atualizada
+   */
+  $.ajax({
+    type: 'post',
+    url: '/app/updateReceived',
+    data: {'type':'filter','id':id},
+    dataType: 'json',
+    success: d => {
+      $('#updateReceiveDesc').val(d.description);
+      $('#updateReceiveValue').val(d.value);
+      $('#updateReceiveDate').val(d.date);
+      $('#updateReceiveWallet').val(d.id_wallet);
+      $('#updateReceiveCategory').val(d.category);
+    }
+  })
+
+  /**
+   * Evento de submit.
+   * O evento verificar se todos os dados obrigatórios da receita foram preenchido,
+   * caso estiver tudo correto enviamos os dados via ajax para a rota de back-end
+   * para efeturamos o update.
+   */
+  $('.updateReceiveForm form').on('submit', function (e) {
+    e.preventDefault();
+    $('.loadingArea').show();
+    let form = $(this).serializeArray();
+    const desc = form[0];
+    const value = form[1];
+    const date = form[2];
+    const wallet = form[3];
+    const category = form[4];
+    let validate = true;
+    if(desc.value.length < 3 || value.value == '' || date.value == '' || 
+    wallet.value == '' || category.value == '') {
+      $('.loadingArea').hide();
+      $('.updateReceiveForm p').addClass('error');
+      $('.updateReceiveForm p').html('Informação inválido, por favor, verifique as informações.');
+      validate = false;
+    }
+    if(validate) {
+      $.ajax({
+        type: 'post',
+        url: '/app/updateReceived',
+        data: {'type':'update','id':id, 'form':form},
+        dataType: 'json',
+        success: d => {
+          if(d.messege == 'success'){
+            location.reload();
+          }
+          else {
+            $('.loadingArea').hide();
+            $('.updateReceiveForm p').addClass('error');
+            $('.updateReceiveForm p').html(d.messege);
+          }
+        }
+      })
+    }
+  })
+
+  
 }
 
 /**
@@ -371,3 +437,19 @@ function concludeReceived(id) {
     }
   });
 }
+
+
+/**
+ * Evento para executar as funções quando carregar a página phtml.
+ */
+$(document).ready(() => {
+  $('.sectionAppTwoFilterNavReceive').hide();
+  $('.sectionAppTwoFilterNavCategory').hide();
+  $('.newReceiveArea').hide();
+  $('.fixed').hide();
+  $('.parcel').hide();
+  $('.updateReceiveArea').hide();
+  $('.updateFixed').hide();
+  $('.updateParcel').hide();
+  $('#messege').hide();
+})

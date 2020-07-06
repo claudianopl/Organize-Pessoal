@@ -197,7 +197,8 @@
 
 
 
-.newReceiveArea {
+.newReceiveArea,
+.updateReceiveArea{
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -212,18 +213,20 @@
   justify-content: center;
   transition: 1s;
 }
-.newReceiveAreaAnimation {
+.ReceiveAreaAnimation {
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }
-.newReceiveFormExit {
+.newReceiveFormExit,
+.updateReceiveFormExit {
   background: rgba(0, 0, 0, 0.4);
   width: 100vw;
   height: 100vh;
   z-index: 3;
   position: absolute;
 }
-.newReceiveForm {
+.newReceiveForm,
+.updateReceiveForm {
   width: 60%;
   height: auto;
   background-color: #ffffff;
@@ -234,45 +237,45 @@
   position: relative;
   padding: 10px;
 }
-.newReceiveForm span {
-  float: right;
-  font-size: 40px;
-  color: #555;
-  margin-left: 93%;
-  transition: 0.5s;
-  cursor: pointer;
-  position: absolute;
-}
-.newReceiveFormTitle {
+.newReceiveFormTitle,
+.updateReceiveFormTitle {
   display: flex;
   align-items: center;
   margin-top: 10px;
   padding-bottom: 15px;
   border-bottom: 1px solid #CCCCCC;
 }
-.newReceiveFormTitle img {
+.newReceiveFormTitle img,
+.updateReceiveFormTitle img {
   margin-right: 15px;
 }
-.newReceiveFormTitle h3 {
+.newReceiveFormTitle h3,
+.updateReceiveFormTitle h3 {
   color: #555555;
   font-weight: 500;
 }
-.newReceiveForm p {
+.newReceiveForm p,
+.updateReceiveFormTitle p{
   margin-top: 5px;
 }
-.newReceiveLine label {
+.newReceiveLine label,
+.updateReceiveLine label {
   display: flex;
   align-items: center;
   margin: 5px 0;
 }
-.newReceiveLine label img {
+.newReceiveLine label img,
+.updateReceiveLine label img {
   margin-top: 5px;
   margin-right:10px;
   margin-left: 15px;
 }
 .newReceiveLine:nth-child(1) input,
 .newReceiveLine:nth-child(2) input,
-.newReceiveLine:nth-child(3) select{
+.newReceiveLine:nth-child(3) select,
+.updateReceiveLine:nth-child(1) input,
+.updateReceiveLine:nth-child(2) input,
+.updateReceiveLine:nth-child(3) select{
   width: 100%;
   padding: 10px;
   font-size: 15px;
@@ -304,7 +307,7 @@
   margin-right: 20px;
 }
 .newReceiveLine:nth-child(4) select:nth-child(2),
-.newReceiveLine:nth-child(4) input {
+.newReceiveLine:nth-child(4) input{
   border: 2px solid #ccddef;
 }
 
@@ -312,25 +315,35 @@
 .newReceiveLine:nth-child(2) input:focus,
 .newReceiveLine:nth-child(3) select:focus,
 .newReceiveLine:nth-child(4) select:focus,
-.newReceiveLine:nth-child(4) input:focus {
+.newReceiveLine:nth-child(4) input:focus,
+.updateReceiveLine:nth-child(1) input:focus,
+.updateReceiveLine:nth-child(2) input:focus,
+.updateReceiveLine:nth-child(3) select:focus{
   border: 1px solid #34F06F;
   outline: 0;
   font-weight: 600;
 }
 .newReceiveLine:nth-child(2),
-.newReceiveLine:nth-child(3){
+.newReceiveLine:nth-child(3),
+.updateReceiveLine:nth-child(2),
+.updateReceiveLine:nth-child(3) {
   display: flex;
 }
 .newReceiveValue,
-.newReceiveWallet {
+.newReceiveWallet,
+.updateReceiveValue,
+.updateReceiveWallet {
   width: 50%;
   margin-right: 20px;
 }
 .newReceiveDate,
-.newReceiveCategory {
+.newReceiveCategory,
+.updateReceiveDate,
+.updateReceiveCategory {
   width: 50%;
 }
-.newReceiveForm form button {
+.newReceiveForm form button,
+.updateReceiveForm form button{
   display: block;
   margin: auto;
   margin-top: 20px;
@@ -346,10 +359,12 @@
   cursor: pointer;
   transition: 1s;
 }
-.newReceiveForm form button:hover {
+.newReceiveForm form button:hover,
+.updateReceiveForm form button:hover {
   padding: 10px 100px;
 }
-.newReceiveForm form button:focus{
+.newReceiveForm form button:focus,
+.updateReceiveForm form button:focus{
   border: none;
   outline: 0;
 }
@@ -387,13 +402,16 @@
   .sectionAppTwoRecive {
     margin: auto;
   }
-  .newReceiveForm {
+  .newReceiveForm,
+  .updateReceiveForm {
     width: 95%;
   }
-  .newReceiveForm form button {
+  .newReceiveForm form button,
+  .updateReceiveForm form button {
     padding:10px 30px;
   }
-  .newReceiveForm form button:hover {
+  .newReceiveForm form button:hover,
+  .updateReceiveForm form button:hover {
     padding: 10px 50px;
   }
   .areaPayStatus {
@@ -409,13 +427,16 @@
   .sectionAppTwoFilter li {
     font-size: 14px;
   }
-  .newReceiveForm {
+  .newReceiveForm
+  .updateReceiveForm {
     width: 90%;
   }
-  .newReceiveForm form button {
+  .newReceiveForm form button,
+  .updateReceiveForm form button {
     padding: 10px 30px;
   }
-  .newReceiveForm form button:hover {
+  .newReceiveForm form button:hover,
+  .updateReceiveForm form button:hover{
     padding: 10px 50px;
   }
   .sectionAppTwo {
