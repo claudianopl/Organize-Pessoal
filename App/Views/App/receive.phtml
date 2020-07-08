@@ -224,29 +224,29 @@
             placeholder="Ex: Investimento na bolsa de valor." name="receiveDesc">
           </div>
           <div class="newReceiveLine">
-            <div class="newReceiveValue">
+            <article class="newReceiveValue">
               <label for="newReceiveValue">
                 <img src="/assets/images/app/appGlobal/iconValueModal.svg"> Valor:
               </label>
-              <input type="number" step="0.01" min="0.01" 
+              <input id='newReceiveValue' type="number" step="0.01" min="0.01" 
               placeholder="00.00R$" name="receiveValue">
-            </div>
+            </article>
 
-            <div class="newReceiveDate">
+            <article class="newReceiveDate">
               <label for="newReceiveDate">
                 <img src="/assets/images/app/appGlobal/iconCalendarModal.svg"> Data:
               </label>
               <input type="date" id='newReceiveDate' placeholder="dd/mm/aaaa"
               name="receiveDate">
-            </div>
+            </article>
           </div>
           <div class="newReceiveLine">
-            <div class="newReceiveWallet">
+            <article class="newReceiveWallet">
               <label for="newReceiveWallet">
                 <img src="/assets/images/app/appGlobal/iconWalletModal.svg"> Carteira
               </label>
-              <select name="receiveWallet">
-                <option value=""></option>
+              <select id='newReceiveWallet' name="receiveWallet">
+                <option value="">Carteiras</option>
                 <?php
                   foreach($this->view->wallets as $key => $value) { ?>
                   
@@ -259,22 +259,22 @@
                   ?>
                 
               </select>
-            </div>
+            </article>
 
-            <div class="newReceiveCategory">
+            <article class="newReceiveCategory">
               <label for="newReceiveCategory">
                 <img src="/assets/images/app/appGlobal/iconCategoryModal.svg"> Categoria
               </label>
-              <select name="receiveCategory">
+              <select id='newReceiveCategory' name="receiveCategory">
                 <option value="">Categorias</option>
                 <option value="Salário">Salário</option>
                 <option value="Empréstimo">Empréstimo</option>
                 <option value="Outras Receitas">Outras Receitas</option>
               </select>
-            </div>
+            </article>
           </div>
           <div class="newReceiveLine">
-            <div class="newReceiveRepetition">
+            <article class="newReceiveRepetition">
               <label for="newReceiveRepetition">
                 <img src="/assets/images/app/appGlobal/iconRepetitionModal.svg"> Repetição
               </label>
@@ -293,7 +293,7 @@
                 <input class='parcel' type="number" min="1" max="420"
                 name='receiveRepetitionParcel'>
               </div>
-            </div>
+            </article>
           </div>
 
 

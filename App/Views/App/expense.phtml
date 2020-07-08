@@ -98,6 +98,13 @@
                 </div>
 
                 <div class="sectionAppExpenseFilterContainer">
+                  <div class="sectionAppTwoFilterDadosDate">
+                    <input type="text" name="month" data-mask="00/0000" 
+                    placeholder="00/0000">
+                  </div>
+                </div>
+
+                <div class="sectionAppExpenseFilterContainer">
                   <div class="sectionAppExpenseFilterButton" 
                   onclick="selectFilterExpense()">
                     <img src="/assets/images/app/expense/buttonFilter.svg">
@@ -172,13 +179,230 @@
               </article>
             </div>
 
+            <div class="areaPayStatus">
+              <div class="paidExpenses">
+                <h4>Pagas: R$00,00</h4>
+              </div>
+              <div class="payExpenses">
+                <h4>A pagar: R$00,00</h4>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
     </section>
 
+    <div class="newExpensesArea">
+      <div class="newExpensesExit"></div>
+      <div class="newExpensesForm">
+        <article class="newExpensesFormTitle">
+          <img src="/assets/images/app/appGlobal/iconTitleModal.svg">
+          <h3>Adicionar despesa:</h3>
+        </article>
+        <p></p>
+
+        <form>
+          <article class="newExpensesLine">
+            <label for='newExpensesDesc'>
+              <img src="/assets/images/app/appGlobal/iconDescModal.svg"> Descição:
+            </label>
+            <input type="text" id='newExpensesDesc'
+            placeholder="Ex: Investimento na bolsa de valor." name="expensesDesc">
+          </article>
+
+          <div class="newExpensesLine">
+            <article class="newExpensesValue">
+              <label for="newExpensesValue">
+                <img src="/assets/images/app/appGlobal/iconValueModal.svg"> Valor:
+              </label>
+              <input id='newExpensesValue' type="number" step="0.01" min="0.01" 
+              placeholder="00.00R$" name="expensesValue">
+            </article>
+
+            <article class="newExpensesDate">
+              <label for="newExpensesDate">
+                <img src="/assets/images/app/appGlobal/iconCalendarModal.svg"> Data:
+              </label>
+              <input type="date" id='newExpensesDate' placeholder="dd/mm/aaaa"
+              name="expensesDate">
+            </article>
+          </div>
+
+          <div class="newExpensesLine">
+            <article class="newExpensesWallet">
+              <label for="newExpensesWallet">
+                <img src="/assets/images/app/appGlobal/iconWalletModal.svg"> Carteira
+              </label>
+              <select id="newExpensesWallet" name="expensesWallet">
+                <option value="">Carteiras</option>
+
+                <?php
+                  foreach($this->view->wallets as $key => $value) { ?>
+                  
+                    <option value="<?php echo $value['id'] ?>">
+                      <?php echo $value['wallet_name']?>
+                    </option>
+                  
+                <?php
+                  }
+                ?>
+
+              </select>
+            </article>
+
+            <article class="newExpensesCategory">
+              <label for="newExpensesCategory">
+                <img src="/assets/images/app/appGlobal/iconCategoryModal.svg"> Categoria
+              </label>
+              <select id='newExpensesCategory' name="receiveCategory">
+                <option value="">Categorias</option>
+                <option value="Alimentação">Alimentação</option>
+                <option value="Assinaturas e serviços">Assinaturas e serviços</option>
+                <option value="Casa">Casa</option>
+                <option value="Compras">Compras</option>
+                <option value="Cuidados pessoais">Cuidados pessoais</option>
+                <option value="Dívidas e empréstimos">Dívidas e empréstimos</option>
+                <option value="Educação">Educação</option>
+                <option value="Entretenimento">Entretenimento</option>
+                <option value="Família e filhos">Família e filhos</option>
+                <option value="Impostos e Taxas">Impostos e Taxas</option>
+                <option value="Investimentos">Investimentos</option>
+                <option value="Mercado">Mercado</option>
+                <option value="Pets">Pets</option>
+                <option value="Saúde">Saúde</option>
+                <option value="Trabalho">Trabalho</option>
+                <option value="Transporte">Transporte</option>
+                <option value="Viagem">Viagem</option>
+              </select>
+            </article>
+          </div>
+
+          <div class="newExpensesLine">
+            <article class="newExpensesRepetition">
+              <label for="newExpensesRepetition">
+                <img src="/assets/images/app/appGlobal/iconRepetitionModal.svg"> Repetição
+              </label>
+              <div class="expensesRepetitionSelects">
+                <select class="enrollment" name="expensesRepetition">
+                  <option value=''>Repetições</option>
+                  <option value='Única'>Única</option>
+                  <option value='Fixa'>Fixa</option>
+                  <option value='Parcelada'>Parcaleda</option>
+                </select>
+                <select class="fixed" name="expensesRepetitionFixed">
+                  <option value=''>Categorias fixas</option>
+                  <option value='Mensal'>Mensal</option>
+                  <option value='Anual'>Anual</option>
+                </select>
+                <input class='parcel' type="number" min="1" max="420"
+                name='expensesRepetitionParcel'>
+              </div>
+            </article>
+          </div>
+
+          <button>Lançar Despesa</button>
+
+        </form>
+      </div>
+    </div>
+
+    <div class="updateExpensesArea">
+      <div class="updateExpensesExit"></div>
+      <div class="updateExpensesForm">
+        <article class="updateExpensesFormTitle">
+          <img src="/assets/images/app/appGlobal/iconTitleModal.svg">
+          <h3>Atualizar despesa:</h3>
+        </article>
+        <p></p>
+
+        <form>
+          <article class="updateExpensesLine">
+            <label for='updateExpensesDesc'>
+              <img src="/assets/images/app/appGlobal/iconDescModal.svg"> Descição:
+            </label>
+            <input type="text" id='updateExpensesDesc'
+            placeholder="Ex: Investimento na bolsa de valor." name="expensesDesc">
+          </article>
+
+          <div class="updateExpensesLine">
+            <article class="updateExpensesValue">
+              <label for="updateExpensesValue">
+                <img src="/assets/images/app/appGlobal/iconValueModal.svg"> Valor:
+              </label>
+              <input id='updateExpensesValue' type="number" step="0.01" min="0.01" 
+              placeholder="00.00R$" name="expensesValue">
+            </article>
+
+            <article class="updateExpensesDate">
+              <label for="updateExpensesDate">
+                <img src="/assets/images/app/appGlobal/iconCalendarModal.svg"> Data:
+              </label>
+              <input type="date" id='updateExpensesDate' placeholder="dd/mm/aaaa"
+              name="expensesDate">
+            </article>
+          </div>
+
+          <div class="updateExpensesLine">
+            <article class="updateExpensesWallet">
+              <label for="updateExpensesWallet">
+                <img src="/assets/images/app/appGlobal/iconWalletModal.svg"> Carteira
+              </label>
+              <select id="updateExpensesWallet" name="expensesWallet">
+                <option value="">Carteiras</option>
+                <option value="1">Carteira Geral</option>
+                
+                <?php
+                  foreach($this->view->wallets as $key => $value) { ?>
+                  
+                    <option value="<?php echo $value['id'] ?>">
+                      <?php echo $value['wallet_name']?>
+                    </option>
+                  
+                <?php
+                  }
+                ?>
+               
+              </select>
+            </article>
+
+            <article class="updateExpensesCategory">
+              <label for="updateExpensesCategory">
+                <img src="/assets/images/app/appGlobal/iconCategoryModal.svg"> Categoria
+              </label>
+              <select id='updateExpensesCategory' name="receiveCategory">
+                <option value="">Categorias</option>
+                <option value="Alimentação">Alimentação</option>
+                <option value="Assinaturas e serviços">Assinaturas e serviços</option>
+                <option value="Casa">Casa</option>
+                <option value="Compras">Compras</option>
+                <option value="Cuidados pessoais">Cuidados pessoais</option>
+                <option value="Dívidas e empréstimos">Dívidas e empréstimos</option>
+                <option value="Educação">Educação</option>
+                <option value="Entretenimento">Entretenimento</option>
+                <option value="Família e filhos">Família e filhos</option>
+                <option value="Impostos e Taxas">Impostos e Taxas</option>
+                <option value="Investimentos">Investimentos</option>
+                <option value="Mercado">Mercado</option>
+                <option value="Pets">Pets</option>
+                <option value="Saúde">Saúde</option>
+                <option value="Trabalho">Trabalho</option>
+                <option value="Transporte">Transporte</option>
+                <option value="Viagem">Viagem</option>
+              </select>
+            </article>
+          </div>
+
+          <button>Atualizar Despesa</button>
+
+        </form>
+      </div>
+    </div>
+
     <!-- jQuery e JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/assets/js/plugin/mask/jquery.mask.js"></script>
+
     <script src="/assets/js/scriptAppExpense.js"></script>
   </body>
 </html>

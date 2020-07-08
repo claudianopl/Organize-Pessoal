@@ -217,7 +217,7 @@ class AppController extends Action
 				$parcel = $_POST['receiveRepetitionParcel'];
 			}
 
-			$dataReceive = Container::getModel('AppData');
+			$dataReceive = Container::getModel('Received');
 			$dataReceive->__set('id_wallet', $wallet);
 			$dataReceive->__set('status', 0);
 			$dataReceive->__set('description', $desc);
@@ -366,7 +366,7 @@ class AppController extends Action
 	{
 		$date = date("Y-m-01");
 		$lastDate = date("Y-m-t");
-		$received = Container::getModel('AppData');
+		$received = Container::getModel('Received');
 		$received->__set('id_wallet', $_COOKIE['userWallet']);
 		$received->__set('date', $date);
 		$received->__set('lastDate', $lastDate);
@@ -388,7 +388,7 @@ class AppController extends Action
 		$lastDay = cal_days_in_month(CAL_GREGORIAN, $month , $year);
 		$lastDate = "$year-$month-$lastDay";
 
-		$received = Container::getModel('AppData');
+		$received = Container::getModel('Received');
 		$received->__set('date', $date);
 		$received -> __set('lastDate', $lastDate);
 		$received->__set('id_wallet', $_COOKIE['userWallet']);
@@ -429,7 +429,7 @@ class AppController extends Action
 			 */
 			else 
 			{
-				$received = Container::getModel('AppData');
+				$received = Container::getModel('Received');
 				$date = $_POST['date'];
 				if($date != '') 
 				{
@@ -488,7 +488,7 @@ class AppController extends Action
 		if(isset($_POST)) 
 		{
 			$id = $_POST['id'];
-			$received = Container::getModel('AppData');
+			$received = Container::getModel('Received');
 			$received->__set('id', $id);
 
 			if($received->removeReceived()) 
@@ -519,7 +519,7 @@ class AppController extends Action
 
 			if($type == 'filter')
 			{
-				$received = Container::getModel('AppData');
+				$received = Container::getModel('Received');
 				$received->__set('id', $id);
 				$dataReceived = $received->filterReceivedId();
 				print_r(json_encode($dataReceived, JSON_UNESCAPED_UNICODE));
@@ -533,7 +533,7 @@ class AppController extends Action
 				$wallet = $form[3]['value'];
 				$category = $form[4]['value'];
 
-				$received = Container::getModel('AppData');
+				$received = Container::getModel('Received');
 				$received->__set('id', $id);
 				$received->__set('description', $description);
 				$received->__set('value', $value);
@@ -574,7 +574,7 @@ class AppController extends Action
 		if(isset($_POST)) 
 		{
 			$id = $_POST['id'];
-			$received = Container::getModel('AppData');
+			$received = Container::getModel('Received');
 			$received->__set('id', $id);
 
 			if($received->concludeReceived()) 

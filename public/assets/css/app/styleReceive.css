@@ -417,6 +417,9 @@
   .areaPayStatus {
     margin-bottom: 70px;
   }
+  .payReceived h4, .payReceivable h4 {
+    font-size: 15px;
+  }
 }
 /* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
 @media (min-width: 576px) and (max-width: 767.98px) {

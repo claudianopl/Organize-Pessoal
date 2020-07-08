@@ -192,9 +192,10 @@ function sectionAppFilter() {
 
 
 /**
- * Função de execução do modal quando solicitado.
+ * Evento de click.
+ * Atua na execução o modal de inserção da receita.
  */
-function executeModalNewReceived(){
+$('.sectionAppTwoRecive').click(() => {
   $('.newReceiveArea').show();
   $('.newReceiveArea').addClass('ReceiveAreaAnimation');
 
@@ -204,14 +205,26 @@ function executeModalNewReceived(){
       $('.newReceiveArea').hide();
     }, 1000);
   })
-}
+})
 
 /**
- * Evento de click.
- * Atua na execução o modal de inserção da receita.
+ * Evento change.
+ * O evento abre as opções que estão dentro do select de repetição, que são as 
+ * opções de fixas e parceladas.
  */
-$('.sectionAppTwoRecive').click(() => {
-  executeModalNewReceived();
+$('.enrollment').on('change', function(e) {
+  const value = $(this).val()
+  if(value == 'Única' || value == '') {
+    $('.fixed').hide();
+    $('.parcel').hide();
+  }
+  if(value == 'Fixa') {
+    $('.parcel').hide();
+    $('.fixed').slideToggle('slow');
+  } else if(value == 'Parcelada') {
+    $('.fixed').hide();
+    $('.parcel').slideToggle('slow');
+  }
 })
 
 
@@ -263,26 +276,6 @@ $('.newReceiveArea form').on('submit', function (e) {
         }
       }
     })
-  }
-})
-
-/**
- * Evento change.
- * O evento abre as opções que estão dentro do select de recepetição, que são as 
- * opções de fixas e parceladas.
- */
-$('.enrollment').on('change', function(e) {
-  const value = $(this).val()
-  if(value == 'Única' || value == '') {
-    $('.fixed').hide();
-    $('.parcel').hide();
-  }
-  if(value == 'Fixa') {
-    $('.parcel').hide();
-    $('.fixed').slideToggle('slow');
-  } else if(value == 'Parcelada') {
-    $('.fixed').hide();
-    $('.parcel').slideToggle('slow');
   }
 })
 
@@ -449,7 +442,5 @@ $(document).ready(() => {
   $('.fixed').hide();
   $('.parcel').hide();
   $('.updateReceiveArea').hide();
-  $('.updateFixed').hide();
-  $('.updateParcel').hide();
   $('#messege').hide();
 })

@@ -15,10 +15,10 @@
 }
 .sectionAppExpenseFilterContainer {
   position: relative;
-  width: 250px;
+  width: 200px;
   margin-right: 30px;
 }
-.sectionAppExpenseFilterContainer:nth-child(3) {
+.sectionAppExpenseFilterContainer:nth-child(4) {
   width: auto;
   margin-right: 0;
 }
@@ -41,6 +41,27 @@
   animation: moveTop 1s;
   animation-delay: 0.5s;
   animation-fill-mode: backwards;
+}
+.sectionAppTwoFilterDadosDate {
+  animation: moveTop 1s;
+  animation-delay: 0.75s;
+  animation-fill-mode: backwards;
+}
+.sectionAppTwoFilterDadosDate input {
+  display: block;
+  width: 100%;
+  border-radius: 18px;
+  padding: 7px 10px;
+  font-size: 15px;
+  color: #8491A5;
+  font-weight: 500;
+  box-shadow: 0px 4px 0px rgba(227, 78, 78, 0.7), 
+  0px 0px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+}
+.sectionAppTwoFilterDadosDate input:focus{
+  outline: 0;
+  border: none;
 }
 .sectionAppExpenseFilterAllActive,
 .sectionAppExpenseFilterCategoryActive {
@@ -82,7 +103,7 @@
 .sectionAppExpenseFilterButton {
   cursor: pointer;
   animation: moveTop 1s;
-  animation-delay: 0.75s;
+  animation-delay: 1s;
   animation-fill-mode: backwards;
 }
 .sectionAppExpenseFilterButtonMobile {
@@ -102,7 +123,7 @@
   cursor: pointer;
   transition: 1s;
   animation: moveTop 1s;
-  animation-delay: 1s;
+  animation-delay: 1.25s;
   animation-fill-mode: backwards;
 }
 .sectionAppExpenseThrow h4 {
@@ -125,7 +146,7 @@
   border-radius: 18px;
   text-align: center;
   animation: moveRight 1s;
-  animation-delay: 1.25s;
+  animation-delay: 1.5s;
   animation-fill-mode: backwards;
 }
 .sectionAppMessageExpense h3 {
@@ -133,8 +154,212 @@
   color: #555555;
 }
 
-/* Responsividade */
 
+/* Total */
+.areaPayStatus {
+  margin-top: 30px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px 10px;
+  display: flex;
+  width: 100%;
+  animation: moveRight 1.5s;
+  animation-delay: 1s;
+  animation-fill-mode: backwards;
+}
+.paidExpenses {
+  flex: 1;
+  margin-right: 15px;
+  text-align: center;
+}
+.payExpenses {
+  flex: 1;
+  text-align: center;
+}
+.paidExpenses h4, .payExpenses h4 {
+  color: #9A9A9A;
+}
+
+
+/* MODAL INSERÇÃO NOVA DESPESA / MODAL UPDTADE DE INSERÇÃO */
+.newExpensesArea,
+.updateExpensesArea {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 10;
+  /*opacity: 0;
+  transition: 1s;
+  transform: translate3d(0,0,-100px);*/
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 1s;
+}
+.ExpensesAreaAnimation {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.newExpensesExit,
+.updateExpensesExit {
+  background: rgba(0, 0, 0, 0.4);
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+  position: absolute;
+}
+
+.newExpensesForm,
+.updateExpensesForm {
+  width: 60%;
+  height: auto;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(231, 231, 231,0.25);
+  z-index: 4;
+  position: relative;
+  padding: 10px;
+}
+.newExpensesFormTitle,
+.updateExpensesFormTitle {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #CCCCCC;
+}
+.newExpensesFormTitle img,
+.updateExpensesFormTitle img {
+  margin-right: 15px;
+}
+.newExpensesFormTitle h3,
+.updateExpensesFormTitle h3 {
+  color: #555555;
+  font-weight: 500;
+}
+.newExpensesForm p,
+.updateExpensesForm p{
+  margin-top: 5px;
+}
+
+/* INPUNTS FORM */
+.newExpensesLine label,
+.updateExpensesLine label{
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+.newExpensesLine label img,
+.updateExpensesLine label img{
+  margin-top: 5px;
+  margin-right:10px;
+  margin-left: 15px;
+}
+.newExpensesLine:nth-child(1) input,
+.newExpensesLine:nth-child(2) input,
+.newExpensesLine:nth-child(3) select,
+.updateExpensesLine:nth-child(1) input,
+.updateExpensesLine:nth-child(2) input,
+.updateExpensesLine:nth-child(3) select{
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  color: #555555;
+  font-weight: 500;
+  border-radius: 18px;
+  border: 1px solid #ccddef;
+  left: auto;
+  margin-bottom: 15px;
+}
+.newExpensesLine:nth-child(4) select,
+.newExpensesLine:nth-child(4) input{
+  width: 50%;
+  padding: 10px;
+  font-size: 15px;
+  color: #555555;
+  font-weight: 500;
+  border-radius: 18px;
+  border: 1px solid #ccddef;
+  left: auto;
+  margin-bottom: 15px;
+}
+/* left */
+.newExpensesValue,
+.newExpensesWallet,
+.updateExpensesValue,
+.updateExpensesWallet {
+  width: 50%;
+  margin-right: 20px;
+}
+/* right */
+.newExpensesDate,
+.newExpensesCategory,
+.updateExpensesDate,
+.updateExpensesCategory{
+  width: 50%;
+}
+.newExpensesLine:nth-child(1) input:focus,
+.newExpensesLine:nth-child(2) input:focus,
+.newExpensesLine:nth-child(3) select:focus,
+.newExpensesLine:nth-child(4) select:focus,
+.newExpensesLine:nth-child(4) input:focus,
+.updateExpensesLine:nth-child(1) input:focus,
+.updateExpensesLine:nth-child(2) input:focus,
+.updateExpensesLine:nth-child(3) select:focus {
+  border: 1px solid #E34E4E;
+  outline: 0;
+  font-weight: 600;
+}
+.expensesRepetitionSelects {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.newExpensesLine:nth-child(4) select:nth-child(1) {
+  margin-right: 20px;
+}
+.newExpensesLine:nth-child(4) select:nth-child(2),
+.newExpensesLine:nth-child(4) input{
+  border: 2px solid #ccddef;
+}
+/* linhas com display flex */
+.newExpensesLine:nth-child(2),
+.newExpensesLine:nth-child(3),
+.updateExpensesLine:nth-child(2),
+.updateExpensesLine:nth-child(3) {
+  display: flex;
+}
+.newExpensesForm form button,
+.updateExpensesForm form button {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  border: none;
+  padding: 10px 50px;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  background: linear-gradient(98.8deg, #E34E4E 8.34%, #636D7C 91.96%);
+  box-shadow: 0px 4px 4px rgba(89, 223, 131, 0.25);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 1s;
+}
+.newExpensesForm form button:hover,
+.updateExpensesForm form button:hover {
+  padding: 10px 100px;
+}
+.newExpensesForm form button:focus,
+.updateExpensesForm form button:focus{
+  border: none;
+  outline: 0;
+}
+/* Responsividade */
 @media (max-width: 575px) { 
   .sectionAppExpenseFilter {
     flex-direction: column;
@@ -148,7 +373,7 @@
     margin-right: 0;
     margin-bottom: 50px;
   }
-  .sectionAppExpenseFilterContainer:nth-child(3) {
+  .sectionAppExpenseFilterContainer:nth-child(4) {
     margin-bottom: 0;
   }
   .sectionAppExpenseFilterAll {
@@ -174,6 +399,19 @@
   .sectionAppExpenseThrow {
     margin: auto;
   }
+  .areaPayStatus {
+    margin-bottom: 70px;
+  }
+  .paidExpenses h4, .payExpenses h4 {
+    font-size: 15px;
+  }
+  .newExpensesForm,
+  .updateExpensesForm {
+    width: 95%;
+  }
+  .updateExpensesForm form button {
+    font-size: 16px;
+  }
 }
 /* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
 @media (min-width: 576px) and (max-width: 767.98px) {
@@ -181,15 +419,22 @@
     flex-direction: column;
   }
   .sectionAppExpenseFilterContainer {
-    width: 200px;
+    width: 145px;
     margin-right: 10px;
   }
   .sectionAppExpenseFilterAreaLeft {
     margin-bottom: 15px;
   }
   .sectionAppExpenseThrow {
-    margin-top: 15px;
     margin: auto;
+    margin-top: 20px;
+  }
+  .areaPayStatus {
+    margin-bottom: 70px;
+  }
+  .newExpensesForm,
+  .updateExpensesForm {
+    width: 90%;
   }
 }
 
@@ -199,6 +444,16 @@
     width: 200px;
     margin-right: 10px;
   }
+  .sectionAppExpenseFilter {
+    flex-direction: column;
+  }
+  .sectionAppExpenseThrow {
+    margin: auto;
+    margin-top: 20px;
+  }
+  .areaPayStatus {
+    margin-bottom: 70px;
+  }
 }
 
 /* Dispositivos large (desktops com 992px ou mais) */
@@ -206,6 +461,13 @@
   .sectionAppExpenseFilterContainer {
     width: 200px;
     margin-right: 10px;
+  }
+  .sectionAppExpenseFilter {
+    flex-direction: column;
+  }
+  .sectionAppExpenseThrow {
+    margin: auto;
+    margin-top: 20px;
   }
   
 }

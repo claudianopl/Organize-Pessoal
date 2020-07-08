@@ -81,10 +81,88 @@ function selectFilterExpense() {
   }
 }
 
+
+
+/**
+ * Evento click.
+ * Evento ativa a função de abertuda do modal de inserção.
+ */
+$('.sectionAppExpenseThrow').click(() => {
+  $('.newExpensesArea').show();
+  $('.newExpensesArea').addClass('ExpensesAreaAnimation');
+
+  $('.newExpensesExit').click(() => {
+    $('.newExpensesArea').removeClass('ExpensesAreaAnimation');
+    setTimeout(() => {  
+      $('.newExpensesArea').hide();
+    }, 1000);
+  })
+})
+
+/**
+ * Evento change.
+ * O evento abre as opções que estão dentro do select de repetição, que são as 
+ * opções de fixas e parceladas.
+ */
+$('.enrollment').on('change', function(e) {
+  const value = $(this).val()
+  if(value == 'Única' || value == '') {
+    $('.fixed').hide();
+    $('.parcel').hide();
+  }
+  if(value == 'Fixa') {
+    $('.parcel').hide();
+    $('.fixed').slideToggle('slow');
+  } else if(value == 'Parcelada') {
+    $('.fixed').hide();
+    $('.parcel').slideToggle('slow');
+  }
+})
+
+
+/**
+ * Evento de submit.
+ * Criando uma nova despesa o evento verificar se todos os dados obrigatórios 
+ * da despesas foram preenchido, caso estiver tudo correto enviamos os dados via 
+ * ajax para a rota de back-end com o ajax.
+ */
+$('.newExpensesForm form').on('submit', function(e) {
+  e.preventDefault();
+})
+
+
+
+
+function executeModalUpdateExpenses() {
+  $('.updateExpensesArea').show();
+  $('.updateExpensesArea').addClass('ExpensesAreaAnimation');
+
+  $('.updateExpensesExit').click(() => {
+    $('.updateExpensesArea').removeClass('ExpensesAreaAnimation');
+    setTimeout(() => {  
+      $('.updateExpensesArea').hide();
+    }, 1000);
+  })
+}
+/**
+ * Função para atualizar uma despesa.
+ * Vai abrir o modal com os dados daquela despesa nesse modal, para o usuário 
+ * atualizar os dados.
+ * @param {String} id 
+ */
+function updateExpenses(id) {
+
+}
+
 /*
 * Executar quando carregar a página phtml
 */
 $(document).ready(() => {
   expenseNav.hide();
   categoryNav.hide();
+  $('.newExpensesArea').hide();
+  $('.fixed').hide();
+  $('.parcel').hide();
+  $('.updateExpensesArea').hide();
+  $('#messege').hide();
 })
