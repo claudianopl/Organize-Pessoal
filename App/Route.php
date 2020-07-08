@@ -142,10 +142,10 @@ class Route extends Bootstrap {
 		/**
 		 * Rota para comunicação ajax da página /app
 		 */
-		$routes['dateApp'] = array(
-			'route' => "/app/dateApp",
+		$routes['dataApp'] = array(
+			'route' => "/app/dataApp",
 			'controller' => 'AppController',
-			'action' => 'dateApp',
+			'action' => 'dataApp',
 		);
 
 		/**
@@ -200,6 +200,33 @@ class Route extends Bootstrap {
 			'route' => "/app/concludeReceived",
 			'controller' => 'AppController',
 			'action' => 'concludeReceived',
+		);
+
+		/**
+		 * Rota para inserir novas despesas do usuário.
+		 */
+		$routes['insertExpenses'] = array(
+			'route' => "/app/insertExpenses",
+			'controller' => 'AppController',
+			'action' => 'insertExpenses',
+		);
+		
+		/**
+		 * Rota para remover despesas do usuário.
+		 */
+		$routes['expensesRemove'] = array(
+			'route' => "/app/expensesRemove",
+			'controller' => 'AppController',
+			'action' => 'expensesRemove',
+		);
+
+		/**
+		 * Rota para concluir despesas do usuário.
+		 */
+		$routes['expensesConclude'] = array(
+			'route' => "/app/expensesConclude",
+			'controller' => 'AppController',
+			'action' => 'expensesConclude',
 		);
 
 		/**

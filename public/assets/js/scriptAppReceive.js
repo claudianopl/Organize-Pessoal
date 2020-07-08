@@ -112,6 +112,7 @@ function sectionAppFilter() {
     data: data,
     dataType: 'json',
     success: (d) => {
+      console.log(d)
       if(d.received.length > 0) {
         $('.sectionAppTable').show('slow');
         $('.sectionAppThreeMessage').hide();
@@ -185,6 +186,9 @@ function sectionAppFilter() {
         $('.sectionAppTable').hide();
         $('.sectionAppThreeMessage').show('slow');
       }
+    },
+    error: e => {
+      console.log(e)
     }
     
   })
@@ -237,7 +241,7 @@ $('.enrollment').on('change', function(e) {
  */
 $('.newReceiveArea form').on('submit', function (e) {
   e.preventDefault();
-  $('.loadingArea').show();
+  //$('.loadingArea').show();
   let form = $(this).serializeArray();
   const desc = form[0];
   const value = form[1];

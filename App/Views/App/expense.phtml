@@ -122,21 +122,22 @@
               </div>
             </div>
 
-            <div class="sectionAppMessageExpense">
-              <h3>
-                Você não possui contas a pagar. Por favor, 
-                comece agora a lançar as suas despesas.
-              </h3>
-            </div>
-            
-  
-            
+            <?php 
+            if(count($this->view->expenses) == 0) { $display = 'none';
+            ?>
 
-            <!--
-              * CASO NÃO ESTIVER VAZIA, IMPRIMIR A TABELA E PREENCHER A TABELA
-            -->
+              <div class="sectionAppMessageExpense">
+                <h3>
+                  Você não possui contas a pagar. Por favor, 
+                  comece agora a lançar as suas despesas.
+                </h3>
+              </div>
+
+            <?php 
+            } else {$display = 'block';}
+            ?>
             
-            <div class="sectionAppTable">
+            <div class="sectionAppTable" style="display: <?php echo $display; ?>;">
               <article class="sectionAppTableTitle">
                 <p class="desc">Descrição</p>
                 <p class="date">Vencimento</p>
@@ -144,47 +145,61 @@
                 <p class="enrollment">Parcelas</p>
                 <p class="price">Valor</p>
               </article>
-              <article class="sectionAppTableItem">
-                <p class="desc">dasdasdasdasdsa</p>
-                <p class="date">15/06/2020</p>
-                <p class="category">bla bla bla</p>
-                <p class="enrollment">dasdas</p>
-                <p class="price">
-                  R$ 00,00
-                  <!--
-                    PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
-                    SE VAI SER POR AJAX OU LINK
-                  -->
-                  <img src="/assets/images/app/appGlobal/remove.svg">
-                  <img src="/assets/images/app/appGlobal/update.svg">
-                  <img src="/assets/images/app/appGlobal/conclude.svg">
-                </p>
-              
-              </article>
-              <article class="sectionAppTableItem">
-                <p class="desc">dasdasdasdasdsa</p>
-                <p class="date">15/06/2020</p>
-                <p class="category">bla bla bla</p>
-                <p class="enrollment">dasdas</p>
-                <p class="price">
-                  R$ 00,00
-                  <!--
-                    PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
-                    SE VAI SER POR AJAX OU LINK
-                  -->
-                  <img src="/assets/images/app/appGlobal/remove.svg">
-                  <img src="/assets/images/app/appGlobal/update.svg">
-                  <img src="/assets/images/app/appGlobal/conclude.svg">
-                </p>
-              </article>
+              <?php foreach($this->view->expenses as $key => $value) {?>
+
+                <article class="sectionAppTableItem" id='<?php echo $value['id'] ?>'>
+                  <p class="desc">
+                    <?php echo $value['description']?>
+                  </p>
+                  <p class="date">
+                    <?php echo date_format(new DateTime($value['date']), 'd/m/Y');?>
+                  </p>
+                  <p class="category">
+                    <?php echo $value['category']; ?>
+                  </p>
+                  <p class="enrollment">
+                    <?php ; 
+                        if($value['enrollment'] == 'Parcelada') {
+                          echo $value['n_parcel_pay'].'/'.$value['n_parcel'];
+                        }
+                        else if($value['enrollment'] == 'Fixa') {
+                          echo $value['status_parcel_fixed'];
+                        }
+                        else {
+                          echo $value['enrollment'];
+                        } 
+                      ?>
+                    </p>
+                  <p class="price">
+                    R$ <?php echo $value['value']; ?>
+                    <!--
+                      PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
+                      SE VAI SER POR AJAX OU LINK
+                    -->
+                    <img src="/assets/images/app/appGlobal/remove.svg"
+                    onclick="removeExpense('<?php echo $value['id'] ?>')">
+                    <img src="/assets/images/app/appGlobal/update.svg"
+                    onclick="updateExpense('<?php echo $value['id'] ?>')">
+                    <?php if($value['status'] == 0) {?>
+                      <img src="/assets/images/app/appGlobal/conclude.svg"
+                      onclick="concludeExpense('<?php echo $value['id'] ?>')">
+                    <?php }?>
+                  </p>
+                </article>
+
+              <?php } ?>
             </div>
 
             <div class="areaPayStatus">
               <div class="paidExpenses">
-                <h4>Pagas: R$00,00</h4>
+                <h4>Pagas: <?php 
+                  echo("R$".$this->view->payments['ExpensesPayme']);
+                  ?></h4>
               </div>
               <div class="payExpenses">
-                <h4>A pagar: R$00,00</h4>
+                <h4>A pagar: <?php 
+                  echo("R$".$this->view->payments['ExpensesNotPayme']);
+                  ?></h4>
               </div>
             </div>
 
@@ -193,6 +208,7 @@
       </div>
     </section>
 
+    <!-- Modal de inserção de despesas -->
     <div class="newExpensesArea">
       <div class="newExpensesExit"></div>
       <div class="newExpensesForm">
@@ -208,7 +224,7 @@
               <img src="/assets/images/app/appGlobal/iconDescModal.svg"> Descição:
             </label>
             <input type="text" id='newExpensesDesc'
-            placeholder="Ex: Investimento na bolsa de valor." name="expensesDesc">
+            placeholder="Ex: Investimento na bolsa de valor." name="Desc">
           </article>
 
           <div class="newExpensesLine">
@@ -217,7 +233,7 @@
                 <img src="/assets/images/app/appGlobal/iconValueModal.svg"> Valor:
               </label>
               <input id='newExpensesValue' type="number" step="0.01" min="0.01" 
-              placeholder="00.00R$" name="expensesValue">
+              placeholder="00.00R$" name="Value">
             </article>
 
             <article class="newExpensesDate">
@@ -225,7 +241,7 @@
                 <img src="/assets/images/app/appGlobal/iconCalendarModal.svg"> Data:
               </label>
               <input type="date" id='newExpensesDate' placeholder="dd/mm/aaaa"
-              name="expensesDate">
+              name="Date">
             </article>
           </div>
 
@@ -234,7 +250,7 @@
               <label for="newExpensesWallet">
                 <img src="/assets/images/app/appGlobal/iconWalletModal.svg"> Carteira
               </label>
-              <select id="newExpensesWallet" name="expensesWallet">
+              <select id="newExpensesWallet" name="Wallet">
                 <option value="">Carteiras</option>
 
                 <?php
@@ -255,7 +271,7 @@
               <label for="newExpensesCategory">
                 <img src="/assets/images/app/appGlobal/iconCategoryModal.svg"> Categoria
               </label>
-              <select id='newExpensesCategory' name="receiveCategory">
+              <select id='newExpensesCategory' name="Category">
                 <option value="">Categorias</option>
                 <option value="Alimentação">Alimentação</option>
                 <option value="Assinaturas e serviços">Assinaturas e serviços</option>
@@ -284,19 +300,19 @@
                 <img src="/assets/images/app/appGlobal/iconRepetitionModal.svg"> Repetição
               </label>
               <div class="expensesRepetitionSelects">
-                <select class="enrollment" name="expensesRepetition">
+                <select class="enrollment" name="Repetition">
                   <option value=''>Repetições</option>
                   <option value='Única'>Única</option>
                   <option value='Fixa'>Fixa</option>
                   <option value='Parcelada'>Parcaleda</option>
                 </select>
-                <select class="fixed" name="expensesRepetitionFixed">
+                <select class="fixed" name="RepetitionFixed">
                   <option value=''>Categorias fixas</option>
                   <option value='Mensal'>Mensal</option>
                   <option value='Anual'>Anual</option>
                 </select>
                 <input class='parcel' type="number" min="1" max="420"
-                name='expensesRepetitionParcel'>
+                name='RepetitionParcel'>
               </div>
             </article>
           </div>

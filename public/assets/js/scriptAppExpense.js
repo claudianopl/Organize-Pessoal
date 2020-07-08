@@ -128,9 +128,75 @@ $('.enrollment').on('change', function(e) {
  */
 $('.newExpensesForm form').on('submit', function(e) {
   e.preventDefault();
+  $('.loadingArea').show();
+  let form = $(this).serializeArray();
+  const desc = form[0];
+  const value = form[1];
+  const date = form[2];
+  const wallet = form[3];
+  const category = form[4];
+  const repetition = form[5];
+  const parcel = form[7];
+  let validate = true
+  if(desc.value.length < 3 || value.value == '' || date.value == '' || 
+  wallet.value == '' || category.value == '' || repetition.value == '') {
+    //$('.loadingArea').hide();
+    $('.newExpensesForm p').addClass('error');
+    $('.newExpensesForm p').html('Informação inválido, por favor, verifique as informações.');
+    validate = false;
+  }
+  if(parseInt(parcel.value) > 420) {
+    $('.loadingArea').hide();
+    $('.newExpensesForm p').addClass('error');
+    $('.newExpensesForm p').html('Número de parcelas máximas são de 420, por favor, altere as parcelas.');
+    validate = false;
+  }
+  if(validate) {
+    $.ajax({
+      type: 'post',
+      url: '/app/insertExpenses',
+      data: form,
+      dataType: 'json',
+      success: (d) => {
+        if(d.messege == 'success') {
+          location.reload();
+        } else {
+          $('.loadingArea').hide();
+          $('.newExpensesForm p').addClass('error');
+          $('.newExpensesForm p').html(d.messege);
+        }
+      },
+      error: e => {
+        console.log(e);
+      }
+    })
+  }
 })
 
-
+/**
+ * Função para remover uma despesa.
+ * Após remover, vamos apresentar uma mensagem ao usuário informando que foi 
+ * removida com sucesso.
+ * @param {String} id 
+ */
+function removeExpense(id) {
+  $.ajax({
+    type: 'post',
+    url: '/app/expensesRemove',
+    data: {'id':id},
+    dataType: 'json',
+    success: d => {
+      if(d.messege == 'success') {
+        location.reload();
+      }
+      else {
+        $('#messege').show('slow');
+        $('#messege').html('Ops... Um error inesperado aconteceu.');
+        $('#messege').addClass('error');
+      }
+    }
+  });
+}
 
 
 function executeModalUpdateExpenses() {
@@ -144,15 +210,40 @@ function executeModalUpdateExpenses() {
     }, 1000);
   })
 }
+
 /**
  * Função para atualizar uma despesa.
  * Vai abrir o modal com os dados daquela despesa nesse modal, para o usuário 
  * atualizar os dados.
  * @param {String} id 
  */
-function updateExpenses(id) {
-
+function updateExpense(id) {
+  console.log(id);
 }
+
+
+function concludeExpense(id) {
+  $.ajax({
+    type: 'post',
+    url: '/app/expensesConclude',
+    data: {'id':id},
+    dataType: 'json',
+    success: d => {
+      if(d.messege == 'success') {
+        location.reload();
+      }
+      else {
+        $('#messege').show('slow');
+        $('#messege').html('Ops... Um error inesperado aconteceu.');
+        $('#messege').addClass('error');
+      }
+    },
+    error: e => {
+      console.log(e);
+    }
+  });
+}
+
 
 /*
 * Executar quando carregar a página phtml
