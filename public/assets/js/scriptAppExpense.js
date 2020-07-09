@@ -50,35 +50,121 @@ categoryNav.click((e) => {
 
 
 function selectFilterExpense() {
-  let filterExpense = expenseSelect.html();
+  let filterStatus = expenseSelect.html();
   let filterCategory = categorySelect.html();
-  if(filterExpense == 'Todas despesas') {
-    filterExpense = '';
+  let filterDate = $('.sectionAppTwoFilterDadosDate input').val();
+  if(filterStatus == 'Todas despesas') {
+    filterStatus = '';
   }
   if(filterCategory == 'Todas categorias') {
     filterCategory = '';
   }
-  if(filterExpense != '' || filterCategory != '') {
-    console.log('ok')
-    /*
-    $.ajax({
-      type: 'post',
-      url: window.location.pathname,
-      data: `receive=${filterReceive}&category=${filterCategory}`,
-      dataType: 'html',
-      success: (d) => {
-        console.log(d.receitas)
-      },
-      error: (e) => {
-        console.log('error')
-      }
-    })
-    */
-    /*
-    * CRIAR A LÓGICA PARA SE COMUNICAR COM A ROTA DO BACKEND E NÃO COM A 
-    * ROTA DO FRONT-END
-    */
+  if(filterDate == undefined) {
+    filterDate='';
   }
+
+  /**
+   * Criando a data do ajax.
+   * Formatando e criando um objeto denominado dataObj que recebe os dados da 
+   * filtragem, se algum dado não for vazio, formatamos o status da daspesa e 
+   * criamos o dataObj com os dados da filtragem do usuário para enviarmos 
+   * ao ajax. Caso contrário, criamos o dataObj com todos os dados vazios.
+   */
+  if (filterStatus == 'Despesas Pagas'){
+    filterStatus = 1;
+  }
+  else if(filterStatus == 'Despesas Não Pagas') {
+    filterStatus = 0;
+  } 
+  const dataObj = {
+    'status':filterStatus, 
+    'category':filterCategory, 
+    'date':filterDate
+  };
+
+  $.ajax({
+    type: 'post',
+    url: '/app/filterExpenses',
+    data: dataObj,
+    dataType: 'json',
+    success: d => {
+      if(d.data.length > 0) {
+        $('.sectionAppTable').show('slow');
+        $('.sectionAppMessageExpense').hide();
+
+        $('.sectionAppTableItem').remove();
+        let fatherTable = $('.sectionAppTable');
+
+        d.data.forEach(element => {
+          let sectionAppTableItem = document.createElement('article');
+          sectionAppTableItem.className = 'sectionAppTableItem';
+          sectionAppTableItem.id = element.id;
+
+          let desc = document.createElement('p');
+          desc.className = 'desc';
+          desc.innerHTML = element.description;
+
+          let date = document.createElement('p');
+          date.className = 'date';
+          let extractDate = element.date.split('-');
+          date.innerHTML = `${extractDate[2]}/${extractDate[1]}/${extractDate[0]}`;
+        
+          let category = document.createElement('p');
+          category.className = 'category';
+          category.innerHTML = (element.category);
+
+          let enrollment = document.createElement('p');
+          enrollment.className = 'enrollment';
+          if(element.enrollment == 'Parcelada') { 
+            enrollment.innerHTML = element.n_parcel_pay+'/'+element.n_parcel;
+          }
+          else if(element.enrollment == 'Fixa') {
+            enrollment.innerHTML = element.status_parcel_fixed;
+          }
+          else {
+            enrollment.innerHTML = element.enrollment;
+          }
+
+          let price = document.createElement('p');
+          price.className = 'price';
+          if(element.status == 0) {
+            price.innerHTML = `R$${element.value} 
+            <img src="/assets/images/app/appGlobal/remove.svg"
+            onclick="removeReceived('${element.id}')">
+            <img src="/assets/images/app/appGlobal/update.svg"
+            onclick="updateReceived('${element.id}')">
+            <img src="/assets/images/app/appGlobal/conclude.svg"
+            onclick="concludeReceived('${element.id}')">`;
+          }
+          else {
+            price.innerHTML = `R$${element.value} 
+            <img src="/assets/images/app/appGlobal/remove.svg"
+            onclick="removeReceived('${element.id}')">
+            <img src="/assets/images/app/appGlobal/update.svg"
+            onclick="updateReceived('${element.id}')">`;
+          }
+
+          sectionAppTableItem.append(desc);
+          sectionAppTableItem.append(date);
+          sectionAppTableItem.append(category);
+          sectionAppTableItem.append(enrollment);
+          sectionAppTableItem.append(price);
+
+          fatherTable.append(sectionAppTableItem);
+
+          $('.paidExpenses h4').html(`Recebido: R$${d.sum.ExpensesPayme}`);
+          $('.payExpenses h4').html(`Recebido: R$${d.sum.ExpensesNotPayme}`);
+        })
+      }
+      else {
+        $('.paidExpenses h4').html(`Recebido: R$${d.sum.ExpensesPayme}`);
+        $('.payExpenses h4').html(`Recebido: R$${d.sum.ExpensesNotPayme}`);
+        $('.sectionAppTable').hide();
+        $('.sectionAppMessageExpense h3').html('Você não possui contas neste filtro.')
+        $('.sectionAppMessageExpense').show('slow');
+      }
+    }
+  })
 }
 
 
@@ -165,9 +251,6 @@ $('.newExpensesForm form').on('submit', function(e) {
           $('.newExpensesForm p').addClass('error');
           $('.newExpensesForm p').html(d.messege);
         }
-      },
-      error: e => {
-        console.log(e);
       }
     })
   }
@@ -175,8 +258,6 @@ $('.newExpensesForm form').on('submit', function(e) {
 
 /**
  * Função para remover uma despesa.
- * Após remover, vamos apresentar uma mensagem ao usuário informando que foi 
- * removida com sucesso.
  * @param {String} id 
  */
 function removeExpense(id) {
@@ -198,7 +279,9 @@ function removeExpense(id) {
   });
 }
 
-
+/**
+ * Função de execução do modal de atualização quando solicitado.
+ */
 function executeModalUpdateExpenses() {
   $('.updateExpensesArea').show();
   $('.updateExpensesArea').addClass('ExpensesAreaAnimation');
@@ -218,10 +301,72 @@ function executeModalUpdateExpenses() {
  * @param {String} id 
  */
 function updateExpense(id) {
-  console.log(id);
+  executeModalUpdateExpenses();
+   /**
+   * Ajax para retornar e preencher os dados da despesa a ser atualizada.
+   */
+  $.ajax({
+    type: 'post',
+    url: '/app/updateExpenses',
+    data: {'type':'filter','id':id},
+    dataType: 'json',
+    success: d => {
+      $('#updateExpensesDesc').val(d.description);
+      $('#updateExpensesValue').val(d.value);
+      $('#updateExpensesDate').val(d.date);
+      $('#updateExpensesWallet').val(d.id_wallet);
+      $('#updateExpensesCategory').val(d.category);
+    }
+  })
+
+  /**
+   * Evento de submit.
+   * O evento verificar se todos os dados obrigatórios da despesa foram 
+   * preenchida, caso estiver tudo correto enviamos os dados via ajax para a 
+   * rota de back-end para efeturamos o update.
+   */
+  $('.updateExpensesForm form').on('submit', function (e) {
+    e.preventDefault();
+    $('.loadingArea').show();
+    let form = $(this).serializeArray();
+    const desc = form[0];
+    const value = form[1];
+    const date = form[2];
+    const wallet = form[3];
+    const category = form[4];
+    let validate = true;
+    if(desc.value.length < 3 || value.value == '' || date.value == '' || 
+    wallet.value == '' || category.value == '') {
+      $('.loadingArea').hide();
+      $('.updateReceiveForm p').addClass('error');
+      $('.updateReceiveForm p').html('Informação inválido, por favor, verifique as informações.');
+      validate = false;
+    }
+    if(validate) {
+      $.ajax({
+        type: 'post',
+        url: '/app/updateExpenses',
+        data: {'type':'update','id':id, 'form':form},
+        dataType: 'json',
+        success: d => {
+          if(d.messege == 'success'){
+            location.reload();
+          }
+          else {
+            $('.loadingArea').hide();
+            $('.updateExpensesForm p').addClass('error');
+            $('.updateExpensesForm p').html(d.messege);
+          }
+        }
+      })
+    }
+  })
 }
 
-
+/**
+ * Função para concluir uma despesa.
+ * @param {String} id 
+ */
 function concludeExpense(id) {
   $.ajax({
     type: 'post',
@@ -237,9 +382,6 @@ function concludeExpense(id) {
         $('#messege').html('Ops... Um error inesperado aconteceu.');
         $('#messege').addClass('error');
       }
-    },
-    error: e => {
-      console.log(e);
     }
   });
 }

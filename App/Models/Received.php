@@ -31,8 +31,6 @@ class Received extends Model
     $this->$attribute = $value;
   }
   
-
- 
   /**
    * A função salva os dados da nova receita no banco de dados.
    * @access public
@@ -70,13 +68,12 @@ class Received extends Model
     return $stmt->fetch(\PDO::FETCH_ASSOC);
   }
 
-
   /**
-   * Retornar receita localizada por id da receita.
+   * Retornar a receita localizada pelo id da receita.
    * @access public
    * @return array com os dados da receita
    */
-  public function filterReceivedId() 
+  public function filterId() 
   {
     $query = 'select * from tb_received where id = :id';
     $stmt = $this->conexao->prepare($query);
@@ -86,13 +83,12 @@ class Received extends Model
     return $stmt->fetch(\PDO::FETCH_ASSOC);
   }
 
-
   /**
-   * A função retorna todas as receitas a receber do mês atual para trás.
+   * A função retorna todas as receitas.
    * @access public
-   * @return array com todas as receitas a receber.
+   * @return array com todas as receitas registradas no banco de dados.
    */
-  public function filterReceiveAll() 
+  public function filterAll() 
   {
     $query = '
     select 
@@ -101,45 +97,20 @@ class Received extends Model
       tb_received 
     where 
       id_wallet = :id_wallet
-    order by date asc
-    ';
+    order by date asc';
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
     $stmt->execute();
 
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
   }
-
-  /**
-   * 
-   */
-  public function filterMonth() 
-  {
-    $query = '
-    select 
-      * 
-    from 
-      tb_received 
-    where 
-      id_wallet = :id_wallet and date between :date and :lastDate
-    order by date asc
-    ';
-    $stmt = $this->conexao->prepare($query);
-    $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
-    $stmt->bindValue(':date', $this->__get('date'));
-    $stmt->bindValue(':lastDate', $this->__get('lastDate'));
-    $stmt->execute();
-
-    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-  }
-
 
   /**
    * A função filtra os dados do banco que o usuário solicitou.
    * @access public
    * @return array com todos os dados solicitados pelo usuário.
    */
-  public function filterReceive() 
+  public function filter() 
   {
     $query = "
     select 
@@ -163,6 +134,31 @@ class Received extends Model
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
   }
 
+  /**
+   * Função para retornamos as receitas do mês.
+   * Usada quando o usuário entra na layout de receitas.
+   * @access public
+   * @return array $stmt com todas as receitas do mês.
+   */
+  public function filterMonth() 
+  {
+    $query = '
+    select 
+      * 
+    from 
+      tb_received 
+    where 
+      id_wallet = :id_wallet and date between :date and :lastDate
+    order by date asc
+    ';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
+    $stmt->bindValue(':date', $this->__get('date'));
+    $stmt->bindValue(':lastDate', $this->__get('lastDate'));
+    $stmt->execute();
+
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+  }
 
   /**
    * A função retornas os pagamentos recebidos e não recebidos do mês.
@@ -205,13 +201,12 @@ class Received extends Model
     return $paymentData;
   }
 
-
   /**
    * A função retornas todos os pagamentos recebidos e não recebidos.
    * @access public
    * @return array com dois elementos, conta recebidas e contas a receber.
    */
-  public function sumReceivedAll() 
+  public function sumAll() 
   {
     $paymentData = array();
 
@@ -243,7 +238,6 @@ class Received extends Model
     return $paymentData;
   }
 
-
   /**
    * Função para remover as receitas.
    * @access public
@@ -258,7 +252,6 @@ class Received extends Model
 
     return true;
   }
-
 
   /**
    * Função para atualizar receitas.
@@ -305,8 +298,6 @@ class Received extends Model
 
     return true;
   }
-
-
 
   /**
    * Função para concluar as receitas.

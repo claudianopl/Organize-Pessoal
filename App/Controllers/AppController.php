@@ -94,7 +94,6 @@ class AppController extends Action
 			$this->view->wallets = $this->userGetWallet();
 			$this->view->expenses = $this->expensesMonth();
 			$this->view->payments = $this->sumMonthReceivedAndExpense(date('Y-m-01'), 'Expense');
-			print_r($this->view->payments);
 
 			$this->render('expense');
 		} else 
@@ -388,6 +387,73 @@ class AppController extends Action
 	}
 
 	/**
+	 * Filtra as receitas e as despesas do usuário.
+	 * @access public
+	 * @param string $data contendo os dados do $_POST.
+	 * @param string $model contendo qual o model a ser executado.
+	 */
+	public function filterReceivedAndExpenses($data, $model)
+	{
+		/**
+		 * Se todos os dados forem vazios, vamos retornar todos os dados registrados 
+		 * no banco de dados.
+		 */
+		if($_POST['date'] == '' && $_POST['status'] == '' && $_POST['category'] == '')
+		{
+			$filterAll = Container::getModel($model);
+			$filterAll->__set('id_wallet', $_COOKIE['userWallet']);
+			$dataFilter['data'] = $filterAll->filterAll();
+			$dataFilter['sum'] = $filterAll->sumAll();
+		}
+
+		/**
+		 * Caso contrário, vamos retornar os dados que foram filtrados no banco 
+		 * de dados.
+		 */
+		else
+		{
+			$filter = Container::getModel($model);
+			$date = $_POST['date'];
+			if($date != '')
+			{
+				$date = explode('/', $date);
+				$month = $date[0];
+				$year = $date[1];
+				$lastDay = cal_days_in_month(CAL_GREGORIAN, $month , $year);
+
+				$startDate = "$year-$month-01";
+				$lastDate = "$year-$month-$lastDay";
+
+				$filter->__set('date', $startDate);
+				$filter->__set('lastDate', $lastDate);
+			}
+			else
+			{
+				$filter->__set('lastDate', '9999-00-00');
+				$filter->__set('date', '0000-00-00');
+			}
+
+			$status = $_POST['status'];
+			if($status != '') 
+			{
+				$filter->__set('status', $status);
+			}
+
+			$category = $_POST['category'];
+			if($category != '')
+			{
+				$filter->__set('category', $category);
+			}
+
+			$filter->__set('id_wallet',$_COOKIE['userWallet']);
+			$dataFilter['data'] = $filter->filter();
+			$dataFilter['sum'] = $filter->sumMonth();
+		}
+
+		return $dataFilter;
+	}
+
+	/**
 	 * Filtra as receitas e despesas mensais.
 	 * A função filtra os dados das receitas da layout receita e os dados das 
 	 * despesas da layout despesa.
@@ -404,6 +470,61 @@ class AppController extends Action
 		$filterMonth->__set('date', $date);
 		$filterMonth->__set('lastDate', $lastDate);
 		return $filterMonth->filterMonth();
+	}
+
+	/**
+	 * Função para atualizar os dados das receitas e despesas do usuário.
+	 * @access public
+	 * @return array $dataFilterId contém os dados da receita ou despesa a ser 
+	 * alterada|| $info cotém a informação se foi ou não alterada.
+	 */
+	public function updateReceivedAndExpenses($data, $model)
+	{
+		$type = $data['type'];
+		$id = $data['id'];
+
+		if($type == 'filter')
+		{
+			$filterId = Container::getModel($model);
+			$filterId->__set('id', $id);
+			$dataFilterId = $filterId->filterId();
+			return $dataFilterId;
+		}
+		else if($type == 'update')
+		{
+			$form = $data['form'];
+			$description = $form[0]['value'];
+			$value = $form[1]['value'];
+			$date = $form[2]['value'];
+			$wallet = $form[3]['value'];
+			$category = $form[4]['value'];
+
+			$updateId = Container::getModel($model);
+			$updateId->__set('id', $id);
+			$updateId->__set('description', $description);
+			$updateId->__set('value', $value);
+			$updateId->__set('date', $date);
+			$updateId->__set('id_wallet', $wallet);
+			$updateId->__set('category', $category);
+
+			$dataFilterId = $updateId->filterId();
+			$enrollment = $dataFilterId['enrollment'];
+
+			if($enrollment == 'Fixa' || $enrollment == 'Parcelada') 
+			{
+				$idParcel = $dataFilterId['id_parcel'];
+				$updateId->__set('id_parcel', $idParcel);
+			}
+			if($updateId->update())
+			{
+				$info['messege'] = 'success';
+			}
+			else
+			{
+				$info['messege'] = 'Um erro inesperado aconteceu, tente novamente mais tarde.';
+			}
+			return $info;
+		}
 	}
 
 	/**
@@ -434,6 +555,7 @@ class AppController extends Action
 	 * @access public
 	 * @param string $model para saber qual model será executado.
 	 * @param string $id para ser concluída.
+	 * @return array
 	 */
 	public function concludeReceivedAndExpenses($model, $id)
 	{
@@ -458,7 +580,6 @@ class AppController extends Action
 	 * Inserir receitas no banco.
 	 * A função insere os dados das receitas.
 	 * @access public
-	 * @return array
 	 */
 	public function insertReceive() 
 	{
@@ -486,76 +607,13 @@ class AppController extends Action
 	 * A função é solicitada através do Ajax e faz a filtragem no banco de dados, 
 	 * retornando apenas os dados requisitados pelo usuário.
 	 * @access public
-	 * @return array
 	 */
 	public function filterReceive() 
 	{
 		if(isset($_POST)) 
 		{
-
-			/**
-			 * Se todos os dados forem vazios, vamos retornar todos os dados que 
-			 * estão pendentes até a atual data.
-			 */
-			if($_POST['date'] == '' && $_POST['status'] == '' && $_POST['category'] == '') 
-			{
-				$received = Container::getModel('Received');
-				$received->__set('id_wallet', $_COOKIE['userWallet']);
-				$dataReceived['received'] = $received->filterReceiveAll();
-				$dataReceived['sumReceived'] = $received->sumReceivedAll();
-			}
-
-			/**
-			 * Caso contrário, vamos retornar os dados que foram filtrados no banco 
-			 * de dados.
-			 */
-			else 
-			{
-				$received = Container::getModel('Received');
-				$date = $_POST['date'];
-				if($date != '') 
-				{
-					$date = explode('/', $date);
-					$month = $date[0];
-					$year = $date[1];
-					$lastDay = cal_days_in_month(CAL_GREGORIAN, $month , $year);
-
-					$startDate = "$year-$month-01";
-					$lastDate = "$year-$month-$lastDay";
-
-					$received->__set('date', $startDate);
-					$received->__set('lastDate', $lastDate);
-				}
-				else 
-				{
-					$received->__set('lastDate', '9999-00-00');
-					$received->__set('date', '0000-00-00');
-				}
-
-				$status = $_POST['status'];
-				if($status == '') 
-				{
-					$received->__set('status', '');
-				} else 
-				{
-					$received->__set('status', $status);
-				}
-
-				$category = $_POST['category'];
-				if($category == '') 
-				{
-					$received->__set('category', '');
-				} else {
-					$received->__set('category', $category);
-				}
-				
-				$received->__set('id_wallet',$_COOKIE['userWallet']);
-				
-				$dataReceived['received'] = $received->filterReceive();
-				$dataReceived['sumReceived'] = $received->sumMonth();
-			}
-
-			print_r(json_encode($dataReceived, JSON_UNESCAPED_UNICODE));
+			$data = $this->filterReceivedAndExpenses($_POST, 'Received');
+			print_r(json_encode($data, JSON_UNESCAPED_UNICODE));
 		}
 	}
 
@@ -578,59 +636,13 @@ class AppController extends Action
 	/**
 	 * Função para atualizar os dados das receitas do usuário.
 	 * @access public
-	 * @return array
 	 */
 	public function updateReceived()
 	{
 		if(isset($_POST))
 		{
-			$type = $_POST['type'];
-			$id = $_POST['id'];
-
-			if($type == 'filter')
-			{
-				$received = Container::getModel('Received');
-				$received->__set('id', $id);
-				$dataReceived = $received->filterReceivedId();
-				print_r(json_encode($dataReceived, JSON_UNESCAPED_UNICODE));
-			}
-			else if($type == 'update')
-			{
-				$form = $_POST['form'];
-				$description = $form[0]['value'];
-				$value = $form[1]['value'];
-				$date = $form[2]['value'];
-				$wallet = $form[3]['value'];
-				$category = $form[4]['value'];
-
-				$received = Container::getModel('Received');
-				$received->__set('id', $id);
-				$received->__set('description', $description);
-				$received->__set('value', $value);
-				$received->__set('date', $date);
-				$received->__set('id_wallet', $wallet);
-				$received->__set('category', $category);
-
-				$dataReceived = $received->filterReceivedId();
-				$enrollment = $dataReceived['enrollment'];
-
-				if($enrollment == 'Fixa' || $enrollment == 'Parcelada') 
-				{
-					$idParcel = $dataReceived['id_parcel'];
-					$received->__set('id_parcel', $idParcel);
-				}
-
-				if($received->update()) 
-				{
-					$info['messege'] = 'success';
-				}
-				else
-				{
-					$info['messege'] = 'Um erro inesperado aconteceu, tente novamente mais tarde.';
-				}
-
-				print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
-			}
+			$data = $this->updateReceivedAndExpenses($_POST, 'Received');
+			print_r(json_encode($data, JSON_UNESCAPED_UNICODE));
 		}
 	}
 	
@@ -655,12 +667,28 @@ class AppController extends Action
 	 * Função para inserir novas despesas.
 	 * A função insere as depesas únicas, fixas e parceladas.
 	 * @access public
-	 * @return array
 	 */
-	public function insertExpenses() {
-		if(isset($_POST)) {
+	public function insertExpenses() 
+	{
+		if(isset($_POST)) 
+		{
 			$info = $this->insertReceiveAndExpenses($_POST, 'Expense');
 			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
+		}
+	}
+
+	/**
+	 * Filtra as despesas do usuário.
+	 * A função é solicitada através do Ajax e faz a filtragem no banco de dados, 
+	 * retornando apenas os dados requisitados pelo usuário.
+	 * @access public
+	 */
+	public function filterExpenses()
+	{
+		if(isset($_POST))
+		{
+			$data = $this->filterReceivedAndExpenses($_POST, 'Expense');
+			print_r(json_encode($data, JSON_UNESCAPED_UNICODE));
 		}
 	}
 
@@ -689,6 +717,19 @@ class AppController extends Action
 			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 		}
 	}
+
+	/**
+	 * Função para atualizar os dados das despesas do usuário.
+	 * @access public
+	 */
+  public function updateExpenses()
+  {
+    if(isset($_POST))
+    {
+			$data = $this->updateReceivedAndExpenses($_POST, 'Expense');
+			print_r(json_encode($data, JSON_UNESCAPED_UNICODE));
+    }
+  }
 
 	/**
 	 * Função para concluir despesas.

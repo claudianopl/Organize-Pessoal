@@ -62,7 +62,6 @@ function sectionAppFilter() {
   let filterStatus = receiveSelect.html();
   let filterCategory = categorySelect.html();
   let filterDate = $('.sectionAppTwoFilterDadosDate input').val();
-  let data = null
 
   if(filterStatus == 'Receitas') {
     filterStatus = '';
@@ -81,27 +80,18 @@ function sectionAppFilter() {
    * criamos o dataObj com os dados da filtragem do usuário para enviarmos 
    * ao ajax. Caso contrário, criamos o dataObj com todos os dados vazios.
    */
-  if(filterStatus != '' || filterCategory != '' || filterDate != '') {
-    if(filterStatus == 'Receitas Não Recebidas') {
-      filterStatus = 0;
-    } else if (filterStatus == 'Receitas Recebidas'){
-      filterStatus = 1;
-    }
-    const dataObj = {
-      'status':filterStatus, 
-      'category':filterCategory, 
-      'date':filterDate
-    };
-    data = dataObj;
-  } 
-  else {
-    const dataObj = {
-      'status':filterStatus, 
-      'category':filterCategory, 
-      'date':filterDate
-    };
-    data = dataObj;
+  if (filterStatus == 'Receitas Recebidas'){
+    filterStatus = 1;
   }
+  else if(filterStatus == 'Receitas Não Recebidas') {
+    filterStatus = 0;
+  } 
+  const dataObj = {
+    'status':filterStatus, 
+    'category':filterCategory, 
+    'date':filterDate
+  };
+  
   
   /**
    * Enviando dados via ajax para a rota do back-end.
@@ -109,18 +99,17 @@ function sectionAppFilter() {
   $.ajax({
     type: 'post',
     url: '/app/filterReceive',
-    data: data,
+    data: dataObj,
     dataType: 'json',
     success: (d) => {
-      console.log(d)
-      if(d.received.length > 0) {
+      if(d.data.length > 0) {
         $('.sectionAppTable').show('slow');
         $('.sectionAppThreeMessage').hide();
 
-        $('.sectionAppTableItem').remove()
+        $('.sectionAppTableItem').remove();
         let fatherTable = $('.sectionAppTable');
 
-        d.received.forEach(element => {
+        d.data.forEach(element => {
           let sectionAppTableItem = document.createElement('article');
           sectionAppTableItem.className = 'sectionAppTableItem';
           sectionAppTableItem.id = element.id;
@@ -178,19 +167,19 @@ function sectionAppFilter() {
           fatherTable.append(sectionAppTableItem);
 
 
-          $('.payReceived h4').html(`Recebido: R$${d.sumReceived.paymentReceived}`);
-          $('.payReceivable h4').html(`Recebido: R$${d.sumReceived.paymentNotReceived}`);
+          $('.payReceived h4').html(`Recebido: R$${d.sum.paymentReceived}`);
+          $('.payReceivable h4').html(`Recebido: R$${d.sum.paymentNotReceived}`);
         });
+        
       } 
       else {
+        $('.payReceived h4').html(`Recebido: R$${d.sum.paymentReceived}`);
+        $('.payReceivable h4').html(`Recebido: R$${d.sum.paymentNotReceived}`);
         $('.sectionAppTable').hide();
+        $('.sectionAppThreeMessage h3').html('Você não possui contas neste filtro.')
         $('.sectionAppThreeMessage').show('slow');
       }
-    },
-    error: e => {
-      console.log(e)
     }
-    
   })
 }
 
@@ -332,21 +321,6 @@ function executeModalUpdateReceived(){
  */
 function updateReceived(id) {
   executeModalUpdateReceived();
-  $('.updateEnrollment').on('change', function(e) {
-    const value = $(this).val();
-    if(value == 'Única' || value == '') {
-      $('.updateFixed').hide();
-      $('.updateParcel').hide();
-    }
-    if(value == 'Fixa') {
-      $('.updateFixed').slideToggle('slow');
-      $('.updateParcel').hide();
-    } else if(value == 'Parcelada') {
-      $('.updateFixed').hide();
-      $('.updateParcel').slideToggle('slow');
-    }
-  })
-
   /**
    * Ajax para retornar e preencher os dados da receita a ser atualizada
    */
@@ -412,8 +386,6 @@ function updateReceived(id) {
 
 /**
  * Função para concluir uma receita.
- * Após concluir, vamos apresentar uma mensagem ao usuário informando que foi 
- * concluído com sucesso.
  * @param {String} id 
  */
 function concludeReceived(id) {

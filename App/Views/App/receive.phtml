@@ -43,7 +43,6 @@
 
           <div class="sectionAppAreaRight">
             <div class="sectionAppOne">
-              <div id="messege"></div>
               <div class="sectionAppOneWallet">
                 <?php $this->importViews('appWallet', 'Receive') ?>
               </div>
@@ -113,21 +112,27 @@
               * LÓGICA PHP
             -->
             <?php 
-              if(count($this->view->receives) == 0) {
-                $display = 'none';
+              if(count($this->view->receives) == 0) 
+              {
+                $displayTable = 'none';
+                $displayMessege = 'block';
+              }
+              else 
+              {
+                $displayTable = 'block';
+                $displayMessege = 'none';
+              }
             ?>
 
-              <div class="sectionAppThreeMessage">
-                <h3>
-                  Você não possui contas a receber. Por favor, comece agora 
-                  a lançar as suas receitas.
-                </h3>
-              </div>
+            <div class="sectionAppThreeMessage"
+            style="display: <?php echo $displayMessege; ?>;">
+              <h3>
+                Você não possui contas a receber. Por favor, comece agora 
+                a lançar as suas receitas.
+              </h3>
+            </div>
               
-            <?php
-              } else { $display = 'block'; }
-            ?>
-            <div class="sectionAppTable" style="display: <?php echo $display; ?>;">
+            <div class="sectionAppTable" style="displayTable: <?php echo $display; ?>;">
               <article class="sectionAppTableTitle">
                 <p class="desc">Descrição</p>
                 <p class="date">Vencimento</p>

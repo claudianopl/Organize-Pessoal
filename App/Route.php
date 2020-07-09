@@ -210,6 +210,24 @@ class Route extends Bootstrap {
 			'controller' => 'AppController',
 			'action' => 'insertExpenses',
 		);
+
+		/**
+		 * Rota para filtrar as despesas do usuário.
+		 */
+		$routes['filterExpenses'] = array(
+			'route' => "/app/filterExpenses",
+			'controller' => 'AppController',
+			'action' => 'filterExpenses',
+		);
+
+		/**
+		 * Rota para editar as despesas do usuário.
+		 */
+		$routes['updateExpenses'] = array(
+			'route' => "/app/updateExpenses",
+			'controller' => 'AppController',
+			'action' => 'updateExpenses',
+		);
 		
 		/**
 		 * Rota para remover despesas do usuário.
