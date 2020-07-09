@@ -3,10 +3,8 @@
   background: #FFFFFF;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 18px;
-  display: flex;
   align-items: center;
   display: flex;
-  align-items: center;
   margin-top: 30px;
   padding: 20px 10px;
   animation: fade 1s;
@@ -17,10 +15,10 @@
 }
 .sectionAppTasksFilterContainer {
   position: relative;
-  width: 250px;
+  width: 200px;
   margin-right: 30px;
 }
-.sectionAppTasksFilterContainer:nth-child(2){
+.sectionAppTasksFilterContainer:nth-child(3){
   width: auto;
   margin-right: 0;
 }
@@ -61,10 +59,30 @@
   color: #ffffff;
   border-radius: 18px;
 }
+.sectionAppTwoFilterDadosDate {
+  animation: moveTop 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: backwards;
+}
+.sectionAppTwoFilterDadosDate input {
+  display: block;
+  width: 100%;
+  border-radius: 18px;
+  padding: 7px 10px;
+  font-size: 15px;
+  color: #8491A5;
+  font-weight: 500;
+  box-shadow: 0px 4px 0px rgba(90, 142, 222, 0.7), 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+}
+.sectionAppTwoFilterDadosDate input:focus {
+  outline: 0;
+  border: 0;
+}
 .sectionAppTasksFilterButton {
   cursor: pointer;
   animation: moveTop 1s;
-  animation-delay: 0.5s;
+  animation-delay: 0.75s;
   animation-fill-mode: backwards;
 }
 .sectionAppTasksFilterButtonMobile {
@@ -186,6 +204,154 @@
 }
 
 
+
+.newTasksArea,
+.updateTasksArea {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 10;
+  opacity: 0;
+  transition: 1s;
+  transform: translate3d(0,0,-100px);
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 1s;
+}
+.TasksAreaAnimation {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.newTasksExit,
+.updateTasksExit{
+  background: rgba(0, 0, 0, 0.4);
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+  position: absolute;
+}
+.newTasksForm,
+.updateTasksForm {
+  width: 60%;
+  height: auto;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(231, 231, 231,0.25);
+  z-index: 4;
+  position: relative;
+  padding: 10px;
+}
+.newTasksFormTitle,
+.updateTasksFormTitle {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #CCCCCC;
+}
+.newTasksFormTitle img,
+.updateTasksFormTitle img {
+  margin-right: 10px;
+}
+.newTasksFormTitle h3,
+.updateTasksFormTitle h3 {
+  color: #555555;
+  font-weight: 500;
+}
+.newTasksLine label
+.updateTasksLine label {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+.newTasksLine label img,
+.updateTasksLine label img {
+  margin-top: 5px;
+  margin-right: 10px;
+  margin-left: 15px;
+}
+.newTasksLine:nth-child(1) textarea,
+.updateTasksLine:nth-child(1) textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  color: #555555;
+  font-weight: 500;
+  border-radius: 18px;
+  border: 1px solid #ccddef;
+  left: auto;
+  margin-bottom: 15px;
+  height: 200px;
+}
+.newTasksLine:nth-child(2) input,
+.newTasksLine:nth-child(2) select,
+.updateTasksLine:nth-child(2) input,
+.updateTasksLine:nth-child(2) select {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  color: #555555;
+  font-weight: 500;
+  border-radius: 18px;
+  border: 1px solid #ccddef;
+  left: auto;
+  margin-bottom: 15px;
+}
+
+.newTasksLine:nth-child(1) textarea:focus,
+.newTasksLine:nth-child(2) input:focus,
+.newTasksLine:nth-child(2) select:focus,
+.updateTasksLine:nth-child(1) textarea:focus,
+.updateTasksLine:nth-child(2) input:focus,
+.updateTasksLine:nth-child(2) select:focus {
+  border: 1px solid #5A8EDE;
+  outline: 0;
+  font-weight: 600;
+}
+.newTasksLine:nth-child(2),
+.updateTasksLine:nth-child(2) {
+  display: flex;
+}
+.newTasksDate,
+.updateTasksDate {
+  width: 50%;
+  margin-right: 20px;
+}
+.newTasksWallet,
+.updateTasksWallet {
+  width: 50%;
+}
+.newTasksForm form button,
+.updateTasksForm form button {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  border: none;
+  padding: 10px 50px;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  background: linear-gradient(98.58deg, #5A8EDE 8.34%, #636D7C 91.96%);
+  box-shadow: 0px 4px 4px #5a8fde46;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 1s;
+}
+.newTasksForm form button:hover,
+.updateTasksForm form button:hover{
+  padding: 10px 100px;
+}
+.newTasksForm form button:focus,
+.updateTasksForm form button:focus {
+  border: none;
+  outline: 0;
+}
+
 @media (max-width: 575px) {
   .sectionAppTasksFilter{
     flex-direction: column;
@@ -199,7 +365,7 @@
     margin-bottom: 50px;
     margin-right: 0;
   }
-  .sectionAppTasksFilterContainer:nth-child(2) {
+  .sectionAppTasksFilterContainer:nth-child(3) {
     margin-bottom: 0;
   }
   .sectionAppTasksFilterAll {
@@ -249,7 +415,10 @@
   .sectionAppTableItemTasks .date img:nth-child(3) {
     margin: 10px 0 0 0;
   }
-  
+  .newTasksForm,
+  .updateTasksForm {
+    width: 95%;
+  }
 }
 /* Dispositivos small (telefones em modo paisagem, com 576px ou mais) */
 @media (min-width: 576px) and (max-width: 767.98px) {
@@ -269,6 +438,17 @@
   .sectionAppTableItemTasks .date {
     min-width: 40%;
     max-width: 40%;
+  }
+  .sectionAppTasksFilter {
+    flex-direction: column;
+  }
+  .sectionAppTasksThrow {
+    margin: auto;
+    margin-top: 20px;
+  }
+  .newTasksForm,
+  .updateTasksForm {
+    width: 90%;
   }
 }
 
@@ -291,6 +471,13 @@
     min-width: 35%;
     max-width: 35%;
   }
+  .sectionAppTasksFilter {
+    flex-direction: column;
+  }
+  .sectionAppTasksThrow {
+    margin: auto;
+    margin-top: 20px;
+  }
 }
 
 /* Dispositivos large (desktops com 992px ou mais) */
@@ -305,6 +492,12 @@
     min-width: 35%;
     max-width: 35%;
   }
-  
+  .sectionAppTasksFilter {
+    flex-direction: column;
+  }
+  .sectionAppTasksThrow {
+    margin: auto;
+    margin-top: 20px;
+  }
 }
 @media (min-width: 1200px) { }

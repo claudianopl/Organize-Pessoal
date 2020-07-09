@@ -53,9 +53,70 @@ function selectFilterTasks() {
 }
 
 
+/**
+ * Evento de click.
+ * Atua na execução do modal de inserção da tarefa.
+ */
+$('.sectionAppTasksThrow').click(() => {
+  $('.newTasksArea').show();
+  $('.newTasksArea').addClass('TasksAreaAnimation');
+
+  $('.newTasksExit').click(() => {
+    $('.newTasksArea').removeClass('TasksAreaAnimation');
+    setTimeout(() => {  
+      $('.newTasksArea').hide();
+    }, 1000);
+  })
+})
+
+
+/**
+ * Função para remover uma tarefa.
+ * @param {String} id 
+ */
+function removeTasks() {
+
+}
+
+/**
+ * Função de execução do modal de atualização quando solicitado.
+ */
+function executeModalUpdateTasks(){
+  $('.updateTasksArea').show();
+  $('.updateTasksArea').addClass('TasksAreaAnimation');
+
+  $('.updateTasksExit').click(() => {
+    $('.updateTasksArea').removeClass('TasksAreaAnimation');
+    setTimeout(() => {  
+      $('.updateTasksArea').hide();
+    }, 1000);
+  })
+}
+
+/**
+ * Função para atualizar uma tarefa.
+ * Vai abrir o modal com os dados daquela tarefa nesse modal, para o usuário 
+ * atualizar os dados.
+ * @param {String} id 
+ */
+function updateTasks() {
+  executeModalUpdateTasks();
+}
+
+/**
+ * Função para concluir uma tarefa.
+ * @param {String} id 
+ */
+function concludeTasks() {
+
+}
+
+
 /*
 * Executar quando carregar a página phtml
 */
 $(document).ready(() => {
   tasksNav.hide();
+  $('.newTasksArea').hide();
+  $('.updateTasksArea').hide();
 })

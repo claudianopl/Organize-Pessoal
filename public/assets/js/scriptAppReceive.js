@@ -186,7 +186,7 @@ function sectionAppFilter() {
 
 /**
  * Evento de click.
- * Atua na execução o modal de inserção da receita.
+ * Atua na execução do modal de inserção da receita.
  */
 $('.sectionAppTwoRecive').click(() => {
   $('.newReceiveArea').show();
@@ -275,8 +275,6 @@ $('.newReceiveArea form').on('submit', function (e) {
 
 /**
  * Função para remover uma receita.
- * Após remover, vamos apresentar uma mensagem ao usuário informando que foi 
- * removida com sucesso.
  * @param {String} id 
  */
 function removeReceived(id) {
