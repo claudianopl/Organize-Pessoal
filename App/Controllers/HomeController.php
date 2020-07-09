@@ -194,7 +194,7 @@ class HomeController extends Action
 						];
 						$name = 'user';
 						$jwt = $this->econdeJWT($data);
-						setcookie($name, $jwt, time()+3600);
+						setcookie($name, $jwt);
 
 						/**
 						 * 
@@ -203,7 +203,10 @@ class HomeController extends Action
 						$wallet->__set('id_user', $date[0]['id']);
 						$wallets = $wallet->getUserWallet();
 						$walletId = $wallets[0]['id'];
-						setcookie('userWallet', $walletId);
+						
+						session_start();
+						
+						$_SESSION['userWallet'] = $walletId;
 						// Informando ao ajax que o login foi efetuado com sucesso
 						$info['messege'] = 'success';
 					}

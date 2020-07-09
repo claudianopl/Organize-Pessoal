@@ -4,6 +4,10 @@ namespace App\Controllers;
 use MF\Controller\Action;
 use MF\Model\Container;
 
+
+session_start();
+
+
 date_default_timezone_set("America/Sao_Paulo");
 
 class AppController extends Action 
@@ -174,8 +178,7 @@ class AppController extends Action
 		if(isset($_POST)) 
 		{
 			$wallet = $_POST['wallet'];
-			setcookie('userWallet', null, -1, '/');
-			setcookie('userWallet', $wallet);
+			$_SESSION['userWallet'] = $wallet;
 		}
 	}
 
@@ -381,7 +384,7 @@ class AppController extends Action
 		$received = Container::getModel($model);
 		$received->__set('date', $date);
 		$received -> __set('lastDate', $lastDate);
-		$received->__set('id_wallet', $_COOKIE['userWallet']);
+		$received->__set('id_wallet', $_SESSION['userWallet']);
 
 		return $received->sumMonth();
 	}
@@ -401,7 +404,7 @@ class AppController extends Action
 		if($_POST['date'] == '' && $_POST['status'] == '' && $_POST['category'] == '')
 		{
 			$filterAll = Container::getModel($model);
-			$filterAll->__set('id_wallet', $_COOKIE['userWallet']);
+			$filterAll->__set('id_wallet', $_SESSION['userWallet']);
 			$dataFilter['data'] = $filterAll->filterAll();
 			$dataFilter['sum'] = $filterAll->sumAll();
 		}
@@ -445,7 +448,7 @@ class AppController extends Action
 				$filter->__set('category', $category);
 			}
 
-			$filter->__set('id_wallet',$_COOKIE['userWallet']);
+			$filter->__set('id_wallet',$_SESSION['userWallet']);
 			$dataFilter['data'] = $filter->filter();
 			$dataFilter['sum'] = $filter->sumMonth();
 		}
@@ -466,7 +469,7 @@ class AppController extends Action
 		$date = date("Y-m-01");
 		$lastDate = date("Y-m-t");
 		$filterMonth = Container::getModel($model);
-		$filterMonth->__set('id_wallet', $_COOKIE['userWallet']);
+		$filterMonth->__set('id_wallet', $_SESSION['userWallet']);
 		$filterMonth->__set('date', $date);
 		$filterMonth->__set('lastDate', $lastDate);
 		return $filterMonth->filterMonth();
@@ -756,8 +759,7 @@ class AppController extends Action
 	 */
 	public function Logoff() 
 	{
-		unset($_COOKIE['userWallet']);
-		setcookie('userWallet', null, -1, '/');
+		session_destroy();
 		unset($_COOKIE['user']);
 		setcookie('user', null, -1, '/');
 		header('Location: /');
