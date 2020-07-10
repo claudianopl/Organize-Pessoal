@@ -67,6 +67,50 @@ $('.sectionAppTasksThrow').click(() => {
       $('.newTasksArea').hide();
     }, 1000);
   })
+});
+
+
+/**
+ * Evento de submit.
+ */
+$('.newTasksForm form').on('submit', function(e) {
+  e.preventDefault();
+  $('.loadingArea').show();
+  const form = $(this).serializeArray();
+  const desc = form[0];
+  const date = form[1];
+  const wallet = form[2];
+  let validate = true
+  if(date.value.length > 16) {
+    $('.loadingArea').hide();
+    $('.newTasksForm p').addClass('error');
+    $('.newTasksForm p').html('Data contém mais caracteres que o necessário, por favor, verifique a data.');
+    validate = false;
+  }
+  if(desc.value.length < 3 || date.value == '' || wallet.value == '') {
+    $('.loadingArea').hide();
+    $('.newTasksForm p').addClass('error');
+    $('.newTasksForm p').html('Informação inválido, por favor, verifique as informações.');
+    validate = false;
+  }
+  if(validate) {
+    $.ajax({
+      type: 'post',
+      url: '/app/insertTasks',
+      data: form,
+      dataType: 'json',
+      success: (d) => {
+        if(d.messege == 'success') {
+          location.reload();
+        } else {
+          $('.loadingArea').hide();
+          $('.newExpensesForm p').addClass('error');
+          $('.newExpensesForm p').html(d.messege);
+        }
+      }
+    })
+  }
+
 })
 
 
@@ -74,8 +118,23 @@ $('.sectionAppTasksThrow').click(() => {
  * Função para remover uma tarefa.
  * @param {String} id 
  */
-function removeTasks() {
-
+function removeTasks(id) {
+  $.ajax({
+    type: 'post',
+    url: '/app/removeTasks',
+    data: {'id':id},
+    dataType: 'json',
+    success: d => {
+      if(d.messege == 'success') {
+        location.reload();
+      }
+      else {
+        $('#messege').show('slow');
+        $('#messege').html('Ops... Um error inesperado aconteceu.');
+        $('#messege').addClass('error');
+      }
+    }
+  });
 }
 
 /**
@@ -107,8 +166,23 @@ function updateTasks() {
  * Função para concluir uma tarefa.
  * @param {String} id 
  */
-function concludeTasks() {
-
+function concludeTasks(id) {
+  $.ajax({
+    type: 'post',
+    url: '/app/concludeTasks',
+    data: {'id':id},
+    dataType: 'json',
+    success: d => {
+      if(d.messege == 'success') {
+        location.reload();
+      }
+      else {
+        $('#messege').show('slow');
+        $('#messege').html('Ops... Um error inesperado aconteceu.');
+        $('#messege').addClass('error');
+      }
+    }
+  });
 }
 
 

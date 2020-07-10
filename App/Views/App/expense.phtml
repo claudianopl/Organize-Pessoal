@@ -43,6 +43,7 @@
 
           <div class="sectionAppAreaRight">
             <div class="sectionAppOne">
+              <h4 id='messege'></h4>
               <div class="sectionAppOneWallet">
                 <?php $this->importViews('appWallet') ?>
               </div>
@@ -144,7 +145,8 @@
               </h3>
             </div>
             
-            <div class="sectionAppTable" style="displayTable: <?php echo $display; ?>;">
+            <div class="sectionAppTable" 
+            style="display: <?php echo $displayTable; ?>;">
               <article class="sectionAppTableTitle">
                 <p class="desc">Descrição</p>
                 <p class="date">Vencimento</p>
@@ -152,6 +154,7 @@
                 <p class="enrollment">Parcelas</p>
                 <p class="price">Valor</p>
               </article>
+              
               <?php foreach($this->view->expenses as $key => $value) {?>
 
                 <article class="sectionAppTableItem" id='<?php echo $value['id'] ?>'>

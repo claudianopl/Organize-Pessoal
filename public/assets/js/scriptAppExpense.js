@@ -215,7 +215,7 @@ $('.enrollment').on('change', function(e) {
 $('.newExpensesForm form').on('submit', function(e) {
   e.preventDefault();
   $('.loadingArea').show();
-  let form = $(this).serializeArray();
+  const form = $(this).serializeArray();
   const desc = form[0];
   const value = form[1];
   const date = form[2];
@@ -226,7 +226,7 @@ $('.newExpensesForm form').on('submit', function(e) {
   let validate = true
   if(desc.value.length < 3 || value.value == '' || date.value == '' || 
   wallet.value == '' || category.value == '' || repetition.value == '') {
-    //$('.loadingArea').hide();
+    $('.loadingArea').hide();
     $('.newExpensesForm p').addClass('error');
     $('.newExpensesForm p').html('Informação inválido, por favor, verifique as informações.');
     validate = false;

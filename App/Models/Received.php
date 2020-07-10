@@ -34,7 +34,7 @@ class Received extends Model
   /**
    * A função salva os dados da nova receita no banco de dados.
    * @access public
-   * @return true
+   * @return array com a id da última inserção.
    */
   public function insert() 
   {
@@ -248,9 +248,11 @@ class Received extends Model
     $query = 'delete from tb_received where id = :id or id_parcel = :id';
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':id', $this->__get('id'));
-    $stmt->execute();
-
-    return true;
+    if($stmt->execute())
+    {
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -294,9 +296,11 @@ class Received extends Model
     $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
     $stmt->bindValue(':category', $this->__get('category'));
     $stmt->bindValue(':id_parcel', $this->__get('id_parcel'));
-    $stmt->execute();
-
-    return true;
+    if($stmt->execute())
+    {
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -309,9 +313,11 @@ class Received extends Model
     $query = 'update tb_received set status = 1 where id = :id';
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':id', $this->__get('id'));
-    $stmt->execute();
-
-    return true;
+    if($stmt->execute())
+    {
+      return true;
+    }
+    return false;
   }
 }
 ?>

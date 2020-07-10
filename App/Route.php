@@ -248,6 +248,33 @@ class Route extends Bootstrap {
 		);
 
 		/**
+		 * Rota para inserir as tarefas do usuário.
+		 */
+		$routes['insertTasks'] = array(
+			'route' => "/app/insertTasks",
+			'controller' => 'AppController',
+			'action' => 'insertTasks',
+		);
+
+		/**
+		 * Rota para remover tarefas do usuário.
+		 */
+		$routes['removeTasks'] = array(
+			'route' => "/app/removeTasks",
+			'controller' => 'AppController',
+			'action' => 'removeTasks',
+		);
+
+		/**
+		 * Rota para concluir tarefas do usuário.
+		 */
+		$routes['concludeTasks'] = array(
+			'route' => "/app/concludeTasks",
+			'controller' => 'AppController',
+			'action' => 'concludeTasks',
+		);
+
+		/**
 		 * Rota para efetuar o logoff
 		 */
 		$routes['userLogoff'] = array(

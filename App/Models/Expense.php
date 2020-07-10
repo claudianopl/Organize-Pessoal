@@ -148,8 +148,7 @@ class Expense extends Model
       tb_expenses 
     where 
       id_wallet = :id_wallet and date between :date and :lastDate
-    order by date asc
-    ';
+    order by date asc';
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
     $stmt->bindValue(':date', $this->__get('date'));
@@ -238,7 +237,7 @@ class Expense extends Model
   }
 
   /**
-   * Função para remover as receitas.
+   * Função para remover as despesas.
    * @access public
    * @return true
    */
@@ -247,9 +246,11 @@ class Expense extends Model
     $query = 'delete from tb_expenses where id = :id or id_parcel = :id';
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':id', $this->__get('id'));
-    $stmt->execute();
-
-    return true;
+    if($stmt->execute())
+    {
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -291,9 +292,11 @@ class Expense extends Model
     $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
     $stmt->bindValue(':category', $this->__get('category'));
     $stmt->bindValue(':id_parcel', $this->__get('id_parcel'));
-    $stmt->execute();
-
-    return true;
+    if($stmt->execute())
+    {
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -306,9 +309,11 @@ class Expense extends Model
     $query = 'update tb_expenses set status = 1 where id = :id';
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':id', $this->__get('id'));
-    $stmt->execute();
-
-    return true;
+    if($stmt->execute())
+    {
+      return true;
+    }
+    return false;
   }
 }
 ?>

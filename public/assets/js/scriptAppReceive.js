@@ -230,7 +230,7 @@ $('.enrollment').on('change', function(e) {
  */
 $('.newReceiveArea form').on('submit', function (e) {
   e.preventDefault();
-  //$('.loadingArea').show();
+  $('.loadingArea').show();
   let form = $(this).serializeArray();
   const desc = form[0];
   const value = form[1];

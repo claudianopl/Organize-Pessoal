@@ -111,7 +111,7 @@ class AppController extends Action
 		if($this->checkJWT()) 
 		{
 			$this->view->wallets = $this->userGetWallet();
-
+			$this->view->tasks = $this->tasksMonth();
 			$this->render('tasks');
 		} else 
 		{
@@ -458,13 +458,12 @@ class AppController extends Action
 
 	/**
 	 * Filtra as receitas e despesas mensais.
-	 * A função filtra os dados das receitas da layout receita e os dados das 
-	 * despesas da layout despesa.
+	 * A função filtra os dados do mes atual das receitas, despesas e tarefas.
 	 * @access public
 	 * @param string $model contém a informação de qual model será executado.
-	 * @return array com os dados das receitas ou despesas.
+	 * @return array com os dados das receitas ou despesas ou tarefas.
 	 */
-	public function filterMonthReceivedAndExpenses($model) 
+	public function filterMonthReceivedAndExpensesAndTasks($model) 
 	{
 		$date = date("Y-m-01");
 		$lastDate = date("Y-m-t");
@@ -537,7 +536,7 @@ class AppController extends Action
 	 * @param string $model o model que será executado
 	 * @return array $info com os dados se foi removido ou não.
 	 */
-	public function removeReceivedAndExpenses($id, $model)
+	public function removeReceivedAndExpensesAndTasks($id, $model)
 	{
 		$remove = Container::getModel($model);
 		$remove->__set('id', $id);
@@ -548,7 +547,7 @@ class AppController extends Action
 		}
 		else 
 		{
-			$info['messege'] = 'error';
+			$info['messege'] = 'Um erro inesperado aconteceu, tente novamente mais tarde.';
 		}
 		return $info;
 	}
@@ -560,7 +559,7 @@ class AppController extends Action
 	 * @param string $id para ser concluída.
 	 * @return array
 	 */
-	public function concludeReceivedAndExpenses($model, $id)
+	public function concludeReceivedAndExpensesAndTasks($model, $id)
 	{
 		$received = Container::getModel($model);
 		$received->__set('id', $id);
@@ -571,7 +570,7 @@ class AppController extends Action
 		}
 		else 
 		{
-			$info['messege'] = 'error';
+			$info['messege'] = 'Um erro inesperado aconteceu, tente novamente mais tarde.';
 		}
 		return $info;
 	}
@@ -602,7 +601,7 @@ class AppController extends Action
 	 */
 	public function receivedMonth() 
 	{
-		return $this->filterMonthReceivedAndExpenses('Received');
+		return $this->filterMonthReceivedAndExpensesAndTasks('Received');
 	}
 
 	/**
@@ -629,7 +628,7 @@ class AppController extends Action
 		if(isset($_POST)) 
 		{
 			$id = $_POST['id'];
-			$info = $this->removeReceivedAndExpenses($id, 'received');
+			$info = $this->removeReceivedAndExpensesAndTasks($id, 'received');
 		 
 			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 
@@ -658,7 +657,7 @@ class AppController extends Action
 		if(isset($_POST)) 
 		{
 			$id = $_POST['id'];
-			$info = $this->concludeReceivedAndExpenses('Received', $id);
+			$info = $this->concludeReceivedAndExpensesAndTasks('Received', $id);
 			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 		}
 	}
@@ -704,7 +703,7 @@ class AppController extends Action
 	 */
 	public function expensesMonth()
 	{
-		return $this->filterMonthReceivedAndExpenses('Expense');
+		return $this->filterMonthReceivedAndExpensesAndTasks('Expense');
 	}
 
 	/**
@@ -716,7 +715,7 @@ class AppController extends Action
 		if(isset($_POST))
 		{
 			$id = $_POST['id'];
-			$info = $this->removeReceivedAndExpenses($id, 'Expense');
+			$info = $this->removeReceivedAndExpensesAndTasks($id, 'Expense');
 			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 		}
 	}
@@ -743,7 +742,88 @@ class AppController extends Action
 		if(isset($_POST))
 		{
 			$id = $_POST['id'];
-			$info = $this->concludeReceivedAndExpenses('Expense', $id);
+			$info = $this->concludeReceivedAndExpensesAndTasks('Expense', $id);
+			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
+		}
+	}
+
+
+
+
+	/**
+	 * Função para solicitar a inserção de uma nova tarefa.
+	 * A função verifica a data para saber se o status da tarefa vai ser pendente 
+	 * ou concluída.
+	 * @access public
+	 */
+	public function insertTasks()
+	{
+		if(isset($_POST))
+		{
+			$description = $_POST['Desc'];
+			$date = $_POST['Date'];
+			$wallet = $_POST['Wallet'];
+			$insertTasks = Container::getModel('Tasks');
+			$insertTasks->__set('id_wallet', $_SESSION['userWallet']);
+			if(strtotime($date) <= strtotime(date('Y-m-d H:i:s')))
+			{
+				$insertTasks->__set('status', 1);
+			} 
+			else
+			{
+				$insertTasks->__set('status', 0);
+			}
+			$insertTasks->__set('date', $date);
+			$insertTasks->__set('description', $description);
+			if($insertTasks->insert())
+			{
+				$info['messege'] = 'success';
+			}
+			else
+			{
+				$info['messege'] = 'Um erro inesperado aconteceu na inserção da tarefa, tente novamente mais tarde!';
+			}
+
+			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
+		}
+	}
+
+	/**
+	 * Retorna todas as taferas da carteira.
+	 * A função retorna todas as taferas daquela carteira que foram criadas e 
+	 * salvadas no banco de dados
+	 * @access public
+	 * @return array
+	 */
+	public function tasksMonth()
+	{
+		return $this->filterMonthReceivedAndExpensesAndTasks('Tasks');
+	}
+
+	/**
+	 * Função para remover uma tarefa.
+	 * @access public
+	 */
+	public function removeTasks()
+	{
+		if(isset($_POST))
+		{
+			$id = $_POST['id'];
+			$info = $this->removeReceivedAndExpensesAndTasks($id, 'Tasks');
+			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
+		}
+	}
+
+	/**
+	 * Função para concluir tarefas.
+	 * @access public
+	 */
+	public function concludeTasks()
+	{
+		if(isset($_POST))
+		{
+			$id = $_POST['id'];
+			$info = $this->concludeReceivedAndExpensesAndTasks('Tasks', $id);
 			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 		}
 	}

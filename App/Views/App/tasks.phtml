@@ -91,7 +91,21 @@
               </div>
             </div>
 
-            <div class="sectionAppMessageTasks">
+            <?php 
+              if(count($this->view->tasks) == 0) 
+              { 
+                $displayTable = 'none';
+                $displayMessege = 'block';
+              }
+              else 
+              {
+                $displayTable = 'block';
+                $displayMessege = 'none';
+              }
+            ?>
+
+            <div class="sectionAppMessageTasks"
+            style="display: <?php echo $displayMessege; ?>;">
               <h3>
                 Você não possui contas a pagar. Por favor, 
                 comece agora a lançar as suas despesas.
@@ -104,47 +118,41 @@
             <!--
               * CASO NÃO ESTIVER VAZIA, IMPRIMIR A TABELA E PREENCHER A TABELA
             -->
-            <div class="sectionAppTableTasks">
+            <div class="sectionAppTableTasks"
+            style="display: <?php echo $displayTable; ?>;">
               <article class="sectionAppTableTitleTasks">
                 <p class="desc">Descrição</p>
                 <p class="date">Data - Hora</p>
               </article>
-              <article class="sectionAppTableItemTasks">
-                <p class="desc">dasdasdasdsadsadasdasdsad</p>
-                <p class="date">
-                  15/06/2020 - 00:00
-                  <!--
-                    PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
-                    SE VAI SER POR AJAX OU LINK
-                  -->
-                  <span>
-                    <img src="/assets/images/app/appGlobal/remove.svg"
-                    onclick="removeTasks()">
-                    <img src="/assets/images/app/appGlobal/update.svg"
-                    onclick="updateTasks()">
-                    <img src="/assets/images/app/appGlobal/conclude.svg"
-                    onclick="concludeTasks()">
-                  </span>
-                  
-                </p>
+
+              <?php foreach($this->view->tasks as $key => $value) {?>
               
-              </article>
-              <article class="sectionAppTableItemTasks">
-                <p class="desc">Descrasdasdasdasdasdasdasição</p>
-                <p class="date">
-                  15/06/2020 - 00:00
-                  <!--
-                    PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
-                    SE VAI SER POR AJAX OU LINK
-                  -->
-                  <span>
-                    <img src="/assets/images/app/appGlobal/remove.svg">
-                    <img src="/assets/images/app/appGlobal/update.svg">
-                    <img src="/assets/images/app/appGlobal/conclude.svg">
-                  </span>
-                </p>
+                <article class="sectionAppTableItemTasks">
+                  <p class="desc">
+                    <?php echo $value['description']?>
+                  </p>
+                  <p class="date">
+                  <?php echo date_format(new DateTime($value['date']), 'd/m/Y H:i');?>
+                    <!--
+                      PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
+                      SE VAI SER POR AJAX OU LINK
+                    -->
+                    <span>s
+                      <img src="/assets/images/app/appGlobal/remove.svg"
+                      onclick="removeTasks('<?php echo $value['id'] ?>')">
+                      <img src="/assets/images/app/appGlobal/update.svg"
+                      onclick="updateTasks('<?php echo $value['id'] ?>')">
+                      <?php if($value['status'] == 0) {?>
+                        <img src="/assets/images/app/appGlobal/conclude.svg"
+                        onclick="concludeTasks('<?php echo $value['id'] ?>')">
+                      <?php }?>
+                    </span>
+                    
+                  </p>
+                </article>
               
-              </article>
+              <?php } ?>
+              
             </div>
             
           </div>
@@ -175,7 +183,7 @@
               <label for="newTasksDate">
                 <img src="/assets/images/app/appGlobal/iconCalendarModal.svg"> Data:
               </label>
-              <input type="datetime" id='newTasksDate' data-mask="00/00/0000 00:00:00"
+              <input type="datetime-local" id='newTasksDate'
               name="Date">
             </article>
 
