@@ -81,12 +81,6 @@ class Route extends Bootstrap {
 			'action' => 'tasks',
 		);
 
-		$routes['appFixed'] = array(
-			'route' => "/app/fixas",
-			'controller' => 'AppController',
-			'action' => 'fixed',
-		);
-
 		$routes['appWallet'] = array(
 			'route' => "/app/carteiras",
 			'controller' => 'AppController',

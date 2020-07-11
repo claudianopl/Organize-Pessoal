@@ -120,7 +120,8 @@ class Received extends Model
       tb_received 
     where
       id_wallet = :id_wallet and date between :date and :lastDate and 
-      category like :category and status like :status
+      category like :category and status like :status and 
+      enrollment like :enrollment
     order by date asc
     ";
     $stmt = $this->conexao->prepare($query);
@@ -129,6 +130,7 @@ class Received extends Model
     $stmt->bindValue(':lastDate', $this->__get('lastDate'));
     $stmt->bindValue(':category', '%'.$this->__get('category').'%');
     $stmt->bindValue(':status', '%'.$this->__get('status').'%');
+    $stmt->bindValue(':enrollment', '%'.$this->__get('enrollment').'%');
     $stmt->execute();
 
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);

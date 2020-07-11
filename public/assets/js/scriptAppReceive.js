@@ -86,6 +86,7 @@ function sectionAppFilter() {
   else if(filterStatus == 'Receitas Não Recebidas') {
     filterStatus = 0;
   } 
+  console.log(filterStatus);
   const dataObj = {
     'status':filterStatus, 
     'category':filterCategory, 

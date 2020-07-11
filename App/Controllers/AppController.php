@@ -119,19 +119,6 @@ class AppController extends Action
 		}
 	}
 
-	public function Fixed() 
-	{
-		if($this->checkJWT()) 
-		{
-			$this->view->wallets = $this->userGetWallet();
-
-			$this->render('fixed');
-		} else 
-		{
-			header("Location: /entrar?e=0");
-		}
-	}
-
 	public function Wallet() 
 	{
 		if($this->checkJWT()) 
@@ -439,12 +426,19 @@ class AppController extends Action
 			$status = $_POST['status'];
 			if($status != '') 
 			{
-				$filter->__set('status', $status);
+				if($status == 'Fixa' || $status == 'Parcelada')
+				{
+					$filter->__set('enrollment', $status);
+				}
+				else 
+				{
+					$filter->__set('status', $status);
+				}
 			}
 
 			$category = $_POST['category'];
 			if($category != '')
-			{
+			{	
 				$filter->__set('category', $category);
 			}
 
@@ -452,7 +446,7 @@ class AppController extends Action
 			$dataFilter['data'] = $filter->filter();
 			$dataFilter['sum'] = $filter->sumMonth();
 		}
-
+		
 		return $dataFilter;
 	}
 
