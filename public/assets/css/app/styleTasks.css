@@ -294,7 +294,8 @@
 .newTasksLine:nth-child(2) input,
 .newTasksLine:nth-child(2) select,
 .updateTasksLine:nth-child(2) input,
-.updateTasksLine:nth-child(2) select {
+.updateTasksLine:nth-child(2) select,
+.updateTasksLine:nth-child(3) select {
   width: 100%;
   padding: 10px;
   font-size: 15px;
@@ -311,7 +312,8 @@
 .newTasksLine:nth-child(2) select:focus,
 .updateTasksLine:nth-child(1) textarea:focus,
 .updateTasksLine:nth-child(2) input:focus,
-.updateTasksLine:nth-child(2) select:focus {
+.updateTasksLine:nth-child(2) select:focus,
+.updateTasksLine:nth-child(3) select:focus {
   border: 1px solid #5A8EDE;
   outline: 0;
   font-weight: 600;

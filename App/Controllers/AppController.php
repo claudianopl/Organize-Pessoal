@@ -500,6 +500,7 @@ class AppController extends Action
 			$date = $form[2]['value'];
 			$wallet = $form[3]['value'];
 			$category = $form[4]['value'];
+			$status = $form[5]['value'];
 
 			$updateId = Container::getModel($model);
 			$updateId->__set('id', $id);
@@ -508,6 +509,7 @@ class AppController extends Action
 			$updateId->__set('date', $date);
 			$updateId->__set('id_wallet', $wallet);
 			$updateId->__set('category', $category);
+			$updateId->__set('status', $status);
 
 			$dataFilterId = $updateId->filterId();
 			$enrollment = $dataFilterId['enrollment'];
@@ -784,6 +786,113 @@ class AppController extends Action
 				$info['messege'] = 'Um erro inesperado aconteceu na inserção da tarefa, tente novamente mais tarde!';
 			}
 
+			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
+		}
+	}
+
+	/**
+	 * Filtra as tarefas do usuário.
+	 * @access public
+	 */
+	public function filterTasks()
+	{
+		if(isset($_POST))
+		{
+			/**
+			 * Se todos os dados forem vazios, vamos retornar todos os dados registrados 
+			 * no banco de dados.
+			 */
+			if($_POST['date'] == '' && $_POST['status'] == '')
+			{
+				$filterAll = Container::getModel('Tasks');
+				$filterAll->__set('id_wallet', $_SESSION['userWallet']);
+				$dataFilter['data'] = $filterAll->filterAll();
+			}
+
+			/**
+			 * Caso contrário, vamos retornar os dados que foram filtrados no banco 
+			 * de dados.
+			 */
+			else
+			{
+				$filter = Container::getModel('Tasks');
+				$date = $_POST['date'];
+				if($date != '')
+				{
+					$date = explode('/', $date);
+					$month = $date[0];
+					$year = $date[1];
+					$lastDay = cal_days_in_month(CAL_GREGORIAN, $month , $year);
+
+					$startDate = "$year-$month-01";
+					$lastDate = "$year-$month-$lastDay";
+
+					$filter->__set('date', $startDate);
+					$filter->__set('lastDate', $lastDate);
+				}
+				else
+				{
+					$filter->__set('lastDate', '9999-00-00');
+					$filter->__set('date', '0000-00-00');
+				}
+
+				$status = $_POST['status'];
+				if($status != '') 
+				{
+					$filter->__set('status', $status);
+				}
+				$filter->__set('id_wallet',$_SESSION['userWallet']);
+				$dataFilter['data'] = $filter->filter();
+			}
+		}
+		print_r(json_encode($dataFilter, JSON_UNESCAPED_UNICODE));
+	}
+
+	/**
+	 * Atualizar tarefas
+	 * @access public
+	 */
+	public function updateTasks()
+	{
+		if(isset($_POST))
+		{
+			$type = $_POST['type'];
+			$id = $_POST['id'];
+		}
+		/**
+		 * se for filter, vamos formatar a data antes de enviar o dado ao usuário.
+		 */
+		if($type == 'filter')
+		{
+			$filterId = Container::getModel('Tasks');
+			$filterId->__set('id', $id);
+			$dataFilterId = $filterId->filterId();
+			$dateFormat = date_format(new \DateTime($dataFilterId['date']), 'd/m/Y H:i');
+			$dataFilterId['date'] = $dateFormat;
+			print_r(json_encode($dataFilterId, JSON_UNESCAPED_UNICODE));
+		}
+		else if($type == 'update')
+		{
+			$form = $_POST['form'];
+			$description = $form[0]['value'];
+			$date = date_format(new \DateTime($form[1]['value']), 'Y-d-m H:i');
+			$wallet = $form[2]['value'];
+			$status = $form[3]['value'];
+			
+			$updateId = Container::getModel('Tasks');
+			$updateId->__set('id', $id);
+			$updateId->__set('description', $description);
+			$updateId->__set('date', $date);
+			$updateId->__set('id_wallet', $wallet);
+			$updateId->__set('status', $status);
+			if($updateId->update())
+			{
+				$info['messege'] = 'success';
+			}
+			else
+			{
+				$info['messege'] = 'Um erro inesperado aconteceu, tente novamente mais tarde.';
+			}
 			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 		}
 	}

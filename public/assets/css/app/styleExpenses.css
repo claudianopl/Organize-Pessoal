@@ -264,7 +264,8 @@
 .newExpensesLine:nth-child(3) select,
 .updateExpensesLine:nth-child(1) input,
 .updateExpensesLine:nth-child(2) input,
-.updateExpensesLine:nth-child(3) select{
+.updateExpensesLine:nth-child(3) select,
+.updateExpensesLine:nth-child(4) select{
   width: 100%;
   padding: 10px;
   font-size: 15px;
@@ -309,7 +310,8 @@
 .newExpensesLine:nth-child(4) input:focus,
 .updateExpensesLine:nth-child(1) input:focus,
 .updateExpensesLine:nth-child(2) input:focus,
-.updateExpensesLine:nth-child(3) select:focus {
+.updateExpensesLine:nth-child(3) select:focus,
+.updateExpensesLine:nth-child(4) select:focus {
   border: 1px solid #E34E4E;
   outline: 0;
   font-weight: 600;

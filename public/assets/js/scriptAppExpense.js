@@ -316,6 +316,7 @@ function updateExpense(id) {
       $('#updateExpensesDate').val(d.date);
       $('#updateExpensesWallet').val(d.id_wallet);
       $('#updateExpensesCategory').val(d.category);
+      $('#updateExpensesStatus').val(d.status);
     }
   })
 

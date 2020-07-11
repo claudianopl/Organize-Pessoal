@@ -257,6 +257,24 @@ class Route extends Bootstrap {
 		);
 
 		/**
+		 * Rota para filtrar as tarefas do usuário.
+		 */
+		$routes['filterTasks'] = array(
+			'route' => "/app/filterTasks",
+			'controller' => 'AppController',
+			'action' => 'filterTasks',
+		);
+
+		/**
+		 * Rota para atualizar as tarefas do usuário.
+		 */
+		$routes['updateTasks'] = array(
+			'route' => "/app/updateTasks",
+			'controller' => 'AppController',
+			'action' => 'updateTasks',
+		);
+
+		/**
 		 * Rota para remover tarefas do usuário.
 		 */
 		$routes['removeTasks'] = array(

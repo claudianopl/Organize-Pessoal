@@ -60,6 +60,7 @@
                     </div>
                     <div class="sectionAppTasksFilterAllNav">
                       <ul>
+                        <li>Todas tarefas</li>
                         <li>Tarefas concluídas</li>
                         <li>Tarefas pendentes</li>
                       </ul>
@@ -137,7 +138,7 @@
                       PENSAR EM COMO VAI FAZER PARA ALTERAR REMOVER E CONCLUIR, 
                       SE VAI SER POR AJAX OU LINK
                     -->
-                    <span>s
+                    <span>
                       <img src="/assets/images/app/appGlobal/remove.svg"
                       onclick="removeTasks('<?php echo $value['id'] ?>')">
                       <img src="/assets/images/app/appGlobal/update.svg"
@@ -262,6 +263,16 @@
               </select>
             </article>
           </div>
+
+          <article class="updateTasksLine">
+            <label for="updateTasksStatus">
+              <img src="/assets/images/app/appGlobal/iconTitleModal.svg"> Status
+            </label>
+            <select id="updateTasksStatus" name="Status">
+              <option value="0">Pendente</option>
+              <option value="1">Concluída</option>
+            </select>
+          </article>
 
           <button>Atualizar Tarefa</button>
         </form>

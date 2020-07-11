@@ -261,6 +261,8 @@ class Received extends Model
    * de escopo local, ou seja, a receita com o seu id, porém, se alterar algo 
    * além da data atualizamos todas as fixas, parceladas e única que tenham seus 
    * respectivos id_parcel.
+   * @access public
+   * @return boolean
    */
   public function update() 
   {
@@ -269,7 +271,7 @@ class Received extends Model
       tb_received 
     set 
       date = :date, description = :description, value = :value, id_wallet = :id_wallet, 
-      category = :category, id_parcel = :id_parcel
+      category = :category, id_parcel = :id_parcel, status = :status
     where 
       id = :id';
     $stmt = $this->conexao->prepare($query);
@@ -280,6 +282,7 @@ class Received extends Model
     $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
     $stmt->bindValue(':category', $this->__get('category'));
     $stmt->bindValue(':id_parcel', $this->__get('id_parcel'));
+    $stmt->bindValue(':status', $this->__get('status'));
     $stmt->execute();
 
     $query = '

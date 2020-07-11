@@ -328,11 +328,13 @@ function updateReceived(id) {
     data: {'type':'filter','id':id},
     dataType: 'json',
     success: d => {
+      console.log(d);
       $('#updateReceiveDesc').val(d.description);
       $('#updateReceiveValue').val(d.value);
       $('#updateReceiveDate').val(d.date);
       $('#updateReceiveWallet').val(d.id_wallet);
       $('#updateReceiveCategory').val(d.category);
+      $('#updateReceiveStatus').val(d.status);
     }
   })
 
@@ -351,9 +353,10 @@ function updateReceived(id) {
     const date = form[2];
     const wallet = form[3];
     const category = form[4];
+    const status = form[5];
     let validate = true;
     if(desc.value.length < 3 || value.value == '' || date.value == '' || 
-    wallet.value == '' || category.value == '') {
+    wallet.value == '' || category.value == '' || status == '') {
       $('.loadingArea').hide();
       $('.updateReceiveForm p').addClass('error');
       $('.updateReceiveForm p').html('Informação inválido, por favor, verifique as informações.');

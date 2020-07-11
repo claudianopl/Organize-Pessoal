@@ -239,7 +239,7 @@ class Expense extends Model
   /**
    * Função para remover as despesas.
    * @access public
-   * @return true
+   * @return boolean
    */
   public function remove()
   {
@@ -255,8 +255,10 @@ class Expense extends Model
 
   /**
    * Função para fazemos futuras edições nas despesas.
+   * A função faz duas edições, uma edição para a despesa pai e outra para as 
+   * despesas filhos, ou seja, os filhos são as parcelas fixas ou parcelado.
    * @access public
-   * @return true
+   * @return boolean
    */
   public function update()
   {
@@ -265,7 +267,7 @@ class Expense extends Model
       tb_expenses
     set 
       date = :date, description = :description, value = :value, id_wallet = :id_wallet, 
-      category = :category, id_parcel = :id_parcel
+      category = :category, id_parcel = :id_parcel, status = :status
     where 
       id = :id';
     $stmt = $this->conexao->prepare($query);
@@ -276,6 +278,7 @@ class Expense extends Model
     $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
     $stmt->bindValue(':category', $this->__get('category'));
     $stmt->bindValue(':id_parcel', $this->__get('id_parcel'));
+    $stmt->bindValue(':status', $this->__get('status'));
     $stmt->execute();
 
     $query = '
@@ -302,7 +305,7 @@ class Expense extends Model
   /**
    * Função para concluar as despesas.
    * @access public
-   * @return true
+   * @return boolean
    */
   public function conclude()
   {
