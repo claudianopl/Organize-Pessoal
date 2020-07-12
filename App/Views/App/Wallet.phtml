@@ -52,7 +52,7 @@
                 <article>
                   <h3>Adicionar Carteira</h3>
                 </article>
-                <form action="" method="POST">
+                <form>
                   <input type="text" name="newWallet" 
                   placeholder="Minha casa / Minha empresa / Meu cartão">
                   <button type="submit">
@@ -64,6 +64,8 @@
                 <?php $this->importViews('appWallet', 'Receive') ?>
               </div>
             </div>
+
+            <p id='messege'></p>
 
             <div class="appWalletsCardsArea">
               <!-- 

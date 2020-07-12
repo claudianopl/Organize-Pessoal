@@ -20,6 +20,23 @@ class Wallet extends Model
   {
     $this->$attribute = $value;
   }
+
+  /**
+   * 
+   */
+  public function insert()
+  {
+    $query = 'insert into tb_wallets set id_user = :id_user, wallet_name = :wallet_name';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue('id_user', $this->__get('id_user'));
+    $stmt->bindValue('wallet_name', $this->__get('wallet_name'));
+    if($stmt->execute())
+    {
+      return true;
+    }
+    return false;
+  }
+
   /**
    * Retornando as carteiras existente no id do usuário.
    * @access public

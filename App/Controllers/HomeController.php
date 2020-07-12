@@ -216,6 +216,11 @@ class HomeController extends Action
 						$info['messege'] = 'Você não confirmou o seu cadastro, por favor, verifique seu e-mail.';
 					}
 				}
+				else 
+				{
+					// Informando o usuário não foi encontrado
+					$info['messege'] = 'Ops… Usuário invalido!';
+				}
 			}
 			else 
 			{

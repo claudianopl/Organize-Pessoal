@@ -931,6 +931,36 @@ class AppController extends Action
 		}
 	}
 
+	
+
+
+	/**
+	 * Função para inserir novas carteiras.
+	 * @access public
+	 */
+	public function insertWallet()
+	{
+		if(isset($_POST))
+		{
+			$wallet = $_POST['newWallet'];
+			$userData = $this->dataJWT();
+			$userId = $userData->id;
+
+			$insert = Container::getModel('Wallet');
+			$insert->__set('id_user', $userId);
+			$insert->__set('wallet_name', $wallet);
+			if($insert->insert())
+			{
+				$info['messege'] = 'success';
+			}
+			else 
+			{
+				$info['messege'] = 'Um erro inesperado aconteceu, tente novamente mais tarde.';
+			}
+			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
+		}
+	}
+
 
 
 

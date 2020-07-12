@@ -287,6 +287,15 @@ class Route extends Bootstrap {
 		);
 
 		/**
+		 * Rota para criar carteiras do usuário.
+		 */
+		$routes['insertWallet'] = array(
+			'route' => "/app/insertWallet",
+			'controller' => 'AppController',
+			'action' => 'insertWallet',
+		);
+
+		/**
 		 * Rota para efetuar o logoff
 		 */
 		$routes['userLogoff'] = array(
