@@ -279,6 +279,7 @@ $('.newReceiveArea form').on('submit', function (e) {
  * @param {String} id 
  */
 function removeReceived(id) {
+  $('.loadingArea').show();
   $.ajax({
     type: 'post',
     url: '/app/removeReceived',
@@ -289,6 +290,7 @@ function removeReceived(id) {
         location.reload();
       }
       else {
+        $('.loadingArea').hide();
         $('#messege').show('slow');
         $('#messege').html('Ops... Um error inesperado aconteceu.');
         $('#messege').addClass('error');
@@ -391,6 +393,7 @@ function updateReceived(id) {
  * @param {String} id 
  */
 function concludeReceived(id) {
+  $('.loadingArea').show();
   $.ajax({
     type: 'post',
     url: '/app/concludeReceived',
@@ -401,6 +404,7 @@ function concludeReceived(id) {
         location.reload();
       }
       else {
+        $('.loadingArea').hide();
         $('#messege').show('slow');
         $('#messege').html('Ops... Um error inesperado aconteceu.');
         $('#messege').addClass('error');

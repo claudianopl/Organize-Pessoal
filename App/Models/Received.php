@@ -84,6 +84,21 @@ class Received extends Model
   }
 
   /**
+   * A função retorna as receitas que possuem o mesmo id_parcel.
+   * @access public
+   * @return array com todas as receitas que contém o mesmo id_parcel.
+   */
+  public function filterIdParcel()
+  {
+    $query = 'select * from tb_received where id_parcel = :id_parcel';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':id_parcel', $this->__get('id_parcel'));
+    $stmt->execute();
+
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+  }
+
+  /**
    * A função retorna todas as receitas.
    * @access public
    * @return array com todas as receitas registradas no banco de dados.

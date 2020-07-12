@@ -555,12 +555,42 @@ class AppController extends Action
 	 * @param string $id para ser concluída.
 	 * @return array
 	 */
-	public function concludeReceivedAndExpensesAndTasks($model, $id)
+	public function concludeReceivedAndExpenses($model, $id)
 	{
-		$received = Container::getModel($model);
-		$received->__set('id', $id);
+		
+		$conclude = Container::getModel($model);
+		$conclude->__set('id', $id);
+		$data = $conclude->filterId();
+		$enrollment = $data['enrollment'];
+		if($enrollment == 'Fixa')
+		{
+			$conclude->__set('id_parcel', $data['id_parcel']);
 
-		if($received->conclude())
+			$dataParcel = $conclude->filterIdParcel();
+			$dataParcel = $dataParcel[count($dataParcel) - 1];
+			if($data['status_parcel_fixed'] == 'Mensal')
+			{
+				$date = date('Y-m-d', strtotime("+1 month",strtotime($dataParcel['date'])));
+			}
+			else if($data['status_parcel_fixed'] == 'Anual')
+			{
+				$date = date('Y-m-d', strtotime("+12 month",strtotime($dataParcel['date'])));
+			}
+	
+			$conclude->__set('id_wallet', $data['id_wallet']);
+			$conclude->__set('status', 0);
+			$conclude->__set('description', $data['description']);
+			$conclude->__set('value', $data['value']);
+			$conclude->__set('date', $date);
+			$conclude->__set('category', $data['category']);
+			$conclude->__set('enrollment', $data['enrollment']);
+			$conclude->__set('statusParcelFixed', $data['status_parcel_fixed']);
+			$conclude->__set('id_parcel', $data['id_parcel']);
+			$conclude->insert();
+			
+		}
+		
+		if($conclude->conclude())
 		{
 			$info['messege'] = 'success';
 		}
@@ -568,6 +598,7 @@ class AppController extends Action
 		{
 			$info['messege'] = 'Um erro inesperado aconteceu, tente novamente mais tarde.';
 		}
+
 		return $info;
 	}
 
@@ -653,7 +684,7 @@ class AppController extends Action
 		if(isset($_POST)) 
 		{
 			$id = $_POST['id'];
-			$info = $this->concludeReceivedAndExpensesAndTasks('Received', $id);
+			$info = $this->concludeReceivedAndExpenses('Received', $id);
 			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 		}
 	}
@@ -738,7 +769,7 @@ class AppController extends Action
 		if(isset($_POST))
 		{
 			$id = $_POST['id'];
-			$info = $this->concludeReceivedAndExpensesAndTasks('Expense', $id);
+			$info = $this->concludeReceivedAndExpenses('Expense', $id);
 			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 		}
 	}
@@ -926,7 +957,16 @@ class AppController extends Action
 		if(isset($_POST))
 		{
 			$id = $_POST['id'];
-			$info = $this->concludeReceivedAndExpensesAndTasks('Tasks', $id);
+			$conclude = Container::getModel('Tasks');
+			$conclude->__set('id', $id);
+			if($conclude->conclude())
+			{
+				$info['messege'] = 'success';
+			}
+			else 
+			{
+				$info['messege'] = 'Um erro inesperado aconteceu, tente novamente mais tarde.';
+			}
 			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 		}
 	}

@@ -106,6 +106,21 @@ class Expense extends Model
   }
 
   /**
+   * A função retorna as despesas que possuem o mesmo id_parcel.
+   * @access public
+   * @return array com todas as despesas que contém o mesmo id_parcel.
+   */
+  public function filterIdParcel()
+  {
+    $query = 'select * from tb_expenses where id_parcel = :id_parcel';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':id_parcel', $this->__get('id_parcel'));
+    $stmt->execute();
+
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+  }
+
+  /**
    * A função filtra os dados do banco que o usuário solicitou.
    * @access public
    * @return array com todos os dados solicitados pelo usuário.

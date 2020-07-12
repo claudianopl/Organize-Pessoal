@@ -261,6 +261,7 @@ $('.newExpensesForm form').on('submit', function(e) {
  * @param {String} id 
  */
 function removeExpense(id) {
+  $('.loadingArea').show();
   $.ajax({
     type: 'post',
     url: '/app/expensesRemove',
@@ -271,6 +272,7 @@ function removeExpense(id) {
         location.reload();
       }
       else {
+        $('.loadingArea').hide();
         $('#messege').show('slow');
         $('#messege').html('Ops... Um error inesperado aconteceu.');
         $('#messege').addClass('error');
@@ -369,6 +371,7 @@ function updateExpense(id) {
  * @param {String} id 
  */
 function concludeExpense(id) {
+  $('.loadingArea').show();
   $.ajax({
     type: 'post',
     url: '/app/expensesConclude',
@@ -379,6 +382,7 @@ function concludeExpense(id) {
         location.reload();
       }
       else {
+        $('.loadingArea').hide();
         $('#messege').show('slow');
         $('#messege').html('Ops... Um error inesperado aconteceu.');
         $('#messege').addClass('error');
