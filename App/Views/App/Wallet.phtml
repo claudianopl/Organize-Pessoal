@@ -34,7 +34,7 @@
     <link rel='icon' type="img/svg" href="/assets/images/iconLogo.svg">
     <title>Organize Pessoal - Carteira</title>
   </head>
-  <body>
+  <body onload = graphic()>
     <!-- loading -->
     <?php $this->importViews('loading') ?>
   
@@ -107,38 +107,6 @@
           <div class="graphicWallet">
             <canvas id='GraphicWallet'></canvas>
           </div>
-          <script type="text/javascript">
-            let ctx = document.getElementById('GraphicWallet').getContext("2d");
-            var graphic = new Chart(ctx, {
-              type: 'line',
-              data: {
-                labels: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set',
-                'Out','Nov','Dez'],
-                datasets: [{
-                  label: 'Receita',
-                  backgroundColor: "#34F06F",
-                  borderColor: "#34F06F",
-                  data: [/* Colocar os dados PHP */],
-                  borderWidth: 2,
-                  fill: false
-                }, {
-                  label: 'Despesa',
-                  backgroundColor: "#E34E4E",
-                  borderColor: "#E34E4E",
-                  data: [/* Colocar os dados PHP */],
-                  borderWidth: 2,
-                  fill: false
-                }] // datasets
-              }, // data
-              options: {
-                title: {
-                  display: true,
-                  fontSize: 16,
-                  text: 'Relatório anual: Receitas x Despesas'
-                }
-              }
-            });
-          </script>
         </div>
       </div>
     </section>

@@ -296,6 +296,15 @@ class Route extends Bootstrap {
 		);
 
 		/**
+		 * Rota para gerar o gráfico wallet
+		 */
+		$routes['graphicWallet'] = array(
+			'route' => "/app/graphicWallet",
+			'controller' => 'AppController',
+			'action' => 'graphicWallet',
+		);
+
+		/**
 		 * Rota para efetuar o logoff
 		 */
 		$routes['userLogoff'] = array(

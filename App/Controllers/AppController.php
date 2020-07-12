@@ -124,7 +124,6 @@ class AppController extends Action
 		if($this->checkJWT()) 
 		{
 			$this->view->wallets = $this->userGetWallet();
-
 			$this->render('wallet');
 		} else 
 		{
@@ -999,6 +998,24 @@ class AppController extends Action
 			}
 			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 		}
+	}
+
+	/**
+	 * Função para trazer os dados que vão conter no gráfico.
+	 * @access public
+	 * @return array
+	 */
+	public function graphicWallet()
+	{
+		$walletId = $_SESSION['userWallet'];
+		$year = date('Y');
+		$graphic = Container::getModel('Wallet');
+		$graphic->__set('id_wallet', $walletId);
+		$graphic->__set('year', $year);
+
+		$data = $graphic->annualSum();
+		
+		print_r(json_encode($data, JSON_UNESCAPED_UNICODE));
 	}
 
 
