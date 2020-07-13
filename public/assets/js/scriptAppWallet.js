@@ -49,9 +49,6 @@ function graphic() {
           }
         }
       });
-    },
-    error: e => {
-      console.log(e);
     }
   })
 }
@@ -83,12 +80,37 @@ $('.sectionAppNewWallet form').on('submit', function(e) {
           location.reload();
         } else {
           $('.loadingArea').hide();
-          $('.newExpensesForm p').addClass('error');
-          $('.newExpensesForm p').html(d.messege);
+          $('#messegeWallet').show('slow');
+          $('#messegeWallet').addClass('error');
+          $('#messegeWallet').html(d.messege);
         }
       }
     })
   }
+})
+
+function removeWallet(id) {
+  $.ajax({
+    type: 'post',
+    url: '/app/removeWallet',
+    data: {'id':id},
+    dataType: 'json',
+    success: (d) => {
+      if(d.messege == 'success') {
+        location.reload();
+      } else {
+        $('.loadingArea').hide();
+        $('#messegeWallet').show('slow');
+        $('#messegeWallet').addClass('error');
+        $('#messegeWallet').html(d.messege);
+      }
+    }
+  })
+}
+
+
+$(document).ready(() => {
+  $('#messegeWallet').hide()
 })
 
 

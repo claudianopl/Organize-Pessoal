@@ -65,35 +65,46 @@
               </div>
             </div>
 
-            <p id='messege'></p>
-
+            <p id='messegeWallet'></p>
+            
             <div class="appWalletsCardsArea">
-              <!-- 
-                Cada Carteira vai ter sua id e ao clicar em remover dispara
-                uma função ao javascript enviando o id da caretira para remover 
-                o appWalletCard que vai ter seu respectivo id adicionado pelo php
-                no javascript acontece o envio dessa informação do id para o php
-                através do ajax, fazendo a remoção da wallet e dando um 
-                reload(talvez).
-                * Função javascript removeWallet(id)
-              -->
-              <div class="appWalletCard">
-                <img class="iconWalletRemove"
-                src="/assets/images/app/wallet/buttonRemove.svg">
-                <img class='iconWalletCard' 
-                src="/assets/images/app/wallet/iconWallet.svg">
-                <article>
-                  <h4 class="titleWallet">Minha Carteira</h4>
-                  <!-- Preencher os dados com o php -->
-                  <!-- Saldo -->
-                  <p class="saleWallet">00,00R$</p>
-                  <!-- Receita-->
-                  <p class="receiveWallet">Receitas: 00,00R$</p>
-                  <!-- Despesas -->
-                  <p class="expenseWallet">Despesas: 00,00R$</p>
-                </article>
-              </div>
+
+              <?php 
+              foreach ($this->view->dataSumWallets as $key => $value) { 
+                $sumReceive = $value['sumReceive'];
+                $sumExpenses = $value['sumExpenses'];
+              ?>
+
+                <div class="appWalletCard">
+                  <img class="iconWalletRemove"
+                  src="/assets/images/app/wallet/buttonRemove.svg"
+                  onclick="removeWallet('<?php echo $value['id']?>')">
+                  <img class='iconWalletCard' 
+                  src="/assets/images/app/wallet/iconWallet.svg">
+                  <article>
+                    <h4 class="titleWallet"><?php echo $value['walletName']?></h4>
+                    <!-- Saldo -->
+                    <p class="saleWallet"> 
+                      Saldo R$
+                      <?php echo(bcsub($sumReceive, $sumExpenses, 2));?>
+                    </p>
+                    <!-- Receita-->
+                    <p class="receiveWallet">
+                      Receitas: R$
+                      <?php echo number_format($sumReceive,2,',','.'); ?>
+                    </p>
+                    <!-- Despesas -->
+                    <p class="expenseWallet">
+                      Despesas: R$
+                      <?php echo number_format($sumExpenses,2,',','.'); ?>
+                    </p>
+                  </article>
+                </div>
+
+              <?php } ?>
+
             </div>
+
 
           </div>
         </div>

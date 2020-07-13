@@ -11,7 +11,7 @@
 .sectionAppNewWallet {
   flex: 1;
 }
-.sectionAppAreaRight p {
+#messegeWallet {
   margin: 0;
   margin-top: 15px;
 }
@@ -127,6 +127,7 @@
   animation-fill-mode: backwards;
 }
 .titleWallet {
+  text-align: center;
   padding-bottom: 15px;
   border-bottom: 2px solid #ffffff;
   margin-top: 20px;

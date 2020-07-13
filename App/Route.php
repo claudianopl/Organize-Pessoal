@@ -305,6 +305,15 @@ class Route extends Bootstrap {
 		);
 
 		/**
+		 * Rota para remover uma wallet
+		 */
+		$routes['removeWallet'] = array(
+			'route' => "/app/removeWallet",
+			'controller' => 'AppController',
+			'action' => 'removeWallet',
+		);
+
+		/**
 		 * Rota para efetuar o logoff
 		 */
 		$routes['userLogoff'] = array(

@@ -81,7 +81,58 @@ class Wallet extends Model
 
     $report['expenses'] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
     return $report;
+  }
 
+  /**
+   * A função para retornar os dados da carteira.
+   * A função soma as receitas e despesas que estão com status pagas, separando 
+   * por grupo formados com os ids das carteiras.
+   * @access public
+   * @return array $wallet com o ip, nome da carteira, soma das receitas e despesas
+   */
+  public function dataSumWallet()
+  {
+    $query = '
+    select 
+	    wallet.id as id, 
+      wallet.wallet_name as walletName, 
+      IFNULL(sum(received.value), 0) as sumReceive
+    from 
+	    tb_wallets as wallet
+    left join 
+      tb_received as received on(received.id_wallet = wallet.id) 
+      and received.status = 1
+    where id_user = :id_user
+    group by wallet.id';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':id_user', $this->__get('id_user'));
+    $stmt->execute();
+    $wallet = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+    $query = '
+    select 
+      IFNULL(sum(expenses.value), 0) as sumExpenses
+    from 
+	    tb_wallets as wallet
+    left join 
+      tb_expenses as expenses on(expenses.id_wallet = wallet.id) 
+      and expenses.status = 1
+    where id_user = :id_user
+    group by wallet.id';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':id_user', $this->__get('id_user'));
+    $stmt->execute();
+    $expense = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+    /**
+     * For usado para extrairmos os valores da soma das depesas e adicionar nos 
+     * dados das wallets.
+     */
+    for ($i=0; $i < count($wallet) ; $i++) { 
+      $wallet[$i]['sumExpenses'] = $expense[$i]['sumExpenses'];
+    }
+
+    return $wallet;
   }
 
   /**
@@ -97,6 +148,34 @@ class Wallet extends Model
     $stmt->execute();
     
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+  }
+
+  /**
+   * Função para remover a carteira e seus dados de receitas, despesas e tarefas.
+   * @access public
+   * @return boolean
+   */
+  public function remove()
+  {
+    $query = '
+    SET SQL_SAFE_UPDATES = 0;
+    SET foreign_key_checks = 0;
+    delete 
+      wallet, received, expenses, tasks
+    from
+      tb_wallets as wallet
+    left  join tb_received as received on(wallet.id = received.id_wallet)
+    left  join tb_expenses as expenses on(wallet.id = expenses.id_wallet)
+    left  join tb_tasks as tasks on(wallet.id = tasks.id_wallet)
+
+    where wallet.id = :id';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':id', $this->__get('id_wallet'));
+    if($stmt->execute())
+    {
+      return true;
+    }
+    return false;
   }
 }
 ?>

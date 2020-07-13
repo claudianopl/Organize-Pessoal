@@ -36,7 +36,7 @@ class AppController extends Action
 	 * @access public
 	 * @return object
 	 */
-	public function dataJWT() 
+	public function getJWT() 
 	{
 		if(isset($_COOKIE['user'])) 
 		{
@@ -119,11 +119,22 @@ class AppController extends Action
 		}
 	}
 
+	/**
+	 * Funão para renderizar a layout wallet, aprezentar as carteiras e dados das
+	 * carteiras como id, soma das receitas e despesas.
+	 */
 	public function Wallet() 
 	{
 		if($this->checkJWT()) 
 		{
+			$wallets = Container::getModel('Wallet');
+			$userData = $this->getJWT();
+			$userId = $userData->id;
+			$wallets->__set('id_user', $userId);
+
 			$this->view->wallets = $this->userGetWallet();
+			$this->view->dataSumWallets = $wallets->dataSumWallet();
+
 			$this->render('wallet');
 		} else 
 		{
@@ -151,7 +162,7 @@ class AppController extends Action
 	 */
 	public function userGetWallet() 
 	{
-		$id = $this->dataJWT()->id;
+		$id = $this->getJWT()->id;
 
 		$wallet = Container::getModel('Wallet');
 		$wallet->__set('id_user', $id);
@@ -182,7 +193,7 @@ class AppController extends Action
 	public function dataApp() 
 	{
 		$info = array();
-		$user = $this->dataJWT();
+		$user = $this->getJWT();
 
 		$info['userName'] = $user->name.' '.$user->surname;
 		print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
@@ -982,20 +993,28 @@ class AppController extends Action
 		if(isset($_POST))
 		{
 			$wallet = $_POST['newWallet'];
-			$userData = $this->dataJWT();
+			$userData = $this->getJWT();
 			$userId = $userData->id;
 
 			$insert = Container::getModel('Wallet');
 			$insert->__set('id_user', $userId);
-			$insert->__set('wallet_name', $wallet);
-			if($insert->insert())
+			if(count($insert->getUserWallet()) < 3)
 			{
-				$info['messege'] = 'success';
+				$insert->__set('wallet_name', $wallet);
+				if($insert->insert())
+				{
+					$info['messege'] = 'success';
+				}
+				else 
+				{
+					$info['messege'] = 'Um erro inesperado aconteceu, tente novamente mais tarde.';
+				}
 			}
-			else 
+			else
 			{
-				$info['messege'] = 'Um erro inesperado aconteceu, tente novamente mais tarde.';
+				$info['messege'] = 'Ops… Parece que você atingiu um número limite de carteiras.';
 			}
+			
 			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 		}
 	}
@@ -1003,7 +1022,6 @@ class AppController extends Action
 	/**
 	 * Função para trazer os dados que vão conter no gráfico.
 	 * @access public
-	 * @return array
 	 */
 	public function graphicWallet()
 	{
@@ -1016,6 +1034,38 @@ class AppController extends Action
 		$data = $graphic->annualSum();
 		
 		print_r(json_encode($data, JSON_UNESCAPED_UNICODE));
+	}
+
+	/**
+	 * Função para remover carteiras.
+	 * @access public
+	 */
+	public function removeWallet()
+	{
+		if(isset($_POST))
+		{
+			$wallet = $this->userGetWallet();
+	
+			$idWallet = $_POST['id'];
+			$remove = Container::getModel('Wallet');
+			$remove->__set('id_wallet', $idWallet);
+
+			if(count($wallet) > 1)
+			{
+				if($remove->remove())
+				{
+					$info['messege'] = 'success';
+					$_SESSION['userWallet'] = $wallet[0]['id'];
+				}
+				else {
+					$info['messege'] = 'Um erro inesperado aconteceu, tente novamente mais tarde.';
+				}
+			}
+			else {
+				$info['messege'] = 'Você precisa criar uma carteira para remover outra.';
+			}
+			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
+		}
 	}
 
 
