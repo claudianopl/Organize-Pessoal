@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function getAjax(date) {
     $.ajax({
       type: 'post',
-      url: '/app/dataApp',
+      url: '/app/dashboardAjax',
       data: `date=${date}`,
       dataType: 'json',
       success: d => {

@@ -54,6 +54,8 @@ class AppController extends Action
 		if($this->checkJWT()) 
 		{
 			$this->view->wallets = $this->userGetWallet();
+			$this->view->balanceDiff = $this->balanceDiffDashboard();
+			$this->view->pending = $this->pendingDashboard();
 
 			$this->render('index');
 		} else 
@@ -185,12 +187,12 @@ class AppController extends Action
 
 	/**
 	 * Retornar os dados ao usuário.
-	 * A função se comunica por requisições ajax, vai ser responsável por levar os
-	 * dados gerais, para a página /app.
+	 * A função se comunica por requisições ajax, vai ser responsável retornar o 
+	 * nome do usuário.
 	 * @access public
 	 * @return array
 	 */
-	public function dataApp() 
+	public function dashboardAjax() 
 	{
 		$info = array();
 		$user = $this->getJWT();
@@ -198,6 +200,49 @@ class AppController extends Action
 		$info['userName'] = $user->name.' '.$user->surname;
 		print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 	}
+
+	/**
+	 * Função para apresentarmos as receitas, despesas e tarefas pendentes.
+	 * @access public
+	 * @return array com a soma das receitas e despesas pagas.
+	 */
+	public function balanceDiffDashboard()
+	{
+		$userDashboard = Container::getModel('Wallet');
+		$userDashboard->__set('id_wallet', $_SESSION['userWallet']);
+		$sumData = $userDashboard->balanceDiff();
+		return $sumData;
+	}
+
+	/**
+	 * Função para filtrar as receitas, despesas e tarefas pendentes até o mês 
+	 * atual.
+	 * @access public
+	 * @return array
+	 */
+	public function pendingDashboard()
+	{
+		$pendingReceived = Container::getModel('Received');
+		$pendingReceived->__set('id_wallet', $_SESSION['userWallet']);
+		$pendingReceived->__set('date' ,date('Y-m-t'));
+		$pendingReceived = $pendingReceived->filterDashboard();
+		$pending['received'] = $pendingReceived;
+
+		$pendingExpenses = Container::getModel('Expense');
+		$pendingExpenses->__set('id_wallet', $_SESSION['userWallet']);
+		$pendingExpenses->__set('date' ,date('Y-m-t'));
+		$pendingExpenses = $pendingExpenses->filterDashboard();
+		$pending['expenses'] = $pendingExpenses;
+
+		$pendingTasks = Container::getModel('Tasks');
+		$pendingTasks->__set('id_wallet', $_SESSION['userWallet']);
+		$pendingTasks->__set('date' ,date('Y-m-t'));
+		$pendingTasks = $pendingTasks->filterDashboard();
+		$pending['tasks'] = $pendingTasks;
+
+		return($pending);
+	}
+
 
 
 

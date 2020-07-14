@@ -23,6 +23,30 @@ class Wallet extends Model
   }
 
   /**
+   * Função para retornar as soams das despesas, receitas e tarefas.
+   * @access public
+   * @return array
+   */
+  public function balanceDiff()
+  {
+    $query = ' select sum(value) as receive from tb_received 
+    where id_wallet = :id_wallet and status = 1;';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
+    $stmt->execute();
+    $data['sumReceived'] = $stmt->fetchColumn();
+
+    $query = ' select sum(value) as expense from tb_expenses 
+    where id_wallet = :id_wallet and status = 1;';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
+    $stmt->execute();
+    $data['sumExpenses'] = $stmt->fetchColumn();
+
+    return $data;
+  }
+
+  /**
    * Função para inserir as novas carteiras do usuário.
    * @access public
    * @return boolean

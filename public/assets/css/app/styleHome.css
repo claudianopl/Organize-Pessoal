@@ -122,7 +122,6 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 18px;
   padding: 10px;
-  height: 306px;
   animation: fade 1s;
   animation-delay: 1.25s;
   animation-fill-mode: backwards;
@@ -184,19 +183,29 @@
 .sectionAppHomeOneInfoSectionNotificationDesc {
   margin-right: auto;
 }
+.sectionAppHomeOneInfoSectionNotificationDesc img {
+  cursor: pointer;
+}
 .sectionAppHomeOneInfoSectionNotificationDesc h4{
   color: #636D7C;
   font-size: 14px;
 }
 .sectionAppHomeOneInfoSectionNotificationDesc p{
-  color: #636D7C;
   font-size: 12px;
+  font-weight: 600;
+}
+.pedding {
+  color: #636D7C;
+}
+.late {
+  color: #E34E4E;
 }
 
 .sectionAppHomeOneInfoSectionReceiveNotificationValue img,
 .sectionAppHomeOneInfoSectionPayNotificationValue img,
 .sectionAppHomeOneInfoSectionTasksNotificationValue img {
   margin-left: 15px;
+  cursor: pointer;
 }
 
 /*

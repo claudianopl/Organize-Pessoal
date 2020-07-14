@@ -152,6 +152,28 @@ class Received extends Model
   }
 
   /**
+   * Filtra todas as despesas pendentes até o mês atual.
+   * @access public
+   * @return array
+   */
+  public function filterDashboard()
+  {
+    $query = '
+    select 
+      id, description, date, value 
+    from 
+      tb_received 
+    where 
+      id_wallet = :id_wallet and date <= :date and status = 0';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
+    $stmt->bindValue(':date', $this->__get('date'));
+    $stmt->execute();
+
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+  }
+
+  /**
    * Função para retornamos as receitas do mês.
    * Usada quando o usuário entra na layout de receitas.
    * @access public

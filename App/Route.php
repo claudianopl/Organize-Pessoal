@@ -136,10 +136,10 @@ class Route extends Bootstrap {
 		/**
 		 * Rota para comunicação ajax da página /app
 		 */
-		$routes['dataApp'] = array(
-			'route' => "/app/dataApp",
+		$routes['dashboardAjax'] = array(
+			'route' => "/app/dashboardAjax",
 			'controller' => 'AppController',
-			'action' => 'dataApp',
+			'action' => 'dashboardAjax',
 		);
 
 		/**
