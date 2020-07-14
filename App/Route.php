@@ -296,7 +296,7 @@ class Route extends Bootstrap {
 		);
 
 		/**
-		 * Rota para gerar o gráfico wallet
+		 * Rota para gerar o gráfico wallet.
 		 */
 		$routes['graphicWallet'] = array(
 			'route' => "/app/graphicWallet",
@@ -305,7 +305,7 @@ class Route extends Bootstrap {
 		);
 
 		/**
-		 * Rota para remover uma wallet
+		 * Rota para remover uma wallet.
 		 */
 		$routes['removeWallet'] = array(
 			'route' => "/app/removeWallet",
@@ -314,7 +314,25 @@ class Route extends Bootstrap {
 		);
 
 		/**
-		 * Rota para efetuar o logoff
+		 * Rota para atualizar o perfil do usuário.
+		 */
+		$routes['userProfile'] = array(
+			'route' => "/app/userProfile",
+			'controller' => 'AppController',
+			'action' => 'userProfile',
+		);
+
+		/**
+		 * Rota para trocar senha do usuário.
+		 */
+		$routes['updatePassword'] = array(
+			'route' => "/app/updatePassword",
+			'controller' => 'AppController',
+			'action' => 'updatePassword',
+		);
+
+		/**
+		 * Rota para efetuar o logoff.
 		 */
 		$routes['userLogoff'] = array(
 			'route' => "/logoff",

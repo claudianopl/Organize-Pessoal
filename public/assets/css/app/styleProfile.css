@@ -7,6 +7,12 @@
   animation: fade 1s;
   overflow: hidden;
 }
+#messegeProfile {
+  margin: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+}
 .appProfileData {
   background: #FFFFFF;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
@@ -25,6 +31,7 @@
   animation-fill-mode: backwards;
 }
 .appProfileData:nth-child(2) {
+  display: flex;
   animation: moveRight 1s;
   animation-delay: 0.25s;
   animation-fill-mode: backwards;
@@ -46,8 +53,6 @@
 }
 .appProfileName,
 .appProfileSurname,
-.appProfileBirth,
-.appProfileEmail,
 .appProfilePassword,
 .appProfileConfirmPassword{
   flex: 1;
@@ -57,11 +62,14 @@
 .appProfilePassword {
   margin-right: 30px;
 }
+.appProfileGender,
+.appProfileBirth {
+  width: 50%;
+}
 .appProfileName label,
 .appProfileSurname label,
 .appProfileGenderSelect label,
 .appProfileBirth label,
-.appProfileEmail label,
 .appProfilePassword label,
 .appProfileConfirmPassword label {
   color: #555555;
@@ -73,7 +81,6 @@
 .appProfileSurname input,
 .appProfileGenderSelect input,
 .appProfileBirth input,
-.appProfileEmail input,
 .appProfilePassword input,
 .appProfileConfirmPassword input{
   width: 100%;
@@ -92,7 +99,6 @@
 .appProfileSurname input:focus,
 .appProfileGenderSelect input:focus,
 .appProfileBirth input:focus,
-.appProfileEmail input:focus,
 .appProfilePassword input:focus,
 .appProfileConfirmPassword input:focus {
   border: 2px solid #59DF83;
@@ -166,6 +172,111 @@
   text-align: center;
 }
 
+/* MODAL */
+.updatePasswordArea {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 10;
+  opacity: 0;
+  transition: 1s;
+  transform: translate3d(0,0,-100px);
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 1s;
+}
+.passwordAreaAnimation {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.updatePassowrdExit {
+  background: rgba(0, 0, 0, 0.4);
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+  position: absolute;
+}
+.updatePasswordForm {
+  width: 60%;
+  height: auto;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(231, 231, 231,0.25);
+  z-index: 4;
+  position: relative;
+  padding: 10px;
+}
+.updatePasswordTitle {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #CCCCCC;
+}
+.updatePasswordTitle img {
+  margin-right: 15px;
+}
+.updatePasswordTitle h3 {
+  color: #555555;
+  font-weight: 500;
+}
+.updatePasswordForm p {
+  margin-top: 5px;
+}
+.updatePasswordLine label{
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+.updatePasswordLine label img{
+  margin-top: 5px;
+  margin-right:10px;
+  margin-left: 15px;
+}
+.updatePasswordLine input {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  color: #555555;
+  font-weight: 500;
+  border-radius: 18px;
+  border: 1px solid #ccddef;
+  left: auto;
+  margin-bottom: 15px;
+}
+.updatePasswordLine input:focus {
+  border: 1px solid #34F06F;
+  outline: 0;
+  font-weight: 600;
+}
+.updatePasswordForm form button {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  border: none;
+  padding: 10px 50px;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  background: linear-gradient(90deg, #59DF83 0%, #13C5A5 99.99%, rgba(196, 196, 196, 0) 100%);
+  box-shadow: 0px 4px 4px rgba(89, 223, 131, 0.25);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 1s;
+}
+.updatePasswordForm form button:hover {
+  padding: 10px 100px;
+}
+.updatePasswordForm form button:focus {
+  border: none;
+  outline: 0;
+}
+
 @media (max-width: 575px) {
   .appProfileData:nth-child(1), 
   .appProfileData:nth-child(3), 
@@ -189,7 +300,9 @@
   .appProfileButtonUpdate button {
     margin-bottom: 15px;
   }
-
+  .updatePasswordForm {
+    width: 90%;
+  }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
@@ -199,6 +312,9 @@
   .appProfileButtonUpdate button, 
   .appProfileButtonUpdatePassword {
     width: 239px;
+  }
+  .updatePasswordForm {
+    width: 90%;
   }
 }
   

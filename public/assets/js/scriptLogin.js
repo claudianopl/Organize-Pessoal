@@ -69,7 +69,7 @@ $('.sectionLoginOneForm form').on('submit', function(e) {
           $('.sectionLoginOneInfo p').html(d.messege);
         }
       },
-      error: erro => {
+      error: e => {
         invalidLogin();
         $('.sectionLoginOneInfo p').html('Algum erro inesperado aconteceu, tente novamente mais tarde.');
       }

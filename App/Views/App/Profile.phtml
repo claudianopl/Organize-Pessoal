@@ -43,28 +43,31 @@
 
           <div class="sectionAppAreaRight">
             <div class='sectionAppProfileArea'>
-              <!-- 
-                Adicionar a action para a rota do backend, só o modal que vai 
-                ser através do ajax
-              -->
-              <form method="POST">
+              <p id='messegeProfile'></p>
+              <form>
                 <div class="appProfileData">
                   <div class="appProfileName">
                     <label for="userName">Nome:</label><br>
-                    <!-- Adicionar o nome do usuário através do php-->
-                    <input type="text" id="userName" name="name" value="">
+                    <input type="text" id="userName" name="name" 
+                    value="<?php echo($this->view->user->name) ?>">
                   </div>
                   <div class="appProfileSurname">
                     <label for="userSurname">Sobrenome:</label><br>
-                    <!-- Adicionar o sobrenome do usuário através do php-->
-                    <input type="text" id="userSurname" name="surname" value="">
+                    <input type="text" id="userSurname" name="surname" 
+                    value="<?php echo($this->view->user->surname) ?>">
                   </div>
                 </div>
                 <div class="appProfileData">
+                  <div class="appProfileBirth">
+                    <label for="userBirth">Nascimento:</label><br>
+                    <input type="date" id="userBirth" name="nasciment" 
+                    value='<?php echo($this->view->user->nasciment) ?>'>
+                  </div>
                   <div class="appProfileGender">
                     <div class="appProfileGenderSelect">
                       <label for="userGender">Gênero</label><br>
-                      <input type="text" id="userGender" name="gender" value="Selecionar" Readonly> 
+                      <input type="text" id="userGender" name="gender" 
+                      value="<?php echo($this->view->user->gender) ?>" Readonly> 
                     </div>
                     <div class="appProfileGenderNav">
                       <ul>
@@ -72,16 +75,6 @@
                         <li>Feminino</li>
                       </ul>
                     </div>
-                  </div>
-                </div>
-                <div class="appProfileData">
-                  <div class="appProfileBirth">
-                    <label for="userBirth">Nascimento:</label><br>
-                    <input type="date" id="userBirth" name="birth">
-                  </div>
-                  <div class="appProfileEmail">
-                    <label for="userEmail">Email:</label><br>
-                    <input type="email" id="userEmail" name="email">
                   </div>
                 </div>
                 <div class="appProfileData">
@@ -109,6 +102,43 @@
         </div>
       </div>
     </section>
+
+    <div class='updatePasswordArea'>
+      <div class="updatePassowrdExit"></div>
+      <div class="updatePasswordForm">
+        <article class="updatePasswordTitle">
+          <img src="/assets/images/app/appGlobal/iconPasswordModal.svg">
+          <h3>Alterar senha</h3>
+        </article>
+        <p></p>
+
+        <form>
+          <article class="updatePasswordLine">
+            <label for="password">
+              <img src="/assets/images/app/appGlobal/iconPasswordModal.svg">Senha atual:
+            </label>
+            <input type="password" id='password' name="password">
+          </article>
+
+          <article class="updatePasswordLine">
+            <label for="newPassword">
+              <img src="/assets/images/app/appGlobal/iconTitleModal.svg">Nova Senha:
+            </label>
+            <input type="password" id='newPassword' name="newPassword">
+          </article>
+
+          <article class="updatePasswordLine">
+            <label for="confirmPassword">
+              <img src="/assets/images/app/appGlobal/iconTitleModal.svg">Confirmar senha:
+            </label>
+            <input type="password" id='confirmPassword' name="confirmPassword">
+          </article>
+
+          <button>Alterar Senha</button>
+
+        </form>
+      </div>
+    </div>
 
     <!-- jQuery e JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

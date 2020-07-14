@@ -147,6 +147,7 @@ class AppController extends Action
 		if($this->checkJWT()) 
 		{
 			$this->view->wallets = $this->userGetWallet();
+			$this->view->user = $this->getJWT();
 
 			$this->render('profile');
 		} else 
@@ -178,7 +179,6 @@ class AppController extends Action
 			$_SESSION['userWallet'] = $wallet;
 		}
 	}
-
 
 
 
@@ -1065,6 +1065,113 @@ class AppController extends Action
 				$info['messege'] = 'Você precisa criar uma carteira para remover outra.';
 			}
 			print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
+		}
+	}
+
+
+
+
+	/**
+	 * Função para atualziar os dados do usuário.
+	 * @access public
+	 */
+	public function userProfile()
+	{
+		if(isset($_POST))
+		{
+			$name = $_POST['name'];
+			$surname = $_POST['surname'];
+			$gender = $_POST['gender'];
+			$nasciment = $_POST['nasciment'];
+			$password = $_POST['password'];
+
+			$userId = $this->getJWT()->id;
+			
+
+			$user = Container::getModel('User');
+			$user->__set('id', $userId);
+
+			$userData = $user->getUserId();
+			if(count($userData) > 0)
+			{
+				if($this->checkArgon2id($password, $userData['user_password']))
+				{
+					$user->__set('user_name', $name);
+					$user->__set('user_surname', $surname);
+					$user->__set('user_gender', $gender);
+					$user->__set('user_nasciment', $nasciment);
+					if($user->updateUser())
+					{
+						$userData = $user->getUserId();
+						$userData = [
+							'authenticate' => md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']),
+							'id' => $userData['id'],
+							'name' => $userData['user_name'],
+							'surname' => $userData['user_surname'],
+							'email' => $userData['user_email'],
+							'gender' => $userData['user_gender'],
+							'nasciment' => $userData['user_nasciment']
+						];
+						$name = 'user';
+						$jwt = $this->econdeJWT($userData);
+						setcookie($name, $jwt);
+
+						$info['messege'] = 'success';
+					}
+					else
+					{
+						$info['messege'] = 'Um erro inesperado aconteceu, tente novamente mais tarde.';
+					}
+				}
+				else
+				{
+					$info['messege'] = 'Senha inválida, por favor, verifique sua senha.';
+				}
+				print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
+			}
+		}
+	}
+
+	/**
+	 * Função para atualizar senha do usuário.
+	 * A função verifica a senha atual, se estiver correta, a função efetua a 
+	 * troca da senha.
+	 * @access public
+	 */
+	public function updatePassword()
+	{
+		if(isset($_POST))
+		{
+			$password = $_POST['password'];
+			$newPassword = $_POST['newPassword'];
+			$confirmPassword = $_POST['confirmPassword'];
+
+			$userId = $this->getJWT()->id;
+			$user = Container::getModel('User');
+			$user->__set('id', $userId);
+
+			$userData = $user->getUserId();
+			if(count($userData) > 0)
+			{
+				if($this->checkArgon2id($password, $userData['user_password']))
+				{
+					$password = $this->passwordArgon2id($newPassword);
+					$user->__set('user_password', $password);
+					if($user->updatePassword())
+					{
+						$info['messege'] = 'success';
+					}
+					else 
+					{
+						$info['messege'] = 'Um erro inesperado aconteceu, tente novamente mais tarde.';
+					}
+				}
+				else
+				{
+					$info['messege'] = 'Sua senha é inválida, por favor, verifique sua senha.';
+				}
+				print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
+			}
 		}
 	}
 

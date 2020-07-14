@@ -126,7 +126,7 @@ class HomeController extends Action
 				 * Criação da carteira.
 				 * <?php 
 				 * $dateUser = $newUser->getUserEmail();
-				 * $userID = $dateUser[0]['id'];
+				 * $userID = $dateUser['id'];
 				 * $newUser->__set('id', $userID);
 				 * $newUser->__set('wallet_name', 'Carteira Geral');
 				 * $newUser->saveWallet();
@@ -135,7 +135,7 @@ class HomeController extends Action
 				 * Esse código cria uma carteira para o usuário.
 				 */
 				$dateUser = $newUser->getUserEmail();				
-				$userID = $dateUser[0]['id'];					
+				$userID = $dateUser['id'];					
 				$newUser->__set('id', $userID);
 				$newUser->__set('wallet_name', 'Carteira Geral');
 				$newUser->saveWallet();
@@ -175,32 +175,33 @@ class HomeController extends Action
 			 * Verifica se o usuário existe.
 			 * Verifica se o email do usuário existe no banco de dados, para depois 
 			 * veficar a senha do usuário. Se estiver valido, iniciamos a sessão.
-			 * @name $date
+			 * @name $data
 			 */
-			$date = $user->getUserEmail();
-			if(count($date) > 0) 
+			$data = $user->getUserEmail();
+			if(count($data) > 0) 
 			{
-				if($this->checkArgon2id($password, $date[0]['user_password'])) 
+				if($this->checkArgon2id($password, $data['user_password'])) 
 				{
-					if($date[0]['user_confirmed'] == 1) 
+					if($data['user_confirmed'] == 1) 
 					{
-						$data = [
+						$userData = [
 							'authenticate' => md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']),
-							'id' => $date[0]['id'],
-							'name' => $date[0]['user_name'],
-							'surname' => $date[0]['user_surname'],
-							'email' => $date[0]['user_email'],
-							'gender' => $date[0]['user_gender'],
+							'id' => $data['id'],
+							'name' => $data['user_name'],
+							'surname' => $data['user_surname'],
+							'email' => $data['user_email'],
+							'gender' => $data['user_gender'],
+							'nasciment' => $data['user_nasciment']
 						];
 						$name = 'user';
-						$jwt = $this->econdeJWT($data);
+						$jwt = $this->econdeJWT($userData);
 						setcookie($name, $jwt);
 
 						/**
-						 * 
-						 */
+						 * Iniciando o login com a primeira carteira do usuário.
+						 */ 
 						$wallet = Container::getModel('Wallet');
-						$wallet->__set('id_user', $date[0]['id']);
+						$wallet->__set('id_user', $data['id']);
 						$wallets = $wallet->getUserWallet();
 						$walletId = $wallets[0]['id'];
 						

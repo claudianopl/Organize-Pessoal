@@ -17,6 +17,7 @@ class User extends Model
   private $user_confirm;
   private $user_confirmed;
   private $user_changepassword;
+  private $user_nasciment;
 
   public function __get($attribute) 
   {
@@ -50,6 +51,44 @@ class User extends Model
   }
 
   /**
+   * Atualizando os dados do usuário.
+   * @access public
+   * @return boolean
+   */
+  public function updateUser()
+  {
+    $query = 'update tb_user set user_name=:name, user_surname=:surname,
+    user_nasciment=:nasciment, user_gender=:gender';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':name', $this->__get('user_name'));
+    $stmt->bindValue(':surname', $this->__get('user_surname'));
+    $stmt->bindValue(':nasciment', $this->__get('user_nasciment'));
+    $stmt->bindValue(':gender', $this->__get('user_gender'));
+    if($stmt->execute())
+    {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Função para editar a senha do usuário.
+   * @access public
+   */
+  public function updatePassword()
+  {
+    $query = 'update tb_user set user_password = :password where id = :id';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':password', $this->__get('user_password'));
+    $stmt->bindValue(':id', $this->__get('id'));
+    if($stmt->execute())
+    {
+      return true;
+    }
+    return false;
+  }
+
+  /**
    * Salvar carteira.
    * A função salva uma carteira automática para o usuário quando ele faz o seu 
    * cadastro.
@@ -62,9 +101,11 @@ class User extends Model
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':id_user', $this->__get('id'));
     $stmt->bindValue(':wallet', $this->__get('wallet_name'));
-    $stmt->execute();
-
-    return true;
+    if($stmt->execute())
+    {
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -84,10 +125,25 @@ class User extends Model
   }
 
   /**
+   * Função para capturar os dados do usuário pelo id.
+   * @access public
+   * @return array
+   */
+  public function getUserId()
+  {
+    $query = 'select * from tb_user where id = :id';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':id', $this->__get('id'));
+    $stmt->execute();
+
+    return $stmt->fetch(\PDO::FETCH_ASSOC);
+  }
+
+  /**
    * Validar usuário.
    * A função verifica se já existe um usuário cadastrado com o e-mail informado.
    * @access public
-   * @return boolean
+   * @return array
    */
   public function getUserEmail() 
   {
@@ -96,13 +152,13 @@ class User extends Model
     $stmt->bindValue(':email', $this->__get('user_email'));
     $stmt->execute();
 
-    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    return $stmt->fetch(\PDO::FETCH_ASSOC);
   }
 
    /**
    * Verifica se o usuário confirmou o e-mail.
    * @access public
-   * @return boolean
+   * @return array
    */
   public function getUserHashConfirm() 
   {
@@ -125,9 +181,11 @@ class User extends Model
     $query = 'update tb_user set user_confirmed = 1 where id = :id';
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':id', $this->__get('id'));
-    $stmt->execute();
-
-    return true;
+    if($stmt->execute())
+    {
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -143,9 +201,11 @@ class User extends Model
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':user_changepassword', $this->__get('user_changepassword'));
     $stmt->bindValue(':email', $this->__get('user_email'));
-    $stmt->execute();
-
-    return true;
+    if($stmt->execute())
+    {
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -164,9 +224,11 @@ class User extends Model
     $stmt = $this->conexao->prepare($query);
     $stmt->bindValue(':user_password', $this->__get('user_password'));
     $stmt->bindValue(':user_changepassword', $this->__get('user_changepassword'));
-    $stmt->execute();
-
-    return true;
+    if($stmt->execute())
+    {
+      return true;
+    }
+    return false;
   }
 }
 
