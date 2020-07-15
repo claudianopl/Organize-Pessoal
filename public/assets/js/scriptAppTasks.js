@@ -284,6 +284,7 @@ function updateTasks(id) {
  * @param {String} id 
  */
 function concludeTasks(id) {
+  $('.loadingArea').show();
   $.ajax({
     type: 'post',
     url: '/app/concludeTasks',
@@ -294,6 +295,7 @@ function concludeTasks(id) {
         location.reload();
       }
       else {
+        $('.loadingArea').hide();
         $('#messege').show('slow');
         $('#messege').html('Ops... Um error inesperado aconteceu.');
         $('#messege').addClass('error');

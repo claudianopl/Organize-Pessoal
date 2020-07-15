@@ -4,13 +4,61 @@
  * @param {String} id
  */
 function confirmed(type, id) {
+  $('.loadingArea').show();
   if(type == 'received') {
-    console.log(id);
+    $.ajax({
+      type: 'post',
+      url: '/app/concludeReceived',
+      data: {'id':id},
+      dataType: 'json',
+      success: d => {
+        if(d.messege == 'success') {
+          location.reload();
+        }
+        else {
+          $('.loadingArea').hide();
+          $('#messege').show('slow');
+          $('#messege').html('Ops... Um error inesperado aconteceu.');
+          $('#messege').addClass('error');
+        }
+      }
+    });
   }
   if(type == 'expenses') {
-    console.log(id);
+    $.ajax({
+      type: 'post',
+      url: '/app/expensesConclude',
+      data: {'id':id},
+      dataType: 'json',
+      success: d => {
+        if(d.messege == 'success') {
+          location.reload();
+        }
+        else {
+          $('.loadingArea').hide();
+          $('#messege').show('slow');
+          $('#messege').html('Ops... Um error inesperado aconteceu.');
+          $('#messege').addClass('error');
+        }
+      }
+    });
   }
   if(type == 'tasks') {
-    console.log(id);
+    $.ajax({
+      type: 'post',
+      url: '/app/concludeTasks',
+      data: {'id':id},
+      dataType: 'json',
+      success: d => {
+        if(d.messege == 'success') {
+          location.reload();
+        }
+        else {
+          $('#messege').show('slow');
+          $('#messege').html('Ops... Um error inesperado aconteceu.');
+          $('#messege').addClass('error');
+        }
+      }
+    });
   }
 }
