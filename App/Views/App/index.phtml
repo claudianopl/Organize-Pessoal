@@ -3,8 +3,7 @@ $dataDay = array();
 for($i=1; $i<=31; $i++) {
   array_push($dataDay, $i);
 }
-$sumReceived = $this->view->balanceDiff['sumReceived'];
-$sumExpenses = $this->view->balanceDiff['sumExpenses'];
+
 
 $peddingReceived = $this->view->pending['received'];
 $peddingExpenses = $this->view->pending['expenses'];
@@ -72,7 +71,7 @@ $peddingTasks = $this->view->pending['tasks'];
               <div class="sectionAppHomeOneInfoHeaderSaleInfo">
                 <h4>Saldo Atual</h4>
                 <p>
-                  R$<?php echo(bcsub($sumReceived, $sumExpenses, 2)); ?>
+                  R$<?php echo $this->view->balanceDiff['diff'] ?>
                 </p>
               </div>
 
@@ -85,7 +84,7 @@ $peddingTasks = $this->view->pending['tasks'];
               <div class="sectionAppHomeOneInfoHeaderReceiveInfo">
                 <h4>Receitas</h4>
                 <p>
-                  R$<?php echo number_format($sumReceived,2,',','.') ?>
+                  R$<?php echo $this->view->balanceDiff['sumReceived'] ?>
                 </p>
               </div>
 
@@ -98,7 +97,7 @@ $peddingTasks = $this->view->pending['tasks'];
               <div class="sectionAppHomeOneInfoHeaderExpensesInfo">
                 <h4>Despesas</h4>
                 <p>
-                  R$<?php echo number_format($sumExpenses,2,',','.') ?>
+                  R$<?php echo $this->view->balanceDiff['sumExpenses'] ?>
                 </p>
               </div>
 
@@ -139,7 +138,7 @@ $peddingTasks = $this->view->pending['tasks'];
                 <div class="sectionAppHomeOneInfoSectionReceiveNotification">
                   <div class="sectionAppHomeOneInfoSectionNotificationDesc">
                     <h4>
-                      <?php echo mb_strimwidth($value['description'],0,20,'…' ); ?>
+                      <?php echo mb_strimwidth($value['description'],0,15,'…' ); ?>
                     </h4>
                     <p class='<?php echo $class ?>'>
                       <?php
@@ -199,7 +198,7 @@ $peddingTasks = $this->view->pending['tasks'];
                 <div class="sectionAppHomeOneInfoSectionPayNotification">
                   <div class="sectionAppHomeOneInfoSectionNotificationDesc">
                     <h4>
-                      <?php echo mb_strimwidth($value['description'],0,20,'…' ); ?>
+                      <?php echo mb_strimwidth($value['description'],0,15,'…' ); ?>
                     </h4>
                     <p class='<?php echo $class ?>'>
                       <?php 
@@ -258,7 +257,7 @@ $peddingTasks = $this->view->pending['tasks'];
                 <div class="sectionAppHomeOneInfoSectionTasksNotification">
                   <div class="sectionAppHomeOneInfoSectionNotificationDesc">
                     <h4>
-                    <?php echo mb_strimwidth($value['description'],0,20,'…' ); ?>
+                    <?php echo mb_strimwidth($value['description'],0,15,'…' ); ?>
                     </h4>
                     <p class='<?php echo $class ?>'>
                       <?php 

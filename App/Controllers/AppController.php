@@ -210,7 +210,20 @@ class AppController extends Action
 	{
 		$userDashboard = Container::getModel('Wallet');
 		$userDashboard->__set('id_wallet', $_SESSION['userWallet']);
-		$sumData = $userDashboard->balanceDiff();
+		$sumData['diff'] = $userDashboard->balanceDiff();
+
+		/**
+		 * Puxando a soma das receitas concluídas do mês atual
+		 */
+		$userReceived = $this->sumMonthReceivedAndExpense(date('Y-m-01'), 'Received');
+		$sumData['sumReceived'] = $userReceived['paymentReceived'];
+
+		/**
+		 * Puxando a soma das despesas concluídas do mês atual
+		 */
+		$userExpense = $this->sumMonthReceivedAndExpense(date('Y-m-01'), 'Expense');
+		$sumData['sumExpenses'] = $userExpense['ExpensesPayme'];
+		
 		return $sumData;
 	}
 
@@ -411,7 +424,7 @@ class AppController extends Action
 	 * A função faz a solicitação da somas das receitas e despesas a receber e 
 	 * recebido ao banco de dados.
 	 * @access public
-	 * @param string $date com a data do mês.
+	 * @param string $date com o mês e o ano.
 	 * @param string $model o model que será executado.
 	 * @return array
 	 */
