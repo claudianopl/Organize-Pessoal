@@ -278,6 +278,41 @@ class Received extends Model
   }
 
   /**
+   * Função para retornar as receitas recebidas para o gráfico.
+   * @access public
+   * @return array
+   */
+  public function sumGraphicDashboard()
+  {
+    $query = '
+    WITH days AS (
+    SELECT DATE_ADD(:date, INTERVAL rnk DAY) day 
+      FROM (SELECT row_number() over() -1 rnk 
+      FROM information_schema.columns LIMIT 31) gerado)   
+    
+    SELECT 
+      days.day, 
+      IFNULL(sum(received.value), 0) as amount
+    FROM 
+      days
+      LEFT JOIN tb_received as received ON received.date = days.day 
+      and received.id_wallet = :id_wallet
+      and received.status = :status
+    WHERE 
+      days.day BETWEEN :date AND :lastDate
+    group by days.day
+    ORDER BY days.day';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':date', $this->__get('date'));
+    $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
+    $stmt->bindValue(':status', $this->__get('status'));
+    $stmt->bindValue(':lastDate', $this->__get('lastDate'));
+    $stmt->execute();
+
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+  }
+
+  /**
    * Função para remover as receitas.
    * @access public
    * @return true

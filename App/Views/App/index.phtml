@@ -296,78 +296,11 @@ $peddingTasks = $this->view->pending['tasks'];
           <div class="GraphicGeneral">
             <canvas id='GraphicGeneral'></canvas>
           </div>
-          <script type="text/javascript">
-            let ctx = document.getElementById('GraphicGeneral').getContext("2d");
-            var graphic = new Chart(ctx, {
-              type: 'line',
-              data: {
-                labels: [/*<?php echo implode(',', $dataDay); ?>*/],
-                datasets: [{
-                  label: 'Receita',
-                  backgroundColor: "#34F06F",
-                  borderColor: "#34F06F",
-                  data: [/* Colocar os dados PHP */],
-                  borderWidth: 2,
-                  fill: false
-                }, {
-                  label: 'Despesa',
-                  backgroundColor: "#E34E4E",
-                  borderColor: "#E34E4E",
-                  data: [/* Colocar os dados PHP */],
-                  borderWidth: 2,
-                  fill: false
-                }] // datasets
-              }, // data
-              options: {
-                title: {
-                  display: true,
-                  fontSize: 16,
-                  text: 'Relatório mensal: Receitas x Despesas'
-                }
-              }
-            });
-          </script>
         </div>
         <div class="sectionAppHomeOneInfoGraphicDetailed">
           <div class="GraphicDetailed">
             <canvas id='GraphicDetailed'></canvas>
           </div>
-          <script type="text/javascript">
-            let GraphicDetailed = document.getElementById('GraphicDetailed').getContext("2d");
-            var GraphicBar = new Chart(GraphicDetailed, {
-              type: 'horizontalBar',
-              data: {
-                labels: ['Alimentação', 'Assinaturas e serviços','Casa',
-                'Compras','Cuidados pessoais','Dívidas e empréstimos',
-                'Educação','Entretenimento','Família e filhos',
-                'Impostos e Taxas','Investimentos','Mercado','Pets','Saúde',
-                'Trabalho','Transporte','Viagem'],
-                datasets: [{
-                  label: '',
-                  backgroundColor: ["#D874A8","#C683E4","#8193E1","#F67CFF",
-                  "#C657CE","#FF6C6C","#6470BA","#626491","#74E88B",
-                  "#FF977C","#FF70A1","#FF8A72","#FFBE57","#72B4E1",
-                  "#446FF5","#44BCE1","#E16B6B"],
-                  data: [/* Colocar os dados PHP */]
-                }] // datasets
-              }, // data
-              options: {
-                title: {
-                  display: true,
-                  fontSize: 16,
-                  text: 'Relatório despesas detalhadas'
-                },
-                layout: {
-                  padding: {
-                      left: 0,
-                      right: 10,
-                      top: 0,
-                      bottom: 0
-                  }
-                }
-              }
-            })     
-          </script>
         </div>
       </section>
       

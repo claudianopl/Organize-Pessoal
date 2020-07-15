@@ -68,44 +68,59 @@ class Wallet extends Model
 
   /**
    * Função para retornar a soma anual das receitas e despesas.
+   * @access public
+   * @return array
    */
   public function annualSum()
   {
-    $query = '
-    select 
-      month.id as month,
+    $query = "
+    WITH months AS (
+      SELECT DATE_ADD(:date, INTERVAL rnk MONTH) month 
+      FROM (SELECT row_number() over() -1 rnk 
+      FROM information_schema.columns LIMIT 12) gerado)
+      
+    SELECT 
+      months.month,
       IFNULL(sum(received.value), 0) as amount
-    from tb_month as month
+    from months
     left join tb_received as received
-      on(month(received.date) = month.id) 
-      and received.id_wallet = :id_wallet
+      on(month(received.date) = month(months.month))
       and year(received.date) = :year
-    group by month.id
-    order by month asc;';
+      and received.id_wallet = :id_wallet
+      group by months.month
+      ORDER BY months.month";
     $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':date', $this->__get('date'));
     $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
     $stmt->bindValue(':year', $this->__get('year'));
     $stmt->execute();
 
     $report['received'] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-
-    $query = '
-    select 
-      month.id as month,
+    
+    $query = "
+    WITH months AS (
+      SELECT DATE_ADD(:date, INTERVAL rnk MONTH) month 
+      FROM (SELECT row_number() over() -1 rnk 
+      FROM information_schema.columns LIMIT 12) gerado)
+      
+    SELECT 
+      months.month,
       IFNULL(sum(expenses.value), 0) as amount
-    from tb_month as month
+    from months
     left join tb_expenses as expenses
-      on(month(expenses.date) = month.id) 
-      and expenses.id_wallet = :id_wallet
+      on(month(expenses.date) = month(months.month))
       and year(expenses.date) = :year
-    group by month.id
-    order by month asc;';
+      and expenses.id_wallet = :id_wallet
+      group by months.month
+      ORDER BY months.month";
     $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':date', $this->__get('date'));
     $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
     $stmt->bindValue(':year', $this->__get('year'));
     $stmt->execute();
 
     $report['expenses'] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
     return $report;
   }
 

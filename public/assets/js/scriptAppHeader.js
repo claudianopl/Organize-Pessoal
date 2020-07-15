@@ -1,5 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
   /**
+   * Ajax para sempre retornar o nome do usuário.
+   */
+  $.ajax({
+    type: 'post',
+    url: '/app/headerUserName',
+    dataType: 'json',
+    success: d => {
+      $('.headerAppUser h4').html(d.userName);
+    }
+  })
+  /**
    * Se comunica com o back-end através do ajax.
    * A função envia os dados, para o back-end do laytou app, foi criada porque 
    * é executada duas vezes, uma quando o usuário entra na página app e outra
@@ -7,20 +18,136 @@ document.addEventListener('DOMContentLoaded', function() {
    * @param {String} date 
    */
   function getAjax(date) {
-    $.ajax({
-      type: 'post',
-      url: '/app/dashboardAjax',
-      data: `date=${date}`,
-      dataType: 'json',
-      success: d => {
-        $('.headerAppUser h4').html(d.userName);
-        
-      },
-      error: erro => {
-        console.log('erro')
-        console.log(erro)
-      }
-    })
+    const url = window.location.href.split('/');
+    if(url[url.length - 1] == 'app') {
+      $.ajax({
+        type: 'post',
+        url: '/app/dashboardCalendar',
+        data: `date=${date}`,
+        dataType: 'json',
+        success: d => {
+          console.log(d)
+          $(".sectionAppHomeOneInfoHeaderReceiveInfo p").html(`R$${d.sum.sumReceived}`);
+          $(".sectionAppHomeOneInfoHeaderExpensesInfo p").html(`R$${d.sum.sumExpenses}`);
+
+          /**
+           * Removendo o gráfico geral e criando um novo.
+           */
+          $('.GraphicGeneral').remove();
+          let fatherGraphic = $('.sectionAppHomeOneInfoGraphicGeneral');
+          
+          let GraphicGeneral = document.createElement('div');
+          GraphicGeneral.className = 'GraphicGeneral';
+
+          let canvasGraficGeneral = document.createElement('canvas');
+          canvasGraficGeneral.id = 'GraphicGeneral';
+
+          GraphicGeneral.append(canvasGraficGeneral);
+          fatherGraphic.append(GraphicGeneral);
+
+          /**
+           * Removendo o gráfico detalhado e criando um novo.
+           */
+          $('.GraphicDetailed').remove();
+          let fatherGraphicDetailed = $('.sectionAppHomeOneInfoGraphicDetailed');
+          
+          let createGraphicDetailed = document.createElement('div');
+          createGraphicDetailed.className = 'GraphicDetailed';
+
+          let createCanvasGraphicDetailed = document.createElement('canvas');
+          createCanvasGraphicDetailed.id = 'GraphicDetailed';
+
+          createGraphicDetailed.append(createCanvasGraphicDetailed);
+          fatherGraphicDetailed.append(createGraphicDetailed);
+
+          
+          /**
+           * Gráfico de receitas x despesas
+           */
+          let days = Array();
+          let sumReceived = Array();
+          let sumExpenses = Array();
+          d.graphic.received.forEach(element => {
+            const date = element.day.split('-');
+            days.push(`${date[2]}`);
+            sumReceived.push(element.amount);
+          });
+          d.graphic.expenses.forEach(element => {
+            sumExpenses.push(element.amount);
+          })
+
+          let ctx = document.getElementById('GraphicGeneral').getContext("2d");
+          var graphic = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: days,
+              datasets: [{
+                label: 'Receita',
+                backgroundColor: "#34F06F",
+                borderColor: "#34F06F",
+                data: sumReceived,
+                borderWidth: 2,
+                fill: false
+              }, {
+                label: 'Despesa',
+                backgroundColor: "#E34E4E",
+                borderColor: "#E34E4E",
+                data: sumExpenses,
+                borderWidth: 2,
+                fill: false
+              }] // datasets
+            }, // data
+            options: {
+              title: {
+                display: true,
+                fontSize: 16,
+                text: 'Relatório mensal: Receitas x Despesas'
+              }
+            }
+          });
+
+          /**
+           * Gráfico detalhado.
+           */
+          let labelGraphic = Array();
+          let graphicValue = Array();
+          d.graphic.detailed.forEach(element => {
+            labelGraphic.push(element.category);
+            graphicValue.push(element.sumGraphic);
+          })
+          let GraphicDetailed = document.getElementById('GraphicDetailed').getContext("2d");
+          var GraphicBar = new Chart(GraphicDetailed, {
+            type: 'horizontalBar',
+            data: {
+              labels: labelGraphic,
+              datasets: [{
+                label: '',
+                backgroundColor: ["#D874A8","#C683E4","#8193E1","#F67CFF",
+                "#C657CE","#FF6C6C","#6470BA","#626491","#74E88B",
+                "#FF977C","#FF70A1","#FF8A72","#FFBE57","#72B4E1",
+                "#446FF5","#44BCE1","#E16B6B"],
+                data: graphicValue,
+              }] // datasets
+            }, // data
+            options: {
+              title: {
+                display: true,
+                fontSize: 16,
+                text: 'Relatório despesas detalhadas'
+              },
+              layout: {
+                padding: {
+                    left: 0,
+                    right: 10,
+                    top: 0,
+                    bottom: 0
+                }
+              }
+            }
+          })
+        }
+      })
+    }
   }
 
   /**
@@ -45,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
         table[i].classList.add("tdActive");
       }
     }
-    return `${dateMonth}-${dateYear}`
+    return `${dateMonth+1}-${dateYear}`
   }
 
   /**

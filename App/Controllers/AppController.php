@@ -184,15 +184,83 @@ class AppController extends Action
 
 
 
+	/**
+	 * Função para retornar os dados via ajax.
+	 * Alimentar os gráficos e a soma das receitas e despesas mensais.
+	 * @access public
+	 */
+	public function dashboardCalendar()
+	{
+		if(isset($_POST))
+		{
+			$date = explode('-', $_POST['date']);
+			$month = $date[0];
+			$month < 10 ? $month = '0'.$month : $month = $month;
+			$year = $date[1];
+
+			$lastDay = cal_days_in_month(CAL_GREGORIAN, $month , $year);
+			$date = date("$year-$month-01");
+			$lastDate = date("$year-$month-$lastDay");
+
+			/**
+			 * Puxando a soma das receitas recebidas do mês selecionado.
+			 */
+			$userReceived = $this->sumMonthReceivedAndExpense($date, 'Received');
+			$sumData['sumReceived'] = $userReceived['paymentReceived'];
+			
+			/**
+			 * Puxando a soma das despesas concluídas do mês atual
+			 */
+			$userExpense = $this->sumMonthReceivedAndExpense($date, 'Expense');
+			$sumData['sumExpenses'] = $userExpense['ExpensesPayme'];
+
+			/**
+			 * Puxando as receitas recebidas, para alimentar o gráfico de receitas x 
+			 * despesas.
+			 */
+			
+			$graphicReceived = Container::getModel('Received');
+			$graphicReceived->__set('date', $date);
+			$graphicReceived->__set('lastDate', $lastDate);
+			$graphicReceived->__set('status', 1);
+			$graphicReceived->__set('id_wallet', $_SESSION['userWallet']);
+
+			$graphic['received'] = $graphicReceived->sumGraphicDashboard();
+			
+			/**
+			 * Puxando as despesas pagas, para alimentar o gráfico de receitas x 
+			 * despesas.
+			 */
+			
+			$graphicExpenses = Container::getModel('Expense');
+			$graphicExpenses->__set('date', $date);
+			$graphicExpenses->__set('lastDate', $lastDate);
+			$graphicExpenses->__set('status', 1);
+			$graphicExpenses->__set('id_wallet', $_SESSION['userWallet']);
+			$graphic['expenses'] = $graphicExpenses->sumGraphicDashboard();
+
+			/**
+			 * Puxando as despesas detalhadas para alimentar o gráfico.
+			 */
+			
+			$graphicExpensesDetailed = Container::getModel('Expense');
+			$graphicExpensesDetailed->__set('date', $date);
+			$graphicExpensesDetailed->__set('lastDate', $lastDate);
+			$graphicExpensesDetailed->__set('status', 1);
+			$graphicExpensesDetailed->__set('id_wallet', $_SESSION['userWallet']);
+			$graphic['detailed'] = $graphicExpensesDetailed->sumGraphicDetailed();
+			
+			$data = ['sum' => $sumData, 'graphic' => $graphic];
+
+			print_r(json_encode($data, JSON_UNESCAPED_UNICODE));
+		}
+	}
 
 	/**
-	 * Retornar os dados ao usuário.
-	 * A função se comunica por requisições ajax, vai ser responsável retornar o 
-	 * nome do usuário.
+	 * Retornar o nome do usuário para o header das layouts.
 	 * @access public
-	 * @return array
 	 */
-	public function dashboardAjax() 
+	public function headerUserName() 
 	{
 		$info = array();
 		$user = $this->getJWT();
@@ -1083,11 +1151,10 @@ class AppController extends Action
 	 */
 	public function graphicWallet()
 	{
-		$walletId = $_SESSION['userWallet'];
-		$year = date('Y');
 		$graphic = Container::getModel('Wallet');
-		$graphic->__set('id_wallet', $walletId);
-		$graphic->__set('year', $year);
+		$graphic->__set('date', date('Y-01-01'));
+		$graphic->__set('id_wallet', $_SESSION['userWallet']);
+		$graphic->__set('year', date('Y'));
 
 		$data = $graphic->annualSum();
 		

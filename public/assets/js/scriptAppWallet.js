@@ -18,7 +18,7 @@ function graphic() {
       d.received.forEach(element => {
         dataReceived.push(element.amount);
       })
-
+      
       let ctx = document.getElementById('GraphicWallet').getContext("2d");
       var graphic = new Chart(ctx, {
         type: 'line',

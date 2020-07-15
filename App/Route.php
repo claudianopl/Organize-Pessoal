@@ -136,10 +136,19 @@ class Route extends Bootstrap {
 		/**
 		 * Rota para comunicação ajax da página /app
 		 */
-		$routes['dashboardAjax'] = array(
-			'route' => "/app/dashboardAjax",
+		$routes['headerUserName'] = array(
+			'route' => "/app/headerUserName",
 			'controller' => 'AppController',
-			'action' => 'dashboardAjax',
+			'action' => 'headerUserName',
+		);
+
+		/**
+		 * Rota para alimentar os gráficos da dashboard.
+		 */
+		$routes['dashboardCalendar'] = array(
+			'route' => "/app/dashboardCalendar",
+			'controller' => 'AppController',
+			'action' => 'dashboardCalendar',
 		);
 
 		/**

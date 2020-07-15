@@ -276,6 +276,69 @@ class Expense extends Model
   }
 
   /**
+   * Função para retornar as despesas pagas para o gráfico.
+   * @access public
+   * @return array
+   */
+  public function sumGraphicDashboard()
+  {
+    $query = '
+    WITH days AS (
+    SELECT DATE_ADD(:date, INTERVAL rnk DAY) day 
+      FROM (SELECT row_number() over() -1 rnk 
+      FROM information_schema.columns LIMIT 31) gerado)   
+    
+    SELECT 
+      days.day, 
+      IFNULL(sum(expenses.value), 0) as amount
+    FROM 
+      days
+      LEFT JOIN tb_expenses as expenses ON expenses.date = days.day 
+      and expenses.id_wallet = :id_wallet
+      and expenses.status = :status
+    WHERE days.day BETWEEN :date AND :lastDate
+    group by days.day
+    ORDER BY days.day';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':date', $this->__get('date'));
+    $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
+    $stmt->bindValue(':status', $this->__get('status'));
+    $stmt->bindValue(':lastDate', $this->__get('lastDate'));
+    $stmt->execute();
+
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+  }
+
+  /**
+   * Função para efetuar a soma das despesas para o gráfico detalhado.
+   * @access public
+   * @return array
+   */
+  public function sumGraphicDetailed()
+  {
+    $query = '
+    select 
+      expenses.category,
+      sum(expenses.value) as sumGraphic
+    from 
+      tb_expenses as expenses
+    where 
+      date between :date and :lastDate 
+      and id_wallet = :id_wallet 
+      and status = :status
+    group by expenses.category
+    ORDER BY expenses.category';
+    $stmt = $this->conexao->prepare($query);
+    $stmt->bindValue(':date', $this->__get('date'));
+    $stmt->bindValue(':lastDate', $this->__get('lastDate'));
+    $stmt->bindValue(':id_wallet', $this->__get('id_wallet'));
+    $stmt->bindValue(':status', $this->__get('status'));
+    $stmt->execute();
+
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+  }
+
+  /**
    * Função para remover as despesas.
    * @access public
    * @return boolean

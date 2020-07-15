@@ -317,7 +317,6 @@
 .GraphicDetailed{
   max-width: 620;
   animation: fade 1s;
-  animation-delay: 2.25s;
   animation-fill-mode: backwards;
 }
 
