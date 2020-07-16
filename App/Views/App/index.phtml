@@ -71,7 +71,7 @@ $peddingTasks = $this->view->pending['tasks'];
               <div class="sectionAppHomeOneInfoHeaderSaleInfo">
                 <h4>Saldo Atual</h4>
                 <p>
-                  R$<?php echo $this->view->balanceDiff['diff'] ?>
+                  R$<?php echo number_format($this->view->balanceDiff['diff'],2,",",".")?>
                 </p>
               </div>
 

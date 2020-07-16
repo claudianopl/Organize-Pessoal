@@ -63,7 +63,8 @@ $('.ResetPassword form').on('submit', function(e) {
           $('.sectionResetPasswordArea p').html(d.message);
         }
       },
-      error: erro => {
+      error: e => {
+        console.log(e)
         invalidPassword();
         $('.sectionResetPasswordArea p').html('Algum erro inesperado aconteceu, tente novamente mais tarde.');
       }

@@ -57,7 +57,7 @@ $('.sectionSingupOneForm form').on('submit', function(e) {
           $('.sectionSingupOneAreaForm p').html(d.messege);
         }
       },
-      error: erro => {
+      error: e => {
         invalidRegister();
         $('.sectionSingupOneAreaForm p').html('Algum erro inesperado aconteceu, tente novamente mais tarde.');
       }

@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
         data: `date=${date}`,
         dataType: 'json',
         success: d => {
-          console.log(d)
           $(".sectionAppHomeOneInfoHeaderReceiveInfo p").html(`R$${d.sum.sumReceived}`);
           $(".sectionAppHomeOneInfoHeaderExpensesInfo p").html(`R$${d.sum.sumExpenses}`);
 

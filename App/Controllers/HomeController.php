@@ -85,7 +85,7 @@ class HomeController extends Action
 		$newUser->__set('user_password', $password);
 		$newUser->__set('user_confirm', $tokenEmail);
 		// Verificando se podemos salvar no banco de dados
-		if($newUser->validateUser() && count($newUser->getUserEmail()) == 0) 
+		if($newUser->validateUser() && $newUser->getUserEmail() == false) 
 		{
 			/**
 			 * Array para configurar o servidor do email
@@ -116,7 +116,7 @@ class HomeController extends Action
 			 * @name $email
 			 * @param array ServerMail, mailData
 			 */
-			//$email = $this->sendMail($serverMail, $mailData);
+			$email = $this->sendMail($serverMail, $mailData);
 			
 			if($email) 
 			{

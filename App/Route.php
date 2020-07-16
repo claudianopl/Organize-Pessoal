@@ -118,12 +118,21 @@ class Route extends Bootstrap {
 		);
 
 		/**
-		 * Rota para modificar senha
+		 * Rota para enviar e-email para modificar a senha
 		 */
 		$routes['changeTokenPassword'] = array(
 			'route' => "/changeTokenPassword",
 			'controller' => 'HomeController',
 			'action' => 'changeTokenPassword',
+		);
+
+		/**
+		 * Rota para modificar senha do usuário.
+		 */
+		$routes['changePassword'] = array(
+			'route' => "/changePassword",
+			'controller' => 'HomeController',
+			'action' => 'changePassword',
 		);
 
 

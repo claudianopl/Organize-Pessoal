@@ -22,7 +22,6 @@ function load(element) {
 /* ------ Ação jQuery para animar os botões mais perguntas ------ */
 $('.sectionHomeFourHelp').click(function() {
   const hCollapse = $(this).find('p.hCollapse');
-  console.log($(this))
   const hCollapseIcon = $(this).find('h4.hCollapseIcon');
 
   hCollapse.slideToggle('slow');
