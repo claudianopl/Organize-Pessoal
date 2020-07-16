@@ -10,7 +10,7 @@ class HomeController extends Action
 	{
 		$this->render('index');
 	}
-
+	
 	public function about() 
 	{
 		$this->render('about');
@@ -21,7 +21,7 @@ class HomeController extends Action
 		$this->render('confirmRegister');
 		echo(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']));
 	}
-
+	
 	/**
 	 * Função para confirmar o cadastro de usuário.
 	 * @access public
@@ -198,8 +198,8 @@ class HomeController extends Action
 						setcookie($name, $jwt);
 
 						/**
-						* Iniciando o login com a primeira carteira do usuário.
-						*/ 
+						 * Iniciando o login com a primeira carteira do usuário.
+						 */ 
 						$wallet = Container::getModel('Wallet');
 						$wallet->__set('id_user', $data['id']);
 						$wallets = $wallet->getUserWallet();
@@ -234,12 +234,12 @@ class HomeController extends Action
 	}
 
 	/**
-	* Função para enviar email de troca da senha.
-	* A função valida o email, verifica no banco de dados se esse email está 
-	* cadastrado, caso tiver cadastrado geramos um Token e enviamos para o usuário
-	* por email.
-	* @access public
-	*/
+	 * Função para enviar email de troca da senha.
+	 * A função valida o email, verifica no banco de dados se esse email está 
+	 * cadastrado, caso tiver cadastrado geramos um Token e enviamos para o usuário
+	 * por email.
+	 * @access public
+	 */
 	public function changeTokenPassword() 
 	{
 		$info = array();
@@ -253,15 +253,15 @@ class HomeController extends Action
 			if(count($date) > 0) 
 			{
 				/**
-				* Gera o token para o usuário conseguir trocar a sua senha.
-				* Esse código gera um token e envia esse token para o banco de dados
-				* que deixa guardado até que seja usado.
-				* <?php 
-				* $tokenEmail = md5(time().rand(0,9999).rand(0,9999));
-				* $user->__set('user_changepassword', $tokenEmail);
-				* $user->changeTokenPassword();
-				* ?>
-				*/
+				 * Gera o token para o usuário conseguir trocar a sua senha.
+				 * Esse código gera um token e envia esse token para o banco de dados
+				 * que deixa guardado até que seja usado.
+				 * <?php 
+				 * $tokenEmail = md5(time().rand(0,9999).rand(0,9999));
+				 * $user->__set('user_changepassword', $tokenEmail);
+				 * $user->changeTokenPassword();
+				 * ?>
+				 */
 				$tokenEmail = md5(time().rand(0,9999).rand(0,9999));
 				$user->__set('user_changepassword', $tokenEmail);
 				if($user->changeTokenPassword())
@@ -279,7 +279,7 @@ class HomeController extends Action
 						'body' => $this->messegeChangePassword($tokenEmail)
 					];
 					$email = $this->sendMail($serverMail, $mailData);
-
+	
 					$info['message'] = 'success';
 				}
 				else
@@ -327,15 +327,15 @@ class HomeController extends Action
 		print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 	}
 
-
+	
 
 		/**
-	* Função que recebe o token de confirmação de usário para ser enviado para o
-	* email com o link de confirmação.
-	* @access public
-	* @param string $tokenEmail
-	* @return string
-	*/
+	 * Função que recebe o token de confirmação de usário para ser enviado para o
+	 * email com o link de confirmação.
+	 * @access public
+	 * @param string $tokenEmail
+	 * @return string
+	 */
 	public function menssage($tokenEmail) 
 	{
 		$message = "<html><head xmlns='http://www.w3.org/1999/xhtml' xmlns:v='urn:schemas-microsoft-com:vml' xmlns:o='urn:schemas-microsoft-com:office:office'>";
@@ -419,15 +419,15 @@ class HomeController extends Action
 	}
 
 	/**
-	* Função para gerar o email para trocar a senha.
-	* A função vai criar o corpo do email que vai enviar para o usuário poder 
-	* trocar sua senha com segurança.
-	* @access public
-	* @param string $tokenEmail é o token gerado para verificarmos quem está 
-	* solicitando a troca de senha.
-	* @return string $message retorna o corpo da menssagem para ser enviado no 
-	* email do usuário.
-	*/
+	 * Função para gerar o email para trocar a senha.
+	 * A função vai criar o corpo do email que vai enviar para o usuário poder 
+	 * trocar sua senha com segurança.
+	 * @access public
+	 * @param string $tokenEmail é o token gerado para verificarmos quem está 
+	 * solicitando a troca de senha.
+	 * @return string $message retorna o corpo da menssagem para ser enviado no 
+	 * email do usuário.
+	 */
 	public function messegeChangePassword($tokenEmail) 
 	{
 		$message = "<html><head xmlns='http://www.w3.org/1999/xhtml' xmlns:v='urn:schemas-microsoft-com:vml' xmlns:o='urn:schemas-microsoft-com:office:office'>";

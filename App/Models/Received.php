@@ -25,12 +25,12 @@ class Received extends Model
   {
     return $this->$attribute;
   }
-
+  
   public function __set($attribute, $value) 
   {
     $this->$attribute = $value;
   }
-
+  
   /**
    * A função salva os dados da nova receita no banco de dados.
    * @access public

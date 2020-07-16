@@ -25,7 +25,7 @@ class Expense extends Model
   {
     return $this->$attribute;
   }
-
+  
   public function __set($attribute, $value) 
   {
     $this->$attribute = $value;

@@ -16,7 +16,7 @@ class Wallet extends Model
   {
     return $this->$attribute;
   }
-
+  
   public function __set($attribute, $value) 
   {
     $this->$attribute = $value;
@@ -135,11 +135,11 @@ class Wallet extends Model
   {
     $query = '
     select 
-      wallet.id as id, 
+	    wallet.id as id, 
       wallet.wallet_name as walletName, 
       IFNULL(sum(received.value), 0) as sumReceive
     from 
-      tb_wallets as wallet
+	    tb_wallets as wallet
     left join 
       tb_received as received on(received.id_wallet = wallet.id) 
       and received.status = 1
@@ -154,7 +154,7 @@ class Wallet extends Model
     select 
       IFNULL(sum(expenses.value), 0) as sumExpenses
     from 
-      tb_wallets as wallet
+	    tb_wallets as wallet
     left join 
       tb_expenses as expenses on(expenses.id_wallet = wallet.id) 
       and expenses.status = 1
