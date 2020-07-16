@@ -155,7 +155,7 @@ class User extends Model
     return $stmt->fetch(\PDO::FETCH_ASSOC);
   }
 
-   /**
+    /**
    * Verifica se o usuário confirmou o e-mail.
    * @access public
    * @return array
