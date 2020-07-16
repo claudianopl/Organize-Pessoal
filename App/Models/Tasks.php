@@ -51,7 +51,9 @@ class Tasks extends Model
   }
 
   /**
-   * 
+   * Função filtra as tarefas pelo id.
+   * @access public
+   * @return array
    */
   public function filterId()
   {

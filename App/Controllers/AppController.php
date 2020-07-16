@@ -48,7 +48,12 @@ class AppController extends Action
 	}
 
 
-
+	/**
+	 * Renderizar layout index.
+	 * Responável por verifricar se o usuário está conectado e renderizar a 
+	 * página home e adicionar os dados: carteiras, receitas, despesas e tarefas.
+	 * @access public
+	 */
 	public function Index() 
 	{
 		if($this->checkJWT()) 
@@ -108,6 +113,12 @@ class AppController extends Action
 		}
 	}
 
+	/**
+	 * Renderizar layout tarefas.
+	 * Responável por verifricar se o usuário está conectado e renderizar a 
+	 * página de tarefas e adicionar os dados: carteiras e as tarefas.
+	 * @access public
+	 */
 	public function Tasks() 
 	{
 		if($this->checkJWT()) 
@@ -144,6 +155,12 @@ class AppController extends Action
 		}
 	}
 
+	/**
+	 * Renderizar layout perfil.
+	 * Responável por verifricar se o usuário está conectado e renderizar a 
+	 * página de perfil e adicionar os dados do perfil do usuário.
+	 * @access public
+	 */
 	public function Profile() 
 	{
 		if($this->checkJWT()) 
@@ -173,6 +190,10 @@ class AppController extends Action
 		return $wallets;
 	}
 
+	/**
+	 * Seleciona a carteira que o usuário desejou.
+	 * @access public
+	 */
 	public function userSelectWallet() 
 	{
 		if(isset($_POST)) 

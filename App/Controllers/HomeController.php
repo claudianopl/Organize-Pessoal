@@ -6,6 +6,7 @@ use MF\Model\Container;
 
 class HomeController extends Action 
 {
+
 	public function index() 
 	{
 		$this->render('index');
@@ -300,6 +301,12 @@ class HomeController extends Action
 		print_r(json_encode($info, JSON_UNESCAPED_UNICODE));
 	}
 
+	/**
+	 * Função responsável por efetuar a troca da senha do usuário.
+	 * A função verifica se existe uma hash de alteração da senha e verifica se 
+	 * essa hash é válida, se for válida efetuamos a alteração.
+	 * @access public
+	 */
 	public function changePassword() 
 	{
 		$newPassword = $this->passwordArgon2id($_POST['newPassword']);
@@ -329,7 +336,7 @@ class HomeController extends Action
 
 	
 
-		/**
+	/**
 	 * Função que recebe o token de confirmação de usário para ser enviado para o
 	 * email com o link de confirmação.
 	 * @access public
