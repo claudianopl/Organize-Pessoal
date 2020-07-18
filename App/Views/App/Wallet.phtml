@@ -86,7 +86,7 @@
                     <!-- Saldo -->
                     <p class="saleWallet"> 
                       Saldo R$
-                      <?php echo(bcsub($sumReceive, $sumExpenses, 2));?>
+                      <?php $diff = ($sumReceive - $sumExpenses); echo number_format($diff,2,',','.');?>
                     </p>
                     <!-- Receita-->
                     <p class="receiveWallet">

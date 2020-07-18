@@ -43,7 +43,7 @@ class Wallet extends Model
     $stmt->execute();
     $data['sumExpenses'] = $stmt->fetchColumn();
 
-    $diff = bcsub($data['sumReceived'], $data['sumExpenses'], 2);
+    $diff = $data['sumReceived'] - $data['sumExpenses'];
     
     return $diff;
   }
