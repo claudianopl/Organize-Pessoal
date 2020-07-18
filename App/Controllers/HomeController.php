@@ -350,7 +350,7 @@ class HomeController extends Action
 		$message .= "<meta name='viewport' content='width=device-width, initial-scale=1, max-scale=1'>\r\n";
 		$message .= "<meta http-equiv='Content-Type' content='text/html' charset='utf-8'>";
 		$message .= "<title>Bem vindo ao Organize Pessoal</title>";
-		$message .= "<style type='text/css' body {margin: 0; padding: 0;}></style>";
+		$message .= "<style type='text/css'> body {margin: 0; padding: 0;} @media (min-width: 576px) and (max-width: 767.98px) {.buttonSuccess{font-size=16px, padding=10px 30px}} @media (max-width: 575px) {.buttonSuccess{font-size=16px, padding=10px 30px}}</style>";
 
 
 		$message .= "</head><body>";
@@ -359,7 +359,7 @@ class HomeController extends Action
 			<table cellspacing='0' cellpadding='0' bgcolor='#EBEBEB' width='600'>
 				<tr>
 					<td style='width: 100%; display: flex; justify-content: center; align-items: center;'>
-						<img src='https://organizepessoal.herokuapp.com/assets/images/emailMarketing.svg'>
+						<img src='https://organizepessoal.herokuapp.com/assets/images/emailMarketing.png'>
 					</td>
 				</tr>
 				<tr>
@@ -403,7 +403,7 @@ class HomeController extends Action
 							</tr>
 							<tr>
 								<td align='center'>
-									<a href='https://organizepessoal.herokuapp.com/cadastro-confirmado/$tokenEmail' style='padding: 10px 50px; background: #34F06F; border-radius: 35px; font-size: 24px; text-decoration: none; color: #fff; font-family: Roboto;'>
+									<a href='https://organizepessoal.herokuapp.com/cadastro-confirmado/$tokenEmail' class='buttonSuccess' style='padding: 10px 50px; background: #34F06F; border-radius: 35px; font-size: 24px; text-decoration: none; color: #fff; font-family: Roboto;'>
 										Confirmar Cadastro
 									</a>
 								</td>
@@ -442,7 +442,7 @@ class HomeController extends Action
 		$message .= "<meta name='viewport' content='width=device-width, initial-scale=1, max-scale=1'>\r\n";
 		$message .= "<meta http-equiv='Content-Type' content='text/html' charset='utf-8'>";
 		$message .= "<title>Solicitação para trocar a senha.</title>";
-		$message .= "<style type='text/css' body {margin: 0; padding: 0;}></style>";
+		$message .= "<style type='text/css'> body {margin: 0; padding: 0;} @media (min-width: 576px) and (max-width: 767.98px) {.buttonSuccess{font-size=16px, padding=10px 30px}} @media (max-width: 575px) {.buttonSuccess{font-size=16px, padding=10px 30px}}</style>";
 
 		$message .= "</head><body>";
 		$message .= "
@@ -450,7 +450,7 @@ class HomeController extends Action
 			<table cellspacing='0' cellpadding='0' bgcolor='#EBEBEB' width='600'>
 				<tr>
 					<td style='width: 100%; display: flex; justify-content: center; align-items: center;'>
-						<img src='https://organizepessoal.herokuapp.com/assets/images/emailMarketing.svg'>
+						<img src='https://organizepessoal.herokuapp.com/assets/images/emailMarketing.png'>
 					</td>
 				</tr>
 				<tr>
