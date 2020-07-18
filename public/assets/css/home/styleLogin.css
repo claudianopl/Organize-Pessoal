@@ -152,7 +152,6 @@
 * Criação do modal
 * Modal para usamos no esqueci senha, para fazemos a validação e enviar um email
 com o token de mudança de senha.
-34F06F
 */
 .bgModalPassword {
   width: 100vw;
@@ -308,7 +307,10 @@ com o token de mudança de senha.
     width: 90%;
   }
   .ModalPassword button {
-    padding: 10px 50px;
+    padding: 10px 40px;
+  }
+  .ModalPassword button:hover {
+    padding: 10px 60px;
   }
 }
 
@@ -320,7 +322,10 @@ com o token de mudança de senha.
     width: 90%;
   }
   .ModalPassword button {
-    padding: 10px 50px;
+    padding: 10px 40px;
+  }
+  .ModalPassword button:hover {
+    padding: 10px 60px;
   }
 }
   
@@ -331,11 +336,17 @@ com o token de mudança de senha.
   .ModalPassword button {
     padding: 10px 50px;
   }
+  .ModalPassword button:hover {
+    padding: 10px 80px;
+  }
 }
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .sectionLoginOneArea {
     height: auto;
+  }
+  .ModalPassword button:hover {
+    padding: 10px 130px;
   }
 }
 @media (min-width: 1200px) { }

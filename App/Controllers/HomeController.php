@@ -35,10 +35,10 @@ class HomeController extends Action
 		$user = Container::getModel('User');
 		$user->__set('user_confirm', $tokenEmail);
 
-		$date = $user->getUserHashConfirm();
-		if(count($date) > 0 && $date['user_confirmed'] == 0) 
+		$data = $user->getUserHashConfirm();
+		if($data != false && $data['user_confirmed'] == 0) 
 		{	
-			$user->__set('id', $date['id']);
+			$user->__set('id', $data['id']);
 			$user->userUpdateConfirmed();
 		}
 	}
@@ -86,7 +86,7 @@ class HomeController extends Action
 		$newUser->__set('user_password', $password);
 		$newUser->__set('user_confirm', $tokenEmail);
 		// Verificando se podemos salvar no banco de dados
-		if($newUser->validateUser() && $newUser->getUserEmail() == false) 
+		if($newUser->validateUser() && $newUser->getUserEmail() != false) 
 		{
 			/**
 			 * Array para configurar o servidor do email
@@ -94,9 +94,9 @@ class HomeController extends Action
 			 * @param array host, username, password, port
 			 */
 			$serverMail = [
-				'host' => 'smtp.mailtrap.io',
-				'username' => '37dea9e6299bb1',
-				'password' => '73b8c084a62e50',
+				'host' => 'smtp.gmail.com',
+				'username' => 'organizepessoal@gmail.com',
+				'password' => '7619a2a3',
 				'port' => '587'
 			];
 
@@ -106,7 +106,7 @@ class HomeController extends Action
 			 * @param array from, to, attachment [path,name], subject, body
 			 */
 			$mailData = [
-				'from' => 'equipeorganizepessoal@organizepessoal.com',
+				'from' => 'organizepessoal@gmail.com',
 				'to' => $_POST['email'],
 				'subject' => 'Ativar conta no Organize Pessoal',
 				'body' => $this->menssage($tokenEmail)
@@ -126,8 +126,8 @@ class HomeController extends Action
 				/**
 				 * Criação da carteira.
 				 * <?php 
-				 * $dateUser = $newUser->getUserEmail();
-				 * $userID = $dateUser['id'];
+				 * $dataUser = $newUser->getUserEmail();
+				 * $userID = $dataUser['id'];
 				 * $newUser->__set('id', $userID);
 				 * $newUser->__set('wallet_name', 'Carteira Geral');
 				 * $newUser->saveWallet();
@@ -135,8 +135,8 @@ class HomeController extends Action
 				 * ?>
 				 * Esse código cria uma carteira para o usuário.
 				 */
-				$dateUser = $newUser->getUserEmail();				
-				$userID = $dateUser['id'];					
+				$dataUser = $newUser->getUserEmail();				
+				$userID = $dataUser['id'];					
 				$newUser->__set('id', $userID);
 				$newUser->__set('wallet_name', 'Carteira Geral');
 				$newUser->saveWallet();
@@ -179,7 +179,7 @@ class HomeController extends Action
 			 * @name $data
 			 */
 			$data = $user->getUserEmail();
-			if(count($data) > 0) 
+			if($data != false) 
 			{
 				if($this->checkArgon2id($password, $data['user_password'])) 
 				{
@@ -250,8 +250,8 @@ class HomeController extends Action
 			$user = Container::getModel('User');
 			$user->__set('user_email', $email);
 
-			$date = $user->getUserEmail();
-			if(count($date) > 0) 
+			$data = $user->getUserEmail();
+			if($data != false) 
 			{
 				/**
 				 * Gera o token para o usuário conseguir trocar a sua senha.
@@ -268,13 +268,13 @@ class HomeController extends Action
 				if($user->changeTokenPassword())
 				{
 					$serverMail = [
-						'host' => 'smtp.mailtrap.io',
-						'username' => '37dea9e6299bb1',
-						'password' => '73b8c084a62e50',
+						'host' => 'smtp.gmail.com',
+						'username' => 'organizepessoal@gmail.com',
+						'password' => '7619a2a3',
 						'port' => '587'
 					];
 					$mailData = [
-						'from' => 'equipeorganizepessoal@organizepessoal.com',
+						'from' => 'organizepessoal@gmail.com',
 						'to' => $email,
 						'subject' => 'Redefinir a senha do Organize Pessoal',
 						'body' => $this->messegeChangePassword($tokenEmail)
@@ -359,7 +359,7 @@ class HomeController extends Action
 			<table cellspacing='0' cellpadding='0' bgcolor='#EBEBEB' width='600'>
 				<tr>
 					<td style='width: 100%; display: flex; justify-content: center; align-items: center;'>
-						<img src=''>
+						<img src='https://organizepessoal.herokuapp.com/assets/images/emailMarketing.svg'>
 					</td>
 				</tr>
 				<tr>
@@ -403,7 +403,7 @@ class HomeController extends Action
 							</tr>
 							<tr>
 								<td align='center'>
-									<a href='/cadastro-confirmado/$tokenEmail' style='padding: 10px 50px; background: #34F06F; border-radius: 35px; font-size: 24px; text-decoration: none; color: #fff; font-family: Roboto;'>
+									<a href='https://organizepessoal.herokuapp.com/cadastro-confirmado/$tokenEmail' style='padding: 10px 50px; background: #34F06F; border-radius: 35px; font-size: 24px; text-decoration: none; color: #fff; font-family: Roboto;'>
 										Confirmar Cadastro
 									</a>
 								</td>
@@ -450,7 +450,7 @@ class HomeController extends Action
 			<table cellspacing='0' cellpadding='0' bgcolor='#EBEBEB' width='600'>
 				<tr>
 					<td style='width: 100%; display: flex; justify-content: center; align-items: center;'>
-						<img src=''>
+						<img src='https://organizepessoal.herokuapp.com/assets/images/emailMarketing.svg'>
 					</td>
 				</tr>
 				<tr>
@@ -475,7 +475,7 @@ class HomeController extends Action
 									<table align='center' style='padding: 20px 0;'>
 										<tr>
 											<td>
-												<a href='/redefinir?verification=$tokenEmail' style='padding: 10px 90px; background: #34F06F; border-radius: 35px; font-size: 24px; text-decoration: none; color: #fff; font-family: Roboto;'>
+												<a href='https://organizepessoal.herokuapp.com/redefinir?verification=$tokenEmail' style='padding: 10px 90px; background: #34F06F; border-radius: 35px; font-size: 24px; text-decoration: none; color: #fff; font-family: Roboto;'>
 													Trocar Senha
 												</a>
 											</td>
