@@ -32,7 +32,7 @@ class ComposerStaticInitff561b2fa34e2ab19d05023f09fe01f7
         ),
         'MF\\' => 
         array (
-            0 => __DIR__ . '/..' . '/MF',
+            0 => __DIR__ . '/../..' . '/App/Controllers/MF',
         ),
         'Firebase\\JWT\\' => 
         array (
