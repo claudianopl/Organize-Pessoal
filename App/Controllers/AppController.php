@@ -219,7 +219,7 @@ class AppController extends Action
 			$month < 10 ? $month = '0'.$month : $month = $month;
 			$year = $date[1];
 
-			$lastDay = date('t', mktime(0, 0, 0, $month, 1, $year));
+			$lastDay = cal_days_in_month(CAL_GREGORIAN, $month , $year);
 			$date = date("$year-$month-01");
 			$lastDate = date("$year-$month-$lastDay");
 
@@ -522,8 +522,7 @@ class AppController extends Action
 		$dateExplode = explode('-', $date);
 		$year = $dateExplode[0];
 		$month = $dateExplode[1];
-		$lastDay = date('t', mktime(0, 0, 0, $month, 1, $year));
-		
+		$lastDay = cal_days_in_month(CAL_GREGORIAN, $month , $year);
 		$lastDate = "$year-$month-$lastDay";
 
 		$received = Container::getModel($model);
@@ -567,7 +566,7 @@ class AppController extends Action
 				$date = explode('/', $date);
 				$month = $date[0];
 				$year = $date[1];
-				$lastDay = date('t', mktime(0, 0, 0, $month, 1, $year));
+				$lastDay = cal_days_in_month(CAL_GREGORIAN, $month , $year);
 
 				$startDate = "$year-$month-01";
 				$lastDate = "$year-$month-$lastDay";
@@ -1005,7 +1004,7 @@ class AppController extends Action
 					$date = explode('/', $date);
 					$month = $date[0];
 					$year = $date[1];
-					$lastDay = date('t', mktime(0, 0, 0, $month, 1, $year));
+					$lastDay = cal_days_in_month(CAL_GREGORIAN, $month , $year);
 
 					$startDate = "$year-$month-01";
 					$lastDate = "$year-$month-$lastDay";
