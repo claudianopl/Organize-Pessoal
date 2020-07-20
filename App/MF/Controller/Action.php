@@ -105,7 +105,7 @@ abstract class Action {
 
     $classAtual = str_replace('Controller', '', $classAtual);
 
-    
+    echo getcwd();
     require_once "../App/Views/".$classAtual."/".$this->view->page.".phtml";
   }
   /**
