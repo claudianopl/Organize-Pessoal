@@ -108,7 +108,7 @@ abstract class Action {
     echo getcwd();
     echo '</br>';
     echo __DIR__;
-    include_once "../App/Views/".$classAtual."/".$this->view->page.".phtml";
+    include_once "app/App/Views/".$classAtual."/".$this->view->page.".phtml";
   }
   /**
    * Gera um JWT.
