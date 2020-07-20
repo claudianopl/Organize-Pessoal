@@ -105,9 +105,6 @@ abstract class Action {
 
     $classAtual = str_replace('Controller', '', $classAtual);
 
-    echo getcwd();
-    echo '</br>';
-    echo __DIR__;
     include_once "../App/Views/".$classAtual."/".$this->view->page.".phtml";
   }
   /**
