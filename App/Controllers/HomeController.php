@@ -48,6 +48,7 @@ class HomeController extends Action
 		if(isset($_COOKIE['user'])) 
 		{
 			header('Location: /app');
+			exit;
 		} else 
 		{
 			$this->render('login');
