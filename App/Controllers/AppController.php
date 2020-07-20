@@ -103,6 +103,7 @@ class AppController extends Action
 	 */
 	public function Expense() 
 	{
+		echo($this->checkJWT());
 		if($this->checkJWT()) 
 		{
 			$this->view->wallets = $this->userGetWallet();
