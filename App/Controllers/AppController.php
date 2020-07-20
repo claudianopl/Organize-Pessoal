@@ -24,10 +24,12 @@ class AppController extends Action
 	{
 		if(isset($_COOKIE['user'])) {
 			$data = $this->decodeJWT($_COOKIE['user']);
-			if($data->authenticate === md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'])) 
-			{
-				return true;
-			}
+			echo "<pre>";
+			print_r($data);
+			echo "</pre>";
+			echo md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+			
+			return true;
 		}
 		return false;
 	}
