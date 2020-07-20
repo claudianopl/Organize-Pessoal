@@ -45,14 +45,9 @@ class HomeController extends Action
 
 	public function login() 
 	{
-		if(isset($_COOKIE['user'])) 
-		{
-			header('Location: /app');
-			exit;
-		} else 
-		{
+		
 			$this->render('login');
-		}
+		
 	}
 
 	public function resetPassword() 
