@@ -1,4 +1,5 @@
 RewriteEngine on
+RewriteCond %{HTTPS} off
 RewriteBase /
 
 RewriteCond %{REQUEST_FILENAME} !-f

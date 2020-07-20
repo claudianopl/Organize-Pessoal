@@ -44,6 +44,7 @@ class AppController extends Action
 		} else 
 		{
 			header("Location: /entrar?e=0");
+			exit;
 		}
 	}
 
@@ -66,6 +67,7 @@ class AppController extends Action
 		} else 
 		{
 			header("Location: /entrar?e=0");
+			exit;
 		}
 	}
 
@@ -88,6 +90,7 @@ class AppController extends Action
 		} else 
 		{
 			header("Location: /entrar?e=0");
+			exit;
 		}
 	}
 
@@ -110,6 +113,7 @@ class AppController extends Action
 		} else 
 		{
 			header("Location: /entrar?e=0");
+			exit;
 		}
 	}
 
@@ -129,6 +133,7 @@ class AppController extends Action
 		} else 
 		{
 			header("Location: /entrar?e=0");
+			exit;
 		}
 	}
 
@@ -152,6 +157,7 @@ class AppController extends Action
 		} else 
 		{
 			header("Location: /entrar?e=0");
+			exit;
 		}
 	}
 
@@ -172,6 +178,7 @@ class AppController extends Action
 		} else 
 		{
 			header("Location: /entrar?e=0");
+			exit;
 		}
 	}
 
@@ -1336,6 +1343,7 @@ class AppController extends Action
 		unset($_COOKIE['user']);
 		setcookie('user', null, -1, '/');
 		header('Location: /');
+		exit;
 	}
 }
 
