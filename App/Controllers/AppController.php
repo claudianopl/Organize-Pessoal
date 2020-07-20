@@ -24,12 +24,14 @@ class AppController extends Action
 	{
 		if(isset($_COOKIE['user'])) {
 			$data = $this->decodeJWT($_COOKIE['user']);
-			echo "<pre>";
-			print_r($data);
-			echo "</pre>";
-			echo md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
-			
-			return true;
+			if($data->authenticate == true)
+			{
+				return true;
+			} 
+			else
+			{
+				return false;
+			}
 		}
 		return false;
 	}
@@ -105,7 +107,6 @@ class AppController extends Action
 	 */
 	public function Expense() 
 	{
-		echo($this->checkJWT());
 		if($this->checkJWT()) 
 		{
 			$this->view->wallets = $this->userGetWallet();

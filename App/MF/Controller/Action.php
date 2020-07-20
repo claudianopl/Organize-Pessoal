@@ -105,10 +105,8 @@ abstract class Action {
 
     $classAtual = str_replace('Controller', '', $classAtual);
 
-    if(file_exists("../App/Views/".$classAtual."/".$this->view->page.".phtml")) 
-    {
-      require_once "../App/Views/".$classAtual."/".$this->view->page.".phtml";
-    }
+    
+    require_once "../App/Views/".$classAtual."/".$this->view->page.".phtml";
   }
   /**
    * Gera um JWT.

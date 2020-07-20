@@ -187,7 +187,7 @@ class HomeController extends Action
 					if($data['user_confirmed'] == 1) 
 					{
 						$userData = [
-							'authenticate' => md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']),
+							'authenticate' => true,
 							'id' => $data['id'],
 							'name' => $data['user_name'],
 							'surname' => $data['user_surname'],
