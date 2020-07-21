@@ -7,7 +7,6 @@ use MF\Model\Container;
 
 session_start();
 
-
 date_default_timezone_set("America/Sao_Paulo");
 
 class AppController extends Action 
@@ -1068,7 +1067,8 @@ class AppController extends Action
 		{
 			$form = $_POST['form'];
 			$description = $form[0]['value'];
-			$date = date_format(new \DateTime($form[1]['value']), 'Y-d-m H:i');
+			$date = $form[1]['value'];
+			$date = date_format(\DateTime::createFromFormat('d/m/Y H:i', $date), 'Y-m-d H:i');
 			$wallet = $form[2]['value'];
 			$status = $form[3]['value'];
 			

@@ -273,6 +273,9 @@ function updateTasks(id) {
             $('.updateTasksForm p').addClass('error');
             $('.updateTasksForm p').html(d.messege);
           }
+        },
+        error: e => {
+          console.log(e.responseText);
         }
       })
     }
