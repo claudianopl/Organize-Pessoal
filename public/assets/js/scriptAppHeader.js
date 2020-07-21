@@ -144,6 +144,9 @@ document.addEventListener('DOMContentLoaded', function() {
               }
             }
           })
+        },
+        error: e => {
+          console.log(e);
         }
       })
     }

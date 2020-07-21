@@ -95,10 +95,10 @@ class HomeController extends Action
 			 * @param array host, username, password, port
 			 */
 			$serverMail = [
-				'host' => 'smtp.gmail.com',
-				'username' => 'organizepessoal@gmail.com',
-				'password' => '7619a2a3',
-				'port' => '587'
+				'host' => '',
+				'username' => '',
+				'password' => '',
+				'port' => ''
 			];
 
 			/**
@@ -107,7 +107,7 @@ class HomeController extends Action
 			 * @param array from, to, attachment [path,name], subject, body
 			 */
 			$mailData = [
-				'from' => 'organizepessoal@gmail.com',
+				'from' => 'organizepessoal@outlook.com',
 				'to' => $_POST['email'],
 				'subject' => 'Ativar conta no Organize Pessoal',
 				'body' => $this->menssage($tokenEmail)
@@ -122,27 +122,31 @@ class HomeController extends Action
 			
 			if($email) 
 			{
-				$newUser->saveUser();
+				if($newUser->saveUser()) {
+					/**
+					 * Criação da carteira.
+					 * <?php 
+					 * $dataUser = $newUser->getUserEmail();
+					 * $userID = $dataUser['id'];
+					 * $newUser->__set('id', $userID);
+					 * $newUser->__set('wallet_name', 'Carteira Geral');
+					 * $newUser->saveWallet();
+					 * $info['messege'] = 'success';
+					 * ?>
+					 * Esse código cria uma carteira para o usuário.
+					 */
+					$dataUser = $newUser->getUserEmail();				
+					$userID = $dataUser['id'];					
+					$newUser->__set('id', $userID);
+					$newUser->__set('wallet_name', 'Carteira Geral');
+					$newUser->saveWallet();
 
-				/**
-				 * Criação da carteira.
-				 * <?php 
-				 * $dataUser = $newUser->getUserEmail();
-				 * $userID = $dataUser['id'];
-				 * $newUser->__set('id', $userID);
-				 * $newUser->__set('wallet_name', 'Carteira Geral');
-				 * $newUser->saveWallet();
-				 * $info['messege'] = 'success';
-				 * ?>
-				 * Esse código cria uma carteira para o usuário.
-				 */
-				$dataUser = $newUser->getUserEmail();				
-				$userID = $dataUser['id'];					
-				$newUser->__set('id', $userID);
-				$newUser->__set('wallet_name', 'Carteira Geral');
-				$newUser->saveWallet();
-
-				$info['messege'] = 'success';
+					$info['messege'] = 'success';
+				}
+				else
+				{
+					$info['messege'] = 'Erro, tente novamente mais tarde.';
+				}
 			}
 		}
 		else 
@@ -269,13 +273,13 @@ class HomeController extends Action
 				if($user->changeTokenPassword())
 				{
 					$serverMail = [
-						'host' => 'smtp.gmail.com',
-						'username' => 'organizepessoal@gmail.com',
-						'password' => '7619a2a3',
-						'port' => '587'
+						'host' => '',
+						'username' => '',
+						'password' => '',
+						'port' => ''
 					];
 					$mailData = [
-						'from' => 'organizepessoal@gmail.com',
+						'from' => 'organizepessoal@outlook.com',
 						'to' => $email,
 						'subject' => 'Redefinir a senha do Organize Pessoal',
 						'body' => $this->messegeChangePassword($tokenEmail)
@@ -360,7 +364,7 @@ class HomeController extends Action
 			<table cellspacing='0' cellpadding='0' bgcolor='#EBEBEB' width='600'>
 				<tr>
 					<td style='width: 100%; display: flex; justify-content: center; align-items: center;'>
-						<img src='https://organizepessoal.herokuapp.com/assets/images/emailMarketing.png'>
+						<img src='https://organizepessoa.000webhostapp.com/assets/images/emailMarketing.png'>
 					</td>
 				</tr>
 				<tr>
@@ -404,7 +408,7 @@ class HomeController extends Action
 							</tr>
 							<tr>
 								<td align='center'>
-									<a href='https://organizepessoal.herokuapp.com/cadastro-confirmado/$tokenEmail' class='buttonSuccess' style='padding: 10px 50px; background: #34F06F; border-radius: 35px; font-size: 24px; text-decoration: none; color: #fff; font-family: Roboto;'>
+									<a href='https://organizepessoa.000webhostapp.com/cadastro-confirmado/$tokenEmail' class='buttonSuccess' style='padding: 10px 50px; background: #34F06F; border-radius: 35px; font-size: 24px; text-decoration: none; color: #fff; font-family: Roboto;'>
 										Confirmar Cadastro
 									</a>
 								</td>
@@ -451,7 +455,7 @@ class HomeController extends Action
 			<table cellspacing='0' cellpadding='0' bgcolor='#EBEBEB' width='600'>
 				<tr>
 					<td style='width: 100%; display: flex; justify-content: center; align-items: center;'>
-						<img src='https://organizepessoal.herokuapp.com/assets/images/emailMarketing.png'>
+						<img src='https://organizepessoa.000webhostapp.com/assets/images/emailMarketing.png'>
 					</td>
 				</tr>
 				<tr>
@@ -476,7 +480,7 @@ class HomeController extends Action
 									<table align='center' style='padding: 20px 0;'>
 										<tr>
 											<td>
-												<a href='https://organizepessoal.herokuapp.com/redefinir?verification=$tokenEmail' style='padding: 10px 90px; background: #34F06F; border-radius: 35px; font-size: 24px; text-decoration: none; color: #fff; font-family: Roboto;'>
+												<a href='https://organizepessoa.000webhostapp.com/redefinir?verification=$tokenEmail' style='padding: 10px 90px; background: #34F06F; border-radius: 35px; font-size: 24px; text-decoration: none; color: #fff; font-family: Roboto;'>
 													Trocar Senha
 												</a>
 											</td>

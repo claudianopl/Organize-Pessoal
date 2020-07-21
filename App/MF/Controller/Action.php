@@ -115,7 +115,7 @@ abstract class Action {
    * @param array $data são os dados que vamos incluir no jwt.
    */
   protected function econdeJWT($data) {
-    return JWT::encode($data, md5('OrganizePessoalC4658*'));
+    return JWT::encode($data, md5(''));
   }
 
   /**
@@ -129,7 +129,7 @@ abstract class Action {
      * Retorna os dados da hash jwt.
      * Retorna esses dados em formato de objeto.
      */
-    return JWT::decode($hash, md5('OrganizePessoalC4658*'), array('HS256'));
+    return JWT::decode($hash, md5(''), array('HS256'));
   }
 }
 
