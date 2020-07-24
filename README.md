@@ -1,6 +1,10 @@
-<a align="center" href='organizepessoa.000webhostapp.com'><img  src="https://organizepessoa.000webhostapp.com/assets/images/emailMarketing.svg" /></a>
+<h1 align="center">
+	<a href='organizepessoa.000webhostapp.com'> 
+		<img  src="https://organizepessoa.000webhostapp.com/assets/images/emailMarketing.svg"/> 
+	</a>
+</h1>
 
-<p align="center">
+<p align="center">"
 <img alt="Repository size" src='https://img.shields.io/github/repo-size/claudianopl/Organize-Pessoal'> <img alt="License" src='https://img.shields.io/github/license/claudianopl/Organize-Pessoal'> <img alt="Website" src='https://img.shields.io/website?url=https%3A%2F%2Forganizepessoa.000webhostapp.com%2F'>
 </p>
 
@@ -11,23 +15,23 @@
 </h4>
 
 ## Índice
-****
+
 <!--ts-->
-   * [Sobre](#Sobre)
-   * [Funcionalidade](#Funcionalidade)
-   * [Como executar o projeto](#Como-executar-o-projeto)
-   * [Tecnologias Usadas](#Tecnologias-Usadas)
-   * [Packagist Usadas](#Packagist-Usadas)
+   * [Sobre](#-Sobre)
+   * [Funcionalidade](#-Funcionalidade)
+   * [Como executar o projeto](#-Como-executar-o-projeto)
+   * [Tecnologias Usadas](#-Tecnologias-Usadas)
+   * [Packagist Usadas](#-Packagist-Usadas)
 <!--te-->
 
 ## ✏️ Sobre
-****
+
 <p>📈 O Organize Pessoal é a forma de ajudar as pessoas com um **gerenciador de finanças e tarefas** simples, muito poderoso e totalmente gratuito. 
 
 Projeto desenvolvido para praticar os conhecimentos adquiridos em PHP, feito totalmente com o intuito de treinar e ajudar de alguma forma as pessoas.</p>
 
 ## ⚙️ Funcionalidade
-****
+
 - [x] Cadastro de usuário
 - [x] Confirmação do e-mail do usuário
 - [x] Solicitação de modificação da senha com confirmação por e-mail
@@ -51,19 +55,19 @@ Projeto desenvolvido para praticar os conhecimentos adquiridos em PHP, feito tot
 - [x] Atualização do perfil do usuário e troca da senha
 
 ## 🚀 Tecnologias Usadas
-****
+
 As seguintes ferramentas foram usadas na construção do projeto:
 - **[Javascript](https://www.javascript.com/)**
 - **[Jquery](https://jquery.com/)**
 - **[PHP](https://www.php.net/)**
 
 ## 🔖 Packagist Usadas
-****
+
 - **[PHPMailer](https://github.com/PHPMailer/PHPMailer)**
 - **[PHP-JWT](https://github.com/firebase/php-jwt)**
 
 ## ⚡ Como executar o projeto
-****
+
 ### Pré-requisitos
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas: [Git](https://git-scm.com/), [PHP](https://www.php.net/) (igual ou superior ao 7.2.0) e o [Composer](https://getcomposer.org/). Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
 
@@ -91,7 +95,7 @@ $ php -S localhost:8080
 - App/Controllers/HomeController.php (Configure o $serverMail e $mailData adaptando para o seu uso)
 
 ## 📝 Licença
-****
+
 Este projeto esta sobe a licença MIT.
 
 Feito com ❤️ por Claudiano Lima 👋🏽 [Entre em contato!](linkedin.com/in/claudianopl)
