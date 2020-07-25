@@ -1,10 +1,8 @@
 <h1 align="center">
-	<a href='organizepessoa.000webhostapp.com'> 
-		<img  src="https://organizepessoa.000webhostapp.com/assets/images/emailMarketing.svg"/> 
-	</a>
+    <img alt="Organize Pessoal" title="#OrganizePessoal" src="https://organizepessoa.000webhostapp.com/assets/images/emailMarketing.svg" style="width:100%;"/>
 </h1>
 
-<p align="center">"
+<p align="center">
 <img alt="Repository size" src='https://img.shields.io/github/repo-size/claudianopl/Organize-Pessoal'> <img alt="License" src='https://img.shields.io/github/license/claudianopl/Organize-Pessoal'> <img alt="Website" src='https://img.shields.io/website?url=https%3A%2F%2Forganizepessoa.000webhostapp.com%2F'>
 </p>
 
@@ -19,9 +17,9 @@
 <!--ts-->
    * [Sobre](#-Sobre)
    * [Funcionalidade](#-Funcionalidade)
-   * [Como executar o projeto](#-Como-executar-o-projeto)
    * [Tecnologias Usadas](#-Tecnologias-Usadas)
    * [Packagist Usadas](#-Packagist-Usadas)
+   * [Como executar o projeto](#-Como-executar-o-projeto)
 <!--te-->
 
 ## ✏️ Sobre
