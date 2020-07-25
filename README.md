@@ -15,8 +15,8 @@
 ## Índice
 
 <!--ts-->
-   * [Sobre](#-Sobre)
-   * [Funcionalidade](#-Funcionalidade)
+   * [Sobre](#%EF%B8%8F-sobre)
+   * [Funcionalidade](#%EF%B8%8F-funcionalidade)
    * [Tecnologias Usadas](#-Tecnologias-Usadas)
    * [Packagist Usadas](#-Packagist-Usadas)
    * [Como executar o projeto](#-Como-executar-o-projeto)
