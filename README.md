@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img alt="Organize Pessoal" title="#OrganizePessoal" src="https://organizepessoa.000webhostapp.com/assets/images/emailMarketing.svg" style="width:100%;"/>
+    <img alt="Organize Pessoal" title="#OrganizePessoal" src="https://organizepessoa.000webhostapp.com/assets/images/Banner1280.png" style="width:100%;"/>
 </h1>
 
 <p align="center">
