@@ -24,9 +24,9 @@
 
 ## ✏️ Sobre
 
-<p>📈 O Organize Pessoal é a forma de ajudar as pessoas com um **gerenciador de finanças e tarefas** simples, muito poderoso e totalmente gratuito. 
+<p>📈 O Organize Pessoal é a forma de ajudar as pessoas com um gerenciador de finanças e tarefas simples, muito poderoso e totalmente gratuito. 
 
-Projeto desenvolvido para praticar os conhecimentos adquiridos em PHP, feito totalmente com o intuito de treinar e ajudar de alguma forma as pessoas.</p>
+Projeto foi desenvolvido para praticar os conhecimentos adquiridos em PHP, feito totalmente com o intuito de treinar e ajudar de alguma forma as pessoas.</p>
 
 ## ⚙️ Funcionalidade
 
