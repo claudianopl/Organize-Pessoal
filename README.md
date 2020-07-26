@@ -58,6 +58,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - **[Javascript](https://www.javascript.com/)**
 - **[Jquery](https://jquery.com/)**
 - **[PHP](https://www.php.net/)**
+- **[MySQL](https://www.mysql.com)**
 
 ## 🔖 Packagist Usadas
 
